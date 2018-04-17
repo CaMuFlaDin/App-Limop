@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.estoques.limop.limop.InsertServico">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:hint="@string/nome_servico"
+            android:id="@+id/nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="text"
+            android:drawableLeft="@drawable/ic_list"
+            android:drawableStart="@drawable/ic_list"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <EditText
+            android:hint="@string/valor_custo"
+            android:id="@+id/valor_custo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="numberDecimal"
+            android:drawableLeft="@drawable/ic_money"
+            android:drawableStart="@drawable/ic_money"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+            <EditText
+                android:hint="@string/valor_venda"
+                android:id="@+id/valor_venda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input_style"
+                android:inputType="numberDecimal"
+                android:drawableLeft="@drawable/ic_money"
+                android:drawableStart="@drawable/ic_money"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="35dp"
+                android:layout_marginLeft="35dp"
+                android:drawablePadding="20dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp" />
+
+        <Button
+            android:onClick="insertServico"
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cadastrar_servico"
+            android:textColor="#FFF"
+            android:background="@drawable/btn_login"
+            android:textSize="16sp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"/>
+
+    </LinearLayout>
+
+</ScrollView>

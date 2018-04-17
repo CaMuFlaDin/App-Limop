@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.estoques.limop.limop.EditarProduto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:hint="@string/nome_produto"
+            android:id="@+id/nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="text"
+            android:drawableLeft="@drawable/ic_list"
+            android:drawableStart="@drawable/ic_list"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <EditText
+            android:hint="@string/foto"
+            android:id="@+id/foto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="text"
+            android:drawableLeft="@drawable/ic_foto"
+            android:drawableStart="@drawable/ic_foto"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <Spinner
+            android:id="@+id/categoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/categoriaProd"
+            android:prompt="@string/categoriaProd"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="-0dp"
+            android:background="@drawable/input_style_not"
+            android:layout_marginTop="24dp">
+        </Spinner>
+
+        <EditText
+            android:hint="@string/valor_custo"
+            android:id="@+id/valor_custo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="text"
+            android:drawableLeft="@drawable/ic_money"
+            android:drawableStart="@drawable/ic_money"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <EditText
+            android:hint="@string/valor_venda"
+            android:id="@+id/valor_venda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="text"
+            android:drawableLeft="@drawable/ic_money"
+            android:drawableStart="@drawable/ic_money"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <EditText
+            android:hint="@string/disponivel_estoque"
+            android:id="@+id/disponivel_estoque"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="text"
+            android:drawableLeft="@drawable/ic_qtd"
+            android:drawableStart="@drawable/ic_qtd"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <EditText
+            android:hint="@string/min_estoque"
+            android:id="@+id/min_estoque"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="text"
+            android:drawableLeft="@drawable/ic_qtd"
+            android:drawableStart="@drawable/ic_qtd"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <EditText
+            android:hint="@string/max_estoque"
+            android:id="@+id/max_estoque"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="text"
+            android:drawableLeft="@drawable/ic_qtd"
+            android:drawableStart="@drawable/ic_qtd"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <EditText
+            android:hint="@string/peso_liquido"
+            android:id="@+id/peso_liquido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="text"
+            android:drawableLeft="@drawable/ic_peso"
+            android:drawableStart="@drawable/ic_peso"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <EditText
+            android:hint="@string/peso_bruto"
+            android:id="@+id/peso_bruto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="text"
+            android:drawableLeft="@drawable/ic_peso"
+            android:drawableStart="@drawable/ic_peso"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <Spinner
+            android:id="@+id/fornecedor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/fornecedores"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="-0dp"
+            android:background="@drawable/input_style_not"
+            android:layout_marginTop="24dp">
+        </Spinner>
+
+        <Button
+            android:onClick="updateProduto"
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cadastrar"
+            android:textColor="#FFF"
+            android:background="@drawable/btn_login"
+            android:textSize="16sp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"/>
+
+
+
+    </LinearLayout>
+
+</ScrollView>
+

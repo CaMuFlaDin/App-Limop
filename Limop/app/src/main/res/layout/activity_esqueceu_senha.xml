@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.estoques.limop.limop.EsqueceuSenha">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/andreatta"
+            android:textSize="20sp"
+            android:padding="20dp"/>
+
+        <EditText
+            android:onClick="campoVazioSenha"
+            android:hint="@string/email"
+            android:id="@+id/email_esq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="textEmailAddress"
+            android:drawableLeft="@drawable/ic_email"
+            android:drawableStart="@drawable/ic_email"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <Button
+            android:drawableRight="@drawable/ic_maiorque"
+            android:drawablePadding="-0dp"
+            android:id="@+id/btnEnviarMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/esqsenha"
+            android:textColor="#FFF"
+            android:background="@drawable/btn_login"
+            android:textSize="16sp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"/>
+
+    </LinearLayout>
+
+</ScrollView>

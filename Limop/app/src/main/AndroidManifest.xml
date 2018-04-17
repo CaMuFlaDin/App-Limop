@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.estoques.limop.limop">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Contato"
+            android:label="Contato Limop"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".EsqueceuSenha"
+            android:label="Esqueci minha Senha"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Principal"
+            android:label="Inicio"
+            android:parentActivityName=".Principal" />
+        <activity
+            android:name=".Usuarios"
+            android:label="Usuários"
+            android:parentActivityName=".Usuarios" />
+        <activity
+            android:name=".Acessos"
+            android:label="Acessos"
+            android:parentActivityName=".Acessos" />
+        <activity
+            android:name=".Compras"
+            android:label="Compras"
+            android:parentActivityName=".Compras" />
+        <activity
+            android:name=".Produtos_Compras"
+            android:label="Produtos"
+            android:parentActivityName=".Produtos_Compras" />
+        <activity
+            android:name=".Fornecedores_compras"
+            android:label="Fornecedores"
+            android:parentActivityName=".Fornecedores_compras" />
+        <activity
+            android:name=".Servicos_Compras"
+            android:label="Serviços"
+            android:parentActivityName=".Servicos_Compras" />
+        <activity
+            android:name=".Transportadoras_Compras"
+            android:label="Transportadoras"
+            android:parentActivityName=".Transportadoras_Compras" />
+        <activity
+            android:name=".Vendas"
+            android:label="Vendas"
+            android:parentActivityName=".Vendas" />
+        <activity
+            android:name=".Clientes"
+            android:label="Clientes"
+            android:parentActivityName=".Clientes" />
+        <activity
+            android:name=".InsertServico"
+            android:label="Cadastrar Serviço"
+            android:parentActivityName=".InsertServico" />
+        <activity
+            android:name=".InsertFornecedor"
+            android:label="Cadastrar Fornecedor"
+            android:parentActivityName=".InsertFornecedor" />
+        <activity
+            android:name=".InsertTransportadora"
+            android:label="Cadastrar Transportadora"
+            android:parentActivityName=".InsertTransportadora" />
+        <activity
+            android:name=".InsertCliente"
+            android:label="Cadastrar Clientes"
+            android:parentActivityName=".InsertCliente" />
+        <activity
+            android:name=".InsertUsuario"
+            android:label="Cadastrar Usuário"
+            android:parentActivityName=".InsertUsuario" />
+        <activity
+            android:name=".EditarServico"
+            android:label="Editar Serviço"
+            android:parentActivityName=".EditarServico" />
+        <activity
+            android:name=".EditarCliente"
+            android:label="Editar Cliente"
+            android:parentActivityName=".EditarCliente" />
+        <activity
+            android:name=".EditarFornecedor"
+            android:label="Editar Fornecedor"
+            android:parentActivityName=".EditarFornecedor" />
+        <activity
+            android:name=".EditarTransportadora"
+            android:label="Editar Transportadora"
+            android:parentActivityName=".EditarTransportadora" />
+        <activity
+            android:name=".EditarUsuario"
+            android:label="Editar Usuário"
+            android:parentActivityName=".EditarUsuario" />
+        <activity android:name=".InsertProduto" />
+        <activity android:name=".EditarProduto"></activity>
+    </application>
+
+</manifest>

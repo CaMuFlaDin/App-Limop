@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.estoques.limop.limop.Vendas">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:onClick="Clientes"
+            android:id="@+id/card_view_vendas"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_margin="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/cardview_image1"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="18dp"
+                    android:src="@drawable/users" />
+
+                <TextView
+                    android:id="@+id/cardview_list_title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/cardview_image1"
+                    android:paddingBottom="5dp"
+                    android:textColor="#000"
+                    android:text="@string/clientes"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/short_description1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cardview_list_title1"
+                    android:layout_toRightOf="@+id/cardview_image1"
+                    android:text="@string/descricao_clientes"
+                    android:textColor="#8b8b8b" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view_compras"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_margin="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/cardview_image2"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="18dp"
+                    android:src="@drawable/product" />
+
+                <TextView
+                    android:id="@+id/cardview_list_title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/cardview_image2"
+                    android:paddingBottom="5dp"
+                    android:textColor="#000"
+                    android:text="@string/produtos"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/short_description2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cardview_list_title2"
+                    android:layout_toRightOf="@+id/cardview_image2"
+                    android:text="@string/descricao_produtos"
+                    android:textColor="#8b8b8b" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view_users"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_margin="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/cardview_image3"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="18dp"
+                    android:src="@drawable/shopping_cart" />
+
+                <TextView
+                    android:id="@+id/cardview_list_title3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/cardview_image3"
+                    android:paddingBottom="5dp"
+                    android:textColor="#000"
+                    android:text="@string/servicos"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/short_description3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cardview_list_title3"
+                    android:layout_toRightOf="@+id/cardview_image3"
+                    android:text="@string/descricao_servicos"
+                    android:textColor="#8b8b8b" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:onClick="Transportadoras"
+            android:id="@+id/card_view_transportadoras"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_margin="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/cardview_image4"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="18dp"
+                    android:src="@drawable/forklift" />
+
+                <TextView
+                    android:id="@+id/cardview_list_title4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/cardview_image4"
+                    android:paddingBottom="5dp"
+                    android:textColor="#000"
+                    android:text="@string/transportadoras"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/short_description4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cardview_list_title4"
+                    android:layout_toRightOf="@+id/cardview_image4"
+                    android:text="@string/descricao_transportadoras"
+                    android:textColor="#8b8b8b" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view_sit_estoque"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_margin="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/cardview_image5"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="18dp"
+                    android:src="@drawable/dropbox" />
+
+                <TextView
+                    android:id="@+id/cardview_list_title5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/cardview_image5"
+                    android:paddingBottom="5dp"
+                    android:textColor="#000"
+                    android:text="@string/situacao_estoque"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/short_description5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cardview_list_title5"
+                    android:layout_toRightOf="@+id/cardview_image5"
+                    android:text="@string/descricao_situ_estoque"
+                    android:textColor="#8b8b8b" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view_prod_vencer"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_margin="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/cardview_image6"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="18dp"
+                    android:src="@drawable/money" />
+
+                <TextView
+                    android:id="@+id/cardview_list_title6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/cardview_image6"
+                    android:paddingBottom="5dp"
+                    android:textColor="#000"
+                    android:text="@string/parcelas_vencer"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/short_description6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cardview_list_title6"
+                    android:layout_toRightOf="@+id/cardview_image6"
+                    android:text="@string/descricao_parc_vencer"
+                    android:textColor="#8b8b8b" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view_os"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_margin="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/cardview_image7"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="18dp"
+                    android:src="@drawable/orderservice" />
+
+                <TextView
+                    android:id="@+id/cardview_list_title7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/cardview_image7"
+                    android:paddingBottom="5dp"
+                    android:textColor="#000"
+                    android:text="@string/ordem_servico"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/short_description7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cardview_list_title7"
+                    android:layout_toRightOf="@+id/cardview_image7"
+                    android:text="@string/descricao_os"
+                    android:textColor="#8b8b8b" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view_rel_venda"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_margin="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/cardview_image8"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="18dp"
+                    android:src="@drawable/report" />
+
+                <TextView
+                    android:id="@+id/cardview_list_title8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/cardview_image8"
+                    android:paddingBottom="5dp"
+                    android:textColor="#000"
+                    android:text="@string/relatorio_venda"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/short_description8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cardview_list_title8"
+                    android:layout_toRightOf="@+id/cardview_image8"
+                    android:text="@string/descricao_relatorio_venda"
+                    android:textColor="#8b8b8b" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view_graficos"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_margin="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:elevation="4dp"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/cardview_image9"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="18dp"
+                    android:src="@drawable/chart" />
+
+                <TextView
+                    android:id="@+id/cardview_list_title9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/cardview_image9"
+                    android:paddingBottom="5dp"
+                    android:textColor="#000"
+                    android:text="@string/graficos"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/short_description9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cardview_list_title9"
+                    android:layout_toRightOf="@+id/cardview_image9"
+                    android:text="@string/descricao_graficos"
+                    android:textColor="#8b8b8b" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</ScrollView>
