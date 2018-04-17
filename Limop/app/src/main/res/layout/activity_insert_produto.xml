@@ -180,7 +180,6 @@
             android:id="@+id/fornecedor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/fornecedores"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="-0dp"
