@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -31,7 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Usuarios extends AppCompatActivity {
+public class Usuarios extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Json/jsonUser.php";
 
@@ -39,16 +41,21 @@ public class Usuarios extends AppCompatActivity {
 
     List<UsuariosConst> usuariosList;
 
+    SearchView searchView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuarios);
 
         listView = (ListView)findViewById(R.id.listView);
+        searchView = findViewById(R.id.sv);
         usuariosList = new ArrayList<>();
 
         registerForContextMenu(listView);
         loadUsuarioList();
+        listView.setTextFilterEnabled(true);
+        searchView.setOnQueryTextListener(this);
     }
 
     public void insertUsuario(View v){
@@ -136,5 +143,20 @@ public class Usuarios extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText){
+        if (TextUtils.isEmpty(newText)) {
+            listView.clearTextFilter();
+        } else {
+            listView.setFilterText(newText);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query){
+        return false;
     }
 }

@@ -5,11 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import com.estoques.limop.limop.Construtoras.FornCompraConst;
+import com.estoques.limop.limop.Construtoras.TranspCompraConst;
 import com.estoques.limop.limop.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +22,7 @@ import java.util.List;
 public class ListViewFornCompra extends ArrayAdapter<FornCompraConst> {
 
     private List<FornCompraConst> forncompraList;
+    private List<FornCompraConst> orig;
 
     private Context mCtx;
 
@@ -26,6 +30,47 @@ public class ListViewFornCompra extends ArrayAdapter<FornCompraConst> {
         super(mCtx, R.layout.list_view_fornecedores_compras, forncompraList);
         this.forncompraList = forncompraList;
         this.mCtx = mCtx;
+    }
+
+
+    @Override
+    public int getCount() {
+        return forncompraList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                final FilterResults oReturn = new FilterResults();
+                final ArrayList<FornCompraConst> results = new ArrayList<FornCompraConst>();
+                if (orig == null) {
+                    orig = forncompraList;
+                }
+                if (constraint != null) {
+                    constraint = constraint.toString().toLowerCase();
+                    if (orig != null && orig.size() > 0) {
+                        for (final FornCompraConst g : orig) {
+                            if ((g.getNome().toLowerCase().contains(constraint.toString())) ||
+                                    (g.getTipo().toLowerCase().contains(constraint.toString())) ||
+                                    g.getTel().toLowerCase().contains(constraint.toString())) {
+                                results.add(g);
+                            }
+                        }
+                    }
+                    oReturn.values = results;
+                }
+                return oReturn;
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                forncompraList = (ArrayList<FornCompraConst>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     @Override

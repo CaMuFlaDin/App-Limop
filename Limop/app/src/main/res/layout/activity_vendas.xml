@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_marginRight="18dp"
-                    android:src="@drawable/product" />
+                    android:src="@drawable/archive" />
 
                 <TextView
                     android:id="@+id/cardview_list_title2"

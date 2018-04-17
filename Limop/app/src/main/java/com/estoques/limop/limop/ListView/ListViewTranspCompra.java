@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import com.estoques.limop.limop.Construtoras.TranspCompraConst;
 import com.estoques.limop.limop.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +21,7 @@ import java.util.List;
 public class ListViewTranspCompra extends ArrayAdapter<TranspCompraConst> {
 
     private List<TranspCompraConst> transpcompraList;
+    private List<TranspCompraConst> orig;
 
     private Context mCtx;
 
@@ -26,6 +29,46 @@ public class ListViewTranspCompra extends ArrayAdapter<TranspCompraConst> {
         super(mCtx, R.layout.list_view_transportadoras_compras, transpcompraList);
         this.transpcompraList = transpcompraList;
         this.mCtx = mCtx;
+    }
+
+    @Override
+    public int getCount() {
+        return transpcompraList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                final FilterResults oReturn = new FilterResults();
+                final ArrayList<TranspCompraConst> results = new ArrayList<TranspCompraConst>();
+                if (orig == null) {
+                    orig = transpcompraList;
+                }
+                if (constraint != null) {
+                    constraint = constraint.toString().toLowerCase();
+                    if (orig != null && orig.size() > 0) {
+                        for (final TranspCompraConst g : orig) {
+                            if ((g.getNome().toLowerCase().contains(constraint.toString())) ||
+                                    (g.getEmail().toLowerCase().contains(constraint.toString())) ||
+                                    g.getValor().toLowerCase().contains(constraint.toString())) {
+                                results.add(g);
+                            }
+                        }
+                    }
+                    oReturn.values = results;
+                }
+                return oReturn;
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                transpcompraList = (ArrayList<TranspCompraConst>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     @Override
