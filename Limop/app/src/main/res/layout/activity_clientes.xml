@@ -6,29 +6,23 @@
     android:layout_height="match_parent"
     tools:context="com.estoques.limop.limop.Acessos">
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="vertical">
-
-        <android.support.design.widget.FloatingActionButton
-            android:onClick="insertCliente"
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            android:layout_gravity="end"
-            android:src="@drawable/ic_add" />
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <SearchView
+                android:id="@+id/sv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:iconifiedByDefault="false"/>
 
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
+        </LinearLayout>
 
 </RelativeLayout>
 

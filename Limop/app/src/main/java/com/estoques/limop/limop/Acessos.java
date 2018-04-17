@@ -2,6 +2,7 @@ package com.estoques.limop.limop;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class Acessos extends AppCompatActivity{
+public class Acessos extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Json/jsonAcessos.php";
 
@@ -32,14 +33,19 @@ public class Acessos extends AppCompatActivity{
 
     List<AcessosConst> acessosList;
 
+    SearchView searchView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acessos);
 
         listView = (ListView)findViewById(R.id.listView);
+        searchView = findViewById(R.id.sv);
         acessosList = new ArrayList<>();
         loadAcessosList();
+        listView.setTextFilterEnabled(true);
+        searchView.setOnQueryTextListener(this);
     }
 
     private void loadAcessosList(){
@@ -78,5 +84,21 @@ public class Acessos extends AppCompatActivity{
         );
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+
+    @Override
+    public boolean onQueryTextChange(String newText){
+        if (TextUtils.isEmpty(newText)) {
+            listView.clearTextFilter();
+        } else {
+            listView.setFilterText(newText);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query){
+        return false;
     }
 }

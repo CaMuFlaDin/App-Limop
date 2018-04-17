@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -32,7 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Fornecedores_compras extends AppCompatActivity {
+public class Fornecedores_compras extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Json/jsonFornecedores.php";
 
@@ -40,16 +42,21 @@ public class Fornecedores_compras extends AppCompatActivity {
 
     List<FornCompraConst> forncompraList;
 
+    SearchView searchView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fornecedores_compras);
 
         listView = (ListView)findViewById(R.id.listView);
+        searchView = findViewById(R.id.sv);
         forncompraList = new ArrayList<>();
 
         registerForContextMenu(listView);
         loadFornComprasList();
+        listView.setTextFilterEnabled(true);
+        searchView.setOnQueryTextListener(this);
     }
 
     @Override
@@ -137,5 +144,20 @@ public class Fornecedores_compras extends AppCompatActivity {
     public void CadastrarFornecedor(View v){
         Intent irTela = new Intent(Fornecedores_compras.this, InsertFornecedor.class);
         startActivity(irTela);
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText){
+        if (TextUtils.isEmpty(newText)) {
+            listView.clearTextFilter();
+        } else {
+            listView.setFilterText(newText);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query){
+        return false;
     }
 }

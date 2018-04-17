@@ -5,11 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import com.estoques.limop.limop.Construtoras.ProdCompraConst;
+import com.estoques.limop.limop.Construtoras.TranspCompraConst;
 import com.estoques.limop.limop.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +22,7 @@ import java.util.List;
 public class ListViewProdCompra extends ArrayAdapter<ProdCompraConst>{
 
     private List<ProdCompraConst> prodcompraList;
+    private List<ProdCompraConst> orig;
 
     private Context mCtx;
 
@@ -26,6 +30,47 @@ public class ListViewProdCompra extends ArrayAdapter<ProdCompraConst>{
         super(mCtx, R.layout.list_view_produtos_compras, prodcompraList);
         this.prodcompraList = prodcompraList;
         this.mCtx = mCtx;
+    }
+
+
+    @Override
+    public int getCount() {
+        return prodcompraList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                final FilterResults oReturn = new FilterResults();
+                final ArrayList<ProdCompraConst> results = new ArrayList<ProdCompraConst>();
+                if (orig == null) {
+                    orig = prodcompraList;
+                }
+                if (constraint != null) {
+                    constraint = constraint.toString().toLowerCase();
+                    if (orig != null && orig.size() > 0) {
+                        for (final ProdCompraConst g : orig) {
+                            if ((g.getProd().toLowerCase().contains(constraint.toString())) ||
+                                    (g.getQtd().toLowerCase().contains(constraint.toString())) ||
+                                    g.getValor().toLowerCase().contains(constraint.toString())) {
+                                results.add(g);
+                            }
+                        }
+                    }
+                    oReturn.values = results;
+                }
+                return oReturn;
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                prodcompraList = (ArrayList<ProdCompraConst>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     @Override
