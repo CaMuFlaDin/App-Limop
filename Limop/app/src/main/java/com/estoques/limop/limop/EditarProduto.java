@@ -73,7 +73,7 @@ public class EditarProduto extends AppCompatActivity {
                             JSONArray servicocompraArray = obj.getJSONArray("produtos");
                             JSONObject jo = servicocompraArray.getJSONObject(0);
 
-                            nome_produto.setText(jo.getString("nome_produto"));
+                            nome_produto.setText(jo.getString("nome"));
                             foto.setText(jo.getString("fotos"));
                             disponivel_estoque.setText(jo.getString("disponivel_estoque"));
                             min_estoque.setText(jo.getString("min_estoque"));
@@ -125,6 +125,8 @@ public class EditarProduto extends AppCompatActivity {
     public void updateProduto(View v) {
         Map<String, String> params = new HashMap<String, String>();
 
+        params.put("update", "update");
+        params.put("id_produto", id);
         params.put("nome", nome_produto.getText().toString().trim());
         params.put("tipo", categoriaProd.getSelectedItem().toString());
         params.put("foto", foto.getText().toString().trim());

@@ -193,7 +193,7 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cadastrar"
+            android:text="@string/editar"
             android:textColor="#FFF"
             android:background="@drawable/btn_login"
             android:textSize="16sp"
