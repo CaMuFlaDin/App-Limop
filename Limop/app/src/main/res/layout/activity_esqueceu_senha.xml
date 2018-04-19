@@ -19,7 +19,6 @@
             android:padding="20dp"/>
 
         <EditText
-            android:onClick="campoVazioSenha"
             android:hint="@string/email"
             android:id="@+id/email_esq"
             android:layout_width="match_parent"
@@ -40,6 +39,7 @@
             android:drawableRight="@drawable/ic_maiorque"
             android:drawablePadding="-0dp"
             android:id="@+id/btnEnviarMsg"
+            android:onClick="campoVazioSenha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/esqsenha"
