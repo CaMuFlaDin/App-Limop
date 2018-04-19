@@ -185,7 +185,7 @@ public class EditarCliente extends AppCompatActivity {
                             JSONObject jo = servicocompraArray.getJSONObject(0);
 
                             nome.setText(jo.getString("nome_cliente"));
-                            //tipo.selectedi(jo.getString("tipo"));
+                            String tipoPessoa = jo.getString("tipo");
                             cnpj.setText(jo.getString("cnpj"));
                             razao.setText(jo.getString("razao_social"));
                             inscricao.setText(jo.getString("inscricao_estadual"));
@@ -202,6 +202,12 @@ public class EditarCliente extends AppCompatActivity {
                             numero.setText(jo.getString("numero"));
                             complemento.setText(jo.getString("complemento"));
                             obs.setText(jo.getString("observacoes"));
+
+                            if(tipoPessoa.equals("Física")){
+                                tipo.setSelection(0);
+                            }else{
+                                tipo.setSelection(1);
+                            }
 
 
                         }catch (JSONException e){
