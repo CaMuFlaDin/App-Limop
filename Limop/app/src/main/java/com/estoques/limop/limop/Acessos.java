@@ -1,5 +1,6 @@
 package com.estoques.limop.limop;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -100,5 +101,12 @@ public class Acessos extends AppCompatActivity implements SearchView.OnQueryText
     @Override
     public boolean onQueryTextSubmit(String query){
         return false;
+    }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent irTela = new Intent(Acessos.this, Principal.class);
+        irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(irTela);
     }
 }

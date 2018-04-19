@@ -267,7 +267,7 @@ public class EditarFornecedor extends AppCompatActivity {
                     JSONObject jo = new JSONObject(response);
                     String resposta = jo.getString("resposta");
                     Toast.makeText(EditarFornecedor.this, resposta, Toast.LENGTH_SHORT).show();
-                    Intent irTela = new Intent(EditarFornecedor.this, Clientes.class);
+                    Intent irTela = new Intent(EditarFornecedor.this, Fornecedores_compras.class);
                     startActivity(irTela);
                 }catch (JSONException e) {
                     e.printStackTrace();
@@ -278,6 +278,13 @@ public class EditarFornecedor extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(EditarFornecedor.this);
         requestQueue.add(stringRequest);
 
+    }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent irTela = new Intent(EditarFornecedor.this, Fornecedores_compras.class);
+        irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(irTela);
     }
 }
 

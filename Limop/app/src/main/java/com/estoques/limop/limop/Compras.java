@@ -32,4 +32,11 @@ public class Compras extends AppCompatActivity {
         Intent irTela = new Intent(Compras.this, Transportadoras_Compras.class);
         startActivity(irTela);
     }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent irTela = new Intent(Compras.this, Principal.class);
+        irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(irTela);
+    }
 }

@@ -184,4 +184,11 @@ public class InsertCliente extends AppCompatActivity {
         },params,getApplicationContext());
 
     }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent irTela = new Intent(InsertCliente.this, Clientes.class);
+        irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(irTela);
+    }
 }

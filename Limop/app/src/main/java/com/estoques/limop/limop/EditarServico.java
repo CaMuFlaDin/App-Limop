@@ -122,4 +122,11 @@ public class EditarServico extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent irTela = new Intent(EditarServico.this, Servicos_Compras.class);
+        irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(irTela);
+    }
 }

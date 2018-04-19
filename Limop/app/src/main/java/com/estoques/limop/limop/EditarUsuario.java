@@ -175,4 +175,11 @@ public class EditarUsuario extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent irTela = new Intent(EditarUsuario.this, Usuarios.class);
+        irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(irTela);
+    }
 }

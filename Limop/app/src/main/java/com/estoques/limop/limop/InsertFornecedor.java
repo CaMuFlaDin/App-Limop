@@ -188,4 +188,11 @@ public class InsertFornecedor extends AppCompatActivity {
 
     }
 
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent irTela = new Intent(InsertFornecedor.this, Fornecedores_compras.class);
+        irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(irTela);
+    }
+
 }

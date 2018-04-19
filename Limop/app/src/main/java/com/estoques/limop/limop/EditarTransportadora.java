@@ -226,4 +226,11 @@ public class EditarTransportadora extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent irTela = new Intent(EditarTransportadora.this, Transportadoras_Compras.class);
+        irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(irTela);
+    }
 }

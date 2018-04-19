@@ -160,4 +160,11 @@ public class Clientes extends AppCompatActivity implements SearchView.OnQueryTex
     public boolean onQueryTextSubmit(String query){
         return false;
     }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent irTela = new Intent(Clientes.this, Vendas.class);
+        irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(irTela);
+    }
 }

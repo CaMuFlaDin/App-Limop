@@ -148,6 +148,13 @@ public class InsertProduto extends AppCompatActivity {
         RequestQueue rq = Volley.newRequestQueue(this);
         rq.add(stringRequest);
     }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent irTela = new Intent(InsertProduto.this, Produtos_Compras.class);
+        irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(irTela);
+    }
 }
 
 

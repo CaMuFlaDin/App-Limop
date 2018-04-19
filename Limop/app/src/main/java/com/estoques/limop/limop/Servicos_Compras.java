@@ -160,4 +160,11 @@ public class Servicos_Compras extends AppCompatActivity implements SearchView.On
         return false;
     }
 
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent irTela = new Intent(Servicos_Compras.this, Compras.class);
+        irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(irTela);
+    }
+
 }

@@ -69,4 +69,11 @@ public class InsertServico extends AppCompatActivity {
         },params,getApplicationContext());
 
     }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent irTela = new Intent(InsertServico.this, Servicos_Compras.class);
+        irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(irTela);
+    }
 }

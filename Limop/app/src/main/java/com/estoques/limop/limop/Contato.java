@@ -84,4 +84,11 @@ public class Contato extends AppCompatActivity {
 
     }
 
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent irTela = new Intent(Contato.this, MainActivity.class);
+        irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(irTela);
+    }
+
 }

@@ -144,4 +144,11 @@ public class InsertTransportadora extends AppCompatActivity {
 
     }
 
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent irTela = new Intent(InsertTransportadora.this, Transportadoras_Compras.class);
+        irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(irTela);
+    }
+
 }

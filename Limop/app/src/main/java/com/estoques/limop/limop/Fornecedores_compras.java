@@ -160,4 +160,11 @@ public class Fornecedores_compras extends AppCompatActivity implements SearchVie
     public boolean onQueryTextSubmit(String query){
         return false;
     }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent irTela = new Intent(Fornecedores_compras.this, Compras.class);
+        irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(irTela);
+    }
 }
