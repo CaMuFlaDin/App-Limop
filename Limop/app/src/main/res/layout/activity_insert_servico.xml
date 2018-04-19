@@ -62,7 +62,7 @@
                 android:paddingBottom="12dp" />
 
         <Button
-            android:onClick="insertServico"
+            android:onClick="campoVazio"
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

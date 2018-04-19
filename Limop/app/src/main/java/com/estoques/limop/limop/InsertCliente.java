@@ -114,6 +114,8 @@ public class InsertCliente extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i == 0){
+                    //cpf.setEnabled(true);
+                    //rg.setEnabled(true);
                     cpf.setVisibility(View.VISIBLE);
                     rg.setVisibility(View.VISIBLE);
 
@@ -121,6 +123,7 @@ public class InsertCliente extends AppCompatActivity {
                     inscricao.setText("");
                     razao.setText("");
 
+                    //cnpj.setEnabled(false);
                     cnpj.setVisibility(View.GONE);
                     inscricao.setVisibility(View.GONE);
                     razao.setVisibility(View.GONE);

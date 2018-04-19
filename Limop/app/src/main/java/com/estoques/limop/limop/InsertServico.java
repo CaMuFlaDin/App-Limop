@@ -46,7 +46,15 @@ public class InsertServico extends AppCompatActivity {
         button = (Button)findViewById(R.id.button);
     }
 
-    public void insertServico(View v) {
+    public void campoVazio(View v){
+        if(nome.getText().length() == 0 || valor_custo.getText().length() == 0 || valor_venda.getText().length() == 0) {
+            Toast.makeText(this, R.string.camposVazios,Toast.LENGTH_SHORT).show();
+        }else{
+            insertServico();
+        }
+    }
+
+    public void insertServico() {
         Map<String, String> params = new HashMap<String, String>();
 
         params.put("nome", nome.getText().toString().trim());
