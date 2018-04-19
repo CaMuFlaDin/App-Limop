@@ -79,40 +79,6 @@
             android:paddingBottom="12dp" />
 
         <EditText
-            android:hint="@string/cpf"
-            android:id="@+id/cpf"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/input_style"
-            android:inputType="text"
-            android:drawableLeft="@drawable/ic_person"
-            android:drawableStart="@drawable/ic_person"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="35dp"
-            android:layout_marginLeft="35dp"
-            android:drawablePadding="20dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp" />
-
-        <EditText
-            android:hint="@string/rg"
-            android:id="@+id/rg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/input_style"
-            android:inputType="text"
-            android:drawableLeft="@drawable/ic_person"
-            android:drawableStart="@drawable/ic_person"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="35dp"
-            android:layout_marginLeft="35dp"
-            android:drawablePadding="20dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp" />
-
-        <EditText
             android:hint="@string/email"
             android:id="@+id/email"
             android:layout_width="match_parent"
@@ -187,6 +153,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
             android:inputType="text"
+            android:focusable="false"
             android:drawableLeft="@drawable/ic_place"
             android:drawableStart="@drawable/ic_place"
             android:layout_marginTop="30dp"
@@ -204,6 +171,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
             android:inputType="text"
+            android:focusable="false"
             android:drawableLeft="@drawable/ic_place"
             android:drawableStart="@drawable/ic_place"
             android:layout_marginTop="30dp"
@@ -221,6 +189,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
             android:inputType="text"
+            android:focusable="false"
             android:drawableLeft="@drawable/ic_home"
             android:drawableStart="@drawable/ic_home"
             android:layout_marginTop="30dp"
@@ -238,6 +207,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
             android:inputType="text"
+            android:focusable="false"
             android:drawableLeft="@drawable/ic_home"
             android:drawableStart="@drawable/ic_home"
             android:layout_marginTop="30dp"

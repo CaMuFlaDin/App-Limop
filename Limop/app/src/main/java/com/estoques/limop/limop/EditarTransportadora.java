@@ -1,9 +1,12 @@
 package com.estoques.limop.limop;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -23,6 +26,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 
 public class EditarTransportadora extends AppCompatActivity {
 
@@ -70,6 +75,54 @@ public class EditarTransportadora extends AppCompatActivity {
         complemento    = findViewById(R.id.complemento);
         valor_frete    = findViewById(R.id.valor_frete);
         btn            = findViewById(R.id.button);
+
+        MaskEditTextChangedListener maskCEP = new MaskEditTextChangedListener("##.###-###",cep);
+        MaskEditTextChangedListener maskCNPJ = new MaskEditTextChangedListener("##.###.###/####-##",cnpj);
+        MaskEditTextChangedListener maskINSC = new MaskEditTextChangedListener("###.###.###.###",inscricao);
+        MaskEditTextChangedListener maskTELCE = new MaskEditTextChangedListener("(##)#####-####",tel_celular);
+        MaskEditTextChangedListener maskTELCO = new MaskEditTextChangedListener("(##)####-####",tel_comercial);
+
+        cep.addTextChangedListener(maskCEP);
+        cnpj.addTextChangedListener(maskCNPJ);
+        inscricao.addTextChangedListener(maskINSC);
+        tel_celular.addTextChangedListener(maskTELCE);
+        tel_comercial.addTextChangedListener(maskTELCO);
+
+        cep.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b){
+                    String sendCep = cep.getText().toString();
+                    sendCep = sendCep.replace(".", "");
+                    sendCep = sendCep.replace("-", "");
+                    String url = "https://viacep.com.br/ws/"+sendCep+"/json/unicode/";
+                    StringRequest sr = new StringRequest(url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject objeto = new JSONObject(response);
+                                String enderecoO = objeto.getString("logradouro"), cidadeO = objeto.getString("localidade"),
+                                        estadoO = objeto.getString("uf"),bairroO = objeto.getString("bairro");
+
+                                rua.setText(enderecoO);
+                                cidade.setText(cidadeO);
+                                estado.setText(estadoO);
+                                bairro.setText(bairroO);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(EditarTransportadora.this, "CEP Inválido!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    RequestQueue rq = Volley.newRequestQueue(EditarTransportadora.this);
+                    rq.add(sr);
+                }
+            }
+        });
 
         try{
             Intent i = getIntent();

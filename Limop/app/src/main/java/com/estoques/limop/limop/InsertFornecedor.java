@@ -1,11 +1,14 @@
 package com.estoques.limop.limop;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -13,7 +16,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.estoques.limop.limop.CRUD.CRUD;
 
 import org.json.JSONException;
@@ -21,6 +28,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 
 public class InsertFornecedor extends AppCompatActivity {
 
@@ -54,29 +63,80 @@ public class InsertFornecedor extends AppCompatActivity {
         tipo              = (Spinner)findViewById(R.id.tipo);
         button            = (Button)findViewById(R.id.button);
 
-        /*tipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        MaskEditTextChangedListener maskCPF = new MaskEditTextChangedListener("###.###.###-##",cpf);
+        MaskEditTextChangedListener maskCEP = new MaskEditTextChangedListener("##.###-###",cep);
+        MaskEditTextChangedListener maskCNPJ = new MaskEditTextChangedListener("##.###.###/####-##",cnpj);
+        MaskEditTextChangedListener maskINSC = new MaskEditTextChangedListener("###.###.###.###",inscricao);
+        MaskEditTextChangedListener maskTELCE = new MaskEditTextChangedListener("(##)#####-####",tel_celular);
+        MaskEditTextChangedListener maskTELCO = new MaskEditTextChangedListener("(##)####-####",tel_comercial);
+
+        cpf.addTextChangedListener(maskCPF);
+        cep.addTextChangedListener(maskCEP);
+        cnpj.addTextChangedListener(maskCNPJ);
+        inscricao.addTextChangedListener(maskINSC);
+        tel_celular.addTextChangedListener(maskTELCE);
+        tel_comercial.addTextChangedListener(maskTELCO);
+
+        cep.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b){
+                    String sendCep = cep.getText().toString();
+                    sendCep = sendCep.replace(".", "");
+                    sendCep = sendCep.replace("-", "");
+                    String url = "https://viacep.com.br/ws/"+sendCep+"/json/unicode/";
+                    StringRequest sr = new StringRequest(url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject objeto = new JSONObject(response);
+                                String enderecoO = objeto.getString("logradouro"), cidadeO = objeto.getString("localidade"),
+                                        estadoO = objeto.getString("uf"),bairroO = objeto.getString("bairro");
+
+                                rua.setText(enderecoO);
+                                cidade.setText(cidadeO);
+                                estado.setText(estadoO);
+                                bairro.setText(bairroO);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(InsertFornecedor.this, "CEP Inválido!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    RequestQueue rq = Volley.newRequestQueue(InsertFornecedor.this);
+                    rq.add(sr);
+                }
+            }
+        });
+
+        tipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i == 0){
-                    cnpj.setFocusable(false);
-                    inscricao.setFocusable(false);
-                    razao.setFocusable(false);
+                    cpf.setEnabled(true);
+                    rg.setEnabled(true);
+
                     cnpj.setText("");
                     inscricao.setText("");
                     razao.setText("");
 
-                    cpf.setFocusable(true);
-                    rg.setFocusable(true);
+                    cnpj.setEnabled(false);
+                    inscricao.setEnabled(false);
+                    razao.setEnabled(false);
                 }else{
-                    cnpj.setFocusable(true);
-                    inscricao.setFocusable(true);
-                    razao.setFocusable(true);
+                    cpf.setEnabled(false);
+                    rg.setEnabled(false);
 
-                    cpf.setText("");
                     rg.setText("");
+                    cpf.setText("");
 
-                    cpf.setFocusable(false);
-                    rg.setFocusable(false);
+                    cnpj.setEnabled(true);
+                    inscricao.setEnabled(true);
+                    razao.setEnabled(true);
                 }
             }
 
@@ -84,7 +144,7 @@ public class InsertFornecedor extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
-        });*/
+        });
     }
 
     public void insertFornecedor(View v) {

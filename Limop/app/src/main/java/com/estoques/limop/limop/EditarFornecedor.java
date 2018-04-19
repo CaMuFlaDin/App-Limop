@@ -1,9 +1,12 @@
 package com.estoques.limop.limop;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -23,6 +26,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 
 public class EditarFornecedor extends AppCompatActivity {
 
@@ -76,12 +81,95 @@ public class EditarFornecedor extends AppCompatActivity {
         obs            = findViewById(R.id.obs);
         btn            = findViewById(R.id.button);
 
+        MaskEditTextChangedListener maskCPF = new MaskEditTextChangedListener("###.###.###-##",cpf);
+        MaskEditTextChangedListener maskCEP = new MaskEditTextChangedListener("##.###-###",cep);
+        MaskEditTextChangedListener maskCNPJ = new MaskEditTextChangedListener("##.###.###/####-##",cnpj);
+        MaskEditTextChangedListener maskINSC = new MaskEditTextChangedListener("###.###.###.###",inscricao);
+        MaskEditTextChangedListener maskTELCE = new MaskEditTextChangedListener("(##)#####-####",tel_celular);
+        MaskEditTextChangedListener maskTELCO = new MaskEditTextChangedListener("(##)####-####",tel_comercial);
+
+        cpf.addTextChangedListener(maskCPF);
+        cep.addTextChangedListener(maskCEP);
+        cnpj.addTextChangedListener(maskCNPJ);
+        inscricao.addTextChangedListener(maskINSC);
+        tel_celular.addTextChangedListener(maskTELCE);
+        tel_comercial.addTextChangedListener(maskTELCO);
+
+        cep.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b){
+                    String sendCep = cep.getText().toString();
+                    sendCep = sendCep.replace(".", "");
+                    sendCep = sendCep.replace("-", "");
+                    String url = "https://viacep.com.br/ws/"+sendCep+"/json/unicode/";
+                    StringRequest sr = new StringRequest(url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject objeto = new JSONObject(response);
+                                String enderecoO = objeto.getString("logradouro"), cidadeO = objeto.getString("localidade"),
+                                        estadoO = objeto.getString("uf"),bairroO = objeto.getString("bairro");
+
+                                rua.setText(enderecoO);
+                                cidade.setText(cidadeO);
+                                estado.setText(estadoO);
+                                bairro.setText(bairroO);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(EditarFornecedor.this, "CEP Inválido!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    RequestQueue rq = Volley.newRequestQueue(EditarFornecedor.this);
+                    rq.add(sr);
+                }
+            }
+        });
+
         try{
             Intent i = getIntent();
             this.id = i.getStringExtra("id");
         }catch(NullPointerException e){
             e.printStackTrace();
         }
+
+        tipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(i == 0){
+                    cpf.setEnabled(true);
+                    rg.setEnabled(true);
+
+                    cnpj.setText("");
+                    inscricao.setText("");
+                    razao.setText("");
+
+                    cnpj.setEnabled(false);
+                    inscricao.setEnabled(false);
+                    razao.setEnabled(false);
+                }else{
+                    cpf.setEnabled(false);
+                    rg.setEnabled(false);
+
+                    rg.setText("");
+                    cpf.setText("");
+
+                    cnpj.setEnabled(true);
+                    inscricao.setEnabled(true);
+                    razao.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         carregar();
     }

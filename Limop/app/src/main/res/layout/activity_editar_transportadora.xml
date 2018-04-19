@@ -149,6 +149,7 @@
         <EditText
             android:hint="@string/estado"
             android:id="@+id/estado"
+            android:focusable="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
@@ -165,6 +166,7 @@
 
         <EditText
             android:hint="@string/cidade"
+            android:focusable="false"
             android:id="@+id/cidade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -183,6 +185,7 @@
         <EditText
             android:hint="@string/bairro"
             android:id="@+id/bairro"
+            android:focusable="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
@@ -200,6 +203,7 @@
         <EditText
             android:hint="@string/rua"
             android:id="@+id/rua"
+            android:focusable="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"

@@ -75,21 +75,21 @@
             android:paddingBottom="12dp" />
 
         <EditText
-            android:hint="@string/inscricao"
             android:id="@+id/inscricao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/input_style"
-            android:inputType="text"
-            android:drawableLeft="@drawable/ic_business"
-            android:drawableStart="@drawable/ic_business"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/input_style"
+            android:drawableLeft="@drawable/ic_business"
             android:drawablePadding="20dp"
+            android:drawableStart="@drawable/ic_business"
+            android:hint="@string/inscricao"
+            android:inputType="text"
+            android:paddingBottom="12dp"
             android:paddingLeft="5dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp" />
+            android:paddingTop="12dp" />
 
         <EditText
             android:hint="@string/cpf"
@@ -197,6 +197,7 @@
             android:hint="@string/estado"
             android:id="@+id/estado"
             android:layout_width="match_parent"
+            android:focusable="false"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
             android:inputType="text"
@@ -213,6 +214,7 @@
         <EditText
             android:hint="@string/cidade"
             android:id="@+id/cidade"
+            android:focusable="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
@@ -230,6 +232,7 @@
         <EditText
             android:hint="@string/bairro"
             android:id="@+id/bairro"
+            android:focusable="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
@@ -251,6 +254,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
             android:inputType="text"
+            android:focusable="false"
             android:drawableLeft="@drawable/ic_home"
             android:drawableStart="@drawable/ic_home"
             android:layout_marginTop="30dp"
