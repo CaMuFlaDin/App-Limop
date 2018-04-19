@@ -114,26 +114,28 @@ public class InsertCliente extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i == 0){
-                    cpf.setEnabled(true);
-                    rg.setEnabled(true);
+                    cpf.setVisibility(View.VISIBLE);
+                    rg.setVisibility(View.VISIBLE);
 
                     cnpj.setText("");
                     inscricao.setText("");
                     razao.setText("");
 
-                    cnpj.setEnabled(false);
-                    inscricao.setEnabled(false);
-                    razao.setEnabled(false);
+                    cnpj.setVisibility(View.GONE);
+                    inscricao.setVisibility(View.GONE);
+                    razao.setVisibility(View.GONE);
+
                 }else{
-                    cpf.setEnabled(false);
-                    rg.setEnabled(false);
+                    cpf.setVisibility(View.GONE);
+                    rg.setVisibility(View.GONE);
 
                     rg.setText("");
                     cpf.setText("");
 
-                    cnpj.setEnabled(true);
-                    inscricao.setEnabled(true);
-                    razao.setEnabled(true);
+                    cnpj.setVisibility(View.VISIBLE);
+                    inscricao.setVisibility(View.VISIBLE);
+                    razao.setVisibility(View.VISIBLE);
+
                 }
             }
 
