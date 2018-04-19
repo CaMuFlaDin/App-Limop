@@ -1,10 +1,14 @@
 package com.estoques.limop.limop;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
+
+import com.estoques.limop.limop.CRUD.CRUD;
 
 public class Principal extends AppCompatActivity {
 
@@ -34,5 +38,17 @@ public class Principal extends AppCompatActivity {
         startActivity(irTela);
     }
 
-    // TODO FAZER ONBACK
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Principal.this);
+        builder.setCancelable(true);
+        builder.setTitle("Você realmente deseja sair?");
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent irTela = new Intent(Principal.this, MainActivity.class);
+                startActivity(irTela);
+            }
+        }).setNegativeButton("Não", null);
+        builder.create().show();
+    }
 }
