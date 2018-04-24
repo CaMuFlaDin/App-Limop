@@ -20,6 +20,7 @@ public class Vendas extends AppCompatActivity {
 
     public void Transportadoras(View v){
         Intent irTela = new Intent(Vendas.this, Transportadoras_Compras.class);
+        irTela.putExtra("tela", "Vendas");
         startActivity(irTela);
     }
     public void Produtos(View v){
