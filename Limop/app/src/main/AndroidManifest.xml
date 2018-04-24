@@ -120,7 +120,14 @@
             android:name=".Produtos_Vendas"
             android:label="Vendas - Produtos"
             android:parentActivityName=".Produtos_Vendas" />
-        <activity android:name=".InsertProdVenda"></activity>
+        <activity
+            android:name=".InsertProdVenda" />
+
+        <activity
+            android:name=".Graficos"
+            android:label="Gráficos"
+            android:parentActivityName=".Graficos"/>
+
     </application>
 
 </manifest>
