@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.estoques.limop.limop.InsertProdVenda">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/clientes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@string/clientes"
+            android:prompt="@string/clientes"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="-0dp"
+            android:background="@drawable/input_style_not"
+            android:layout_marginTop="24dp">
+        </Spinner>
+
+        <EditText
+            android:hint="@string/data_venda"
+            android:id="@+id/data_venda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="date"
+            android:drawableLeft="@drawable/ic_data"
+            android:drawableStart="@drawable/ic_data"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <Spinner
+            android:id="@+id/stts_negociacao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@string/"
+            android:prompt="@string/"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="-0dp"
+            android:background="@drawable/input_style_not"
+            android:layout_marginTop="24dp">
+        </Spinner>
+
+        <Spinner
+            android:id="@+id/contrato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@string/"
+            android:prompt="@string/"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="-0dp"
+            android:background="@drawable/input_style_not"
+            android:layout_marginTop="24dp">
+        </Spinner>
+
+        <Spinner
+            android:id="@+id/produto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@string/"
+            android:prompt="@string/"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="-0dp"
+            android:background="@drawable/input_style_not"
+            android:layout_marginTop="24dp">
+        </Spinner>
+
+        <EditText
+            android:id="@+id/qtd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="number"
+            android:drawableLeft="@drawable/ic_qtd"
+            android:drawableStart="@drawable/ic_qtd"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <EditText
+            android:id="@+id/valor_unitario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="numberDecimal"
+            android:drawableLeft="@drawable/ic_money"
+            android:drawableStart="@drawable/ic_money"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <EditText
+            android:id="@+id/desconto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="number"
+            android:drawableLeft="@drawable/ic_money"
+            android:drawableStart="@drawable/ic_money"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <Spinner
+            android:id="@+id/cond_pagamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="-0dp"
+            android:background="@drawable/input_style_not"
+            android:layout_marginTop="24dp">
+        </Spinner>
+
+        <EditText
+            android:id="@+id/vencimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="date"
+            android:drawableLeft="@drawable/ic_data"
+            android:drawableStart="@drawable/ic_data"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <Spinner
+            android:id="@+id/forma_pagamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="-0dp"
+            android:background="@drawable/input_style_not"
+            android:layout_marginTop="24dp">
+        </Spinner>
+
+        <EditText
+            android:id="@+id/obs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="date"
+            android:drawableLeft="@drawable/ic_list"
+            android:drawableStart="@drawable/ic_list"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <Button
+            android:onClick="insertProduto"
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cadastrar"
+            android:textColor="#FFF"
+            android:background="@drawable/btn_login"
+            android:textSize="16sp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
+

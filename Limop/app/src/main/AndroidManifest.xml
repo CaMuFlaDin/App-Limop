@@ -108,17 +108,19 @@
             android:name=".EditarUsuario"
             android:label="Editar Usuário"
             android:parentActivityName=".EditarUsuario" />
-
         <activity
             android:name=".InsertProduto"
             android:label="Novo Produto"
             android:parentActivityName=".InsertProduto" />
-
         <activity
             android:name=".EditarProduto"
             android:label="Editar Produto"
             android:parentActivityName=".EditarProduto" />
-
+        <activity
+            android:name=".Produtos_Vendas"
+            android:label="Vendas - Produtos"
+            android:parentActivityName=".Produtos_Vendas" />
+        <activity android:name=".InsertProdVenda"></activity>
     </application>
 
 </manifest>

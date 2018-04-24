@@ -123,6 +123,17 @@
     <string name="categoriaProd">Selecione a categoria</string>
     <string name="nome_produto">Nome do Produto</string>
 
+    <!-- Vendas -->
+    <string name="data_venda">Data da venda</string>
+    <string-array name="stts">Status da Negociação</string-array>
+    <string-array name="stts_negociacao">
+        <item>Venda</item>
+        <item>Orçamento</item>
+        <item>Orçamento Aceito</item>
+        <item>Orçamento Recusado</item>
+    </string-array>
+
+
 
     <!-- Telas -->
     <string name="title_activity_principal">"Página inicial "</string>

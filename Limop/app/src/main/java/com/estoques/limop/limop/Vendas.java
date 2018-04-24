@@ -22,6 +22,10 @@ public class Vendas extends AppCompatActivity {
         Intent irTela = new Intent(Vendas.this, Transportadoras_Compras.class);
         startActivity(irTela);
     }
+    public void Produtos(View v){
+        Intent irTela = new Intent(Vendas.this, Produtos_Vendas.class);
+        startActivity(irTela);
+    }
 
     public void onBackPressed(){
         super.onBackPressed();
