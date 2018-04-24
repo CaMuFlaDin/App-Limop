@@ -52,7 +52,6 @@ public class InsertProdVenda extends AppCompatActivity {
         max_estoque               = findViewById(R.id.max_estoque);
         peso_liquido              = findViewById(R.id.peso_liquido);
         peso_bruto                = findViewById(R.id.peso_bruto);
-        nome_cliente              = findViewById(R.id.cliente);
         valor_venda               = findViewById(R.id.valor_venda);
         valor_custo               = findViewById(R.id.valor_custo);
         categoriaProd             = findViewById(R.id.categoria);
@@ -89,7 +88,7 @@ public class InsertProdVenda extends AppCompatActivity {
         params.put("peso_bruto", peso_bruto.getText().toString().trim());
         params.put("valor_venda", valor_venda.getText().toString().trim());
         params.put("valor_custo", valor_custo.getText().toString().trim());
-        //params.put("id_fornecedor", idFornecedor);
+        params.put("id_cliente", idCliente);
 
         CRUD.inserir("https://limopestoques.com.br/Android/Insert/InsertProdVenda.php", new Response.Listener<String>() {
             @Override
