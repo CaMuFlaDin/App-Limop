@@ -125,13 +125,78 @@
 
     <!-- Vendas -->
     <string name="data_venda">Data da venda</string>
-    <string-array name="stts">Status da Negociação</string-array>
     <string-array name="stts_negociacao">
         <item>Venda</item>
         <item>Orçamento</item>
         <item>Orçamento Aceito</item>
         <item>Orçamento Recusado</item>
     </string-array>
+    <string-array name="contrato">
+        <item>Cobrança</item>
+        <item>Vigência</item>
+    </string-array>
+    <string-array name="cond_pagamento">
+        <item>Á vista</item>
+        <item>2x</item>
+        <item>3x</item>
+        <item>4x</item>
+        <item>5x</item>
+        <item>6x</item>
+        <item>7x</item>
+        <item>8x</item>
+        <item>9x</item>
+        <item>10x</item>
+        <item>11x</item>
+        <item>12x</item>
+        <item>13x</item>
+        <item>14x</item>
+        <item>15x</item>
+        <item>16x</item>
+        <item>17x</item>
+        <item>18x</item>
+        <item>19x</item>
+        <item>20x</item>
+        <item>21x</item>
+        <item>22x</item>
+        <item>23x</item>
+        <item>24x</item>
+        <item>25x</item>
+        <item>26x</item>
+        <item>27x</item>
+        <item>28x</item>
+        <item>29x</item>
+        <item>30x</item>
+        <item>31x</item>
+        <item>32x</item>
+        <item>33x</item>
+        <item>34x</item>
+        <item>35x</item>
+        <item>36x</item>
+        <item>37x</item>
+        <item>38x</item>
+        <item>39x</item>
+        <item>40x</item>
+        <item>41x</item>
+        <item>42x</item>
+        <item>43x</item>
+        <item>44x</item>
+        <item>45x</item>
+        <item>46x</item>
+        <item>47x</item>
+        <item>48x</item>
+    </string-array>
+
+    <string-array name="forma_pagamento">
+        <item>Boleto</item>
+        <item>Cartão de Crédito</item>
+        <item>Cartão de Débito</item>
+        <item>Dinheiro</item>
+    </string-array>
+
+    <string name="vencimento">Vencimento</string>
+    <string name="desconto">Desconto</string>
+    <string name="valor_unitario">Valor Unitario</string>
+    <string name="qtd">Quantidade</string>
 
 
 
