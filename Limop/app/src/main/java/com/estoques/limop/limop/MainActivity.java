@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.estoques.limop.limop.Sessao.Sessao;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     EditText email;
     EditText senha;
 
+    Sessao sessao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         email = findViewById(R.id.email);
         senha = findViewById(R.id.senha);
+
+        sessao = new Sessao(MainActivity.this);
+
+        if(sessao.getBoolean("login")){
+            Intent irTela = new Intent(MainActivity.this, Principal.class);
+            startActivity(irTela);
+        }
     }
 
     public boolean verificarCampo(){
@@ -71,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
                         String email = quei.getString("email");
                         String foto = quei.getString("foto");
                         String tipo = quei.getString("tipo");
+
+                        sessao.setBoolean("login", true);
+                        sessao.setString("id_usuario", id_usuario);
+
                         Intent irTela = new Intent(MainActivity.this, Principal.class);
                         startActivity(irTela);
 
