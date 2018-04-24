@@ -43,11 +43,22 @@ public class Transportadoras_Compras extends AppCompatActivity implements Search
     List<TranspCompraConst> transpcompraList;
 
     SearchView searchView;
+    Class tela;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transportadoras__compras);
+
+        Intent recuperar = getIntent();
+        try{
+            String anterior = recuperar.getStringExtra("tela");
+            tela = Class.forName(anterior);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }catch(NullPointerException e){
+            e.printStackTrace();
+        }
 
         listView = (ListView)findViewById(R.id.listView);
         searchView = findViewById(R.id.sv);
@@ -164,7 +175,7 @@ public class Transportadoras_Compras extends AppCompatActivity implements Search
     // TODO ARRUMAR AQUI
     public void onBackPressed(){
         super.onBackPressed();
-        Intent irTela = new Intent(Transportadoras_Compras.this, Transportadoras_Compras.class);
+        Intent irTela = new Intent(Transportadoras_Compras.this, tela);
         irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(irTela);
     }
