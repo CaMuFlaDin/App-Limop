@@ -1,4 +1,4 @@
-package com.estoques.limop.limop;
+package br.com.limopestoques.limop;
 
 import org.junit.Test;
 

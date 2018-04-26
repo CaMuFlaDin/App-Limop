@@ -4,7 +4,7 @@ android {
     useLibrary 'org.apache.http.legacy'
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.estoques.limop.limop"
+        applicationId "br.com.limopestoques.limop"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.estoques.limop.limop.Graficos">
+    tools:context="br.com.limopestoques.limop.Graficos">
 
     <WebView
         android:layout_margin="15dp"
