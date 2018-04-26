@@ -112,7 +112,7 @@ public class InsertProdVenda extends AppCompatActivity {
         params.put("id_cliente", idCliente);
         params.put("id_produto", idProduto);
 
-        CRUD.inserir("https://limopestoques.com.br/Android/Insert/InsertProdVenda.php", new Response.Listener<String>() {
+        CRUD.inserir("https://limopestoques.com.br/Android/Insert/InsertVendaProd.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response){
                 try{
