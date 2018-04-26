@@ -35,8 +35,8 @@ public class InsertProdVenda extends AppCompatActivity {
     private String idCliente;
     private String idProduto;
 
-    EditText data_venda,disponivel_estoque,min_estoque,max_estoque,peso_liquido,peso_bruto,nome_produto,valor_venda,valor_custo;
-    Spinner nome_cliente,produto;
+    EditText data_venda,qtd, valor_unitario,desconto,vencimento,obs;
+    Spinner nome_cliente,produto,stts_negociacao,contrato,cond_pagamento,forma_pagamento;
     Button button;
 
     ArrayAdapter<String> adapter;
@@ -52,13 +52,16 @@ public class InsertProdVenda extends AppCompatActivity {
 
         nome_cliente              = findViewById(R.id.cliente);
         produto                   = findViewById(R.id.produto);
-        disponivel_estoque        = findViewById(R.id.disponivel_estoque);
-        min_estoque               = findViewById(R.id.min_estoque);
-        max_estoque               = findViewById(R.id.max_estoque);
-        peso_liquido              = findViewById(R.id.peso_liquido);
-        peso_bruto                = findViewById(R.id.peso_bruto);
-        valor_venda               = findViewById(R.id.valor_venda);
-        valor_custo               = findViewById(R.id.valor_custo);
+        data_venda                = findViewById(R.id.data_venda);
+        stts_negociacao           = findViewById(R.id.stts_negociacao);
+        contrato                  = findViewById(R.id.contrato);
+        qtd                       = findViewById(R.id.qtd);
+        valor_unitario            = findViewById(R.id.valor_unitario);
+        desconto                  = findViewById(R.id.desconto);
+        vencimento                = findViewById(R.id.vencimento);
+        obs                       = findViewById(R.id.obs);
+        cond_pagamento            = findViewById(R.id.cond_pagamento);
+        forma_pagamento            = findViewById(R.id.forma_pagamento);
 
 
         button                    = (Button)findViewById(R.id.button);
@@ -98,16 +101,17 @@ public class InsertProdVenda extends AppCompatActivity {
     public void insertProduto(View v) {
         Map<String, String> params = new HashMap<String, String>();
 
-        params.put("cliente", nome_cliente.getSelectedItem().toString());
-        params.put("foto", data_venda.getText().toString().trim());
-        params.put("disponivel_estoque", disponivel_estoque.getText().toString().trim());
-        params.put("min_estoque", min_estoque.getText().toString().trim());
-        params.put("max_estoque", max_estoque.getText().toString().trim());
-        params.put("peso_liquido", peso_liquido.getText().toString().trim());
-        params.put("peso_bruto", peso_bruto.getText().toString().trim());
-        params.put("valor_venda", valor_venda.getText().toString().trim());
-        params.put("valor_custo", valor_custo.getText().toString().trim());
+        params.put("data_venda", data_venda.getText().toString().trim());
+        params.put("status", stts_negociacao.getSelectedItem().toString());
+        params.put("contrato", contrato.getSelectedItem().toString());
+        params.put("qtd", qtd.getText().toString().trim());
+        params.put("valor_unitario", valor_unitario.getText().toString().trim());
+        params.put("desconto", desconto.getText().toString().trim());
+        params.put("vencimento", vencimento.getText().toString().trim());
+        params.put("cond_pagamento", cond_pagamento.getSelectedItem().toString());
+        params.put("forma_pagamento", forma_pagamento.getSelectedItem().toString());
         params.put("id_cliente", idCliente);
+        params.put("id_produto", idProduto);
 
         CRUD.inserir("https://limopestoques.com.br/Android/Insert/InsertProdVenda.php", new Response.Listener<String>() {
             @Override
@@ -169,7 +173,7 @@ public class InsertProdVenda extends AppCompatActivity {
     }
 
     public void carregarProduto(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonProdutos.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonProd.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
