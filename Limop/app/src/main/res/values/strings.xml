@@ -6,6 +6,10 @@
     <string name="login">Login</string>
     <string name="camposVazios">Algum campo está vazio</string>
 
+    <!-- Facebook -->
+    <string name="facebook_app_id">974977215983374</string>
+    <string name="fb_login_protocol_scheme">fb974977215983374</string>
+
     <!-- Contato -->
     <string name="primeiro_nome">Nome *</string>
     <string name="email_cont">E-mail *</string>
