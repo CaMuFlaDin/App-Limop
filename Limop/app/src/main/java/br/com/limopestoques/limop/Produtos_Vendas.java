@@ -73,7 +73,7 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
         ProdCompraConst vendas = prodvendaList.get(pos);
         final String id = vendas.getId();
         if(item.getTitle() == "Editar Venda"){
-            Intent irTela = new Intent(Produtos_Vendas.this, EditarProduto.class);
+            Intent irTela = new Intent(Produtos_Vendas.this, EditarProdVenda.class);
             irTela.putExtra("id",id);
             startActivity(irTela);
         }
