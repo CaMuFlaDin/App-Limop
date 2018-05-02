@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 try{
                     JSONObject objeto = new JSONObject(response);
-                    boolean validar = objeto.getBoolean("resposta");
+                    boolean validar = objeto.getBoolean("validar");
                     if(validar) {
                         String id_usuario = objeto.getString("id_usuario");
                         String email = objeto.getString("email");
