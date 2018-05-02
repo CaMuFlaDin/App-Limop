@@ -42,8 +42,7 @@ public class Principal extends AppCompatActivity {
         builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Intent irTela = new Intent(Principal.this, MainActivity.class);
-                startActivity(irTela);
+                finish();
             }
         }).setNegativeButton("Não", null);
         builder.create().show();

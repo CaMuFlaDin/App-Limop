@@ -23,6 +23,22 @@ import java.util.Map;
 public class CRUD {
     public CRUD(){}
 
+    public static StringRequest customRequest(String url, Response.Listener<String> responseListener,
+                                              final Context contexto, final Map<String, String> params){
+        StringRequest sr = new StringRequest(Request.Method.POST, url, responseListener,
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(contexto, error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }){
+            protected Map<String,String> getParams() throws com.android.volley.AuthFailureError{
+                return params;
+            }
+        };
+        return sr;
+    }
+
     public static StringRequest editar(String url, Response.Listener listener, final Map<String,String> params, final Context context){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, listener, new Response.ErrorListener() {
             @Override
