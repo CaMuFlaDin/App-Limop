@@ -25,6 +25,13 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 import br.com.limopestoques.limop.CRUD.CRUD;
 import br.com.limopestoques.limop.Sessao.Sessao;
@@ -47,6 +54,12 @@ public class MainActivity extends AppCompatActivity {
 
     Sessao sessao;
 
+    GoogleSignInClient mGoogleSignInClient;
+
+    SignInButton signInButton;
+
+    Integer RC_SIGN_IN = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +67,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         email = findViewById(R.id.email);
         senha = findViewById(R.id.senha);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        signInButton = findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_STANDARD);
+
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signIn();
+            }
+        });
+
 
         loginButton = findViewById(R.id.login_button);
 
@@ -102,6 +131,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void onStart(){
+        super.onStart();
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        googleLogin(account);
+    }
+
     public void loginFB(String email){
         Map<String,String> params = new HashMap<String,String>();
         params.put("emailLogin", "emailLogin");
@@ -121,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                         String tipo = objeto.getString("tipo");
 
                         sessao.setBoolean("login", true);
+                        sessao.setString("tipo",tipo);
                         sessao.setString("id_usuario", id_usuario);
                         
                         Intent irTela = new Intent(MainActivity.this, Principal.class);
@@ -157,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
                         String tipo = quei.getString("tipo");
 
                         sessao.setBoolean("login", true);
+                        sessao.setString("tipo",tipo);
                         sessao.setString("id_usuario", id_usuario);
 
                         Intent irTela = new Intent(MainActivity.this, Principal.class);
@@ -188,6 +225,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
     public void Contato(View v) {
         Intent irTela = new Intent(MainActivity.this, Contato.class);
         startActivity(irTela);
@@ -199,8 +241,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+
+
+    }
+
+    public  void googleLogin(GoogleSignInAccount account){
+        if(account != null){
+            String email = account.getEmail();
+            loginFB(email);
+        }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            googleLogin(account);
+
+            // Signed in successfully, show authenticated UI.
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information
+            e.printStackTrace();
+        }
     }
 }
