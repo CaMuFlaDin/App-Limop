@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
+import br.com.limopestoques.limop.Sessao.Sessao;
 
 public class InsertCliente extends AppCompatActivity {
 
@@ -31,6 +32,7 @@ public class InsertCliente extends AppCompatActivity {
             estado,bairro,rua,numero,complemento,obs;
     Spinner tipo;
     Button button;
+    Sessao sessao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,8 @@ public class InsertCliente extends AppCompatActivity {
         obs               = (EditText)findViewById(R.id.obs);
         tipo              = (Spinner)findViewById(R.id.tipo);
         button            = (Button)findViewById(R.id.button);
+
+        sessao = new Sessao(InsertCliente.this);
 
         MaskEditTextChangedListener maskCPF = new MaskEditTextChangedListener("###.###.###-##",cpf);
         MaskEditTextChangedListener maskCEP = new MaskEditTextChangedListener("##.###-###",cep);
@@ -150,6 +154,8 @@ public class InsertCliente extends AppCompatActivity {
     public void insertCliente(View v) {
         Map<String, String> params = new HashMap<String, String>();
 
+        String id_usuario = sessao.getString("id_usuario");
+
         params.put("nome", nome.getText().toString().trim());
         params.put("cnpj", cnpj.getText().toString().trim());
         params.put("razao", razao.getText().toString().trim());
@@ -168,6 +174,7 @@ public class InsertCliente extends AppCompatActivity {
         params.put("complemento", complemento.getText().toString().trim());
         params.put("obs", obs.getText().toString().trim());
         params.put("tipo", tipo.getSelectedItem().toString());
+        params.put("id_usuario", id_usuario);
 
         CRUD.inserir("https://limopestoques.com.br/Android/Insert/InsertCliente.php", new Response.Listener<String>() {
             @Override

@@ -20,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import br.com.limopestoques.limop.CRUD.CRUD;
 import br.com.limopestoques.limop.Construtoras.ClientesConst;
 import br.com.limopestoques.limop.Construtoras.ProdCompraConst;
+import br.com.limopestoques.limop.Sessao.Sessao;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +38,7 @@ public class InsertProdVenda extends AppCompatActivity {
     EditText data_venda,qtd, valor_unitario,desconto,vencimento,obs;
     Spinner nome_cliente,produto,stts_negociacao,contrato,cond_pagamento,forma_pagamento;
     Button button;
+    Sessao sessao;
 
     ArrayAdapter<String> adapter;
     ArrayList<ClientesConst> clientes;
@@ -61,6 +63,8 @@ public class InsertProdVenda extends AppCompatActivity {
         obs                       = findViewById(R.id.obs);
         cond_pagamento            = findViewById(R.id.cond_pagamento);
         forma_pagamento            = findViewById(R.id.forma_pagamento);
+
+        sessao = new Sessao(InsertProdVenda.this);
 
 
         button                    = (Button)findViewById(R.id.button);
@@ -100,6 +104,8 @@ public class InsertProdVenda extends AppCompatActivity {
     public void insertProduto(View v) {
         Map<String, String> params = new HashMap<String, String>();
 
+        String id_usuario = sessao.getString("id_usuario");
+
         params.put("data_venda", data_venda.getText().toString().trim());
         params.put("status", stts_negociacao.getSelectedItem().toString());
         params.put("contrato", contrato.getSelectedItem().toString());
@@ -111,6 +117,7 @@ public class InsertProdVenda extends AppCompatActivity {
         params.put("forma_pagamento", forma_pagamento.getSelectedItem().toString());
         params.put("id_cliente", idCliente);
         params.put("id_produto", idProduto);
+        params.put("id_usuario", id_usuario);
 
         CRUD.inserir("https://limopestoques.com.br/Android/Insert/InsertVendaProd.php", new Response.Listener<String>() {
             @Override

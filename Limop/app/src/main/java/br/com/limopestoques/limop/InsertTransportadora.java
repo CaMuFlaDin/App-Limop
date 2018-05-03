@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
+import br.com.limopestoques.limop.Sessao.Sessao;
 
 public class InsertTransportadora extends AppCompatActivity {
 
@@ -30,6 +31,7 @@ public class InsertTransportadora extends AppCompatActivity {
             estado,bairro,rua,numero,complemento,obs,valor_frete;
     Spinner tipo;
     Button button;
+    Sessao sessao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,8 @@ public class InsertTransportadora extends AppCompatActivity {
         valor_frete       = (EditText)findViewById(R.id.valor_frete);
         tipo              = (Spinner)findViewById(R.id.tipo);
         button            = (Button)findViewById(R.id.button);
+
+        sessao = new Sessao(InsertTransportadora.this);
 
         MaskEditTextChangedListener maskCEP = new MaskEditTextChangedListener("##.###-###",cep);
         MaskEditTextChangedListener maskCNPJ = new MaskEditTextChangedListener("##.###.###/####-##",cnpj);
@@ -108,6 +112,8 @@ public class InsertTransportadora extends AppCompatActivity {
     public void insertTransportadora(View v) {
         Map<String, String> params = new HashMap<String, String>();
 
+        String id_usuario = sessao.getString("id_usuario");
+
         params.put("nome", nome.getText().toString().trim());
         params.put("cnpj", cnpj.getText().toString().trim());
         params.put("razao", razao.getText().toString().trim());
@@ -123,6 +129,7 @@ public class InsertTransportadora extends AppCompatActivity {
         params.put("numero", numero.getText().toString().trim());
         params.put("complemento", complemento.getText().toString().trim());
         params.put("valor_frete", valor_frete.getText().toString().trim());
+        params.put("id_usuario", id_usuario);
 
         CRUD.inserir("https://limopestoques.com.br/Android/Insert/InsertTransportadora.php", new Response.Listener<String>() {
             @Override

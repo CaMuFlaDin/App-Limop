@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import br.com.limopestoques.limop.CRUD.CRUD;
+import br.com.limopestoques.limop.Sessao.Sessao;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +23,8 @@ public class InsertServico extends AppCompatActivity {
     String ServerURL = "" ;
     EditText nome, valor_custo, valor_venda;
     Button button;
+    Sessao sessao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,8 @@ public class InsertServico extends AppCompatActivity {
         valor_custo = (EditText)findViewById(R.id.valor_custo);
         valor_venda = (EditText)findViewById(R.id.valor_venda);
         button = (Button)findViewById(R.id.button);
+
+        sessao = new Sessao(InsertServico.this);
     }
 
     public void campoVazio(View v){
@@ -44,7 +49,10 @@ public class InsertServico extends AppCompatActivity {
     public void insertServico() {
         Map<String, String> params = new HashMap<String, String>();
 
+        String id_usuario = sessao.getString("id_usuario");
+
         params.put("nome", nome.getText().toString().trim());
+        params.put("id_usuario", id_usuario);
         params.put("valor_custo", valor_custo.getText().toString().trim());
         params.put("valor_venda", valor_venda.getText().toString().trim());
 

@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import br.com.limopestoques.limop.CRUD.CRUD;
 import br.com.limopestoques.limop.Construtoras.FornCompraConst;
+import br.com.limopestoques.limop.Sessao.Sessao;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +35,7 @@ public class InsertProduto extends AppCompatActivity {
     EditText foto,disponivel_estoque,min_estoque,max_estoque,peso_liquido,peso_bruto,nome_produto,valor_venda,valor_custo;
     Spinner fornecedor,categoriaProd;
     Button button;
+    Sessao sessao;
 
     ArrayAdapter<String> adapter;
     ArrayList<FornCompraConst> fornecedores;
@@ -54,6 +56,8 @@ public class InsertProduto extends AppCompatActivity {
         valor_venda               = findViewById(R.id.valor_venda);
         valor_custo               = findViewById(R.id.valor_custo);
         categoriaProd             = findViewById(R.id.categoria);
+
+        sessao = new Sessao(InsertProduto.this);
 
 
         button                    = (Button)findViewById(R.id.button);
@@ -77,6 +81,8 @@ public class InsertProduto extends AppCompatActivity {
     public void insertProduto(View v) {
         Map<String, String> params = new HashMap<String, String>();
 
+        String id_usuario = sessao.getString("id_usuario");
+
         params.put("nome", nome_produto.getText().toString().trim());
         params.put("tipo", categoriaProd.getSelectedItem().toString());
         params.put("foto", foto.getText().toString().trim());
@@ -88,6 +94,7 @@ public class InsertProduto extends AppCompatActivity {
         params.put("valor_venda", valor_venda.getText().toString().trim());
         params.put("valor_custo", valor_custo.getText().toString().trim());
         params.put("id_fornecedor", idFornecedor);
+        params.put("id_usuario", id_usuario);
 
         CRUD.inserir("https://limopestoques.com.br/Android/Insert/InsertProduto.php", new Response.Listener<String>() {
             @Override
