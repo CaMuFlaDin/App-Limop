@@ -29,6 +29,7 @@ import com.facebook.login.widget.LoginButton;
 import br.com.limopestoques.limop.CRUD.CRUD;
 import br.com.limopestoques.limop.Sessao.Sessao;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -110,9 +111,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try{
-                    JSONObject objeto = new JSONObject(response);
-                    boolean validar = objeto.getBoolean("validar");
+                    JSONObject obj = new JSONObject(response);
+                    boolean validar = obj.getBoolean("validar");
                     if(validar) {
+                        JSONObject objeto = obj.getJSONObject("resposta");
                         String id_usuario = objeto.getString("id_usuario");
                         String email = objeto.getString("email");
                         String foto = objeto.getString("foto");
@@ -120,14 +122,12 @@ public class MainActivity extends AppCompatActivity {
 
                         sessao.setBoolean("login", true);
                         sessao.setString("id_usuario", id_usuario);
-
-                        Toast.makeText(MainActivity.this, "Guardou a merda toda", Toast.LENGTH_SHORT).show();
+                        
                         Intent irTela = new Intent(MainActivity.this, Principal.class);
                         irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(irTela);
                     }else{
-                        String error = objeto.getString("error");
-                        Toast.makeText(MainActivity.this, error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Erro", Toast.LENGTH_SHORT).show();
                     }
                 }catch(JSONException e){
                     e.printStackTrace();
