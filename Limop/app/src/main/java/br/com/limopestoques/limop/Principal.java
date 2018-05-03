@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.facebook.login.LoginManager;
+
 public class Principal extends AppCompatActivity {
 
     @Override
@@ -42,6 +44,7 @@ public class Principal extends AppCompatActivity {
         builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                LoginManager.getInstance().logOut();
                 finish();
             }
         }).setNegativeButton("Não", null);
