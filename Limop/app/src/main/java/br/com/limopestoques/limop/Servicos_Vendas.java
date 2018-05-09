@@ -75,7 +75,7 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
         ProdCompraConst vendas = servicosvendaList.get(pos);
         final String id = vendas.getId();
         if(item.getTitle() == "Editar Venda"){
-            Intent irTela = new Intent(Servicos_Vendas.this, EditarProdVenda.class);
+            Intent irTela = new Intent(Servicos_Vendas.this, EditarServVenda.class);
             irTela.putExtra("id",id);
             startActivity(irTela);
         }
@@ -110,7 +110,7 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
                             for (int i = 0; i < servvendaArray.length(); i++){
                                 JSONObject servicoObject = servvendaArray.getJSONObject(i);
 
-                                ProdCompraConst prodCompra = new ProdCompraConst(servicoObject.getString("id_venda"),servicoObject.getString("nome_servico"),"R$ "+servicoObject.getString("valor"), "Quantidade: "+servicoObject.getString("quantidade"));
+                                ProdCompraConst prodCompra = new ProdCompraConst(servicoObject.getString("id_venda"),servicoObject.getString("nomeServico"),"R$ "+servicoObject.getString("valor"), "Quantidade: "+servicoObject.getString("quantidade"));
 
                                 servicosvendaList.add(prodCompra);
                             }
@@ -143,7 +143,7 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
     }
 
     public void CadastrarVenda(View v){
-        Intent irTela = new Intent(Servicos_Vendas.this, InsertProdVenda.class);
+        Intent irTela = new Intent(Servicos_Vendas.this, InsertServVenda.class);
         startActivity(irTela);
     }
 

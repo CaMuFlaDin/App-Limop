@@ -146,7 +146,9 @@
             android:label="Gráficos"
             android:parentActivityName=".Graficos" />
         <activity android:name=".EditarProdVenda" />
-        <activity android:name=".Servicos_Vendas"></activity>
+        <activity android:name=".Servicos_Vendas" />
+        <activity android:name=".InsertServVenda" />
+        <activity android:name=".EditarServVenda"></activity>
     </application>
 
 </manifest>

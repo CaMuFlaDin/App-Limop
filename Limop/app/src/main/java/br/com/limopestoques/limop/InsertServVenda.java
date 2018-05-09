@@ -20,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import br.com.limopestoques.limop.CRUD.CRUD;
 import br.com.limopestoques.limop.Construtoras.ClientesConst;
 import br.com.limopestoques.limop.Construtoras.ProdCompraConst;
+import br.com.limopestoques.limop.Construtoras.ServicosCompraConst;
 import br.com.limopestoques.limop.Sessao.Sessao;
 
 import org.json.JSONArray;
@@ -30,13 +31,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InsertProdVenda extends AppCompatActivity {
+public class InsertServVenda extends AppCompatActivity {
 
     private String idCliente;
-    private String idProduto;
+    private String idServico;
 
     EditText data_venda,qtd, valor_unitario,desconto,vencimento,obs;
-    Spinner nome_cliente,produto,stts_negociacao,contrato,cond_pagamento,forma_pagamento;
+    Spinner nome_cliente,servico,stts_negociacao,contrato,cond_pagamento,forma_pagamento;
     Button button;
     Sessao sessao;
 
@@ -44,15 +45,15 @@ public class InsertProdVenda extends AppCompatActivity {
     ArrayList<ClientesConst> clientes;
 
     ArrayAdapter<String> adapter2;
-    ArrayList<ProdCompraConst> produtos;
+    ArrayList<ServicosCompraConst> servicos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_insert_prod_venda);
+        setContentView(R.layout.activity_insert_serv_venda);
 
         nome_cliente              = findViewById(R.id.cliente);
-        produto                   = findViewById(R.id.produto);
+        servico                   = findViewById(R.id.servico);
         data_venda                = findViewById(R.id.data_venda);
         stts_negociacao           = findViewById(R.id.stts_negociacao);
         contrato                  = findViewById(R.id.contrato);
@@ -64,7 +65,7 @@ public class InsertProdVenda extends AppCompatActivity {
         cond_pagamento            = findViewById(R.id.cond_pagamento);
         forma_pagamento            = findViewById(R.id.forma_pagamento);
 
-        sessao = new Sessao(InsertProdVenda.this);
+        sessao = new Sessao(InsertServVenda.this);
 
 
         button                    = (Button)findViewById(R.id.button);
@@ -74,8 +75,8 @@ public class InsertProdVenda extends AppCompatActivity {
         carregarCliente();
 
         adapter2 = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item);
-        produtos = new ArrayList<ProdCompraConst>();
-        carregarProduto();
+        servicos = new ArrayList<ServicosCompraConst>();
+        carregarServico();
 
         nome_cliente.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -89,10 +90,10 @@ public class InsertProdVenda extends AppCompatActivity {
             }
         });
 
-        produto.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        servico.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                idProduto = produtos.get(i).getId();
+                idServico = servicos.get(i).getId();
             }
 
             @Override
@@ -101,7 +102,7 @@ public class InsertProdVenda extends AppCompatActivity {
             }
         });
     }
-    public void insertProduto(View v) {
+    public void insertServico(View v) {
         Map<String, String> params = new HashMap<String, String>();
 
         String id_usuario = sessao.getString("id_usuario");
@@ -117,17 +118,17 @@ public class InsertProdVenda extends AppCompatActivity {
         params.put("cond_pagamento", cond_pagamento.getSelectedItem().toString());
         params.put("forma_pagamento", forma_pagamento.getSelectedItem().toString());
         params.put("id_cliente", idCliente);
-        params.put("id_produto", idProduto);
+        params.put("id_servico", idServico);
         params.put("id_usuario", id_usuario);
 
-        CRUD.inserir("https://limopestoques.com.br/Android/Insert/InsertVendaProd.php", new Response.Listener<String>() {
+        CRUD.inserir("https://limopestoques.com.br/Android/Insert/InsertVendaServ.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response){
                 try{
                     JSONObject jo = new JSONObject(response);
                     String resposta = jo.getString("resposta");
-                    Toast.makeText(InsertProdVenda.this, resposta, Toast.LENGTH_SHORT).show();
-                    Intent irTela = new Intent(InsertProdVenda.this, Produtos_Vendas.class);
+                    Toast.makeText(InsertServVenda.this, resposta, Toast.LENGTH_SHORT).show();
+                    Intent irTela = new Intent(InsertServVenda.this, Servicos_Vendas.class);
                     startActivity(irTela);
                 }catch (JSONException e) {
                     e.printStackTrace();
@@ -179,25 +180,25 @@ public class InsertProdVenda extends AppCompatActivity {
         rq.add(stringRequest);
     }
 
-    public void carregarProduto(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonProd.php",
+    public void carregarServico(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonServicos.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try{
                             JSONObject obj = new JSONObject(response);
 
-                            JSONArray forncompraArray = obj.getJSONArray("produtos");
+                            JSONArray forncompraArray = obj.getJSONArray("servicos");
 
                             for (int i = 0; i < forncompraArray.length(); i++){
                                 JSONObject forncompraObject = forncompraArray.getJSONObject(i);
 
-                                ProdCompraConst prodCompra = new ProdCompraConst(forncompraObject.getString("id_produto"), forncompraObject.getString("nome"), forncompraObject.getString("valor_venda"), forncompraObject.getString("disponivel_estoque"));
+                                ServicosCompraConst servCompra = new ServicosCompraConst(forncompraObject.getString("id_servico"), forncompraObject.getString("nome_servico"), forncompraObject.getString("valor_custo"), forncompraObject.getString("valor_venda"));
 
-                                produtos.add(prodCompra);
-                                adapter2.add(prodCompra.getProd());
+                                servicos.add(servCompra);
+                                adapter2.add(servCompra.getNome());
                             }
-                            produto.setAdapter(adapter2);
+                            servico.setAdapter(adapter2);
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -224,7 +225,7 @@ public class InsertProdVenda extends AppCompatActivity {
 
     public void onBackPressed(){
         super.onBackPressed();
-        Intent irTela = new Intent(InsertProdVenda.this, Produtos_Vendas.class);
+        Intent irTela = new Intent(InsertServVenda.this, Servicos_Vendas.class);
         irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(irTela);
     }
