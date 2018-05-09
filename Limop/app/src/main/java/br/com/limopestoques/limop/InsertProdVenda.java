@@ -1,13 +1,18 @@
 package br.com.limopestoques.limop;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -26,6 +31,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,10 +70,9 @@ public class InsertProdVenda extends AppCompatActivity {
         vencimento                = findViewById(R.id.vencimento);
         obs                       = findViewById(R.id.obs);
         cond_pagamento            = findViewById(R.id.cond_pagamento);
-        forma_pagamento            = findViewById(R.id.forma_pagamento);
+        forma_pagamento           = findViewById(R.id.forma_pagamento);
 
         sessao = new Sessao(InsertProdVenda.this);
-
 
         button                    = (Button)findViewById(R.id.button);
 
@@ -101,6 +108,9 @@ public class InsertProdVenda extends AppCompatActivity {
             }
         });
     }
+
+
+
     public void insertProduto(View v) {
         Map<String, String> params = new HashMap<String, String>();
 
@@ -192,7 +202,7 @@ public class InsertProdVenda extends AppCompatActivity {
                             for (int i = 0; i < forncompraArray.length(); i++){
                                 JSONObject forncompraObject = forncompraArray.getJSONObject(i);
 
-                                ProdCompraConst prodCompra = new ProdCompraConst(forncompraObject.getString("id_produto"), forncompraObject.getString("nome"), forncompraObject.getString("valor_venda"), forncompraObject.getString("disponivel_estoque"));
+                                ProdCompraConst prodCompra = new ProdCompraConst(forncompraObject.getString("id_produto"), forncompraObject.getString("nome"), forncompraObject.getString("valor_venda"), forncompraObject.getString("disponivel_estoque"),forncompraObject.getString("fotos"));
 
                                 produtos.add(prodCompra);
                                 adapter2.add(prodCompra.getProd());

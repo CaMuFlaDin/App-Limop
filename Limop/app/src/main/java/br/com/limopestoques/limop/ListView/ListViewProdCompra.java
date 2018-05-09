@@ -1,12 +1,19 @@
 package br.com.limopestoques.limop.ListView;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.Volley;
 
 import br.com.limopestoques.limop.Construtoras.ProdCompraConst;
 import br.com.limopestoques.limop.R;
@@ -81,12 +88,16 @@ public class ListViewProdCompra extends ArrayAdapter<ProdCompraConst>{
         TextView txtprod = listViewItem.findViewById(R.id.txtProd);
         TextView txtvalor = listViewItem.findViewById(R.id.txtValor);
         TextView txtqtd = listViewItem.findViewById(R.id.txtQtd);
+        NetworkImageView image = listViewItem.findViewById(R.id.img);
+
+        ImageLoader il = VolleySingleton.getInstance(mCtx).getImageLoader();
 
         ProdCompraConst usuariosConst = prodcompraList.get(position);
 
         txtprod.setText(usuariosConst.getProd());
         txtvalor.setText(usuariosConst.getValor());
         txtqtd.setText(usuariosConst.getQtd());
+        image.setImageUrl("https://limopestoques.com.br/Index_adm/produtos/imgs/"+usuariosConst.getImg(),il);
 
         return listViewItem;
     }

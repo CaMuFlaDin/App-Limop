@@ -108,7 +108,7 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
                             for (int i = 0; i < prodvendaArray.length(); i++){
                                 JSONObject produtoObject = prodvendaArray.getJSONObject(i);
 
-                                ProdCompraConst prodCompra = new ProdCompraConst(produtoObject.getString("id_venda"),produtoObject.getString("nome_produto"),"R$ "+produtoObject.getString("valor"), "Quantidade: "+produtoObject.getString("quantidade"));
+                                ProdCompraConst prodCompra = new ProdCompraConst(produtoObject.getString("id_venda"),produtoObject.getString("nome_produto"),"R$ "+produtoObject.getString("valor"), "Quantidade: "+produtoObject.getString("quantidade"),produtoObject.getString("fotos"));
 
                                 prodvendaList.add(prodCompra);
                             }

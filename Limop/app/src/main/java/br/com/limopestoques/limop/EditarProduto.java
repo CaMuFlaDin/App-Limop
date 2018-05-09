@@ -1,8 +1,13 @@
 package br.com.limopestoques.limop;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,15 +19,22 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import br.com.limopestoques.limop.CRUD.CRUD;
 import br.com.limopestoques.limop.Construtoras.FornCompraConst;
+import br.com.limopestoques.limop.Construtoras.UsuariosConst;
+import br.com.limopestoques.limop.Singleton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,9 +43,16 @@ public class EditarProduto extends AppCompatActivity {
 
     private String idFornecedor;
 
-    EditText foto,disponivel_estoque,min_estoque,max_estoque,peso_liquido,peso_bruto,nome_produto,valor_venda,valor_custo;
+    EditText disponivel_estoque,min_estoque,max_estoque,peso_liquido,peso_bruto,nome_produto,valor_venda,valor_custo;
     Spinner fornecedor,categoriaProd;
     Button button;
+    NetworkImageView niv;
+
+    String imagem;
+
+
+    private static final int GALLERY_REQUEST = 1;
+    private Bitmap img = null;
 
     private String id;
 
@@ -48,7 +67,6 @@ public class EditarProduto extends AppCompatActivity {
         setContentView(R.layout.activity_editar_produto);
 
         nome_produto              = findViewById(R.id.nome);
-        foto                      = findViewById(R.id.foto);
         disponivel_estoque        = findViewById(R.id.disponivel_estoque);
         min_estoque               = findViewById(R.id.min_estoque);
         max_estoque               = findViewById(R.id.max_estoque);
@@ -58,6 +76,7 @@ public class EditarProduto extends AppCompatActivity {
         valor_venda               = findViewById(R.id.valor_venda);
         valor_custo               = findViewById(R.id.valor_custo);
         categoriaProd             = findViewById(R.id.categoria);
+        niv                       = findViewById(R.id.img);
 
         try{
             Intent i = getIntent();
@@ -66,6 +85,15 @@ public class EditarProduto extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        niv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent photoPicker = new Intent(Intent.ACTION_PICK);
+                photoPicker.setType("image/*");
+                startActivityForResult(photoPicker, GALLERY_REQUEST);
+            }
+        });
+
         carregar();
 
         adapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item);
@@ -73,6 +101,32 @@ public class EditarProduto extends AppCompatActivity {
 
         carregarFornecedor();
     }
+
+    @Override
+    public void onActivityResult(int reqCode, int resultCode, Intent data){
+        super.onActivityResult(reqCode, resultCode, data);
+
+        if(resultCode == RESULT_OK && reqCode == GALLERY_REQUEST){
+            try{
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                img = BitmapFactory.decodeStream(imageStream);
+                niv.setImageBitmap(img);
+            }catch(FileNotFoundException e){
+                e.printStackTrace();
+                Toast.makeText(this, "Erro ao receber a imagem: Imagem não encontrada!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    public String getStringImage(Bitmap imagem){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        imagem.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+        byte[] b = outputStream.toByteArray();
+        String temp = Base64.encodeToString(b, Base64.DEFAULT);
+
+        return temp;
+    }
+
     public void carregar(){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
                 new Response.Listener<String>() {
@@ -85,7 +139,6 @@ public class EditarProduto extends AppCompatActivity {
                             JSONObject jo = servicocompraArray.getJSONObject(0);
 
                             nome_produto.setText(jo.getString("nome"));
-                            foto.setText(jo.getString("fotos"));
                             disponivel_estoque.setText(jo.getString("disponivel_estoque"));
                             min_estoque.setText(jo.getString("min_estoque"));
                             max_estoque.setText(jo.getString("max_estoque"));
@@ -94,6 +147,10 @@ public class EditarProduto extends AppCompatActivity {
                             valor_custo.setText(jo.getString("valor_custo"));
                             valor_venda.setText(jo.getString("valor_venda"));
                             String categoria = jo.getString("categoria");
+                            imagem = jo.getString("fotos");
+
+                            ImageLoader il = Singleton.getInstance(EditarProduto.this).getImageLoader();
+                            niv.setImageUrl("https://limopestoques.com.br/Index_adm/produtos/imgs/"+ imagem,il);
 
                             if(categoria.equals("Acabado")){
                                 categoriaProd.setSelection(0);
@@ -136,11 +193,17 @@ public class EditarProduto extends AppCompatActivity {
     public void updateProduto(View v) {
         Map<String, String> params = new HashMap<String, String>();
 
+        if(img == null){
+            params.put("imgProd", imagem);
+        }else{
+            String imagemProduto = getStringImage(img);
+            params.put("imgProd", imagemProduto);
+            params.put("novaImg", "nada");
+        }
         params.put("update", "update");
         params.put("id_produto", id);
         params.put("nome", nome_produto.getText().toString().trim());
         params.put("tipo", categoriaProd.getSelectedItem().toString());
-        params.put("foto", foto.getText().toString().trim());
         params.put("disponivel_estoque", disponivel_estoque.getText().toString().trim());
         params.put("min_estoque", min_estoque.getText().toString().trim());
         params.put("max_estoque", max_estoque.getText().toString().trim());

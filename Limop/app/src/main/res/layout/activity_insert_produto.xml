@@ -27,22 +27,11 @@
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
 
-        <EditText
-            android:hint="@string/foto"
-            android:id="@+id/foto"
+        <ImageView
+            android:id="@+id/img"
+            android:src="@drawable/add_foto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/input_style"
-            android:inputType="text"
-            android:drawableLeft="@drawable/ic_foto"
-            android:drawableStart="@drawable/ic_foto"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="35dp"
-            android:layout_marginLeft="35dp"
-            android:drawablePadding="20dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp" />
+            android:layout_height="wrap_content"/>
 
         <Spinner
             android:id="@+id/categoria"

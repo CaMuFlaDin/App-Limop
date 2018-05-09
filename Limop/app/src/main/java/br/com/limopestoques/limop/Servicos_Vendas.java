@@ -110,7 +110,7 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
                             for (int i = 0; i < servvendaArray.length(); i++){
                                 JSONObject servicoObject = servvendaArray.getJSONObject(i);
 
-                                ProdCompraConst prodCompra = new ProdCompraConst(servicoObject.getString("id_venda"),servicoObject.getString("nomeServico"),"R$ "+servicoObject.getString("valor"), "Quantidade: "+servicoObject.getString("quantidade"));
+                                ProdCompraConst prodCompra = new ProdCompraConst(servicoObject.getString("id_venda"),servicoObject.getString("nomeServico"),"R$ "+servicoObject.getString("valor"), "Quantidade: "+servicoObject.getString("quantidade"),null);
 
                                 servicosvendaList.add(prodCompra);
                             }

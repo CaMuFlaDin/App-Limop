@@ -1,13 +1,18 @@
 package br.com.limopestoques.limop;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -25,6 +30,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,10 +40,14 @@ import java.util.Map;
 public class InsertProduto extends AppCompatActivity {
     private String idFornecedor;
 
-    EditText foto,disponivel_estoque,min_estoque,max_estoque,peso_liquido,peso_bruto,nome_produto,valor_venda,valor_custo;
+    EditText disponivel_estoque,min_estoque,max_estoque,peso_liquido,peso_bruto,nome_produto,valor_venda,valor_custo;
     Spinner fornecedor,categoriaProd;
     Button button;
     Sessao sessao;
+    ImageView imagem;
+
+    private static final int GALLERY_REQUEST = 1;
+    private Bitmap img;
 
     ArrayAdapter<String> adapter;
     ArrayList<FornCompraConst> fornecedores;
@@ -46,7 +58,6 @@ public class InsertProduto extends AppCompatActivity {
         setContentView(R.layout.activity_insert_produto);
 
         nome_produto              = findViewById(R.id.nome);
-        foto                      = findViewById(R.id.foto);
         disponivel_estoque        = findViewById(R.id.disponivel_estoque);
         min_estoque               = findViewById(R.id.min_estoque);
         max_estoque               = findViewById(R.id.max_estoque);
@@ -56,8 +67,18 @@ public class InsertProduto extends AppCompatActivity {
         valor_venda               = findViewById(R.id.valor_venda);
         valor_custo               = findViewById(R.id.valor_custo);
         categoriaProd             = findViewById(R.id.categoria);
+        imagem                    = findViewById(R.id.img);
 
         sessao = new Sessao(InsertProduto.this);
+
+        imagem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent photoPicker = new Intent(Intent.ACTION_PICK);
+                photoPicker.setType("image/*");
+                startActivityForResult(photoPicker, GALLERY_REQUEST);
+            }
+        });
 
 
         button                    = (Button)findViewById(R.id.button);
@@ -78,14 +99,42 @@ public class InsertProduto extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onActivityResult(int reqCode, int resultCode, Intent data){
+        super.onActivityResult(reqCode, resultCode, data);
+
+        if(resultCode == RESULT_OK && reqCode == GALLERY_REQUEST){
+            try{
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                img = BitmapFactory.decodeStream(imageStream);
+                imagem.setImageBitmap(img);
+            }catch(FileNotFoundException e){
+                e.printStackTrace();
+                Toast.makeText(this, "Erro ao receber a imagem: Imagem não encontrada!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    public String getStringImage(Bitmap imagem){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        imagem.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+        byte[] b = outputStream.toByteArray();
+        String temp = Base64.encodeToString(b, Base64.DEFAULT);
+
+        return temp;
+    }
+
     public void insertProduto(View v) {
+        String imagemProduto = getStringImage(img);
         Map<String, String> params = new HashMap<String, String>();
 
         String id_usuario = sessao.getString("id_usuario");
 
+        params.put("imgProd", imagemProduto);
+
         params.put("nome", nome_produto.getText().toString().trim());
         params.put("tipo", categoriaProd.getSelectedItem().toString());
-        params.put("foto", foto.getText().toString().trim());
         params.put("disponivel_estoque", disponivel_estoque.getText().toString().trim());
         params.put("min_estoque", min_estoque.getText().toString().trim());
         params.put("max_estoque", max_estoque.getText().toString().trim());
