@@ -5,6 +5,11 @@
     android:padding="16dp"
     android:orientation="vertical">
 
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/img"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
     <TextView
         android:id="@+id/txtID"
         android:layout_width="match_parent"

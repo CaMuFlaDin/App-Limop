@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+
 import br.com.limopestoques.limop.Construtoras.UsuariosConst;
 import br.com.limopestoques.limop.R;
 
@@ -81,12 +84,16 @@ public class ListViewUsuarios extends ArrayAdapter<UsuariosConst>{
         TextView txtid = listViewItem.findViewById(R.id.txtID);
         TextView txtname = listViewItem.findViewById(R.id.txtName);
         TextView txttipo = listViewItem.findViewById(R.id.txtTipo);
+        NetworkImageView image = listViewItem.findViewById(R.id.img);
+
+        ImageLoader il = VolleySingleton.getInstance(mCtx).getImageLoader();
 
         UsuariosConst usuariosConst = usuariosList.get(position);
 
         txtid.setText(usuariosConst.getName());
         txtname.setText(usuariosConst.getEmail());
         txttipo.setText(usuariosConst.getTipo());
+        image.setImageUrl("https://limopestoques.com.br/Index_adm/usuarios/imgs/"+usuariosConst.getImg(),il);
 
         return listViewItem;
     }

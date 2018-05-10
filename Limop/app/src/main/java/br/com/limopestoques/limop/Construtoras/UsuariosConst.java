@@ -6,13 +6,14 @@ package br.com.limopestoques.limop.Construtoras;
 
 public class UsuariosConst {
 
-    String id,name, email,tipo;
+    String id,name, email,tipo,imagem;
 
-    public UsuariosConst(String id, String name, String email, String tipo){
+    public UsuariosConst(String id, String name, String email, String tipo,String img){
         this.id = id;
         this.name = name;
         this.email = email;
         this.tipo = tipo;
+        this.imagem = img;
     }
 
     public String getId(){
@@ -29,5 +30,8 @@ public class UsuariosConst {
 
     public String getTipo(){
         return this.tipo;
+    }
+    public String getImg(){
+        return this.imagem;
     }
 }

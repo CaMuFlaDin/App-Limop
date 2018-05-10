@@ -113,7 +113,7 @@ public class Usuarios extends AppCompatActivity implements SearchView.OnQueryTex
                             for (int i = 0; i < usuarioArray.length(); i++){
                                 JSONObject usuarioObject = usuarioArray.getJSONObject(i);
 
-                                UsuariosConst users = new UsuariosConst(usuarioObject.getString("id_usuario"),usuarioObject.getString("nome_usuario"), usuarioObject.getString("email"),usuarioObject.getString("tipo"));
+                                UsuariosConst users = new UsuariosConst(usuarioObject.getString("id_usuario"),usuarioObject.getString("nome_usuario"), usuarioObject.getString("email"),usuarioObject.getString("tipo"),usuarioObject.getString("foto"));
 
                                 usuariosList.add(users);
                             }
