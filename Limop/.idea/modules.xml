@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Limop.iml" filepath="$PROJECT_DIR$/Limop.iml" />
+      <module fileurl="file://C:\Users\Guilherme\Documents\GitHub\App-Limop\Limop\Limop.iml" filepath="C:\Users\Guilherme\Documents\GitHub\App-Limop\Limop\Limop.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Guilherme\Documents\GitHub\App-Limop\Limop\app\app.iml" filepath="C:\Users\Guilherme\Documents\GitHub\App-Limop\Limop\app\app.iml" />
     </modules>
   </component>
 </project>
