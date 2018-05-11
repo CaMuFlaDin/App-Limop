@@ -1,8 +1,12 @@
 package br.com.limopestoques.limop;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +19,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import br.com.limopestoques.limop.CRUD.CRUD;
@@ -23,6 +29,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,14 +43,19 @@ public class EditarUsuario extends AppCompatActivity {
 
     EditText nome;
     Spinner tipo;
-    EditText foto;
     EditText email;
+    NetworkImageView niv;
     EditText data_nascimento;
     RadioButton masculino;
     RadioButton feminino;
     RadioGroup sexo;
 
+    String imagem;
+
     Button btn;
+
+    private static final int GALLERY_REQUEST = 1;
+    private Bitmap img = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +64,12 @@ public class EditarUsuario extends AppCompatActivity {
 
         nome            = findViewById(R.id.nome);
         tipo            = findViewById(R.id.tipo);
-        foto            = findViewById(R.id.foto);
         email           = findViewById(R.id.email);
         data_nascimento = findViewById(R.id.data_nascimento);
         masculino       = findViewById(R.id.masc);
         feminino        = findViewById(R.id.fem);
         sexo            = findViewById(R.id.sexo);
+        niv             = findViewById(R.id.img);
         btn             = findViewById(R.id.button);
 
         try{
@@ -66,7 +80,42 @@ public class EditarUsuario extends AppCompatActivity {
         }
 
         carregar();
+
+        niv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent photoPicker = new Intent(Intent.ACTION_PICK);
+                photoPicker.setType("image/*");
+                startActivityForResult(photoPicker, GALLERY_REQUEST);
+            }
+        });
     }
+
+    @Override
+    public void onActivityResult(int reqCode, int resultCode, Intent data){
+        super.onActivityResult(reqCode, resultCode, data);
+
+        if(resultCode == RESULT_OK && reqCode == GALLERY_REQUEST){
+            try{
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                img = BitmapFactory.decodeStream(imageStream);
+                niv.setImageBitmap(img);
+            }catch(FileNotFoundException e){
+                e.printStackTrace();
+                Toast.makeText(this, "Erro ao receber a imagem: Imagem não encontrada!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    public String getStringImage(Bitmap imagem){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        imagem.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+        byte[] b = outputStream.toByteArray();
+        String temp = Base64.encodeToString(b, Base64.DEFAULT);
+
+        return temp;
+    }
+
     public void carregar(){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
                 new Response.Listener<String>() {
@@ -85,6 +134,10 @@ public class EditarUsuario extends AppCompatActivity {
                             email.setText(jo.getString("email"));
                             sexoUser = jo.getString("sexo");
                             data_nascimento.setText(jo.getString("data_nascimento"));
+                            imagem = jo.getString("foto");
+
+                            ImageLoader il = Singleton.getInstance(EditarUsuario.this).getImageLoader();
+                            niv.setImageUrl("https://limopestoques.com.br/Index_adm/usuarios/imgs/"+ imagem,il);
 
                             if(tipoUser.equals("Administrador")){
                                 tipo.setSelection(0);
@@ -124,7 +177,6 @@ public class EditarUsuario extends AppCompatActivity {
                 params.put("id_usuario", id);
                 params.put("nome", nome.getText().toString().trim());
                 params.put("tipo", tipo.getSelectedItem().toString());
-                //params.put("foto", foto.getText().toString().trim());
                 params.put("email",email.getText().toString().trim());
                 params.put("sexo", sexoPessoa);
                 params.put("data_nascimento", data_nascimento.getText().toString().trim());
@@ -146,11 +198,18 @@ public class EditarUsuario extends AppCompatActivity {
 
         Map<String, String> params = new HashMap<String, String>();
 
+        if(img == null){
+            params.put("img", imagem);
+        }else{
+            String imagemUsuario = getStringImage(img);
+            params.put("img", imagemUsuario);
+            params.put("novaImg", "nada");
+        }
+
         params.put("update", "update");
         params.put("id_usuario", id);
         params.put("nome", nome.getText().toString().trim());
         params.put("tipo", tipo.getSelectedItem().toString());
-        //params.put("foto", foto.getText().toString().trim());
         params.put("email",email.getText().toString().trim());
         params.put("sexo", sexoPessoa);
         params.put("data_nascimento", data_nascimento.getText().toString().trim());

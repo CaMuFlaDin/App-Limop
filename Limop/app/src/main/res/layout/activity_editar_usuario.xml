@@ -40,22 +40,12 @@
             android:layout_marginTop="24dp">
         </Spinner>
 
-        <EditText
-            android:hint="@string/imagem"
-            android:id="@+id/foto"
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/img"
+            android:src="@drawable/add_foto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/input_style"
-            android:inputType="text"
-            android:drawableLeft="@drawable/ic_person"
-            android:drawableStart="@drawable/ic_person"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="35dp"
-            android:layout_marginLeft="35dp"
-            android:drawablePadding="20dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp" />
+            android:layout_height="wrap_content"/>
+
 
         <EditText
             android:hint="@string/email"

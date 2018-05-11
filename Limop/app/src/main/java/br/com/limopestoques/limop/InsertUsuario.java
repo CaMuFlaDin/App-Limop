@@ -1,11 +1,16 @@
 package br.com.limopestoques.limop;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -16,6 +21,9 @@ import br.com.limopestoques.limop.CRUD.CRUD;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +34,10 @@ public class InsertUsuario extends AppCompatActivity {
     RadioGroup sexoGroup;
     Button   button;
     String sexo,senhaa;
+    ImageView iv;
+    private Bitmap img;
+
+    private static final int GALLERY_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,18 +45,53 @@ public class InsertUsuario extends AppCompatActivity {
         setContentView(R.layout.activity_insert_usuario);
 
         nome              = (EditText)findViewById(R.id.nome);
-        foto              = (EditText)findViewById(R.id.foto);
         email             = (EditText)findViewById(R.id.email);
         senha             = (EditText)findViewById(R.id.senha);
         confirmar_senha   = (EditText)findViewById(R.id.confirmar_senha);
         data_nascimento   = (EditText)findViewById(R.id.data_nascimento);
         tipo              = (Spinner)findViewById(R.id.tipo);
         sexoGroup         = (RadioGroup)findViewById(R.id.sexo);
+        iv                = findViewById(R.id.img);
         button            = (Button)findViewById(R.id.button);
+
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent photoPicker = new Intent(Intent.ACTION_PICK);
+                photoPicker.setType("image/*");
+                startActivityForResult(photoPicker, GALLERY_REQUEST);
+            }
+        });
 
     }
 
+    @Override
+    public void onActivityResult(int reqCode, int resultCode, Intent data){
+        super.onActivityResult(reqCode, resultCode, data);
+
+        if(resultCode == RESULT_OK && reqCode == GALLERY_REQUEST){
+            try{
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                img = BitmapFactory.decodeStream(imageStream);
+                iv.setImageBitmap(img);
+            }catch(FileNotFoundException e){
+                e.printStackTrace();
+                Toast.makeText(this, "Erro ao receber a imagem: Imagem não encontrada!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    public String getStringImage(Bitmap imagem){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        imagem.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+        byte[] b = outputStream.toByteArray();
+        String temp = Base64.encodeToString(b, Base64.DEFAULT);
+
+        return temp;
+    }
+
     public void insertUsuario(View v) {
+        String imagemUsuario = getStringImage(img);
         Map<String, String> params = new HashMap<String, String>();
 
         if(sexoGroup.getCheckedRadioButtonId() == R.id.masc){
@@ -60,8 +107,8 @@ public class InsertUsuario extends AppCompatActivity {
             Toast.makeText(this, "Senhas não conferem", Toast.LENGTH_SHORT).show();
         }
 
+        params.put("img", imagemUsuario);
         params.put("nome", nome.getText().toString().trim());
-        params.put("foto", foto.getText().toString().trim());
         params.put("email", email.getText().toString().trim());
         params.put("senha", senhaa);
         params.put("sexo", sexo);

@@ -40,7 +40,13 @@
             android:layout_marginTop="24dp">
         </Spinner>
 
-        <EditText
+        <ImageView
+            android:id="@+id/img"
+            android:src="@drawable/add_foto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!--<EditText
             android:hint="@string/imagem"
             android:id="@+id/foto"
             android:layout_width="match_parent"
@@ -55,7 +61,7 @@
             android:drawablePadding="20dp"
             android:paddingLeft="5dp"
             android:paddingTop="12dp"
-            android:paddingBottom="12dp" />
+            android:paddingBottom="12dp" />-->
 
         <EditText
             android:hint="@string/email"
