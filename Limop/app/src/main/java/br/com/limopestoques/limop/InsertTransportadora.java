@@ -109,7 +109,17 @@ public class InsertTransportadora extends AppCompatActivity {
 
     }
 
-    public void insertTransportadora(View v) {
+    public void validarCampos(View v){
+        if(nome.length() == 0 || cnpj.length() == 0 || razao.length() == 0 || inscricao.length() == 0 || email.length() == 0 || tel_celular.length() == 0 || tel_comercial.length() == 0
+                || cep.length() == 0 || estado.length() == 0 || cidade.length() == 0 || bairro.length() == 0 || rua.length() == 0
+                || numero.length() == 0 || valor_frete.length() == 0){
+            Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
+        }else{
+           insertTransportadora();
+        }
+    }
+
+    public void insertTransportadora() {
         Map<String, String> params = new HashMap<String, String>();
 
         String id_usuario = sessao.getString("id_usuario");
