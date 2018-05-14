@@ -138,7 +138,6 @@ public class EditarUsuario extends AppCompatActivity {
 
                             nome.setText(jo.getString("nome_usuario"));
                             String tipoUser = jo.getString("tipo");
-                            //foto.setText(jo.getString("foto"));
                             email.setText(jo.getString("email"));
                             sexoUser = jo.getString("sexo");
                             data_nascimento.setText(jo.getString("data_nascimento"));
