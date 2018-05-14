@@ -33,6 +33,7 @@ import java.util.Map;
 import br.com.limopestoques.limop.CRUD.CRUD;
 import br.com.limopestoques.limop.Construtoras.ProdCompraConst;
 import br.com.limopestoques.limop.Construtoras.ServicosCompraConst;
+import br.com.limopestoques.limop.Construtoras.ServicosVendasConst;
 import br.com.limopestoques.limop.ListView.ListViewProdCompra;
 
 public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQueryTextListener{
@@ -110,9 +111,9 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
                             for (int i = 0; i < servvendaArray.length(); i++){
                                 JSONObject servicoObject = servvendaArray.getJSONObject(i);
 
-                                ProdCompraConst prodCompra = new ProdCompraConst(servicoObject.getString("id_venda"),servicoObject.getString("nomeServico"),"R$ "+servicoObject.getString("valor"), "Quantidade: "+servicoObject.getString("quantidade"),null);
+                                ServicosVendasConst servVenda = new ServicosVendasConst(servicoObject.getString("id_venda"),servicoObject.getString("nomeServico"),"R$ "+servicoObject.getString("valor"), "Quantidade: "+servicoObject.getString("quantidade"));
 
-                                servicosvendaList.add(prodCompra);
+                                servicosvendaList.add(servVenda);
                             }
 
                             ListViewProdCompra adapter = new ListViewProdCompra(servicosvendaList, getApplicationContext());
