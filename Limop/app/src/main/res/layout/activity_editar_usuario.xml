@@ -113,7 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/editar"
-            android:onClick="updateUsuario"
+            android:onClick="validarCampos"
             android:textColor="#FFF"
             android:background="@drawable/btn_login"
             android:textSize="16sp"

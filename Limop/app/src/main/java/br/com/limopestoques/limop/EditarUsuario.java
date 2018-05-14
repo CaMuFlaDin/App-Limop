@@ -91,6 +91,14 @@ public class EditarUsuario extends AppCompatActivity {
         });
     }
 
+    public void validarCampos(View v){
+     if(nome.length() == 0 || email.length() == 0 || data_nascimento.length() == 0 || !sexo.isSelected()){
+        Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
+    }else{
+        updateUsuario();
+    }
+    }
+
     @Override
     public void onActivityResult(int reqCode, int resultCode, Intent data){
         super.onActivityResult(reqCode, resultCode, data);
@@ -188,7 +196,7 @@ public class EditarUsuario extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    public void updateUsuario(View v) {
+    public void updateUsuario() {
         String sexoPessoa;
         if(sexo.getCheckedRadioButtonId() == R.id.masc){
             sexoPessoa = "Masculino";
