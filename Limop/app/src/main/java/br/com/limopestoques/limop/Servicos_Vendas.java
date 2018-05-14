@@ -35,6 +35,8 @@ import br.com.limopestoques.limop.Construtoras.ProdCompraConst;
 import br.com.limopestoques.limop.Construtoras.ServicosCompraConst;
 import br.com.limopestoques.limop.Construtoras.ServicosVendasConst;
 import br.com.limopestoques.limop.ListView.ListViewProdCompra;
+import br.com.limopestoques.limop.ListView.ListViewServicosCompra;
+import br.com.limopestoques.limop.ListView.ListViewServicosVendas;
 
 public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
@@ -42,7 +44,7 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
 
     ListView listView;
 
-    List<ProdCompraConst> servicosvendaList;
+    List<ServicosVendasConst> servicosvendaList;
 
     SearchView searchView;
 
@@ -73,7 +75,7 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Integer pos = info.position;
-        ProdCompraConst vendas = servicosvendaList.get(pos);
+        ServicosVendasConst vendas = servicosvendaList.get(pos);
         final String id = vendas.getId();
         if(item.getTitle() == "Editar Venda"){
             Intent irTela = new Intent(Servicos_Vendas.this, EditarServVenda.class);
@@ -116,7 +118,7 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
                                 servicosvendaList.add(servVenda);
                             }
 
-                            ListViewProdCompra adapter = new ListViewProdCompra(servicosvendaList, getApplicationContext());
+                            ListViewServicosVendas adapter = new ListViewServicosVendas(servicosvendaList, getApplicationContext());
 
                             listView.setAdapter(adapter);
 

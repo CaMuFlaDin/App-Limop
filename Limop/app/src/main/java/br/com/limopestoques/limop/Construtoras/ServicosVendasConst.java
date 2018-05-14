@@ -6,11 +6,11 @@ package br.com.limopestoques.limop.Construtoras;
 
 public class ServicosVendasConst {
 
-    String id, prod, valor, qtd;
+    String id, servico, valor, qtd;
 
-    public ServicosVendasConst(String id, String prod, String valor, String qtd) {
+    public ServicosVendasConst(String id, String serv, String valor, String qtd) {
         this.id = id;
-        this.prod = prod;
+        this.servico = serv;
         this.valor = valor;
         this.qtd = qtd;
     }
@@ -20,7 +20,7 @@ public class ServicosVendasConst {
     }
 
     public String getProd() {
-        return this.prod;
+        return this.servico;
     }
 
     public String getValor() {
