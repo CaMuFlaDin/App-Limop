@@ -90,7 +90,13 @@ public class InsertUsuario extends AppCompatActivity {
         return temp;
     }
 
-    public void insertUsuario(View v) {
+    public void validarCampos(View v){
+        if(nome.length() == 0 || email.length() == 0 || senha.length() == 0 || confirmar_senha.length() == 0 || data_nascimento){
+
+        }
+    }
+
+    public void insertUsuario() {
         String imagemUsuario = getStringImage(img);
         Map<String, String> params = new HashMap<String, String>();
 
