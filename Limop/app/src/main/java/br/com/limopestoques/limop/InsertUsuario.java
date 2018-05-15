@@ -24,12 +24,15 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class InsertUsuario extends AppCompatActivity {
 
-    EditText nome,foto,email,senha,confirmar_senha,data_nascimento;
+    EditText nome,email,senha,confirmar_senha,data_nascimento;
     Spinner  tipo;
     RadioGroup sexoGroup;
     Button   button;
@@ -63,6 +66,8 @@ public class InsertUsuario extends AppCompatActivity {
                 startActivityForResult(photoPicker, GALLERY_REQUEST);
             }
         });
+
+
 
     }
 
@@ -99,7 +104,7 @@ public class InsertUsuario extends AppCompatActivity {
         }
     }
 
-    public void insertUsuario() {
+    public void insertUsuario(View v) {
         imagemUsuario = getStringImage(img);
         Map<String, String> params = new HashMap<String, String>();
 
@@ -121,7 +126,7 @@ public class InsertUsuario extends AppCompatActivity {
         params.put("email", email.getText().toString().trim());
         params.put("senha", senhaa);
         params.put("sexo", sexo);
-        params.put("nascimento", data_nascimento.getText().toString().trim());
+        params.put("nascimento", email.getText().toString().trim());
         params.put("tipo", tipo.getSelectedItem().toString());
 
         CRUD.inserir("https://limopestoques.com.br/Android/Insert/InsertUsuario.php", new Response.Listener<String>() {
