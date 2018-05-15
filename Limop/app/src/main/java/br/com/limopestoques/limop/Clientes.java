@@ -51,8 +51,8 @@ public class Clientes extends AppCompatActivity implements SearchView.OnQueryTex
 
         listView = (ListView)findViewById(R.id.listView);
         searchView = findViewById(R.id.sv);
-        clientesList = new ArrayList<>();
-        clientesQuery = new ArrayList<>();
+        clientesList = new ArrayList<ClientesConst>();
+        clientesQuery = new ArrayList<ClientesConst>();
 
         registerForContextMenu(listView);
         loadClientesList();
@@ -77,7 +77,7 @@ public class Clientes extends AppCompatActivity implements SearchView.OnQueryTex
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Integer pos = info.position;
-        ClientesConst clientes = clientesList.get(pos);
+        ClientesConst clientes = clientesQuery.get(pos);
         final String id = clientes.getId();
         if(item.getTitle() == "Editar Cliente"){
             Intent irTela = new Intent(Clientes.this, EditarCliente.class);
