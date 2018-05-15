@@ -104,7 +104,8 @@ public class InsertProduto extends AppCompatActivity {
     public void validarCampos(View v){
 
         if(nome_produto.getText().length() == 0 || imagemProduto == null || valor_custo.getText().length() == 0 ||
-                valor_venda.getText().length() == 0 || disponivel_estoque.getText().length() == 0 || min_estoque.getText().length() == 0 || max_estoque.toString().length() == 0 || peso_liquido.getText().length() == 0 || peso_bruto.getText().length() == 0){
+                valor_venda.getText().length() == 0 || disponivel_estoque.getText().length() == 0 || min_estoque.getText().length() == 0 ||
+                max_estoque.toString().length() == 0 || peso_liquido.getText().length() == 0 || peso_bruto.getText().length() == 0){
             Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
         }else{
             insertProduto();
@@ -121,6 +122,7 @@ public class InsertProduto extends AppCompatActivity {
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 img = BitmapFactory.decodeStream(imageStream);
                 imagem.setImageBitmap(img);
+                imagemProduto = getStringImage(img);
             }catch(FileNotFoundException e){
                 e.printStackTrace();
                 Toast.makeText(this, "Erro ao receber a imagem: Imagem não encontrada!", Toast.LENGTH_SHORT).show();
@@ -137,7 +139,6 @@ public class InsertProduto extends AppCompatActivity {
     }
 
     public void insertProduto() {
-        imagemProduto = getStringImage(img);
         Map<String, String> params = new HashMap<String, String>();
 
         String id_usuario = sessao.getString("id_usuario");

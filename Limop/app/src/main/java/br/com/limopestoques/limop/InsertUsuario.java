@@ -16,6 +16,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Response;
+
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import br.com.limopestoques.limop.CRUD.CRUD;
 
 import org.json.JSONException;
@@ -67,8 +69,8 @@ public class InsertUsuario extends AppCompatActivity {
             }
         });
 
-
-
+        MaskEditTextChangedListener maskData = new MaskEditTextChangedListener("##/##/####",data_nascimento);
+        data_nascimento.addTextChangedListener(maskData);
     }
 
     @Override
@@ -81,6 +83,7 @@ public class InsertUsuario extends AppCompatActivity {
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 img = BitmapFactory.decodeStream(imageStream);
                 iv.setImageBitmap(img);
+                imagemUsuario = getStringImage(img);
             }catch(FileNotFoundException e){
                 e.printStackTrace();
                 Toast.makeText(this, "Erro ao receber a imagem: Imagem não encontrada!", Toast.LENGTH_SHORT).show();
@@ -98,16 +101,14 @@ public class InsertUsuario extends AppCompatActivity {
 
     public void validarCampos(View v){
 
-
-        if(nome.length() == 0 || email.length() == 0 || senha.length() == 0 || confirmar_senha.length() == 0 || data_nascimento.length() == 0 || !sexoGroup.isSelected()|| imagemUsuario != null){
-            insertUsuario();
-        }else{
+        if(nome.getText().length() == 0 || email.getText().length() == 0 || senha.getText().length() == 0 || confirmar_senha.getText().length() == 0 || data_nascimento.getText().length() == 0 || sexoGroup.getCheckedRadioButtonId() < 0 || imagemUsuario == null){
             Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
+        }else{
+            insertUsuario();
         }
     }
 
     public void insertUsuario() {
-        imagemUsuario = getStringImage(img);
         Map<String, String> params = new HashMap<String, String>();
 
         if(sexoGroup.getCheckedRadioButtonId() == R.id.masc){
@@ -123,12 +124,18 @@ public class InsertUsuario extends AppCompatActivity {
             Toast.makeText(this, "Senhas não conferem", Toast.LENGTH_SHORT).show();
         }
 
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        ParsePosition pos = new ParsePosition(0);
+        Date data = formato.parse(data_nascimento.getText().toString(),pos);
+        formato = new SimpleDateFormat("yyyy-MM-dd");
+        String date = formato.format(data);
+
         params.put("img", imagemUsuario);
         params.put("nome", nome.getText().toString().trim());
         params.put("email", email.getText().toString().trim());
         params.put("senha", senhaa);
         params.put("sexo", sexo);
-        params.put("nascimento", data_nascimento.getText().toString().trim());
+        params.put("nascimento", date);
         params.put("tipo", tipo.getSelectedItem().toString());
 
         CRUD.inserir("https://limopestoques.com.br/Android/Insert/InsertUsuario.php", new Response.Listener<String>() {

@@ -110,9 +110,9 @@ public class InsertTransportadora extends AppCompatActivity {
     }
 
     public void validarCampos(View v){
-        if(nome.length() == 0 || cnpj.length() == 0 || razao.length() == 0 || inscricao.length() == 0 || email.length() == 0 || tel_celular.length() == 0 || tel_comercial.length() == 0
-                || cep.length() == 0 || estado.length() == 0 || cidade.length() == 0 || bairro.length() == 0 || rua.length() == 0
-                || numero.length() == 0 || valor_frete.length() == 0){
+        if(nome.getText().length() == 0 || cnpj.getText().length() == 0 || razao.getText().length() == 0 || inscricao.getText().length() == 0 || email.getText().length() == 0 || tel_celular.getText().length() == 0 || tel_comercial.getText().length() == 0
+                || cep.getText().length() == 0 || estado.getText().length() == 0 || cidade.getText().length() == 0 || bairro.getText().length() == 0 || rua.getText().length() == 0
+                || numero.getText().length() == 0 || valor_frete.getText().length() == 0){
             Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
         }else{
            insertTransportadora();

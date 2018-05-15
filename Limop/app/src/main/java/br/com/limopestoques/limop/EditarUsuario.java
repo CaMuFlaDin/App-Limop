@@ -23,6 +23,8 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import br.com.limopestoques.limop.CRUD.CRUD;
 
 import org.json.JSONArray;
@@ -32,6 +34,9 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,10 +94,13 @@ public class EditarUsuario extends AppCompatActivity {
                 startActivityForResult(photoPicker, GALLERY_REQUEST);
             }
         });
+
+        MaskEditTextChangedListener maskData = new MaskEditTextChangedListener("##/##/####",data_nascimento);
+        data_nascimento.addTextChangedListener(maskData);
     }
 
     public void validarCampos(View v){
-     if(nome.length() == 0 || email.length() == 0 || data_nascimento.length() == 0 || !sexo.isSelected()){
+     if(nome.getText().length() == 0 || email.getText().length() == 0 || data_nascimento.getText().length() == 0 || sexo.getCheckedRadioButtonId() < 0){
         Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
     }else{
         updateUsuario();
@@ -140,7 +148,17 @@ public class EditarUsuario extends AppCompatActivity {
                             String tipoUser = jo.getString("tipo");
                             email.setText(jo.getString("email"));
                             sexoUser = jo.getString("sexo");
-                            data_nascimento.setText(jo.getString("data_nascimento"));
+
+                            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                            ParsePosition pos = new ParsePosition(0);
+                            Date data = formato.parse(jo.getString("data_nascimento"),pos);
+                            formato = new SimpleDateFormat("dd/MM/yyyy");
+                            String date = formato.format(data);
+
+                            data_nascimento.setText(date);
+
+
+
                             imagem = jo.getString("foto");
 
                             ImageLoader il = Singleton.getInstance(EditarUsuario.this).getImageLoader();
@@ -213,13 +231,19 @@ public class EditarUsuario extends AppCompatActivity {
             params.put("novaImg", "nada");
         }
 
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        ParsePosition pos = new ParsePosition(0);
+        Date data = formato.parse(data_nascimento.getText().toString(),pos);
+        formato = new SimpleDateFormat("yyyy-MM-dd");
+        String date = formato.format(data);
+
         params.put("update", "update");
         params.put("id_usuario", id);
         params.put("nome", nome.getText().toString().trim());
         params.put("tipo", tipo.getSelectedItem().toString());
         params.put("email",email.getText().toString().trim());
         params.put("sexo", sexoPessoa);
-        params.put("data_nascimento", data_nascimento.getText().toString().trim());
+        params.put("data_nascimento", date);
 
 
         StringRequest stringRequest = CRUD.editar("https://limopestoques.com.br/Android/Update/updateUsuario.php", new Response.Listener<String>() {

@@ -173,6 +173,29 @@ public class EditarCliente extends AppCompatActivity {
 
         carregar();
     }
+
+    public void validarCampos(View v){
+        if(nome.getText().length() == 0 || email.getText().length() == 0 || tel_celular.getText().length() == 0 || tel_comercial.getText().length() == 0
+                || cep.getText().length() == 0 || estado.getText().length() == 0 || cidade.getText().length() == 0 || bairro.getText().length() == 0 || rua.getText().length() == 0
+                || numero.getText().length() == 0){
+            Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
+        }else{
+            if(tipo.getSelectedItemPosition() == 0){
+                if(cpf.getText().length() != 0 && rg.getText().length() != 0){
+                    updateCliente();
+                }else{
+                    Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                if(cnpj.getText().length() != 0 && inscricao.getText().length() != 0 && razao.getText().length() != 0){
+                    updateCliente();
+                }else{
+                    Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
     public void carregar(){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
                 new Response.Listener<String>() {
@@ -234,7 +257,7 @@ public class EditarCliente extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    public void updateCliente(View v) {
+    public void updateCliente() {
         Map<String, String> params = new HashMap<String, String>();
 
         params.put("update", "update");

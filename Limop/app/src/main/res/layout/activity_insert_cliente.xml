@@ -317,7 +317,7 @@
             android:paddingBottom="12dp" />
 
         <Button
-            android:onClick="insertCliente"
+            android:onClick="verificarCampos"
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

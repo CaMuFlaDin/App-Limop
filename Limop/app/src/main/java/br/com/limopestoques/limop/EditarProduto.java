@@ -128,8 +128,8 @@ public class EditarProduto extends AppCompatActivity {
     }
 
     public void validarCampos(View v){
-        if(nome_produto.length() == 0 || valor_custo.length() == 0 || valor_venda.length() == 0 || disponivel_estoque.length() == 0 || min_estoque.length() == 0 || max_estoque.length() == 0 ||
-                peso_liquido.length() == 0 || peso_bruto.length() == 0){
+        if(nome_produto.getText().length() == 0 || valor_custo.getText().length() == 0 || valor_venda.getText().length() == 0 || disponivel_estoque.getText().length() == 0 || min_estoque.getText().length() == 0 || max_estoque.getText().length() == 0 ||
+                peso_liquido.getText().length() == 0 || peso_bruto.getText().length() == 0){
             Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
         }else{
             updateProduto();
