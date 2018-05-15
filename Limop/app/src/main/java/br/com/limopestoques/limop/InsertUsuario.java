@@ -104,7 +104,7 @@ public class InsertUsuario extends AppCompatActivity {
         }
     }
 
-    public void insertUsuario(View v) {
+    public void insertUsuario() {
         imagemUsuario = getStringImage(img);
         Map<String, String> params = new HashMap<String, String>();
 
