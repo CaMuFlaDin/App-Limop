@@ -45,6 +45,7 @@ public class InsertProduto extends AppCompatActivity {
     Button button;
     Sessao sessao;
     ImageView imagem;
+    String imagemProduto = null;
 
     private static final int GALLERY_REQUEST = 1;
     private Bitmap img;
@@ -100,6 +101,15 @@ public class InsertProduto extends AppCompatActivity {
         });
     }
 
+    public void validarCampos(View v){
+        if(nome_produto.length() == 0 || imagemProduto == null || valor_custo.length() == 0 || valor_venda.length() == 0 || disponivel_estoque.length() == 0 || min_estoque.length() == 0 || max_estoque.length() == 0 ||
+                peso_liquido.length() == 0 || peso_bruto.length() == 0){
+            Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
+        }else{
+            insertProduto();
+        }
+    }
+
     @Override
     public void onActivityResult(int reqCode, int resultCode, Intent data){
         super.onActivityResult(reqCode, resultCode, data);
@@ -125,8 +135,8 @@ public class InsertProduto extends AppCompatActivity {
         return temp;
     }
 
-    public void insertProduto(View v) {
-        String imagemProduto = getStringImage(img);
+    public void insertProduto() {
+        imagemProduto = getStringImage(img);
         Map<String, String> params = new HashMap<String, String>();
 
         String id_usuario = sessao.getString("id_usuario");

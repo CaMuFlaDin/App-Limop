@@ -3,9 +3,15 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Limop.iml" filepath="$PROJECT_DIR$/Limop.iml" />
+<<<<<<< HEAD
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+=======
+      <module fileurl="file://C:\Users\Aluno\Documents\GitHub\App-Limop\Limop\Limop.iml" filepath="C:\Users\Aluno\Documents\GitHub\App-Limop\Limop\Limop.iml" />
       <module fileurl="file://C:\Users\Guilherme\Documents\GitHub\App-Limop\Limop\Limop.iml" filepath="C:\Users\Guilherme\Documents\GitHub\App-Limop\Limop\Limop.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Aluno\Documents\GitHub\App-Limop\Limop\app\app.iml" filepath="C:\Users\Aluno\Documents\GitHub\App-Limop\Limop\app\app.iml" />
       <module fileurl="file://C:\Users\Guilherme\Documents\GitHub\App-Limop\Limop\app\app.iml" filepath="C:\Users\Guilherme\Documents\GitHub\App-Limop\Limop\app\app.iml" />
+>>>>>>> 65669be379c212871be09b2f1e8dc7147f43620a
     </modules>
   </component>
 </project>

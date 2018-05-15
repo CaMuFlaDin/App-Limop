@@ -36,6 +36,7 @@ public class InsertUsuario extends AppCompatActivity {
     String sexo,senhaa;
     ImageView iv;
     private Bitmap img;
+    String imagemUsuario = null;
 
     private static final int GALLERY_REQUEST = 1;
 
@@ -90,8 +91,16 @@ public class InsertUsuario extends AppCompatActivity {
         return temp;
     }
 
-    public void insertUsuario(View v) {
-        String imagemUsuario = getStringImage(img);
+    public void validarCampos(View v){
+        if(nome.length() == 0 || email.length() == 0 || senha.length() == 0 || confirmar_senha.length() == 0 || data_nascimento.length() == 0 || !sexoGroup.isSelected()|| imagemUsuario == null){
+            Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
+        }else{
+            insertUsuario();
+        }
+    }
+
+    public void insertUsuario() {
+        imagemUsuario = getStringImage(img);
         Map<String, String> params = new HashMap<String, String>();
 
         if(sexoGroup.getCheckedRadioButtonId() == R.id.masc){

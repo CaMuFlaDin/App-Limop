@@ -92,7 +92,15 @@ public class EditarServico extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    public void updateServico(View v) {
+    public void validarCampos(View v){
+        if(nome.getText().length() == 0 || valor_custo.getText().length() == 0 || valor_venda.getText().length() == 0) {
+            Toast.makeText(this, "Preencha os campos corretamente!",Toast.LENGTH_SHORT).show();
+        }else{
+            updateServico();
+        }
+    }
+
+    public void updateServico() {
         Map<String, String> params = new HashMap<String, String>();
 
         params.put("update", "update");

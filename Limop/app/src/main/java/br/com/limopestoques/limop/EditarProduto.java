@@ -127,6 +127,15 @@ public class EditarProduto extends AppCompatActivity {
         return temp;
     }
 
+    public void validarCampos(View v){
+        if(nome_produto.length() == 0 || valor_custo.length() == 0 || valor_venda.length() == 0 || disponivel_estoque.length() == 0 || min_estoque.length() == 0 || max_estoque.length() == 0 ||
+                peso_liquido.length() == 0 || peso_bruto.length() == 0){
+            Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
+        }else{
+            updateProduto();
+        }
+    }
+
     public void carregar(){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
                 new Response.Listener<String>() {
@@ -190,7 +199,7 @@ public class EditarProduto extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    public void updateProduto(View v) {
+    public void updateProduto() {
         Map<String, String> params = new HashMap<String, String>();
 
         if(img == null){

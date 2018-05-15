@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EEE"
     tools:context="br.com.limopestoques.limop.Compras">
 
     <LinearLayout
@@ -11,238 +12,45 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <ImageView
             android:onClick="FornecedoresCompras"
-            android:id="@+id/card_view_fornecedores"
+            android:layout_marginTop="10dp"
+            android:id="@+id/fornecedorescompras"
             android:layout_width="match_parent"
-            android:layout_height="100sp"
-            android:layout_margin="8dp">
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/fornecedores" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff"
-                android:elevation="4dp"
-                android:padding="16dp">
-
-                <ImageView
-                    android:id="@+id/cardview_image"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginRight="18dp"
-                    android:src="@drawable/truck" />
-
-                <TextView
-                    android:id="@+id/cardview_list_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/cardview_image"
-                    android:paddingBottom="5dp"
-                    android:textColor="#000"
-                    android:text="@string/fornecedores"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/cardview_list_title"
-                    android:layout_toRightOf="@+id/cardview_image"
-                    android:text="@string/descricao_fornecedores"
-                    android:textColor="#8b8b8b" />
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <ImageView
             android:onClick="ProdutosCompras"
-            android:id="@+id/card_view_produtos"
+            android:layout_marginTop="10dp"
+            android:id="@+id/produtoscompras"
             android:layout_width="match_parent"
-            android:layout_height="100sp"
-            android:layout_margin="8dp">
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/produtos" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff"
-                android:elevation="4dp"
-                android:padding="16dp">
-
-                <ImageView
-                    android:id="@+id/cardview_image1"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginRight="18dp"
-                    android:src="@drawable/archive" />
-
-                <TextView
-                    android:id="@+id/cardview_list_title1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/cardview_image1"
-                    android:paddingBottom="5dp"
-                    android:textColor="#000"
-                    android:text="@string/produtos"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:id="@+id/short_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/cardview_list_title1"
-                    android:layout_toRightOf="@+id/cardview_image1"
-                    android:text="@string/descricao_produtos"
-                    android:textColor="#8b8b8b" />
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <ImageView
             android:onClick="ServicosCompras"
-            android:id="@+id/card_view_servicos"
+            android:layout_marginTop="10dp"
+            android:id="@+id/servicos"
             android:layout_width="match_parent"
-            android:layout_height="100sp"
-            android:layout_margin="8dp">
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/servicos" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff"
-                android:elevation="4dp"
-                android:padding="16dp">
-
-                <ImageView
-                    android:id="@+id/cardview_image2"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginRight="18dp"
-                    android:src="@drawable/shopping_cart" />
-
-                <TextView
-                    android:id="@+id/cardview_list_title2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/cardview_image2"
-                    android:paddingBottom="5dp"
-                    android:textColor="#000"
-                    android:text="@string/servicos"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:id="@+id/short_description2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/cardview_list_title2"
-                    android:layout_toRightOf="@+id/cardview_image2"
-                    android:text="@string/descricao_servicos"
-                    android:textColor="#8b8b8b" />
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <ImageView
             android:onClick="TransportadorasCompras"
-            android:id="@+id/card_view_transportadoras"
+            android:layout_marginTop="10dp"
+            android:id="@+id/transportadoras"
             android:layout_width="match_parent"
-            android:layout_height="100sp"
-            android:layout_margin="8dp">
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/transportadoras" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff"
-                android:elevation="4dp"
-                android:padding="16dp">
-
-                <ImageView
-                    android:id="@+id/cardview_image3"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginRight="18dp"
-                    android:src="@drawable/forklift" />
-
-                <TextView
-                    android:id="@+id/cardview_list_title3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/cardview_image3"
-                    android:paddingBottom="5dp"
-                    android:textColor="#000"
-                    android:text="@string/transportadoras"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:id="@+id/short_description3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/cardview_list_title3"
-                    android:layout_toRightOf="@+id/cardview_image3"
-                    android:text="@string/descricao_transportadoras"
-                    android:textColor="#8b8b8b" />
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/card_view_sit_estoque"
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/situacaoestoque"
             android:layout_width="match_parent"
-            android:layout_height="100sp"
-            android:layout_margin="8dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff"
-                android:elevation="4dp"
-                android:padding="16dp">
-
-                <ImageView
-                    android:id="@+id/cardview_image4"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginRight="18dp"
-                    android:src="@drawable/dropbox" />
-
-                <TextView
-                    android:id="@+id/cardview_list_title4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/cardview_image4"
-                    android:paddingBottom="5dp"
-                    android:textColor="#000"
-                    android:text="@string/situacao_estoque"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:id="@+id/short_description4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/cardview_list_title4"
-                    android:layout_toRightOf="@+id/cardview_image4"
-                    android:text="@string/descricao_situ_estoque"
-                    android:textColor="#8b8b8b" />
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/situacaoestoque" />
 
     </LinearLayout>
 

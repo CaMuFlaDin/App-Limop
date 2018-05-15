@@ -29,6 +29,7 @@
 
         <ImageView
             android:id="@+id/img"
+            android:paddingTop="30dp"
             android:src="@drawable/add_foto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -177,7 +178,7 @@
         </Spinner>
 
         <Button
-            android:onClick="insertProduto"
+            android:onClick="validarCampos"
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
