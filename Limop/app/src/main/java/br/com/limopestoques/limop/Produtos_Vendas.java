@@ -22,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import br.com.limopestoques.limop.CRUD.CRUD;
 import br.com.limopestoques.limop.Construtoras.ProdCompraConst;
+import br.com.limopestoques.limop.ListView.ListViewClientes;
 import br.com.limopestoques.limop.ListView.ListViewProdCompra;
 
 import org.json.JSONArray;
@@ -40,6 +41,7 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
     ListView listView;
 
     List<ProdCompraConst> prodvendaList;
+    List<ProdCompraConst> prodQuery;
 
     SearchView searchView;
 
@@ -51,6 +53,7 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
         listView = (ListView)findViewById(R.id.listView);
         searchView = findViewById(R.id.sv);
         prodvendaList = new ArrayList<>();
+        prodQuery = new ArrayList<>();
 
         registerForContextMenu(listView);
         loadProdvendaList();
@@ -70,7 +73,7 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Integer pos = info.position;
-        ProdCompraConst vendas = prodvendaList.get(pos);
+        ProdCompraConst vendas = prodQuery.get(pos);
         final String id = vendas.getId();
         if(item.getTitle() == "Editar Venda"){
             Intent irTela = new Intent(Produtos_Vendas.this, EditarProdVenda.class);
@@ -111,6 +114,7 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
                                 ProdCompraConst prodCompra = new ProdCompraConst(produtoObject.getString("id_venda"),produtoObject.getString("nome_produto"),"R$ "+produtoObject.getString("valor"), "Quantidade: "+produtoObject.getString("quantidade"),produtoObject.getString("fotos"));
 
                                 prodvendaList.add(prodCompra);
+                                prodQuery.add(prodCompra);
                             }
 
                             ListViewProdCompra adapter = new ListViewProdCompra(prodvendaList, getApplicationContext());
@@ -147,11 +151,18 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
 
     @Override
     public boolean onQueryTextChange(String newText){
+        prodQuery.clear();
         if (TextUtils.isEmpty(newText)) {
-            listView.clearTextFilter();
+            prodQuery.addAll(prodvendaList);
         } else {
-            listView.setFilterText(newText);
+            String queryText = newText.toLowerCase();
+            for(ProdCompraConst u : prodvendaList){
+                if(u.getProd().toLowerCase().contains(queryText)){
+                    prodQuery.add(u);
+                }
+            }
         }
+        listView.setAdapter(new ListViewProdCompra(prodQuery, Produtos_Vendas.this));
         return true;
     }
 

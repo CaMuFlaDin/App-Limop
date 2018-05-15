@@ -97,10 +97,12 @@ public class InsertUsuario extends AppCompatActivity {
     }
 
     public void validarCampos(View v){
-        if(nome.length() == 0 || email.length() == 0 || senha.length() == 0 || confirmar_senha.length() == 0 || data_nascimento.length() == 0 || !sexoGroup.isSelected()|| imagemUsuario == null){
-            Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
-        }else{
+
+
+        if(nome.length() == 0 || email.length() == 0 || senha.length() == 0 || confirmar_senha.length() == 0 || data_nascimento.length() == 0 || !sexoGroup.isSelected()|| imagemUsuario != null){
             insertUsuario();
+        }else{
+            Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -126,7 +128,7 @@ public class InsertUsuario extends AppCompatActivity {
         params.put("email", email.getText().toString().trim());
         params.put("senha", senhaa);
         params.put("sexo", sexo);
-        params.put("nascimento", email.getText().toString().trim());
+        params.put("nascimento", data_nascimento.getText().toString().trim());
         params.put("tipo", tipo.getSelectedItem().toString());
 
         CRUD.inserir("https://limopestoques.com.br/Android/Insert/InsertUsuario.php", new Response.Listener<String>() {

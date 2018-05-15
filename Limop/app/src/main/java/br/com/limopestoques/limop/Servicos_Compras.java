@@ -21,7 +21,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import br.com.limopestoques.limop.CRUD.CRUD;
+import br.com.limopestoques.limop.Construtoras.ClientesConst;
 import br.com.limopestoques.limop.Construtoras.ServicosCompraConst;
+import br.com.limopestoques.limop.ListView.ListViewClientes;
 import br.com.limopestoques.limop.ListView.ListViewServicosCompra;
 
 import org.json.JSONArray;
@@ -40,6 +42,7 @@ public class Servicos_Compras extends AppCompatActivity implements SearchView.On
     ListView listView;
 
     List<ServicosCompraConst> servicocompraList;
+    List<ServicosCompraConst> servicoQuery;
 
     SearchView searchView;
 
@@ -51,6 +54,7 @@ public class Servicos_Compras extends AppCompatActivity implements SearchView.On
         listView = (ListView)findViewById(R.id.listView);
         searchView = findViewById(R.id.sv);
         servicocompraList = new ArrayList<>();
+        servicoQuery = new ArrayList<>();
 
         registerForContextMenu(listView);
         loadServicoCompraList();
@@ -70,7 +74,7 @@ public class Servicos_Compras extends AppCompatActivity implements SearchView.On
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Integer pos = info.position;
-        ServicosCompraConst servico = servicocompraList.get(pos);
+        ServicosCompraConst servico = servicoQuery.get(pos);
         final String id = servico.getId();
         if(item.getTitle() == "Editar Serviço"){
             Intent irTela = new Intent(Servicos_Compras.this, EditarServico.class);
@@ -116,6 +120,7 @@ public class Servicos_Compras extends AppCompatActivity implements SearchView.On
                                 ServicosCompraConst servicoCompra = new ServicosCompraConst(servicoObject.getString("id_servico"),servicoObject.getString("nome_servico"), "Valor de Custo R$ "+servicoObject.getString("valor_custo"), "Valor de Venda R$ "+servicoObject.getString("valor_venda"));
 
                                 servicocompraList.add(servicoCompra);
+                                servicoQuery.add(servicoCompra);
                             }
 
                             ListViewServicosCompra adapter = new ListViewServicosCompra(servicocompraList, getApplicationContext());
@@ -147,11 +152,18 @@ public class Servicos_Compras extends AppCompatActivity implements SearchView.On
 
     @Override
     public boolean onQueryTextChange(String newText){
+        servicoQuery.clear();
         if (TextUtils.isEmpty(newText)) {
-            listView.clearTextFilter();
+            servicoQuery.addAll(servicocompraList);
         } else {
-            listView.setFilterText(newText);
+            String queryText = newText.toLowerCase();
+            for(ServicosCompraConst u : servicocompraList){
+                if(u.getNome().toLowerCase().contains(queryText)){
+                    servicoQuery.add(u);
+                }
+            }
         }
+        listView.setAdapter(new ListViewServicosCompra(servicoQuery, Servicos_Compras.this));
         return true;
     }
 

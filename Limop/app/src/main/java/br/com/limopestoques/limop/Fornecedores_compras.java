@@ -21,7 +21,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import br.com.limopestoques.limop.CRUD.CRUD;
+import br.com.limopestoques.limop.Construtoras.ClientesConst;
 import br.com.limopestoques.limop.Construtoras.FornCompraConst;
+import br.com.limopestoques.limop.ListView.ListViewClientes;
 import br.com.limopestoques.limop.ListView.ListViewFornCompra;
 
 import org.json.JSONArray;
@@ -40,6 +42,7 @@ public class Fornecedores_compras extends AppCompatActivity implements SearchVie
     ListView listView;
 
     List<FornCompraConst> forncompraList;
+    List<FornCompraConst> fornQuery;
 
     SearchView searchView;
 
@@ -51,6 +54,7 @@ public class Fornecedores_compras extends AppCompatActivity implements SearchVie
         listView = (ListView)findViewById(R.id.listView);
         searchView = findViewById(R.id.sv);
         forncompraList = new ArrayList<>();
+        fornQuery = new ArrayList<>();
 
         registerForContextMenu(listView);
         loadFornComprasList();
@@ -70,7 +74,7 @@ public class Fornecedores_compras extends AppCompatActivity implements SearchVie
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Integer pos = info.position;
-        FornCompraConst fornecedores = forncompraList.get(pos);
+        FornCompraConst fornecedores = fornQuery.get(pos);
         final String id = fornecedores.getId();
         if(item.getTitle() == "Editar Fornecedor"){
             Intent irTela = new Intent(Fornecedores_compras.this, EditarFornecedor.class);
@@ -111,6 +115,7 @@ public class Fornecedores_compras extends AppCompatActivity implements SearchVie
                                 FornCompraConst forneCompra = new FornCompraConst(forncompraObject.getString("id_fornecedor"), forncompraObject.getString("nome_fornecedor"), forncompraObject.getString("tipo"), forncompraObject.getString("telefone_comercial"));
 
                                 forncompraList.add(forneCompra);
+                                fornQuery.add(forneCompra);
                             }
 
                             ListViewFornCompra adapter = new ListViewFornCompra(forncompraList, getApplicationContext());
@@ -147,11 +152,20 @@ public class Fornecedores_compras extends AppCompatActivity implements SearchVie
 
     @Override
     public boolean onQueryTextChange(String newText){
+        fornQuery.clear();
         if (TextUtils.isEmpty(newText)) {
-            listView.clearTextFilter();
+            fornQuery.addAll(forncompraList);
         } else {
-            listView.setFilterText(newText);
+            String queryText = newText.toLowerCase();
+            for(FornCompraConst u : forncompraList){
+                if(u.getNome().toLowerCase().contains(queryText) ||
+                        u.getTipo().toLowerCase().contains(queryText) ||
+                        u.getTel().toLowerCase().contains(queryText)){
+                    fornQuery.add(u);
+                }
+            }
         }
+        listView.setAdapter(new ListViewFornCompra(fornQuery, Fornecedores_compras.this));
         return true;
     }
 

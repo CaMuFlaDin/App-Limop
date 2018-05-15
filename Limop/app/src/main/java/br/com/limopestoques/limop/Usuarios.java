@@ -21,7 +21,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import br.com.limopestoques.limop.CRUD.CRUD;
+import br.com.limopestoques.limop.Construtoras.ClientesConst;
 import br.com.limopestoques.limop.Construtoras.UsuariosConst;
+import br.com.limopestoques.limop.ListView.ListViewClientes;
 import br.com.limopestoques.limop.ListView.ListViewUsuarios;
 
 import org.json.JSONArray;
@@ -40,6 +42,7 @@ public class Usuarios extends AppCompatActivity implements SearchView.OnQueryTex
     ListView listView;
 
     List<UsuariosConst> usuariosList;
+    List<UsuariosConst> usuariosQuery;
 
     SearchView searchView;
 
@@ -51,6 +54,7 @@ public class Usuarios extends AppCompatActivity implements SearchView.OnQueryTex
         listView = (ListView)findViewById(R.id.listView);
         searchView = findViewById(R.id.sv);
         usuariosList = new ArrayList<>();
+        usuariosQuery = new ArrayList<>();
 
         registerForContextMenu(listView);
         loadUsuarioList();
@@ -75,7 +79,7 @@ public class Usuarios extends AppCompatActivity implements SearchView.OnQueryTex
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Integer pos = info.position;
-        UsuariosConst usuarios = usuariosList.get(pos);
+        UsuariosConst usuarios = usuariosQuery.get(pos);
         final String id = usuarios.getId();
         if(item.getTitle() == "Editar Usuário"){
             Intent irTela = new Intent(Usuarios.this, EditarUsuario.class);
@@ -116,6 +120,7 @@ public class Usuarios extends AppCompatActivity implements SearchView.OnQueryTex
                                 UsuariosConst users = new UsuariosConst(usuarioObject.getString("id_usuario"),usuarioObject.getString("nome_usuario"), usuarioObject.getString("email"),usuarioObject.getString("tipo"),usuarioObject.getString("foto"));
 
                                 usuariosList.add(users);
+                                usuariosQuery.add(users);
                             }
 
                             ListViewUsuarios adapter = new ListViewUsuarios(usuariosList, getApplicationContext());
@@ -147,11 +152,20 @@ public class Usuarios extends AppCompatActivity implements SearchView.OnQueryTex
 
     @Override
     public boolean onQueryTextChange(String newText){
+        usuariosQuery.clear();
         if (TextUtils.isEmpty(newText)) {
-            listView.clearTextFilter();
+            usuariosQuery.addAll(usuariosList);
         } else {
-            listView.setFilterText(newText);
+            String queryText = newText.toLowerCase();
+            for(UsuariosConst u : usuariosList){
+                if(u.getName().toLowerCase().contains(queryText) ||
+                        u.getEmail().toLowerCase().contains(queryText) ||
+                        u.getTipo().toLowerCase().contains(queryText)){
+                    usuariosQuery.add(u);
+                }
+            }
         }
+        listView.setAdapter(new ListViewUsuarios(usuariosQuery, Usuarios.this));
         return true;
     }
 

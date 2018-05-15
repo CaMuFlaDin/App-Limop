@@ -22,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import br.com.limopestoques.limop.CRUD.CRUD;
 import br.com.limopestoques.limop.Construtoras.TranspCompraConst;
+import br.com.limopestoques.limop.ListView.ListViewClientes;
 import br.com.limopestoques.limop.ListView.ListViewTranspCompra;
 
 import org.json.JSONArray;
@@ -40,6 +41,7 @@ public class Transportadoras_Compras extends AppCompatActivity implements Search
     ListView listView;
 
     List<TranspCompraConst> transpcompraList;
+    List<TranspCompraConst> transpQuery;
 
     SearchView searchView;
     Class tela;
@@ -62,6 +64,7 @@ public class Transportadoras_Compras extends AppCompatActivity implements Search
         listView = (ListView)findViewById(R.id.listView);
         searchView = findViewById(R.id.sv);
         transpcompraList = new ArrayList<>();
+        transpQuery = new ArrayList<>();
         registerForContextMenu(listView);
         loadTranspCompraList();
         listView.setTextFilterEnabled(true);
@@ -85,7 +88,7 @@ public class Transportadoras_Compras extends AppCompatActivity implements Search
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Integer pos = info.position;
-        TranspCompraConst transp = transpcompraList.get(pos);
+        TranspCompraConst transp = transpQuery.get(pos);
         final String id = transp.getId();
         if(item.getTitle() == "Editar Transportadora"){
             Intent irTela = new Intent(Transportadoras_Compras.this, EditarTransportadora.class);
@@ -126,6 +129,7 @@ public class Transportadoras_Compras extends AppCompatActivity implements Search
                                 TranspCompraConst transp = new TranspCompraConst(transpObject.getString("id_transportadora"),transpObject.getString("nome_transportadora"), transpObject.getString("email"), "R$ "+transpObject.getString("valor_frete"));
 
                                 transpcompraList.add(transp);
+                                transpQuery.add(transp);
                             }
 
                             ListViewTranspCompra adapter = new ListViewTranspCompra(transpcompraList, getApplicationContext());
@@ -157,11 +161,19 @@ public class Transportadoras_Compras extends AppCompatActivity implements Search
 
     @Override
     public boolean onQueryTextChange(String newText){
+        transpQuery.clear();
         if (TextUtils.isEmpty(newText)) {
-            listView.clearTextFilter();
+            transpQuery.addAll(transpcompraList);
         } else {
-            listView.setFilterText(newText);
+            String queryText = newText.toLowerCase();
+            for(TranspCompraConst u : transpcompraList){
+                if(u.getNome().toLowerCase().contains(queryText) ||
+                        u.getEmail().toLowerCase().contains(queryText)){
+                    transpQuery.add(u);
+                }
+            }
         }
+        listView.setAdapter(new ListViewTranspCompra(transpQuery, Transportadoras_Compras.this));
         return true;
     }
 

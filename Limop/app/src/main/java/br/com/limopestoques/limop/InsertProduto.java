@@ -102,8 +102,9 @@ public class InsertProduto extends AppCompatActivity {
     }
 
     public void validarCampos(View v){
-        if(nome_produto.length() == 0 || imagemProduto == null || valor_custo.length() == 0 || valor_venda.length() == 0 || disponivel_estoque.length() == 0 || min_estoque.length() == 0 || max_estoque.length() == 0 ||
-                peso_liquido.length() == 0 || peso_bruto.length() == 0){
+
+        if(nome_produto.getText().toString().length() == 0 || imagemProduto == null || valor_custo.getText().toString().length() == 0 || valor_venda.getText().toString().length() == 0 || disponivel_estoque.getText().toString().length() == 0 || min_estoque.getText().toString().length() == 0 || max_estoque.getText().toString().length() == 0 ||
+                peso_liquido.getText().toString().length() == 0 || peso_bruto.getText().toString().length() == 0){
             Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
         }else{
             insertProduto();

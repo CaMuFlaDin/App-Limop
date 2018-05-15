@@ -31,9 +31,11 @@ import java.util.List;
 import java.util.Map;
 
 import br.com.limopestoques.limop.CRUD.CRUD;
+import br.com.limopestoques.limop.Construtoras.ClientesConst;
 import br.com.limopestoques.limop.Construtoras.ProdCompraConst;
 import br.com.limopestoques.limop.Construtoras.ServicosCompraConst;
 import br.com.limopestoques.limop.Construtoras.ServicosVendasConst;
+import br.com.limopestoques.limop.ListView.ListViewClientes;
 import br.com.limopestoques.limop.ListView.ListViewProdCompra;
 import br.com.limopestoques.limop.ListView.ListViewServicosCompra;
 import br.com.limopestoques.limop.ListView.ListViewServicosVendas;
@@ -45,6 +47,7 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
     ListView listView;
 
     List<ServicosVendasConst> servicosvendaList;
+    List<ServicosVendasConst> servicosQuery;
 
     SearchView searchView;
 
@@ -56,6 +59,7 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
         listView = (ListView)findViewById(R.id.listView);
         searchView = findViewById(R.id.sv);
         servicosvendaList = new ArrayList<>();
+        servicosQuery = new ArrayList<>();
 
         registerForContextMenu(listView);
         loadServvendaList();
@@ -75,7 +79,7 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Integer pos = info.position;
-        ServicosVendasConst vendas = servicosvendaList.get(pos);
+        ServicosVendasConst vendas = servicosQuery.get(pos);
         final String id = vendas.getId();
         if(item.getTitle() == "Editar Venda"){
             Intent irTela = new Intent(Servicos_Vendas.this, EditarServVenda.class);
@@ -116,6 +120,7 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
                                 ServicosVendasConst servVenda = new ServicosVendasConst(servicoObject.getString("id_venda"),servicoObject.getString("nomeServico"),"R$ "+servicoObject.getString("valor"), "Quantidade: "+servicoObject.getString("quantidade"));
 
                                 servicosvendaList.add(servVenda);
+                                servicosQuery.add(servVenda);
                             }
 
                             ListViewServicosVendas adapter = new ListViewServicosVendas(servicosvendaList, getApplicationContext());
@@ -152,11 +157,18 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
 
     @Override
     public boolean onQueryTextChange(String newText){
+        servicosQuery.clear();
         if (TextUtils.isEmpty(newText)) {
-            listView.clearTextFilter();
+            servicosQuery.addAll(servicosvendaList);
         } else {
-            listView.setFilterText(newText);
+            String queryText = newText.toLowerCase();
+            for(ServicosVendasConst u : servicosvendaList){
+                if(u.getProd().toLowerCase().contains(queryText)){
+                    servicosQuery.add(u);
+                }
+            }
         }
+        listView.setAdapter(new ListViewServicosVendas(servicosQuery, Servicos_Vendas.this));
         return true;
     }
 

@@ -15,7 +15,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import br.com.limopestoques.limop.Construtoras.AcessosConst;
+import br.com.limopestoques.limop.Construtoras.ClientesConst;
 import br.com.limopestoques.limop.ListView.ListViewAcessos;
+import br.com.limopestoques.limop.ListView.ListViewClientes;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,6 +33,7 @@ public class Acessos extends AppCompatActivity implements SearchView.OnQueryText
     ListView listView;
 
     List<AcessosConst> acessosList;
+    List<AcessosConst> acessosQuery;
 
     SearchView searchView;
 
@@ -42,6 +45,7 @@ public class Acessos extends AppCompatActivity implements SearchView.OnQueryText
         listView = (ListView)findViewById(R.id.listView);
         searchView = findViewById(R.id.sv);
         acessosList = new ArrayList<>();
+        acessosQuery = new ArrayList<>();
         loadAcessosList();
         listView.setTextFilterEnabled(true);
         searchView.setOnQueryTextListener(this);
@@ -63,6 +67,7 @@ public class Acessos extends AppCompatActivity implements SearchView.OnQueryText
                                 AcessosConst users = new AcessosConst(acessosObject.getString("nome_usuario"), acessosObject.getString("qtd_acessos")+" Acessos", acessosObject.getString("data_acesso"));
 
                                 acessosList.add(users);
+                                acessosQuery.add(users);
                             }
 
                             ListViewAcessos adapter = new ListViewAcessos(acessosList, getApplicationContext());
@@ -88,11 +93,18 @@ public class Acessos extends AppCompatActivity implements SearchView.OnQueryText
 
     @Override
     public boolean onQueryTextChange(String newText){
+        acessosQuery.clear();
         if (TextUtils.isEmpty(newText)) {
-            listView.clearTextFilter();
+            acessosQuery.addAll(acessosList);
         } else {
-            listView.setFilterText(newText);
+            String queryText = newText.toLowerCase();
+            for(AcessosConst u : acessosList){
+                if(u.getUser().toLowerCase().contains(queryText)){
+                    acessosQuery.add(u);
+                }
+            }
         }
+        listView.setAdapter(new ListViewAcessos(acessosQuery, Acessos.this));
         return true;
     }
 

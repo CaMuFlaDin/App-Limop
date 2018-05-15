@@ -21,7 +21,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import br.com.limopestoques.limop.CRUD.CRUD;
+import br.com.limopestoques.limop.Construtoras.ClientesConst;
 import br.com.limopestoques.limop.Construtoras.ProdCompraConst;
+import br.com.limopestoques.limop.ListView.ListViewClientes;
 import br.com.limopestoques.limop.ListView.ListViewProdCompra;
 
 import org.json.JSONArray;
@@ -40,6 +42,7 @@ public class Produtos_Compras extends AppCompatActivity implements SearchView.On
     ListView listView;
 
     List<ProdCompraConst> prodcompraList;
+    List<ProdCompraConst> prodQuery;
 
     SearchView searchView;
 
@@ -51,6 +54,7 @@ public class Produtos_Compras extends AppCompatActivity implements SearchView.On
         listView = (ListView)findViewById(R.id.listView);
         searchView = findViewById(R.id.sv);
         prodcompraList = new ArrayList<>();
+        prodQuery = new ArrayList<>();
 
         registerForContextMenu(listView);
         loadProdCompraList();
@@ -70,7 +74,7 @@ public class Produtos_Compras extends AppCompatActivity implements SearchView.On
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Integer pos = info.position;
-        ProdCompraConst fornecedores = prodcompraList.get(pos);
+        ProdCompraConst fornecedores = prodQuery.get(pos);
         final String id = fornecedores.getId();
         if(item.getTitle() == "Editar Produto"){
             Intent irTela = new Intent(Produtos_Compras.this, EditarProduto.class);
@@ -111,6 +115,7 @@ public class Produtos_Compras extends AppCompatActivity implements SearchView.On
                                 ProdCompraConst prodCompra = new ProdCompraConst(produtoObject.getString("id_produto"),produtoObject.getString("nome"),"R$ "+produtoObject.getString("valor_venda"), produtoObject.getString("disponivel_estoque")+" Disponíveis no estoque",produtoObject.getString("fotos"));
 
                                 prodcompraList.add(prodCompra);
+                                prodQuery.add(prodCompra);
                             }
 
                             ListViewProdCompra adapter = new ListViewProdCompra(prodcompraList, getApplicationContext());
@@ -147,11 +152,18 @@ public class Produtos_Compras extends AppCompatActivity implements SearchView.On
 
     @Override
     public boolean onQueryTextChange(String newText){
+        prodQuery.clear();
         if (TextUtils.isEmpty(newText)) {
-            listView.clearTextFilter();
+            prodQuery.addAll(prodcompraList);
         } else {
-            listView.setFilterText(newText);
+            String queryText = newText.toLowerCase();
+            for(ProdCompraConst u : prodcompraList){
+                if(u.getProd().toLowerCase().contains(queryText)){
+                    prodQuery.add(u);
+                }
+            }
         }
+        listView.setAdapter(new ListViewProdCompra(prodQuery, Produtos_Compras.this));
         return true;
     }
 
