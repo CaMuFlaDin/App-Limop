@@ -21,8 +21,6 @@ import java.util.List;
 public class ListViewClientes extends ArrayAdapter<ClientesConst>{
 
     private List<ClientesConst> clientesList;
-    private List<ClientesConst> orig;
-
     private Context mCtx;
 
     public ListViewClientes(List<ClientesConst> clientesList, Context mCtx){
@@ -31,47 +29,6 @@ public class ListViewClientes extends ArrayAdapter<ClientesConst>{
         this.mCtx = mCtx;
     }
 
-    @Override
-    public int getCount() {
-        return clientesList.size();
-    }
-
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                final FilterResults oReturn = new FilterResults();
-                final ArrayList<ClientesConst> results = new ArrayList<ClientesConst>();
-                if (orig == null) {
-                    orig = clientesList;
-                }
-                if (constraint != null) {
-                    constraint = constraint.toString().toLowerCase();
-                    if (orig != null && orig.size() > 0) {
-                        for (final ClientesConst g : orig) {
-                            if ((g.getNome().toLowerCase().contains(constraint.toString())) ||
-                                    (g.getTipo().toLowerCase().contains(constraint.toString())) ||
-                                    g.getEmail().toLowerCase().contains(constraint.toString())) {
-                                results.add(g);
-                            }
-                        }
-                    }
-                    oReturn.values = results;
-                }
-                return oReturn;
-            }
-
-            @SuppressWarnings("unchecked")
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                clientesList = (ArrayList<ClientesConst>) results.values;
-                notifyDataSetChanged();
-            }
-        };
-    }
-
-    @Override
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = LayoutInflater.from(mCtx);
 

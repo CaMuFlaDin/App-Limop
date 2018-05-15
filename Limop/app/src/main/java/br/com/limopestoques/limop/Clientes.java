@@ -22,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import br.com.limopestoques.limop.CRUD.CRUD;
 import br.com.limopestoques.limop.Construtoras.ClientesConst;
+import br.com.limopestoques.limop.Construtoras.UsuariosConst;
 import br.com.limopestoques.limop.ListView.ListViewClientes;
 
 import org.json.JSONArray;
@@ -40,7 +41,7 @@ public class Clientes extends AppCompatActivity implements SearchView.OnQueryTex
     ListView listView;
 
     List<ClientesConst> clientesList;
-
+    List<ClientesConst> clientesQuery;
     SearchView searchView;
 
     @Override
@@ -51,6 +52,7 @@ public class Clientes extends AppCompatActivity implements SearchView.OnQueryTex
         listView = (ListView)findViewById(R.id.listView);
         searchView = findViewById(R.id.sv);
         clientesList = new ArrayList<>();
+        clientesQuery = new ArrayList<>();
 
         registerForContextMenu(listView);
         loadClientesList();
@@ -116,6 +118,7 @@ public class Clientes extends AppCompatActivity implements SearchView.OnQueryTex
                                 ClientesConst clientes = new ClientesConst(clienteObject.getString("id_cliente"), clienteObject.getString("nome_cliente"), clienteObject.getString("tipo"), clienteObject.getString("email"));
 
                                 clientesList.add(clientes);
+                                clientesQuery.add(clientes);
                             }
 
                             ListViewClientes adapter = new ListViewClientes(clientesList, getApplicationContext());
@@ -147,11 +150,19 @@ public class Clientes extends AppCompatActivity implements SearchView.OnQueryTex
 
     @Override
     public boolean onQueryTextChange(String newText){
+        clientesQuery.clear();
         if (TextUtils.isEmpty(newText)) {
-            listView.clearTextFilter();
+            clientesQuery.addAll(clientesList);
         } else {
-            listView.setFilterText(newText);
+            String queryText = newText.toLowerCase();
+            for(ClientesConst u : clientesList){
+                if(u.getNome().toLowerCase().contains(queryText) ||
+                        u.getEmail().toLowerCase().contains(queryText)){
+                    clientesQuery.add(u);
+                }
+            }
         }
+        listView.setAdapter(new ListViewClientes(clientesQuery, getApplicationContext()));
         return true;
     }
 
