@@ -162,7 +162,7 @@ public class Clientes extends AppCompatActivity implements SearchView.OnQueryTex
                 }
             }
         }
-        listView.setAdapter(new ListViewClientes(clientesQuery, getApplicationContext()));
+        listView.setAdapter(new ListViewClientes(clientesQuery, Clientes.this));
         return true;
     }
 
