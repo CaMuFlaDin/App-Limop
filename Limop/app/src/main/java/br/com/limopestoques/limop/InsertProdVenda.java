@@ -22,6 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import br.com.limopestoques.limop.CRUD.CRUD;
 import br.com.limopestoques.limop.Construtoras.ClientesConst;
 import br.com.limopestoques.limop.Construtoras.ProdCompraConst;
@@ -34,7 +36,10 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -107,22 +112,47 @@ public class InsertProdVenda extends AppCompatActivity {
 
             }
         });
+
+        MaskEditTextChangedListener maskData = new MaskEditTextChangedListener("##/##/####",data_venda);
+        MaskEditTextChangedListener maskDataVenc = new MaskEditTextChangedListener("##/##/####",vencimento);
+        data_venda.addTextChangedListener(maskData);
+        vencimento.addTextChangedListener(maskDataVenc);
+
     }
 
+    public void validarCampos(View v){
+        if(data_venda.getText().length() == 0 || qtd.getText().length() == 0 || valor_unitario.getText().length() == 0
+                || desconto.getText().length() == 0  || vencimento.getText().length() == 0) {
+                    Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
+        }else{
+            insertProduto();
+        }
+    }
 
-
-    public void insertProduto(View v) {
+    public void insertProduto() {
         Map<String, String> params = new HashMap<String, String>();
 
         String id_usuario = sessao.getString("id_usuario");
 
-        params.put("data_venda", data_venda.getText().toString().trim());
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        ParsePosition pos = new ParsePosition(0);
+        Date data = formato.parse(data_venda.getText().toString(),pos);
+        formato = new SimpleDateFormat("yyyy-MM-dd");
+        String date = formato.format(data);
+
+        SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy");
+        ParsePosition pos2 = new ParsePosition(0);
+        Date data2 = formato2.parse(vencimento.getText().toString(),pos2);
+        formato2 = new SimpleDateFormat("yyyy-MM-dd");
+        String vencimento = formato2.format(data2);
+
+        params.put("data_venda", date);
         params.put("status", stts_negociacao.getSelectedItem().toString());
         params.put("contrato", contrato.getSelectedItem().toString());
         params.put("qtd", qtd.getText().toString().trim());
         params.put("valor_unitario", valor_unitario.getText().toString().trim());
         params.put("desconto", desconto.getText().toString().trim());
-        params.put("vencimento", vencimento.getText().toString().trim());
+        params.put("vencimento", vencimento);
         params.put("obs", obs.getText().toString().trim());
         params.put("cond_pagamento", cond_pagamento.getSelectedItem().toString());
         params.put("forma_pagamento", forma_pagamento.getSelectedItem().toString());
