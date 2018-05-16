@@ -11,11 +11,29 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-                <SearchView
-                    android:id="@+id/sv"
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:iconifiedByDefault="false"/>
+                    android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:drawableStart="@drawable/ic_person_black"
+                            android:drawableLeft="@drawable/ic_person_black"
+                            android:layout_gravity="center"
+                            android:textColor="#000"
+                            android:textSize="25sp"
+                            android:text="@string/users"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <SearchView
+                            android:id="@+id/sv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:iconifiedByDefault="false"/>
+
+                </LinearLayout>
 
                 <ListView
                     android:id="@+id/listView"

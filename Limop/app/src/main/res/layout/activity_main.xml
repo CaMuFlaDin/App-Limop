@@ -77,7 +77,6 @@
             android:layout_marginLeft="80dp"
             android:layout_marginRight="80dp"/>
 
-
         <com.facebook.login.widget.LoginButton
             android:id="@+id/login_button"
             android:layout_width="wrap_content"

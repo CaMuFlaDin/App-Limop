@@ -7,6 +7,24 @@
     android:orientation="vertical"
     tools:context="br.com.limopestoques.limop.Graficos">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:drawableStart="@drawable/ic_insert_chart"
+            android:drawableLeft="@drawable/ic_insert_chart"
+            android:layout_gravity="center"
+            android:textColor="#000"
+            android:textSize="25sp"
+            android:text="@string/graficos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
     <WebView
         android:layout_margin="15dp"
         android:id="@+id/webview"
