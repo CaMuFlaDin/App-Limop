@@ -234,7 +234,29 @@ public class EditarFornecedor extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    public void updateFornecedor(View v) {
+    public void verificarCampos(View v){
+        if(nome.getText().length() == 0 || email.getText().length() == 0 || tel_celular.getText().length() == 0 || tel_comercial.getText().length() == 0
+                || cep.getText().length() == 0 || estado.getText().length() == 0 || cidade.getText().length() == 0 || bairro.getText().length() == 0 || rua.getText().length() == 0
+                || numero.getText().length() == 0){
+            Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
+        }else{
+            if(tipo.getSelectedItemPosition() == 0){
+                if(cpf.getText().length() != 0 && rg.getText().length() != 0){
+                    updateFornecedor();
+                }else{
+                    Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                if(cnpj.getText().length() != 0 && inscricao.getText().length() != 0 && razao.getText().length() != 0){
+                    updateFornecedor();
+                }else{
+                    Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    public void updateFornecedor() {
         Map<String, String> params = new HashMap<String, String>();
 
         params.put("update", "update");
