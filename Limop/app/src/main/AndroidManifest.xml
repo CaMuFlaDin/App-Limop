@@ -145,10 +145,22 @@
             android:name=".Graficos"
             android:label="Gráficos"
             android:parentActivityName=".Graficos" />
-        <activity android:name=".EditarProdVenda" />
-        <activity android:name=".Servicos_Vendas" />
-        <activity android:name=".InsertServVenda" />
-        <activity android:name=".EditarServVenda"></activity>
+        <activity
+            android:name=".EditarProdVenda"
+            android:label="Editar Venda - Produto"
+            android:parentActivityName=".EditarProdVenda"/>
+        <activity
+            android:name=".Servicos_Vendas"
+            android:label="Serviços - Vendas"
+            android:parentActivityName=".Servicos_Vendas"/>
+        <activity
+            android:name=".InsertServVenda"
+            android:label="Inserir Serviço"
+            android:parentActivityName=".InsertServVenda"/>
+        <activity
+            android:name=".EditarServVenda"
+            android:label="Editar Venda - Serviço"
+            android:parentActivityName=".EditarServVenda"/>
     </application>
 
 </manifest>
