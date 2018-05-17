@@ -1,8 +1,6 @@
 package br.com.limopestoques.limop.ListView;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,29 +8,28 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.android.volley.toolbox.Volley;
-
-import br.com.limopestoques.limop.Construtoras.ProdCompraConst;
-import br.com.limopestoques.limop.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.limopestoques.limop.Construtoras.ProdCompraConst;
+import br.com.limopestoques.limop.Construtoras.ProdVendaConst;
+import br.com.limopestoques.limop.R;
+
 /**
- * Created by User on 04/03/2018.
+ * Created by Aluno on 17/05/2018.
  */
 
-public class ListViewProdCompra extends ArrayAdapter<ProdCompraConst>{
+public class ListViewProdVenda extends ArrayAdapter<ProdVendaConst> {
 
-    private List<ProdCompraConst> prodcompraList;
-    private List<ProdCompraConst> orig;
+    private List<ProdVendaConst> prodcompraList;
+    private List<ProdVendaConst> orig;
 
     private Context mCtx;
 
-    public ListViewProdCompra(List<ProdCompraConst> prodcompraList, Context mCtx){
+    public ListViewProdVenda(List<ProdVendaConst> prodcompraList, Context mCtx){
         super(mCtx, R.layout.list_view_produtos_compras, prodcompraList);
         this.prodcompraList = prodcompraList;
         this.mCtx = mCtx;
@@ -50,14 +47,14 @@ public class ListViewProdCompra extends ArrayAdapter<ProdCompraConst>{
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 final FilterResults oReturn = new FilterResults();
-                final ArrayList<ProdCompraConst> results = new ArrayList<ProdCompraConst>();
+                final ArrayList<ProdVendaConst> results = new ArrayList<ProdVendaConst>();
                 if (orig == null) {
                     orig = prodcompraList;
                 }
                 if (constraint != null) {
                     constraint = constraint.toString().toLowerCase();
                     if (orig != null && orig.size() > 0) {
-                        for (final ProdCompraConst g : orig) {
+                        for (final ProdVendaConst g : orig) {
                             if ((g.getProd().toLowerCase().contains(constraint.toString())) ||
                                     (g.getQtd().toLowerCase().contains(constraint.toString())) ||
                                     g.getValor().toLowerCase().contains(constraint.toString())) {
@@ -73,7 +70,7 @@ public class ListViewProdCompra extends ArrayAdapter<ProdCompraConst>{
             @SuppressWarnings("unchecked")
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                prodcompraList = (ArrayList<ProdCompraConst>) results.values;
+                prodcompraList = (ArrayList<ProdVendaConst>) results.values;
                 notifyDataSetChanged();
             }
         };
@@ -83,21 +80,22 @@ public class ListViewProdCompra extends ArrayAdapter<ProdCompraConst>{
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = LayoutInflater.from(mCtx);
 
-        View listViewItem = inflater.inflate(R.layout.list_view_produtos_compras, null, true);
+        View listViewItem = inflater.inflate(R.layout.list_view_produtos_vendas, null, true);
 
         TextView txtprod = listViewItem.findViewById(R.id.txtProd);
         TextView txtvalor = listViewItem.findViewById(R.id.txtValor);
         TextView txtqtd = listViewItem.findViewById(R.id.txtQtd);
+        TextView txtcliente = listViewItem.findViewById(R.id.txtCliente);
         NetworkImageView image = listViewItem.findViewById(R.id.img);
 
         ImageLoader il = VolleySingleton.getInstance(mCtx).getImageLoader();
 
-        ProdCompraConst usuariosConst = prodcompraList.get(position);
+        ProdVendaConst usuariosConst = prodcompraList.get(position);
 
         txtprod.setText(usuariosConst.getProd());
         txtvalor.setText(usuariosConst.getValor());
         txtqtd.setText(usuariosConst.getQtd());
-
+        txtcliente.setText(usuariosConst.getNome_cliente());
         image.setImageUrl("https://limopestoques.com.br/Index_adm/produtos/imgs/"+usuariosConst.getImg(),il);
 
         return listViewItem;
