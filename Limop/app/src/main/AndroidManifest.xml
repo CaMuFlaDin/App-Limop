@@ -50,8 +50,7 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Principal"
-            android:label="Inicio"
-            android:parentActivityName=".Principal" />
+            android:label="Inicio" />
         <activity
             android:name=".Usuarios"
             android:label="Usuários"
