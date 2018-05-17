@@ -6,13 +6,14 @@ package br.com.limopestoques.limop.Construtoras;
 
 public class ServicosVendasConst {
 
-    String id, servico, valor, qtd;
+    String id, servico, valor, qtd,nome_cliente;
 
-    public ServicosVendasConst(String id, String serv, String valor, String qtd) {
+    public ServicosVendasConst(String id, String serv, String valor, String qtd, String nome_cliente) {
         this.id = id;
         this.servico = serv;
         this.valor = valor;
         this.qtd = qtd;
+        this.nome_cliente = nome_cliente;
     }
 
     public String getId() {
@@ -29,5 +30,8 @@ public class ServicosVendasConst {
 
     public String getQtd() {
         return this.qtd;
+    }
+    public String getNome_cliente() {
+        return this.nome_cliente;
     }
 }

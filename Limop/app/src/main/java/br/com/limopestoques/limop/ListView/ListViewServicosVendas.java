@@ -81,12 +81,14 @@ public class ListViewServicosVendas extends ArrayAdapter<ServicosVendasConst> {
         TextView txtid = listViewItem.findViewById(R.id.txtNome);
         TextView txtname = listViewItem.findViewById(R.id.txtCusto);
         TextView txttipo = listViewItem.findViewById(R.id.txtVenda);
+        TextView txtCliente = listViewItem.findViewById(R.id.txtCliente);
 
         ServicosVendasConst usuariosConst = servicocompraList.get(position);
 
         txtid.setText(usuariosConst.getProd());
         txtname.setText(usuariosConst.getValor());
         txttipo.setText(usuariosConst.getQtd());
+        txtCliente.setText(usuariosConst.getNome_cliente());
 
         return listViewItem;
     }
