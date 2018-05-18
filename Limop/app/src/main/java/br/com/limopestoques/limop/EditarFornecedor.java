@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -53,6 +54,11 @@ public class EditarFornecedor extends AppCompatActivity {
     EditText numero;
     EditText complemento;
     EditText obs;
+    TextView razao_text;
+    TextView inscricao_text;
+    TextView cnpj_text;
+    TextView cpf_text;
+    TextView rg_text;
     Button btn;
 
     @Override
@@ -80,6 +86,11 @@ public class EditarFornecedor extends AppCompatActivity {
         complemento    = findViewById(R.id.complemento);
         obs            = findViewById(R.id.obs);
         btn            = findViewById(R.id.button);
+        razao_text     = findViewById(R.id.razao_text);
+        inscricao_text = findViewById(R.id.inscricao_text);
+        cnpj_text      = findViewById(R.id.cnpj_text);
+        cpf_text       = findViewById(R.id.cpf_text);
+        rg_text        = findViewById(R.id.rg_text);
 
         MaskEditTextChangedListener maskCPF = new MaskEditTextChangedListener("###.###.###-##",cpf);
         MaskEditTextChangedListener maskCEP = new MaskEditTextChangedListener("##.###-###",cep);
@@ -142,26 +153,35 @@ public class EditarFornecedor extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i == 0){
+                    cpf_text.setVisibility(View.VISIBLE);
                     cpf.setVisibility(View.VISIBLE);
+                    rg_text.setVisibility(View.VISIBLE);
                     rg.setVisibility(View.VISIBLE);
 
                     cnpj.setText("");
                     inscricao.setText("");
                     razao.setText("");
 
+                    cnpj_text.setVisibility(View.GONE);
                     cnpj.setVisibility(View.GONE);
+                    inscricao_text.setVisibility(View.GONE);
                     inscricao.setVisibility(View.GONE);
+                    razao_text.setVisibility(View.GONE);
                     razao.setVisibility(View.GONE);
-
                 }else{
+                    cpf_text.setVisibility(View.GONE);
                     cpf.setVisibility(View.GONE);
+                    rg_text.setVisibility(View.GONE);
                     rg.setVisibility(View.GONE);
 
                     rg.setText("");
                     cpf.setText("");
 
+                    cnpj_text.setVisibility(View.VISIBLE);
                     cnpj.setVisibility(View.VISIBLE);
+                    inscricao_text.setVisibility(View.VISIBLE);
                     inscricao.setVisibility(View.VISIBLE);
+                    razao_text.setVisibility(View.VISIBLE);
                     razao.setVisibility(View.VISIBLE);
 
                 }

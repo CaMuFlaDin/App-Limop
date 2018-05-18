@@ -10,6 +10,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nome_servico" />
+
         <EditText
             android:hint="@string/nome_servico"
             android:id="@+id/nome"
@@ -19,13 +29,22 @@
             android:inputType="text"
             android:drawableLeft="@drawable/ic_list"
             android:drawableStart="@drawable/ic_list"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
             android:paddingLeft="5dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/valor_custo" />
 
         <EditText
             android:hint="@string/valor_custo"
@@ -36,13 +55,22 @@
             android:inputType="numberDecimal"
             android:drawableLeft="@drawable/ic_money"
             android:drawableStart="@drawable/ic_money"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
             android:paddingLeft="5dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/valor_venda" />
 
         <EditText
             android:hint="@string/valor_venda"
@@ -53,7 +81,6 @@
             android:inputType="numberDecimal"
             android:drawableLeft="@drawable/ic_money"
             android:drawableStart="@drawable/ic_money"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
