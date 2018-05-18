@@ -147,19 +147,21 @@
         <activity
             android:name=".EditarProdVenda"
             android:label="Editar Venda - Produto"
-            android:parentActivityName=".EditarProdVenda"/>
+            android:parentActivityName=".EditarProdVenda" />
         <activity
             android:name=".Servicos_Vendas"
             android:label="Serviços - Vendas"
-            android:parentActivityName=".Servicos_Vendas"/>
+            android:parentActivityName=".Servicos_Vendas" />
         <activity
             android:name=".InsertServVenda"
             android:label="Inserir Serviço"
-            android:parentActivityName=".InsertServVenda"/>
+            android:parentActivityName=".InsertServVenda" />
         <activity
             android:name=".EditarServVenda"
             android:label="Editar Venda - Serviço"
-            android:parentActivityName=".EditarServVenda"/>
+            android:parentActivityName=".EditarServVenda" />
+        <activity android:name=".SituacaoEstoque" />
+        <activity android:name=".HistoricoMovimentacao"></activity>
     </application>
 
 </manifest>
