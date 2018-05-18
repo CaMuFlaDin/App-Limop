@@ -55,10 +55,13 @@ public class HistoricoMovimentacao extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        carregar();
+        carregarEntradas();
+        carregarSaidas();
+
+
     }
 
-    public void carregar(){
+    public void carregarEntradas(){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -71,7 +74,7 @@ public class HistoricoMovimentacao extends AppCompatActivity {
                             for (int i = 0; i < forncompraArray.length(); i++){
                                 JSONObject forncompraObject = forncompraArray.getJSONObject(i);
 
-                                HistoricoConst produto = new HistoricoConst(forncompraObject.getString("data"), forncompraObject.getString("nome_fornecedor"), forncompraObject.getString("qtd"), forncompraObject.getString("valor_venda"));
+                                HistoricoConst produto = new HistoricoConst(forncompraObject.getString("data"), "Fornecedor:"+forncompraObject.getString("nome_fornecedor"), "Quantidade movimentada:"+forncompraObject.getString("qtd"), "Valor:"+forncompraObject.getString("valor_venda"),"Entrada");
 
                                 historicoList.add(produto);
                             }
@@ -103,5 +106,52 @@ public class HistoricoMovimentacao extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+
+    public void carregarSaidas(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray forncompraArray = obj.getJSONArray("saidas");
+
+                            for (int i = 0; i < forncompraArray.length(); i++){
+                                JSONObject forncompraObject = forncompraArray.getJSONObject(i);
+
+                                HistoricoConst produto = new HistoricoConst(forncompraObject.getString("data_venda"), "Cliente:"+forncompraObject.getString("nome_cliente"), "Quantidade movimentada:"+forncompraObject.getString("quantidade"), "Valor:"+forncompraObject.getString("valor"),"Saída");
+
+                                historicoList.add(produto);
+                            }
+
+                            ListViewHistorico adapter = new ListViewHistorico(historicoList, getApplicationContext());
+
+                            listView.setAdapter(adapter);
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ){
+            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("select", "select");
+                params.put("id_produto", id);
+
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
     }
 
