@@ -37,22 +37,6 @@
             app:srcCompat="@drawable/servicos" />
 
         <ImageView
-            android:onClick="Transportadoras"
-            android:layout_marginTop="10dp"
-            android:id="@+id/transportadoras"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/transportadoras" />
-
-        <ImageView
-            android:onClick="SituacaoEstoque"
-            android:layout_marginTop="10dp"
-            android:id="@+id/situacaoestoque"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/situacaoestoque" />
-
-        <ImageView
             android:layout_marginTop="10dp"
             android:id="@+id/parecelasvencer"
             android:layout_width="match_parent"

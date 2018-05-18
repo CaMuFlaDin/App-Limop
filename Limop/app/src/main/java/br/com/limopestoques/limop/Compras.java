@@ -28,17 +28,6 @@ public class Compras extends AppCompatActivity {
         startActivity(irTela);
     }
 
-    public void TransportadorasCompras(View v){
-        Intent irTela = new Intent(Compras.this, Transportadoras_Compras.class);
-        irTela.putExtra("tela", "Compras");
-        startActivity(irTela);
-    }
-
-    public void SituacaoEstoque(View v){
-        Intent irTela = new Intent(Compras.this, SituacaoEstoque.class);
-        startActivity(irTela);
-    }
-
     public void onBackPressed(){
         super.onBackPressed();
         Intent irTela = new Intent(Compras.this, Principal.class);

@@ -42,6 +42,11 @@ public class Principal extends AppCompatActivity {
         }
     }
 
+    public void Transportadoras(View v){
+        Intent irTela = new Intent(Principal.this, Transportadoras_Compras.class);
+        startActivity(irTela);
+    }
+
     public void Vendas(View v){
         Intent irTela = new Intent(Principal.this, Vendas.class);
         startActivity(irTela);
@@ -59,6 +64,11 @@ public class Principal extends AppCompatActivity {
 
     public void Acessos(View v){
         Intent irTela = new Intent(Principal.this, Acessos.class);
+        startActivity(irTela);
+    }
+
+    public void SituacaoEstoque(View v){
+        Intent irTela = new Intent(Principal.this, SituacaoEstoque.class);
         startActivity(irTela);
     }
 

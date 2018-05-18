@@ -36,23 +36,6 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/servicos" />
 
-        <ImageView
-            android:onClick="TransportadorasCompras"
-            android:layout_marginTop="10dp"
-            android:id="@+id/transportadoras"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/transportadoras" />
-
-        <ImageView
-            android:onClick="SituacaoEstoque"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/situacaoestoque"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/situacaoestoque" />
-
     </LinearLayout>
 
 </ScrollView>

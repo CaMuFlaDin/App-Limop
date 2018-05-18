@@ -18,11 +18,6 @@ public class Vendas extends AppCompatActivity {
         startActivity(irTela);
     }
 
-    public void Transportadoras(View v){
-        Intent irTela = new Intent(Vendas.this, Transportadoras_Compras.class);
-        irTela.putExtra("tela", "Vendas");
-        startActivity(irTela);
-    }
     public void Produtos(View v){
         Intent irTela = new Intent(Vendas.this, Produtos_Vendas.class);
         startActivity(irTela);
@@ -40,11 +35,6 @@ public class Vendas extends AppCompatActivity {
 
     public void Graficos(View v){
         Intent irTela = new Intent(Vendas.this, Graficos.class);
-        startActivity(irTela);
-    }
-
-    public void SituacaoEstoque(View v){
-        Intent irTela = new Intent(Vendas.this, SituacaoEstoque.class);
         startActivity(irTela);
     }
 
