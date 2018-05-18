@@ -160,12 +160,18 @@
             android:name=".EditarServVenda"
             android:label="Editar Venda - Serviço"
             android:parentActivityName=".EditarServVenda" />
-<<<<<<< HEAD
-        <activity android:name=".OrdemServico"></activity>
-=======
-        <activity android:name=".SituacaoEstoque" />
-        <activity android:name=".HistoricoMovimentacao"></activity>
->>>>>>> d254b7a44d0dacde1a621d5e48df8e469ef87168
+        <activity
+            android:name=".OrdemServico"
+            android:label="Ordem de Serviço"
+            android:parentActivityName=".OrdemServico"/>
+        <activity
+            android:name=".SituacaoEstoque"
+            android:label="Situação do Estoque"
+            android:parentActivityName=".SituacaoEstoque"/>
+        <activity
+            android:name=".HistoricoMovimentacao"
+            android:label="Histórico de Movimentação"
+            android:parentActivityName=".HistoricoMovimentacao"/>
     </application>
 
 </manifest>
