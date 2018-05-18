@@ -26,9 +26,9 @@ public class ListViewAcessos extends ArrayAdapter<AcessosConst> {
     private Context mCtx;
 
     public ListViewAcessos(List<AcessosConst> acessosList, Context mCtx){
-        super(mCtx, R.layout.list_view_acessos, acessosList);
-        this.acessosList = acessosList;
-        this.mCtx = mCtx;
+            super(mCtx, R.layout.list_view_acessos, acessosList);
+            this.acessosList = acessosList;
+            this.mCtx = mCtx;
     }
 
 
