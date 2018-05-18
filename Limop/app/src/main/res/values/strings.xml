@@ -129,7 +129,13 @@
     <string name="historico">Histórico de Movimentação</string>
 
     <!-- Vendas -->
+    <string name="servicoo">Serviço</string>
+    <string name="forma_pag">Forma de Pagamento</string>
+    <string name="cond_pag">Condição Pagamento</string>
+    <string name="produtoos">Produto</string>
+    <string name="contrato">Contrato</string>
     <string name="data_venda">Data da venda</string>
+    <string name="stts_negociacaoo">Status da Negociação</string>
     <string-array name="stts_negociacao">
         <item>Venda</item>
         <item>Orçamento</item>

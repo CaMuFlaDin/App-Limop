@@ -27,6 +27,16 @@
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
 
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tipoT" />
+
         <Spinner
             android:id="@+id/tipo"
             android:drawablePadding="-0dp"
@@ -35,7 +45,6 @@
             android:entries="@array/tipo"
             android:background="@drawable/input_style_not"
             android:prompt="@string/tipoT"
-            android:layout_marginTop="24dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp">
         </Spinner>

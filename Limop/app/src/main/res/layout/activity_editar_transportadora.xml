@@ -10,6 +10,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nome_transportadora" />
+
         <EditText
             android:hint="@string/nome_transportadora"
             android:id="@+id/nome"
@@ -19,13 +29,22 @@
             android:inputType="text"
             android:drawableLeft="@drawable/ic_list"
             android:drawableStart="@drawable/ic_list"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
             android:paddingLeft="5dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cnpj" />
 
         <EditText
             android:hint="@string/cnpj"
@@ -36,13 +55,22 @@
             android:inputType="number"
             android:drawableLeft="@drawable/ic_business"
             android:drawableStart="@drawable/ic_business"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
             android:paddingLeft="5dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/razao" />
 
         <EditText
             android:hint="@string/razao"
@@ -53,13 +81,22 @@
             android:inputType="text"
             android:drawableLeft="@drawable/ic_business"
             android:drawableStart="@drawable/ic_business"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
             android:paddingLeft="5dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/inscricao" />
 
         <EditText
             android:hint="@string/inscricao"
@@ -70,13 +107,22 @@
             android:inputType="number"
             android:drawableLeft="@drawable/ic_business"
             android:drawableStart="@drawable/ic_business"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
             android:paddingLeft="5dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/email" />
 
         <EditText
             android:hint="@string/email"
@@ -87,13 +133,22 @@
             android:inputType="text"
             android:drawableLeft="@drawable/ic_email"
             android:drawableStart="@drawable/ic_email"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
             android:paddingLeft="5dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tel_comercial" />
 
         <EditText
             android:hint="@string/tel_comercial"
@@ -104,13 +159,22 @@
             android:inputType="number"
             android:drawableLeft="@drawable/ic_phone"
             android:drawableStart="@drawable/ic_phone"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
             android:paddingLeft="5dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tel_cell" />
 
         <EditText
             android:hint="@string/tel_cell"
@@ -121,13 +185,22 @@
             android:inputType="number"
             android:drawableLeft="@drawable/ic_phone_iphone"
             android:drawableStart="@drawable/ic_phone_iphone"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
             android:paddingLeft="5dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cep" />
 
         <EditText
             android:hint="@string/cep"
@@ -138,13 +211,22 @@
             android:inputType="number"
             android:drawableLeft="@drawable/ic_place"
             android:drawableStart="@drawable/ic_place"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
             android:paddingLeft="5dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/estado" />
 
         <EditText
             android:hint="@string/estado"
@@ -156,13 +238,22 @@
             android:inputType="text"
             android:drawableLeft="@drawable/ic_place"
             android:drawableStart="@drawable/ic_place"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
             android:paddingLeft="5dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cidade" />
 
         <EditText
             android:hint="@string/cidade"
@@ -174,13 +265,22 @@
             android:inputType="text"
             android:drawableLeft="@drawable/ic_place"
             android:drawableStart="@drawable/ic_place"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
             android:paddingLeft="5dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bairro" />
 
         <EditText
             android:hint="@string/bairro"
@@ -192,13 +292,22 @@
             android:inputType="text"
             android:drawableLeft="@drawable/ic_home"
             android:drawableStart="@drawable/ic_home"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
             android:paddingLeft="5dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/rua" />
 
         <EditText
             android:hint="@string/rua"
@@ -210,13 +319,22 @@
             android:inputType="text"
             android:drawableLeft="@drawable/ic_home"
             android:drawableStart="@drawable/ic_home"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
             android:paddingLeft="5dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/numero" />
 
         <EditText
             android:hint="@string/numero"
@@ -227,13 +345,22 @@
             android:inputType="number"
             android:drawableLeft="@drawable/ic_home"
             android:drawableStart="@drawable/ic_home"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
             android:paddingLeft="5dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/complemento" />
 
         <EditText
             android:hint="@string/complemento"
@@ -244,13 +371,22 @@
             android:inputType="text"
             android:drawableLeft="@drawable/ic_home"
             android:drawableStart="@drawable/ic_home"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
             android:paddingLeft="5dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/valor_frete" />
 
         <EditText
             android:hint="@string/valor_frete"
@@ -261,7 +397,6 @@
             android:inputType="numberDecimal"
             android:drawableLeft="@drawable/ic_money"
             android:drawableStart="@drawable/ic_money"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:drawablePadding="20dp"
