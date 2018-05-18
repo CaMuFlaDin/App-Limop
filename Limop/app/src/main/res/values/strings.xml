@@ -126,6 +126,7 @@
     </string-array>
     <string name="categoriaProd">Selecione a categoria</string>
     <string name="nome_produto">Nome do Produto</string>
+    <string name="historico">Histórico de Movimentação</string>
 
     <!-- Vendas -->
     <string name="servicoo">Serviço</string>
