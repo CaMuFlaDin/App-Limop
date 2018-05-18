@@ -142,7 +142,7 @@ public class SituacaoEstoque extends AppCompatActivity implements SearchView.OnQ
 
     public void onBackPressed(){
         super.onBackPressed();
-        Intent irTela = new Intent(SituacaoEstoque.this, Compras.class);
+        Intent irTela = new Intent(SituacaoEstoque.this, Principal.class);
         irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(irTela);
     }
