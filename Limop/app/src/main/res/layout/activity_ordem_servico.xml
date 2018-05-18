@@ -18,8 +18,8 @@
 
             <TextView
                 android:layout_marginTop="10dp"
-                android:drawableStart="@drawable/ic_person_black"
-                android:drawableLeft="@drawable/ic_person_black"
+                android:drawableStart="@drawable/ic_picture_as_pdf"
+                android:drawableLeft="@drawable/ic_picture_as_pdf"
                 android:layout_gravity="center"
                 android:textColor="#000"
                 android:textSize="25sp"

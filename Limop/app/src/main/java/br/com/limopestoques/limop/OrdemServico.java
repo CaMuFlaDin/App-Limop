@@ -175,4 +175,11 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
     public boolean onQueryTextSubmit(String query){
         return false;
     }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent irTela = new Intent(OrdemServico.this, Vendas.class);
+        irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(irTela);
+    }
 }
