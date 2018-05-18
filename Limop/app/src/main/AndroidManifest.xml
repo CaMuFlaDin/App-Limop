@@ -160,8 +160,7 @@
             android:name=".EditarServVenda"
             android:label="Editar Venda - Serviço"
             android:parentActivityName=".EditarServVenda" />
-        <activity android:name=".SituacaoEstoque" />
-        <activity android:name=".HistoricoMovimentacao"></activity>
+        <activity android:name=".OrdemServico"></activity>
     </application>
 
 </manifest>

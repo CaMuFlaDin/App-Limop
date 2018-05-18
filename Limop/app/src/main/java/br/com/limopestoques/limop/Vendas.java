@@ -33,6 +33,11 @@ public class Vendas extends AppCompatActivity {
         startActivity(irTela);
     }
 
+    public void OrdemServico(View v){
+        Intent irTela = new Intent(Vendas.this, OrdemServico.class);
+        startActivity(irTela);
+    }
+
     public void Graficos(View v){
         Intent irTela = new Intent(Vendas.this, Graficos.class);
         startActivity(irTela);

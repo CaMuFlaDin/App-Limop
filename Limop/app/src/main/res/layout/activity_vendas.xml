@@ -60,6 +60,7 @@
             app:srcCompat="@drawable/parcelasvencer" />
 
         <ImageView
+            android:onClick="OrdemServico"
             android:layout_marginTop="10dp"
             android:id="@+id/compras"
             android:layout_width="match_parent"
