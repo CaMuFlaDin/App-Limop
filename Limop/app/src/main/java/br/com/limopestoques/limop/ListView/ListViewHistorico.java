@@ -49,13 +49,23 @@ public class ListViewHistorico extends ArrayAdapter<HistoricoConst> {
         TextView txtInter = listViewItem.findViewById(R.id.txtInter);
         TextView txtQtd = listViewItem.findViewById(R.id.txtQtd);
         TextView txtValor = listViewItem.findViewById(R.id.txtValor);
+        TextView txtTipo = listViewItem.findViewById(R.id.txtTipo);
+        View view = listViewItem.findViewById(R.id.view);
 
         HistoricoConst historico = historicolist.get(position);
+
 
         txtData.setText(historico.getData());
         txtInter.setText(historico.getInter());
         txtQtd.setText(historico.getQtd());
         txtValor.setText(historico.getValor());
+        txtTipo.setText(historico.getTipo());
+
+        if(historico.getTipo().equals("Entrada")){
+            view.setBackgroundColor(mCtx.getResources().getColor(R.color.verdelhoso));
+        }else{
+            view.setBackgroundColor(mCtx.getResources().getColor(R.color.vermelhao));
+        }
 
         return listViewItem;
     }

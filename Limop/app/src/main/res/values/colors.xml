@@ -3,4 +3,6 @@
     <color name="colorPrimary">#143D7A</color>
     <color name="colorPrimaryDark">#0F284C</color>
     <color name="colorAccent">#143D7A</color>
+    <color name="verdelhoso">#005e00</color>
+    <color name="vermelhao">#F00</color>
 </resources>
