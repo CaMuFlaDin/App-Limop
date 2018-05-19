@@ -25,6 +25,7 @@ import br.com.limopestoques.limop.CRUD.CRUD;
 import br.com.limopestoques.limop.Construtoras.TranspCompraConst;
 import br.com.limopestoques.limop.ListView.ListViewClientes;
 import br.com.limopestoques.limop.ListView.ListViewTranspCompra;
+import br.com.limopestoques.limop.Sessao.Sessao;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +47,10 @@ public class Transportadoras_Compras extends AppCompatActivity implements Search
 
     SearchView searchView;
     Class tela;
+
+    Sessao sessao;
+
+    String tipo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +76,10 @@ public class Transportadoras_Compras extends AppCompatActivity implements Search
         loadTranspCompraList();
         listView.setTextFilterEnabled(true);
         searchView.setOnQueryTextListener(this);
+
+        sessao = new Sessao(Transportadoras_Compras.this);
+
+        tipo = sessao.getString("tipo");
     }
 
     public void insertTransportadora(View v){
@@ -83,7 +92,9 @@ public class Transportadoras_Compras extends AppCompatActivity implements Search
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle(R.string.acoes);
         menu.add(0,v.getId(),0,"Editar Transportadora");
-        menu.add(0,v.getId(),0,"Excluir Transportadora");
+        if(tipo.equals("Administrador")){
+            menu.add(0,v.getId(),0,"Excluir Transportadora");
+        }
     }
 
     @Override

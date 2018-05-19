@@ -26,6 +26,7 @@ import br.com.limopestoques.limop.Construtoras.ClientesConst;
 import br.com.limopestoques.limop.Construtoras.FornCompraConst;
 import br.com.limopestoques.limop.ListView.ListViewClientes;
 import br.com.limopestoques.limop.ListView.ListViewFornCompra;
+import br.com.limopestoques.limop.Sessao.Sessao;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +48,10 @@ public class Fornecedores_compras extends AppCompatActivity implements SearchVie
 
     SearchView searchView;
 
+    Sessao sessao;
+
+    String tipo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -62,6 +67,10 @@ public class Fornecedores_compras extends AppCompatActivity implements SearchVie
         loadFornComprasList();
         listView.setTextFilterEnabled(true);
         searchView.setOnQueryTextListener(this);
+
+        sessao = new Sessao(Fornecedores_compras.this);
+
+        tipo = sessao.getString("tipo");
     }
 
     @Override
@@ -69,7 +78,9 @@ public class Fornecedores_compras extends AppCompatActivity implements SearchVie
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle(R.string.acoes);
         menu.add(0,v.getId(),0,"Editar Fornecedor");
-        menu.add(0,v.getId(),0,"Excluir Fornecedor");
+        if(tipo.equals("Administrador")){
+            menu.add(0,v.getId(),0,"Excluir Fornecedor");
+        }
     }
 
     @Override

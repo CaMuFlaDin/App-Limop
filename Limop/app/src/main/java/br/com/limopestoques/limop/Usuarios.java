@@ -26,6 +26,7 @@ import br.com.limopestoques.limop.Construtoras.ClientesConst;
 import br.com.limopestoques.limop.Construtoras.UsuariosConst;
 import br.com.limopestoques.limop.ListView.ListViewClientes;
 import br.com.limopestoques.limop.ListView.ListViewUsuarios;
+import br.com.limopestoques.limop.Sessao.Sessao;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +42,10 @@ public class Usuarios extends AppCompatActivity implements SearchView.OnQueryTex
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Json/jsonUser.php";
 
     ListView listView;
+
+    Sessao sessao;
+
+    String tipo;
 
     List<UsuariosConst> usuariosList;
     List<UsuariosConst> usuariosQuery;
@@ -58,6 +63,10 @@ public class Usuarios extends AppCompatActivity implements SearchView.OnQueryTex
         usuariosList = new ArrayList<>();
         usuariosQuery = new ArrayList<>();
 
+        sessao = new Sessao(Usuarios.this);
+
+        tipo = sessao.getString("tipo");
+
         registerForContextMenu(listView);
         loadUsuarioList();
         listView.setTextFilterEnabled(true);
@@ -74,7 +83,10 @@ public class Usuarios extends AppCompatActivity implements SearchView.OnQueryTex
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle(R.string.acoes);
         menu.add(0,v.getId(),0,"Editar Usuário");
-        menu.add(0,v.getId(),0,"Excluir Usuário");
+        if(tipo.equals("Administrador")){
+            menu.add(0,v.getId(),0,"Excluir Usuário");
+        }
+
     }
 
     @Override

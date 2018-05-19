@@ -40,6 +40,7 @@ import br.com.limopestoques.limop.ListView.ListViewClientes;
 import br.com.limopestoques.limop.ListView.ListViewProdCompra;
 import br.com.limopestoques.limop.ListView.ListViewServicosCompra;
 import br.com.limopestoques.limop.ListView.ListViewServicosVendas;
+import br.com.limopestoques.limop.Sessao.Sessao;
 
 public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
@@ -49,6 +50,10 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
 
     List<ServicosVendasConst> servicosvendaList;
     List<ServicosVendasConst> servicosQuery;
+
+    Sessao sessao;
+
+    String tipo;
 
     SearchView searchView;
 
@@ -67,6 +72,10 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
         loadServvendaList();
         listView.setTextFilterEnabled(true);
         searchView.setOnQueryTextListener(this);
+
+        sessao = new Sessao(Servicos_Vendas.this);
+
+        tipo = sessao.getString("tipo");
     }
 
     @Override
@@ -74,7 +83,9 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle(R.string.acoes);
         menu.add(0,v.getId(),0,"Editar Venda");
-        menu.add(0,v.getId(),0,"Excluir Venda");
+        if(tipo.equals("Administrador")){
+            menu.add(0,v.getId(),0,"Excluir Venda");
+        }
     }
 
     @Override

@@ -25,6 +25,7 @@ import br.com.limopestoques.limop.CRUD.CRUD;
 import br.com.limopestoques.limop.Construtoras.ClientesConst;
 import br.com.limopestoques.limop.Construtoras.UsuariosConst;
 import br.com.limopestoques.limop.ListView.ListViewClientes;
+import br.com.limopestoques.limop.Sessao.Sessao;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +46,10 @@ public class Clientes extends AppCompatActivity implements SearchView.OnQueryTex
     List<ClientesConst> clientesQuery;
     SearchView searchView;
 
+    Sessao sessao;
+
+    String tipo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -60,6 +65,10 @@ public class Clientes extends AppCompatActivity implements SearchView.OnQueryTex
         loadClientesList();
         listView.setTextFilterEnabled(true);
         searchView.setOnQueryTextListener(this);
+
+        sessao = new Sessao(Clientes.this);
+
+        tipo = sessao.getString("tipo");
     }
 
     public void insertCliente(View v){
@@ -72,7 +81,9 @@ public class Clientes extends AppCompatActivity implements SearchView.OnQueryTex
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle(R.string.acoes);
         menu.add(0,v.getId(),0,"Editar Cliente");
-        menu.add(0,v.getId(),0,"Excluir Cliente");
+        if(tipo.equals("Administrador")){
+            menu.add(0,v.getId(),0,"Excluir Cliente");
+        }
     }
 
     @Override

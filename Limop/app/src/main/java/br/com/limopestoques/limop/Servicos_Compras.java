@@ -26,6 +26,7 @@ import br.com.limopestoques.limop.Construtoras.ClientesConst;
 import br.com.limopestoques.limop.Construtoras.ServicosCompraConst;
 import br.com.limopestoques.limop.ListView.ListViewClientes;
 import br.com.limopestoques.limop.ListView.ListViewServicosCompra;
+import br.com.limopestoques.limop.Sessao.Sessao;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +48,11 @@ public class Servicos_Compras extends AppCompatActivity implements SearchView.On
 
     SearchView searchView;
 
+    Sessao sessao;
+
+    String tipo;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -62,6 +68,10 @@ public class Servicos_Compras extends AppCompatActivity implements SearchView.On
         loadServicoCompraList();
         listView.setTextFilterEnabled(true);
         searchView.setOnQueryTextListener(this);
+
+        sessao = new Sessao(Servicos_Compras.this);
+
+        tipo = sessao.getString("tipo");
     }
 
     @Override
@@ -69,7 +79,9 @@ public class Servicos_Compras extends AppCompatActivity implements SearchView.On
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle(R.string.acoes);
         menu.add(0,v.getId(),0,"Editar Serviço");
-        menu.add(0,v.getId(),0,"Excluir Serviço");
+        if(tipo.equals("Administrador")){
+            menu.add(0,v.getId(),0,"Excluir Serviço");
+        }
     }
 
     @Override

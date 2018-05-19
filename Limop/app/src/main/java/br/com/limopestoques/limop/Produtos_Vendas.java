@@ -27,6 +27,7 @@ import br.com.limopestoques.limop.Construtoras.ProdVendaConst;
 import br.com.limopestoques.limop.ListView.ListViewClientes;
 import br.com.limopestoques.limop.ListView.ListViewProdCompra;
 import br.com.limopestoques.limop.ListView.ListViewProdVenda;
+import br.com.limopestoques.limop.Sessao.Sessao;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,6 +49,10 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
 
     SearchView searchView;
 
+    Sessao sessao;
+
+    String tipo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -63,6 +68,11 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
         loadProdvendaList();
         listView.setTextFilterEnabled(true);
         searchView.setOnQueryTextListener(this);
+
+        sessao = new Sessao(Produtos_Vendas.this);
+
+        tipo = sessao.getString("tipo");
+
     }
 
     @Override
@@ -70,7 +80,9 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle(R.string.acoes);
         menu.add(0,v.getId(),0,"Editar Venda");
-        menu.add(0,v.getId(),0,"Excluir Venda");
+        if(tipo.equals("Administrador")){
+            menu.add(0,v.getId(),0,"Excluir Venda");
+        }
     }
 
     @Override

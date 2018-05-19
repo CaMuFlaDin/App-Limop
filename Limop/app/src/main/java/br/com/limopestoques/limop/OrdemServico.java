@@ -34,6 +34,7 @@ import java.util.Map;
 import br.com.limopestoques.limop.CRUD.CRUD;
 import br.com.limopestoques.limop.Construtoras.OrdemServicoConst;
 import br.com.limopestoques.limop.ListView.ListViewOrdemServico;
+import br.com.limopestoques.limop.Sessao.Sessao;
 
 public class OrdemServico extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
@@ -45,6 +46,10 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
     List<OrdemServicoConst> ordemservicoQuery;
 
     SearchView searchView;
+
+    Sessao sessao;
+
+    String tipo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,10 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
         loadOrdemServicoList();
         listView.setTextFilterEnabled(true);
         searchView.setOnQueryTextListener(this);
+
+        sessao = new Sessao(OrdemServico.this);
+
+        tipo = sessao.getString("tipo");
     }
 
     @Override
@@ -68,7 +77,9 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
         menu.setHeaderTitle(R.string.acoes);
         menu.add(0,v.getId(),0,"Visualizar PDF");
         menu.add(0,v.getId(),0,"Editar Ordem de Serviço");
-        menu.add(0,v.getId(),0,"Excluir Ordem de Serviço");
+        if(tipo.equals("Administrador")){
+            menu.add(0,v.getId(),0,"Excluir Ordem de Serviço");
+        }
     }
 
     //TODO Fazer Ordem de Serviço
@@ -82,15 +93,15 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
         if(item.getTitle() == "Visualizar PDF"){
 
         }
-        else if(item.getTitle() == "Editar Usuário"){
+        else if(item.getTitle() == "Editar Ordem de Serviço"){
             /*Intent irTela = new Intent(OrdemServico.this, EditarOS.class);
             irTela.putExtra("id",id);
             startActivity(irTela);*/
         }
-        else if(item.getTitle() == "Excluir Usuário"){
+        else if(item.getTitle() == "Excluir Ordem de Serviço"){
             AlertDialog.Builder builder = new AlertDialog.Builder(OrdemServico.this);
             builder.setCancelable(true);
-            builder.setTitle("Deseja excluir esse Ordem de Serviço?");
+            builder.setTitle("Deseja excluir essa Ordem de Serviço?");
             builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {

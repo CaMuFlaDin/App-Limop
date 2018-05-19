@@ -26,6 +26,7 @@ import br.com.limopestoques.limop.Construtoras.ClientesConst;
 import br.com.limopestoques.limop.Construtoras.ProdCompraConst;
 import br.com.limopestoques.limop.ListView.ListViewClientes;
 import br.com.limopestoques.limop.ListView.ListViewProdCompra;
+import br.com.limopestoques.limop.Sessao.Sessao;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +42,10 @@ public class Produtos_Compras extends AppCompatActivity implements SearchView.On
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Json/jsonProd.php";
 
     ListView listView;
+
+    Sessao sessao;
+
+    String tipo;
 
     List<ProdCompraConst> prodcompraList;
     List<ProdCompraConst> prodQuery;
@@ -62,6 +67,10 @@ public class Produtos_Compras extends AppCompatActivity implements SearchView.On
         loadProdCompraList();
         listView.setTextFilterEnabled(true);
         searchView.setOnQueryTextListener(this);
+
+        sessao = new Sessao(Produtos_Compras.this);
+
+        tipo = sessao.getString("tipo");
     }
 
     @Override
@@ -69,7 +78,9 @@ public class Produtos_Compras extends AppCompatActivity implements SearchView.On
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle(R.string.acoes);
         menu.add(0,v.getId(),0,"Editar Produto");
-        menu.add(0,v.getId(),0,"Excluir Produto");
+        if(tipo.equals("Administrador")){
+            menu.add(0,v.getId(),0,"Excluir Produto");
+        }
     }
 
     @Override
