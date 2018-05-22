@@ -94,6 +94,7 @@ public class EditarCliente extends AppCompatActivity {
         MaskEditTextChangedListener maskCPF = new MaskEditTextChangedListener("###.###.###-##",cpf);
         MaskEditTextChangedListener maskCEP = new MaskEditTextChangedListener("##.###-###",cep);
         MaskEditTextChangedListener maskCNPJ = new MaskEditTextChangedListener("##.###.###/####-##",cnpj);
+        MaskEditTextChangedListener maskRG = new MaskEditTextChangedListener("##.###.###-#",rg);
         MaskEditTextChangedListener maskINSC = new MaskEditTextChangedListener("###.###.###.###",inscricao);
         MaskEditTextChangedListener maskTELCE = new MaskEditTextChangedListener("(##)#####-####",tel_celular);
         MaskEditTextChangedListener maskTELCO = new MaskEditTextChangedListener("(##)####-####",tel_comercial);
@@ -102,6 +103,7 @@ public class EditarCliente extends AppCompatActivity {
         cep.addTextChangedListener(maskCEP);
         cnpj.addTextChangedListener(maskCNPJ);
         inscricao.addTextChangedListener(maskINSC);
+        rg.addTextChangedListener(maskRG);
         tel_celular.addTextChangedListener(maskTELCE);
         tel_comercial.addTextChangedListener(maskTELCO);
 
@@ -119,13 +121,17 @@ public class EditarCliente extends AppCompatActivity {
                         public void onResponse(String response) {
                             try {
                                 JSONObject objeto = new JSONObject(response);
-                                String enderecoO = objeto.getString("logradouro"), cidadeO = objeto.getString("localidade"),
-                                        estadoO = objeto.getString("uf"),bairroO = objeto.getString("bairro");
+                                if(!objeto.getBoolean("erro")){
+                                    String enderecoO = objeto.getString("logradouro"), cidadeO = objeto.getString("localidade"),
+                                            estadoO = objeto.getString("uf"),bairroO = objeto.getString("bairro");
 
-                                rua.setText(enderecoO);
-                                cidade.setText(cidadeO);
-                                estado.setText(estadoO);
-                                bairro.setText(bairroO);
+                                    rua.setText(enderecoO);
+                                    cidade.setText(cidadeO);
+                                    estado.setText(estadoO);
+                                    bairro.setText(bairroO);
+                                }else{
+                                    Toast.makeText(EditarCliente.this, "CEP Inválido!", Toast.LENGTH_SHORT).show();
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

@@ -120,11 +120,17 @@ public class InsertUsuario extends AppCompatActivity {
         }
 
         if(senha.getText().toString().equals(confirmar_senha.getText().toString())){
-            senhaa = senha.getText().toString();
+            if(senha.getText().length() < 7){
+                Toast.makeText(this, "A senha deve ser maior ou igual a 7 caracteres!", Toast.LENGTH_SHORT).show();
+            }else{
+                senhaa = senha.getText().toString();
+            }
 
         }else{
             Toast.makeText(this, "Senhas não conferem", Toast.LENGTH_SHORT).show();
         }
+
+
 
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         ParsePosition pos = new ParsePosition(0);

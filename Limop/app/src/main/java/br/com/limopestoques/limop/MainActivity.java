@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONObject jo = new JSONObject(response);
                     boolean valido = jo.getBoolean("validar");
-                    if (valido) {
+                    if (valido == true) {
                         JSONObject quei = jo.getJSONObject("resposta");
 
                         String id_usuario = quei.getString("id_usuario");

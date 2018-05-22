@@ -65,6 +65,7 @@ public class InsertFornecedor extends AppCompatActivity {
 
         MaskEditTextChangedListener maskCPF = new MaskEditTextChangedListener("###.###.###-##",cpf);
         MaskEditTextChangedListener maskCEP = new MaskEditTextChangedListener("##.###-###",cep);
+        MaskEditTextChangedListener maskRG = new MaskEditTextChangedListener("##.###.###-#",rg);
         MaskEditTextChangedListener maskCNPJ = new MaskEditTextChangedListener("##.###.###/####-##",cnpj);
         MaskEditTextChangedListener maskINSC = new MaskEditTextChangedListener("###.###.###.###",inscricao);
         MaskEditTextChangedListener maskTELCE = new MaskEditTextChangedListener("(##)#####-####",tel_celular);
@@ -73,6 +74,7 @@ public class InsertFornecedor extends AppCompatActivity {
         cpf.addTextChangedListener(maskCPF);
         cep.addTextChangedListener(maskCEP);
         cnpj.addTextChangedListener(maskCNPJ);
+        rg.addTextChangedListener(maskRG);
         inscricao.addTextChangedListener(maskINSC);
         tel_celular.addTextChangedListener(maskTELCE);
         tel_comercial.addTextChangedListener(maskTELCO);
@@ -90,13 +92,17 @@ public class InsertFornecedor extends AppCompatActivity {
                         public void onResponse(String response) {
                             try {
                                 JSONObject objeto = new JSONObject(response);
-                                String enderecoO = objeto.getString("logradouro"), cidadeO = objeto.getString("localidade"),
-                                        estadoO = objeto.getString("uf"),bairroO = objeto.getString("bairro");
+                                if(!objeto.getBoolean("erro")){
+                                    String enderecoO = objeto.getString("logradouro"), cidadeO = objeto.getString("localidade"),
+                                            estadoO = objeto.getString("uf"),bairroO = objeto.getString("bairro");
 
-                                rua.setText(enderecoO);
-                                cidade.setText(cidadeO);
-                                estado.setText(estadoO);
-                                bairro.setText(bairroO);
+                                    rua.setText(enderecoO);
+                                    cidade.setText(cidadeO);
+                                    estado.setText(estadoO);
+                                    bairro.setText(bairroO);
+                                }else{
+                                    Toast.makeText(InsertFornecedor.this, "CEP Inválido!", Toast.LENGTH_SHORT).show();
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
