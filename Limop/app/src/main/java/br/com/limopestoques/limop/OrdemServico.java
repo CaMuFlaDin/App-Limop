@@ -82,8 +82,6 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
         }
     }
 
-    //TODO Fazer Ordem de Serviço
-
     @Override
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
@@ -95,7 +93,7 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
         }
         else if(item.getTitle() == "Editar Ordem de Serviço"){
             Intent irTela = new Intent(OrdemServico.this, EditarOS.class);
-            irTela.putExtra("id",id);
+            irTela.putExtra("id_os",id);
             startActivity(irTela);
         }
         else if(item.getTitle() == "Excluir Ordem de Serviço"){

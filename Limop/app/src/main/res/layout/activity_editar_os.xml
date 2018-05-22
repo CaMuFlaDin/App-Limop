@@ -22,12 +22,12 @@
             android:text="@string/cliente" />
 
         <EditText
+            android:focusable="false"
             android:hint="@string/cliente"
             android:id="@+id/cliente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
-            android:inputType="date"
             android:drawableLeft="@drawable/ic_data"
             android:drawableStart="@drawable/ic_data"
             android:layout_marginRight="35dp"
@@ -48,12 +48,39 @@
             android:text="@string/stts" />
 
         <EditText
+            android:focusable="false"
             android:hint="@string/stts"
             android:id="@+id/stts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
+            android:drawableLeft="@drawable/ic_data"
+            android:drawableStart="@drawable/ic_data"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/data_venda" />
+
+        <EditText
+            android:focusable="false"
             android:inputType="date"
+            android:hint="@string/data_venda"
+            android:id="@+id/data_inicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
             android:drawableLeft="@drawable/ic_data"
             android:drawableStart="@drawable/ic_data"
             android:layout_marginRight="35dp"
@@ -74,12 +101,12 @@
             android:text="@string/previsao_entrega" />
 
         <EditText
+            android:inputType="date"
             android:hint="@string/previsao_entrega"
             android:id="@+id/previsao_entrega"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
-            android:inputType="date"
             android:drawableLeft="@drawable/ic_data"
             android:drawableStart="@drawable/ic_data"
             android:layout_marginRight="35dp"
@@ -100,12 +127,12 @@
             android:text="@string/equipamento_recebido" />
 
         <EditText
+            android:focusable="false"
             android:hint="@string/equipamento_recebido"
             android:id="@+id/equipamento_recebido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
-            android:inputType="date"
             android:drawableLeft="@drawable/ic_data"
             android:drawableStart="@drawable/ic_data"
             android:layout_marginRight="35dp"
@@ -131,7 +158,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
-            android:inputType="date"
             android:drawableLeft="@drawable/ic_data"
             android:drawableStart="@drawable/ic_data"
             android:layout_marginRight="35dp"
@@ -157,7 +183,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
-            android:inputType="date"
             android:drawableLeft="@drawable/ic_data"
             android:drawableStart="@drawable/ic_data"
             android:layout_marginRight="35dp"
@@ -183,7 +208,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
-            android:inputType="date"
             android:drawableLeft="@drawable/ic_data"
             android:drawableStart="@drawable/ic_data"
             android:layout_marginRight="35dp"
@@ -209,7 +233,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
-            android:inputType="date"
             android:drawableLeft="@drawable/ic_data"
             android:drawableStart="@drawable/ic_data"
             android:layout_marginRight="35dp"
@@ -235,7 +258,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
-            android:inputType="date"
             android:drawableLeft="@drawable/ic_data"
             android:drawableStart="@drawable/ic_data"
             android:layout_marginRight="35dp"
@@ -261,7 +283,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
-            android:inputType="date"
             android:drawableLeft="@drawable/ic_data"
             android:drawableStart="@drawable/ic_data"
             android:layout_marginRight="35dp"
@@ -287,7 +308,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
-            android:inputType="date"
             android:drawableLeft="@drawable/ic_data"
             android:drawableStart="@drawable/ic_data"
             android:layout_marginRight="35dp"
