@@ -100,13 +100,17 @@ public class EditarTransportadora extends AppCompatActivity {
                         public void onResponse(String response) {
                             try {
                                 JSONObject objeto = new JSONObject(response);
-                                String enderecoO = objeto.getString("logradouro"), cidadeO = objeto.getString("localidade"),
-                                        estadoO = objeto.getString("uf"),bairroO = objeto.getString("bairro");
+                                if(!objeto.getBoolean("erro")){
+                                    String enderecoO = objeto.getString("logradouro"), cidadeO = objeto.getString("localidade"),
+                                            estadoO = objeto.getString("uf"),bairroO = objeto.getString("bairro");
 
-                                rua.setText(enderecoO);
-                                cidade.setText(cidadeO);
-                                estado.setText(estadoO);
-                                bairro.setText(bairroO);
+                                    rua.setText(enderecoO);
+                                    cidade.setText(cidadeO);
+                                    estado.setText(estadoO);
+                                    bairro.setText(bairroO);
+                                }else{
+                                    Toast.makeText(EditarTransportadora.this, "CEP Inválido!", Toast.LENGTH_SHORT).show();
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
