@@ -6,15 +6,19 @@ package br.com.limopestoques.limop.Construtoras;
 
 public class OrdemServicoConst {
 
-    String cliente, equipamento, numPedido, numVenda;
+    String id, cliente, equipamento, numPedido, numVenda;
 
-    public OrdemServicoConst(String cliente, String equipamento, String numPedido, String numVenda){
+    public OrdemServicoConst(String id, String cliente, String equipamento, String numPedido, String numVenda){
+        this.id = id;
         this.cliente = cliente;
         this.equipamento = equipamento;
         this.numPedido = numPedido;
         this.numVenda = numVenda;
     }
 
+    public String getId(){
+        return this.id;
+    }
     public String getEquipamento(){
         return this.equipamento;
     }

@@ -89,14 +89,14 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Integer pos = info.position;
         OrdemServicoConst os = ordemservicoQuery.get(pos);
-        //final String id = os.getId();
+        final String id = os.getId();
         if(item.getTitle() == "Visualizar PDF"){
 
         }
         else if(item.getTitle() == "Editar Ordem de Serviço"){
-            /*Intent irTela = new Intent(OrdemServico.this, EditarOS.class);
+            Intent irTela = new Intent(OrdemServico.this, EditarOS.class);
             irTela.putExtra("id",id);
-            startActivity(irTela);*/
+            startActivity(irTela);
         }
         else if(item.getTitle() == "Excluir Ordem de Serviço"){
             AlertDialog.Builder builder = new AlertDialog.Builder(OrdemServico.this);
@@ -105,8 +105,8 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
             builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    //CRUD.excluir(JSON_URL, id.toString(), getApplicationContext());
-                    //listView.setAdapter(null);
+                    CRUD.excluir(JSON_URL, id.toString(), getApplicationContext());
+                    listView.setAdapter(null);
                     loadOrdemServicoList();
                 }
             }).setNegativeButton("Não", null);
@@ -129,7 +129,7 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
                             for (int i = 0; i < ordemservicoArray.length(); i++){
                                 JSONObject ordemdeservicoObject = ordemservicoArray.getJSONObject(i);
 
-                                OrdemServicoConst os = new OrdemServicoConst(ordemdeservicoObject.getString("cliente"),ordemdeservicoObject.getString("eqp_recebido"), "Número do pedido: " + ordemdeservicoObject.getString("id_os"), "Número da venda: " + ordemdeservicoObject.getString("id_venda"));
+                                OrdemServicoConst os = new OrdemServicoConst(ordemdeservicoObject.getString("id_os"),ordemdeservicoObject.getString("cliente"),ordemdeservicoObject.getString("eqp_recebido"), "Número do pedido: " + ordemdeservicoObject.getString("id_os"), "Número da venda: " + ordemdeservicoObject.getString("id_venda"));
 
                                 ordemservicoList.add(os);
                                 ordemservicoQuery.add(os);

@@ -209,6 +209,19 @@
     <string name="valor_unitario">Valor Unitario</string>
     <string name="qtd">Quantidade</string>
 
+    <!-- Ordem de Serviço -->
+    <string name="cliente">Cliente</string>
+    <string name="stts">Status</string>
+    <string name="previsao_entrega">Previsão da Entrega</string>
+    <string name="equipamento_recebido">Equipamento Recebido</string>
+    <string name="n_serie">N° da série</string>
+    <string name="marca">Marca</string>
+    <string name="modelo">Modelo</string>
+    <string name="obs_equipamento">Observações sobre o recebimento do Equipamento</string>
+    <string name="descricao_defeito">Descrição do problema ou defeito encontrado</string>
+    <string name="descricao_servico">Descrição do serviço que será prestado</string>
+    <string name="obs_interna">Observações Internas</string>
+
 
     <!-- Telas -->
     <string name="title_activity_principal">"Página inicial "</string>

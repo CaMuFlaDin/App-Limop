@@ -163,15 +163,19 @@
         <activity
             android:name=".OrdemServico"
             android:label="Ordem de Serviço"
-            android:parentActivityName=".OrdemServico"/>
+            android:parentActivityName=".OrdemServico" />
         <activity
             android:name=".SituacaoEstoque"
             android:label="Situação do Estoque"
-            android:parentActivityName=".SituacaoEstoque"/>
+            android:parentActivityName=".SituacaoEstoque" />
         <activity
             android:name=".HistoricoMovimentacao"
             android:label="Histórico de Movimentação"
-            android:parentActivityName=".HistoricoMovimentacao"/>
+            android:parentActivityName=".HistoricoMovimentacao" />
+        <activity
+            android:name=".EditarOS"
+            android:label="Editar Ordem de Serviço"
+            android:parentActivityName=".EditarOS"/>
     </application>
 
 </manifest>
