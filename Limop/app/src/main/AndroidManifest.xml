@@ -4,6 +4,7 @@
     package="br.com.limopestoques.limop">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -175,7 +176,8 @@
         <activity
             android:name=".EditarOS"
             android:label="Editar Ordem de Serviço"
-            android:parentActivityName=".EditarOS"/>
+            android:parentActivityName=".EditarOS" />
+        <activity android:name=".InsertOS"></activity>
     </application>
 
 </manifest>

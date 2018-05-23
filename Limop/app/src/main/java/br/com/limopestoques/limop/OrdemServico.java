@@ -1,7 +1,15 @@
 package br.com.limopestoques.limop;
 
+import android.Manifest;
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,6 +59,10 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
 
     String tipo;
 
+    static final int oqueeuquero = 112;
+
+    String ultimoid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -75,10 +87,50 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle(R.string.acoes);
-        menu.add(0,v.getId(),0,"Visualizar PDF");
+        menu.add(0,v.getId(),0,"Download PDF");
         menu.add(0,v.getId(),0,"Editar Ordem de Serviço");
         if(tipo.equals("Administrador")){
             menu.add(0,v.getId(),0,"Excluir Ordem de Serviço");
+        }
+    }
+
+    public boolean checkPermissions(){
+        int readPermission = ContextCompat.checkSelfPermission(OrdemServico.this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        if(readPermission == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }else{
+            ActivityCompat.requestPermissions(OrdemServico.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, oqueeuquero);
+        }
+        return false;
+    }
+
+    public void downloadRelatorio(String id){
+        String url = "https://www.limopestoques.com.br/PDF/os.php?id=" + id;
+
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+        request.setTitle("Ordem de Serviço");
+
+        request.allowScanningByMediaScanner();
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Ordem de Serviço");
+
+        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        if (manager != null) {
+            manager.enqueue(request);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults){
+        switch(requestCode){
+            case oqueeuquero:
+                if(!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)){
+                    Toast.makeText(this, "É necessário garantir a permissão para download dos relatórios!", Toast.LENGTH_SHORT).show();
+                }else{
+                    downloadRelatorio(ultimoid);
+                }
+                break;
         }
     }
 
@@ -88,8 +140,11 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
         Integer pos = info.position;
         OrdemServicoConst os = ordemservicoQuery.get(pos);
         final String id = os.getId();
-        if(item.getTitle() == "Visualizar PDF"){
-
+        if(item.getTitle() == "Download PDF"){
+            if(checkPermissions()){
+                ultimoid = id;
+                downloadRelatorio(id);
+            }
         }
         else if(item.getTitle() == "Editar Ordem de Serviço"){
             Intent irTela = new Intent(OrdemServico.this, EditarOS.class);

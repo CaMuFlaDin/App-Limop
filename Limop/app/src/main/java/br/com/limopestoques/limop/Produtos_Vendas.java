@@ -83,6 +83,8 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
         if(tipo.equals("Administrador")){
             menu.add(0,v.getId(),0,"Excluir Venda");
         }
+        menu.add(0,v.getId(),0,"Gerar Ordem de Serviço desta venda");
+        menu.add(0,v.getId(),0,"Gerar Contrato desta venda");
     }
 
     @Override
@@ -109,6 +111,14 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
                 }
             }).setNegativeButton("Não", null);
             builder.create().show();
+        }
+        else if(item.getTitle() == "Gerar Ordem de Serviço desta venda"){
+            Intent irTela = new Intent(Produtos_Vendas.this, InsertOS.class);
+            irTela.putExtra("id",id);
+            startActivity(irTela);
+        }
+        else if(item.getTitle() == "Gerar Contrato desta venda"){
+            Toast.makeText(this, "Não disponível", Toast.LENGTH_SHORT).show();
         }
         return true;
     }

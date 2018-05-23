@@ -62,11 +62,11 @@ public class EditarOS extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        MaskEditTextChangedListener maskDataa = new MaskEditTextChangedListener("##/##/####",data_inicio);
-        data_inicio.addTextChangedListener(maskDataa);
-
         MaskEditTextChangedListener maskData = new MaskEditTextChangedListener("##/##/####",previsao_entrega);
         previsao_entrega.addTextChangedListener(maskData);
+
+        MaskEditTextChangedListener maskDataa = new MaskEditTextChangedListener("##/##/####",data_inicio);
+        data_inicio.addTextChangedListener(maskDataa);
 
         carregar();
     }
@@ -92,6 +92,7 @@ public class EditarOS extends AppCompatActivity {
                             descricao_defeito.setText(jo.getString("descricao_problema"));
                             descricao_servico.setText(jo.getString("descricao_servico"));
                             obs_interna.setText(jo.getString("obs_internas"));
+                            data_inicio.setText(jo.getString("data_inicio"));
 
                             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                             ParsePosition pos = new ParsePosition(0);
@@ -100,16 +101,6 @@ public class EditarOS extends AppCompatActivity {
                             String date = formato.format(data);
 
                             previsao_entrega.setText(date);
-
-                            SimpleDateFormat formato2 = new SimpleDateFormat("yyyy-MM-dd");
-                            ParsePosition pos2 = new ParsePosition(0);
-                            Date data2 = formato2.parse(jo.getString("data_inicio"),pos2);
-                            formato2 = new SimpleDateFormat("dd/MM/yyyy");
-                            String date2 = formato2.format(data2);
-
-                            //TODO Arrumar crash app
-
-                            data_inicio.setText(date2);
 
                         }catch (JSONException e) {
                             e.printStackTrace();
