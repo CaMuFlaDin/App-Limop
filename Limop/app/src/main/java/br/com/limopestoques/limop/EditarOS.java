@@ -126,7 +126,7 @@ public class EditarOS extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    /*public void updateOS(){
+    public void updateOS(){
         Map<String, String> params = new HashMap<String, String>();
 
         params.put("update", "update");
@@ -144,14 +144,14 @@ public class EditarOS extends AppCompatActivity {
         params.put("obs_interna", obs_interna.getText().toString().trim());
 
 
-        StringRequest stringRequest = CRUD.editar("https://limopestoques.com.br/Android/Update/updateServico.php", new Response.Listener<String>() {
+        StringRequest stringRequest = CRUD.editar("https://limopestoques.com.br/Android/Update/updateOS.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try{
                     JSONObject jo = new JSONObject(response);
                     String resposta = jo.getString("resposta");
-                    Toast.makeText(EditarOS.this, "", Toast.LENGTH_SHORT).show();
-                    Intent irTela = new Intent(EditarOS.this, Servicos_Compras.class);
+                    Toast.makeText(EditarOS.this, "Editado com Sucesso", Toast.LENGTH_SHORT).show();
+                    Intent irTela = new Intent(EditarOS.this, OrdemServico.class);
                     startActivity(irTela);
                 }catch (JSONException e) {
                     e.printStackTrace();
@@ -161,7 +161,7 @@ public class EditarOS extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(EditarOS.this);
         requestQueue.add(stringRequest);
 
-    }*/
+    }
 
     public void validarCampos(View v){
         if(cliente.getText().length() == 0 || stts.getText().length() == 0 || previsao_entrega.getText().length() == 0 ||
@@ -170,6 +170,7 @@ public class EditarOS extends AppCompatActivity {
                 descricao_servico.getText().length() == 0 || obs_interna.getText().length() == 0) {
             Toast.makeText(this, "Preencha os campos corretamente!",Toast.LENGTH_SHORT).show();
         }else{
+            updateOS();
         }
     }
 }
