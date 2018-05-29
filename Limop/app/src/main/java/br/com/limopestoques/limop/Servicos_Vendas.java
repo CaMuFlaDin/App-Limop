@@ -1,7 +1,15 @@
 package br.com.limopestoques.limop;
 
+import android.Manifest;
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,6 +64,12 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
     String tipo;
 
     SearchView searchView;
+
+    String tipoVenda = "S";
+
+    String ultimoid;
+
+    static final int codigo = 112;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,9 +135,38 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
             startActivity(irTela);
         }
         else if(item.getTitle() == "Gerar Contrato desta venda"){
-            Toast.makeText(this, "Não disponível", Toast.LENGTH_SHORT).show();
+            if(checkPermissions()){
+                ultimoid = id;
+                downloadRelatorio(id);
+            }
         }
         return true;
+    }
+
+    public boolean checkPermissions(){
+        int readPermission = ContextCompat.checkSelfPermission(Servicos_Vendas.this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        if(readPermission == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }else{
+            ActivityCompat.requestPermissions(Servicos_Vendas.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, codigo);
+        }
+        return false;
+    }
+
+    public void downloadRelatorio(String id){
+        String url = "https://www.limopestoques.com.br/PDF/contrato.php?id=" + id+"&tipo=" +tipoVenda;
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+        request.setTitle("Contrato");
+
+        request.allowScanningByMediaScanner();
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Contrato");
+
+        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        if (manager != null) {
+            manager.enqueue(request);
+        }
     }
 
     private void loadServvendaList(){

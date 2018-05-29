@@ -129,11 +129,17 @@ public class EditarOS extends AppCompatActivity {
     public void updateOS(){
         Map<String, String> params = new HashMap<String, String>();
 
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        ParsePosition pos = new ParsePosition(0);
+        Date data = formato.parse(previsao_entrega.getText().toString(),pos);
+        formato = new SimpleDateFormat("yyyy-MM-dd");
+        String date = formato.format(data);
+
         params.put("update", "update");
         params.put("id_os", id);
         params.put("cliente", cliente.getText().toString().trim());
         params.put("status", stts.getText().toString().trim());
-        params.put("previsao_entrega", previsao_entrega.getText().toString().trim());
+        params.put("previsao_entrega", date);
         params.put("eqp_recebido", equipamento_recebido.getText().toString().trim());
         params.put("n_serie", n_serie.getText().toString().trim());
         params.put("marca", marca.getText().toString().trim());
@@ -150,7 +156,7 @@ public class EditarOS extends AppCompatActivity {
                 try{
                     JSONObject jo = new JSONObject(response);
                     String resposta = jo.getString("resposta");
-                    Toast.makeText(EditarOS.this, "Editado com Sucesso", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditarOS.this, "Editado com Sucesso!", Toast.LENGTH_SHORT).show();
                     Intent irTela = new Intent(EditarOS.this, OrdemServico.class);
                     startActivity(irTela);
                 }catch (JSONException e) {
@@ -167,7 +173,7 @@ public class EditarOS extends AppCompatActivity {
         if(cliente.getText().length() == 0 || stts.getText().length() == 0 || previsao_entrega.getText().length() == 0 ||
                 equipamento_recebido.getText().length() == 0 || n_serie.getText().length() == 0 || marca.getText().length() == 0 ||
                 modelo.getText().length() == 0 || obs_equipamento.getText().length() == 0 || descricao_defeito.getText().length() == 0 ||
-                descricao_servico.getText().length() == 0 || obs_interna.getText().length() == 0) {
+                descricao_servico.getText().length() == 0) {
             Toast.makeText(this, "Preencha os campos corretamente!",Toast.LENGTH_SHORT).show();
         }else{
             updateOS();

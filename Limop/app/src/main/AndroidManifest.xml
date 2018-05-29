@@ -177,7 +177,12 @@
             android:name=".EditarOS"
             android:label="Editar Ordem de Serviço"
             android:parentActivityName=".EditarOS" />
-        <activity android:name=".InsertOS"></activity>
+        <activity
+            android:name=".InsertOS" />
+        <activity
+            android:name=".Relatorios"
+            android:label="Relatórios"
+            android:parentActivityName=".Relatorios" ></activity>
     </application>
 
 </manifest>

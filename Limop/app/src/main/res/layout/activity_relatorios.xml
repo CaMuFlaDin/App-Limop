@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#EEE"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.com.limopestoques.limop.Relatorios">
+
+    <LinearLayout
+        android:id="@+id/um"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:onClick="DemonsFin"
+            android:layout_marginTop="10dp"
+            android:id="@+id/transportadoras"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/transportadoras" />
+
+
+        <ImageView
+            android:onClick="PedidosSolicitados"
+            android:layout_marginTop="10dp"
+            android:id="@+id/vendas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/vendas" />
+
+        <ImageView
+            android:onClick="ItensVendidos"
+            android:layout_marginTop="10dp"
+            android:id="@+id/compras"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/compras" />
+
+    </LinearLayout>
+
+</ScrollView>
