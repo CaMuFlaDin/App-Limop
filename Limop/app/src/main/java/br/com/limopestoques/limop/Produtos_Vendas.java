@@ -112,15 +112,14 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
     }
 
     public void downloadRelatorio(String id){
-        String url = "https://www.limopestoques.com.br/PDF/contrato.php?id='" + id+"'&tipo=" +tipoVenda;
-
+        String url = "https://www.limopestoques.com.br/PDF/contrato.php?id=" + id+"&tipo=" +tipoVenda;
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
         request.setTitle("Contrato");
 
         request.allowScanningByMediaScanner();
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Ordem de Serviço");
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Contrato");
 
         DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
         if (manager != null) {
