@@ -40,7 +40,7 @@ public class InsertOS extends AppCompatActivity {
             descricao_servico, obs_interna;
 
     Sessao sessao;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
