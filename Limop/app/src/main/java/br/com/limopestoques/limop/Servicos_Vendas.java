@@ -131,7 +131,8 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
         }
         else if(item.getTitle() == "Gerar Ordem de Serviço desta venda"){
             Intent irTela = new Intent(Servicos_Vendas.this, InsertOS.class);
-            irTela.putExtra("id",id);
+            irTela.putExtra("id_venda",id);
+            irTela.putExtra("tipo","S");
             startActivity(irTela);
         }
         else if(item.getTitle() == "Gerar Contrato desta venda"){

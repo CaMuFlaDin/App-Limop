@@ -31,6 +31,7 @@ import br.com.limopestoques.limop.Sessao.Sessao;
 public class InsertOS extends AppCompatActivity {
 
     private String id;
+    private String tipoVenda;
 
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Insert/InsertOS.php";
 
@@ -39,7 +40,7 @@ public class InsertOS extends AppCompatActivity {
             descricao_servico, obs_interna;
 
     Sessao sessao;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +67,7 @@ public class InsertOS extends AppCompatActivity {
         try{
             Intent i = getIntent();
             this.id = i.getStringExtra("id_venda");
+            this.tipoVenda = i.getStringExtra("tipo");
         }catch(NullPointerException e){
             e.printStackTrace();
         }
@@ -79,6 +81,7 @@ public class InsertOS extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         try{
                             JSONObject obj = new JSONObject(response);
 
@@ -87,7 +90,7 @@ public class InsertOS extends AppCompatActivity {
 
                             cliente.setText(jo.getString("nome_cliente"));
                             stts.setText(jo.getString("status_negociacao"));
-                            equipamento_recebido.setText(jo.getString("nome"));
+                            equipamento_recebido.setText(jo.getString("eqp"));
 
                             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                             ParsePosition pos = new ParsePosition(0);
@@ -112,6 +115,7 @@ public class InsertOS extends AppCompatActivity {
             protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("select", "select");
+                params.put("tipo", tipoVenda);
                 params.put("id_venda", id);
 
                 return params;
@@ -123,7 +127,7 @@ public class InsertOS extends AppCompatActivity {
 
     public void validarCampos(View v){
 
-        if(previsao_entrega.getText().length() == 0 || n_serie == null || marca.getText().length() == 0 ||
+        if(previsao_entrega.getText().length() == 0 || n_serie.getText().length() == 0 || marca.getText().length() == 0 ||
             modelo.getText().length() == 0 || obs_equipamento.getText().length() == 0 || descricao_defeito.getText().length() == 0 ||
             descricao_servico.toString().length() == 0){
             Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
