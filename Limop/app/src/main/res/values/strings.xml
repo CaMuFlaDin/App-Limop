@@ -226,6 +226,13 @@
     <!-- Telas -->
     <string name="title_activity_principal">"Página inicial "</string>
 
+    <!-- Inventário -->
+    <string name="categoriaProdInv">"Categorias "</string>
+    <string name="fornecedor">"Fornecedor "</string>
+    <string name="qtdEstoque">"Quantidade em Estoque "</string>
+    <string name="qtdEstoqueMenor">"Quantidade em Estoque menor que"</string>
+    <string name="Visualizar">" Visualizar"</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

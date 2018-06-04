@@ -177,12 +177,16 @@
             android:name=".EditarOS"
             android:label="Editar Ordem de Serviço"
             android:parentActivityName=".EditarOS" />
-        <activity
-            android:name=".InsertOS" />
+        <activity android:name=".InsertOS" />
         <activity
             android:name=".Relatorios"
             android:label="Relatórios"
-            android:parentActivityName=".Relatorios" ></activity>
+            android:parentActivityName=".Relatorios" />
+        <activity
+            android:name=".Inventario"
+            android:label="Inventário"
+            android:parentActivityName=".Inventario"  />
+
     </application>
 
 </manifest>

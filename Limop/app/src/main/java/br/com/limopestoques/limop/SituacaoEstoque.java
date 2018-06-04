@@ -118,6 +118,11 @@ public class SituacaoEstoque extends AppCompatActivity implements SearchView.OnQ
         requestQueue.add(stringRequest);
     }
 
+    public void Inventario(View v){
+        Intent i = new Intent(SituacaoEstoque.this, Inventario.class);
+        startActivity(i);
+    }
+
     @Override
     public boolean onQueryTextChange(String newText){
         prodQuery.clear();
