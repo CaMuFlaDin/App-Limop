@@ -82,15 +82,13 @@ public class Inventario extends AppCompatActivity {
         CRUD.inserir("https://limopestoques.com.br/Android/Json/Inventario.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response){
-                try{
-                    JSONObject jo = new JSONObject(response);
-                    String resposta = jo.getString("resposta");
-                    Toast.makeText(Inventario.this, resposta, Toast.LENGTH_SHORT).show();
-                }catch (JSONException e) {
-                    e.printStackTrace();
-                }
+
             }
         },params,getApplicationContext());
+
+        if(checkPermissions()){
+            downloadRelatorio();
+        }
 
     }
 
