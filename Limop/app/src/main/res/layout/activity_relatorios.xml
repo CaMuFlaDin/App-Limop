@@ -20,7 +20,7 @@
             android:id="@+id/transportadoras"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/transportadoras" />
+            app:srcCompat="@drawable/relatorio" />
 
 
         <ImageView
@@ -29,7 +29,7 @@
             android:id="@+id/vendas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/vendas" />
+            app:srcCompat="@drawable/relatorioo" />
 
         <ImageView
             android:onClick="ItensVendidos"
@@ -37,7 +37,11 @@
             android:id="@+id/compras"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/compras" />
+            app:srcCompat="@drawable/relatoriooo" />
+        
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
 
     </LinearLayout>
 
