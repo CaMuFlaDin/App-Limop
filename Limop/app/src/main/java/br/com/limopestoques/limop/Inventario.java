@@ -73,21 +73,9 @@ public class Inventario extends AppCompatActivity {
     }
 
     public void gerar(View v) {
-        Map<String, String> params = new HashMap<String, String>();
-
-        params.put("categoria", categoria.getSelectedItem().toString());
-        params.put("id_fornecedor", idFornecedor);
-        params.put("qtd", qtd.getText().toString().trim());
-
-        CRUD.inserir("https://limopestoques.com.br/Android/Json/Inventario.php", new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response){
-
-            }
-        },params,getApplicationContext());
 
         if(checkPermissions()){
-            downloadRelatorio();
+            downloadRelatorio(categoria.getSelectedItem().toString(), idFornecedor, qtd.getText().toString());
         }
 
     }
@@ -102,10 +90,13 @@ public class Inventario extends AppCompatActivity {
 
                             JSONArray forncompraArray = obj.getJSONArray("fornecedores");
 
+                            FornCompraConst forneCompra = new FornCompraConst("0", null, null, null);
+                            fornecedores.add(forneCompra);
+                            adapter.add("");
                             for (int i = 0; i < forncompraArray.length(); i++){
                                 JSONObject forncompraObject = forncompraArray.getJSONObject(i);
 
-                                FornCompraConst forneCompra = new FornCompraConst(forncompraObject.getString("id_fornecedor"), forncompraObject.getString("nome_fornecedor"), forncompraObject.getString("tipo"), forncompraObject.getString("telefone_comercial"));
+                                forneCompra = new FornCompraConst(forncompraObject.getString("id_fornecedor"), forncompraObject.getString("nome_fornecedor"), forncompraObject.getString("tipo"), forncompraObject.getString("telefone_comercial"));
 
                                 fornecedores.add(forneCompra);
                                 adapter.add(forneCompra.getNome());
@@ -144,8 +135,8 @@ public class Inventario extends AppCompatActivity {
         return false;
     }
 
-    public void downloadRelatorio(){
-        String url = "https://www.limopestoques.com.br/Android/Json/Inventario.php";
+    public void downloadRelatorio(String categoria, String fornecedor, String qtd){
+        String url = "https://www.limopestoques.com.br/Android/Json/Inventario.php?categoria=" + categoria+"&fornecedor=" +fornecedor+"&qtd="+qtd;
 
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
         request.setTitle("Inventário");
@@ -168,7 +159,7 @@ public class Inventario extends AppCompatActivity {
                 if(!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)){
                     Toast.makeText(this, "É necessário garantir a permissão para download dos relatórios!", Toast.LENGTH_SHORT).show();
                 }else{
-                    downloadRelatorio();
+                    downloadRelatorio(categoria.getSelectedItem().toString(), idFornecedor, qtd.getText().toString());
                 }
                 break;
         }

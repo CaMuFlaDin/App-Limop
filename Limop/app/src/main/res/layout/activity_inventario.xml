@@ -64,7 +64,7 @@
 
         <EditText
             android:hint="@string/qtdEstoque"
-            android:id="@+id/valor_custo"
+            android:id="@+id/qtd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_style"
