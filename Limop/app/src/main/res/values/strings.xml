@@ -227,6 +227,17 @@
     <!-- Telas -->
     <string name="title_activity_principal">"Página inicial "</string>
 
+    <!-- Relatórios -->
+    <string name="mensal">Selecione o mês</string>
+    <string name="anual">Selecione o ano</string>
+    <string name="inicio">Data Inicial</string>
+    <string name="fim">Data Final</string>
+    <string name="gerar">Gerar</string>
+    <string name="tipoRelatorio">Selecione o Tipo de Relatório</string>
+    <string name="semanal2">Semanal</string>
+    <string name="mensal2">Mensal</string>
+    <string name="anual2">Anual</string>
+
     <!-- Inventário -->
     <string name="categoriaProdInv">"Categorias "</string>
     <string name="fornecedor">"Fornecedor "</string>
@@ -241,5 +252,25 @@
     <string name="title_activity_insert_fornecedor">InsertFornecedor</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="meses">
+        <item>Janeiro</item>
+        <item>Fevereiro</item>
+        <item>Março</item>
+        <item>Abril</item>
+        <item>Maio</item>
+        <item>Junho</item>
+        <item>Julho</item>
+        <item>Agosto</item>
+        <item>Setembro</item>
+        <item>Outubro</item>
+        <item>Novembro</item>
+        <item>Dezembro</item>
+    </string-array>
+
+    <string-array name="anos">
+        <item>2017</item>
+        <item>2018</item>
+    </string-array>
 
 </resources>

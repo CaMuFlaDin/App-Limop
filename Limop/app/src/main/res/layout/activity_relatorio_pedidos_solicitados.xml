@@ -19,46 +19,66 @@
             android:layout_marginLeft="35dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/anual" />
+            android:text="@string/tipoRelatorio" />
 
-        <Spinner
-            android:id="@+id/mensal"
-            android:drawablePadding="-0dp"
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/tipo"
-            android:background="@drawable/input_style_not"
-            android:prompt="@string/tipoT"
+            android:id="@+id/tipo"
+            android:layout_marginTop="12dp"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp">
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input_style_not"
+                android:id="@+id/semanal2"
+                android:text="@string/semanal2"/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input_style_not"
+                android:id="@+id/mensal2"
+                android:text="@string/mensal2"/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input_style_not"
+                android:id="@+id/anual2"
+                android:text="@string/anual2"/>
+
+        </RadioGroup>
 
         <TextView
             android:textColor="#000"
             android:textSize="15sp"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="30dp"
+            android:id="@+id/tv1"
             android:layout_marginLeft="35dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/anual" />
+            android:text="@string/mensal" />
 
         <Spinner
             android:id="@+id/mensal"
             android:drawablePadding="-0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/tipo"
+            android:entries="@array/meses"
             android:background="@drawable/input_style_not"
-            android:prompt="@string/tipoT"
             android:layout_marginRight="35dp"
-            android:layout_marginLeft="35dp">
-        </Spinner>
+            android:layout_marginLeft="35dp"/>
 
         <TextView
             android:textColor="#000"
             android:textSize="15sp"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="30dp"
+            android:id="@+id/tv2"
             android:layout_marginLeft="35dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,13 +89,84 @@
             android:drawablePadding="-0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/tipo"
+            android:entries="@array/anos"
             android:background="@drawable/input_style_not"
-            android:prompt="@string/tipoT"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp">
         </Spinner>
 
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:id="@+id/tv3"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/inicio" />
+
+        <EditText
+            android:id="@+id/Data_inicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/input_style"
+            android:drawableLeft="@drawable/ic_data"
+            android:drawablePadding="20dp"
+            android:drawableStart="@drawable/ic_data"
+            android:hint="@string/inicio"
+            android:inputType="date"
+            android:paddingBottom="12dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp" />
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
+            android:id="@+id/tv4"
+            android:layout_marginLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fim" />
+
+        <EditText
+            android:hint="@string/fim"
+            android:id="@+id/Data_final"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_style"
+            android:inputType="date"
+            android:drawableLeft="@drawable/ic_data"
+            android:drawableStart="@drawable/ic_data"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:drawablePadding="20dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <Button
+            android:onClick="gerar"
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gerar"
+            android:layout_marginBottom="30dp"
+            android:textColor="#FFF"
+            android:background="@drawable/btn_login"
+            android:textSize="16sp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"/>
+
+
     </LinearLayout>
+
 
 </ScrollView>

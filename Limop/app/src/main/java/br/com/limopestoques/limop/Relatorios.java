@@ -28,7 +28,8 @@ public class Relatorios extends AppCompatActivity {
         Toast.makeText(this, "Em breve!", Toast.LENGTH_SHORT).show();
     }
     public void PedidosSolicitados(View v){
-        Toast.makeText(this, "Em breve!", Toast.LENGTH_SHORT).show();
+       Intent i = new Intent(Relatorios.this, RelatorioPedidosSolicitados.class);
+       startActivity(i);
     }
     public void ItensVendidos(View v){
         if(checkPermissions()){
