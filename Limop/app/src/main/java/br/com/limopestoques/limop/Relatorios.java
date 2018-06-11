@@ -24,17 +24,16 @@ public class Relatorios extends AppCompatActivity {
         setContentView(R.layout.activity_relatorios);
     }
 
-    public void DemonsFin(View v){
-        Toast.makeText(this, "Em breve!", Toast.LENGTH_SHORT).show();
-    }
     public void PedidosSolicitados(View v){
        Intent i = new Intent(Relatorios.this, RelatorioPedidosSolicitados.class);
        startActivity(i);
     }
     public void ItensVendidos(View v){
-        if(checkPermissions()){
+        /*if(checkPermissions()){
             downloadRelatorio();
-        }
+        }*/
+        Intent i = new Intent(Relatorios.this, RelatorioItensVendidos.class);
+        startActivity(i);
     }
 
     public boolean checkPermissions(){
