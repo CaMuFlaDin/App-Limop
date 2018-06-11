@@ -182,6 +182,104 @@ public class EditarServVenda extends AppCompatActivity {
                                 contrato.setSelection(1);
                             }
 
+                            if(condicao.equals("1")){
+                                cond_pagamento.setSelection(0);
+                            }else if(condicao.equals("2")){
+                                cond_pagamento.setSelection(1);
+                            }else if(condicao.equals("3")){
+                                cond_pagamento.setSelection(2);
+                            }else if(condicao.equals("4")){
+                                cond_pagamento.setSelection(3);
+                            }else if(condicao.equals("5")){
+                                cond_pagamento.setSelection(4);
+                            }else if(condicao.equals("6")){
+                                cond_pagamento.setSelection(5);
+                            }else if(condicao.equals("7")){
+                                cond_pagamento.setSelection(6);
+                            }else if(condicao.equals("8")){
+                                cond_pagamento.setSelection(7);
+                            }else if(condicao.equals("9")){
+                                cond_pagamento.setSelection(8);
+                            }else if(condicao.equals("10")){
+                                cond_pagamento.setSelection(9);
+                            }else if(condicao.equals("11")){
+                                cond_pagamento.setSelection(10);
+                            }else if(condicao.equals("12")){
+                                cond_pagamento.setSelection(11);
+                            }else if(condicao.equals("13")){
+                                cond_pagamento.setSelection(12);
+                            }else if(condicao.equals("14")){
+                                cond_pagamento.setSelection(13);
+                            }else if(condicao.equals("15")){
+                                cond_pagamento.setSelection(14);
+                            }else if(condicao.equals("16")){
+                                cond_pagamento.setSelection(15);
+                            }else if(condicao.equals("17")){
+                                cond_pagamento.setSelection(16);
+                            }else if(condicao.equals("18")){
+                                cond_pagamento.setSelection(17);
+                            }else if(condicao.equals("19")){
+                                cond_pagamento.setSelection(18);
+                            }else if(condicao.equals("20")){
+                                cond_pagamento.setSelection(19);
+                            }else if(condicao.equals("21")){
+                                cond_pagamento.setSelection(20);
+                            }else if(condicao.equals("22")){
+                                cond_pagamento.setSelection(21);
+                            }else if(condicao.equals("23")){
+                                cond_pagamento.setSelection(22);
+                            }else if(condicao.equals("24")){
+                                cond_pagamento.setSelection(23);
+                            }else if(condicao.equals("25")){
+                                cond_pagamento.setSelection(24);
+                            }else if(condicao.equals("26")){
+                                cond_pagamento.setSelection(25);
+                            }else if(condicao.equals("27")){
+                                cond_pagamento.setSelection(26);
+                            }else if(condicao.equals("28")){
+                                cond_pagamento.setSelection(27);
+                            }else if(condicao.equals("29")){
+                                cond_pagamento.setSelection(28);
+                            }else if(condicao.equals("30")){
+                                cond_pagamento.setSelection(29);
+                            }else if(condicao.equals("31")){
+                                cond_pagamento.setSelection(30);
+                            }else if(condicao.equals("32")){
+                                cond_pagamento.setSelection(31);
+                            }else if(condicao.equals("33")){
+                                cond_pagamento.setSelection(32);
+                            }else if(condicao.equals("34")){
+                                cond_pagamento.setSelection(33);
+                            }else if(condicao.equals("35")){
+                                cond_pagamento.setSelection(34);
+                            }else if(condicao.equals("36")){
+                                cond_pagamento.setSelection(35);
+                            }else if(condicao.equals("37")){
+                                cond_pagamento.setSelection(36);
+                            }else if(condicao.equals("38")){
+                                cond_pagamento.setSelection(37);
+                            }else if(condicao.equals("39")){
+                                cond_pagamento.setSelection(38);
+                            }else if(condicao.equals("40")){
+                                cond_pagamento.setSelection(39);
+                            }else if(condicao.equals("41")){
+                                cond_pagamento.setSelection(40);
+                            }else if(condicao.equals("42")){
+                                cond_pagamento.setSelection(41);
+                            }else if(condicao.equals("43")){
+                                cond_pagamento.setSelection(42);
+                            }else if(condicao.equals("44")){
+                                cond_pagamento.setSelection(43);
+                            }else if(condicao.equals("45")){
+                                cond_pagamento.setSelection(44);
+                            }else if(condicao.equals("46")){
+                                cond_pagamento.setSelection(45);
+                            }else if(condicao.equals("47")){
+                                cond_pagamento.setSelection(46);
+                            }else if(condicao.equals("48")){
+                                cond_pagamento.setSelection(47);
+                            }
+
                             if(forma.equals("Boleto")){
                                 forma_pagamento.setSelection(0);
                             }else if(forma.equals("Cartão de Crédito")){
@@ -240,6 +338,18 @@ public class EditarServVenda extends AppCompatActivity {
         formato2 = new SimpleDateFormat("yyyy-MM-dd");
         String vencimento = formato2.format(data2);
 
+        String CondicaoPagamento = "";
+
+        for(int i=1;i<=48;i++){
+            if(i != 1) {
+                if (cond_pagamento.getSelectedItem().toString().equals(i + "x")) {
+                    CondicaoPagamento = String.valueOf(i);
+                }
+            }else{
+                CondicaoPagamento = "1";
+            }
+        }
+
         params.put("update", "update");
         params.put("id_venda", id);
         params.put("data_venda", date);
@@ -249,7 +359,7 @@ public class EditarServVenda extends AppCompatActivity {
         params.put("valor_unitario", valor_unitario.getText().toString().trim());
         params.put("desconto", desconto.getText().toString().trim());
         params.put("vencimento", vencimento);
-        params.put("cond_pagamento", cond_pagamento.getSelectedItem().toString());
+        params.put("cond_pagamento", CondicaoPagamento);
         params.put("forma_pagamento", forma_pagamento.getSelectedItem().toString());
         params.put("obs", obs.getText().toString().trim());
         params.put("id_cliente", idCliente);
