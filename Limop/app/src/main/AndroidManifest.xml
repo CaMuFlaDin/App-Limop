@@ -186,7 +186,11 @@
             android:name=".Inventario"
             android:label="Inventário"
             android:parentActivityName=".Inventario" />
-        <activity android:name=".RelatorioPedidosSolicitados"></activity>
+        <activity android:name=".RelatorioPedidosSolicitados" />
+        <activity
+            android:name=".ParcelasVencer"
+            android:label="Parcelas a Vencer"
+            android:parentActivityName=".ParcelasVencer"/>
     </application>
 
 </manifest>

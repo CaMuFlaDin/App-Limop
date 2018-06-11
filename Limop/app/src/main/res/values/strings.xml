@@ -210,6 +210,8 @@
     <string name="valor_unitario">Valor Unitario</string>
     <string name="qtd">Quantidade</string>
 
+    <string name="parcelasvencer">Parcelas a Vencer</string>
+
     <!-- Ordem de Serviço -->
     <string name="cliente">Cliente</string>
     <string name="stts">Status</string>
