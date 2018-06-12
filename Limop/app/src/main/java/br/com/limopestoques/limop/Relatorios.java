@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 public class Relatorios extends AppCompatActivity {
 
-    static final int oqueeuquero = 112;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,36 +28,7 @@ public class Relatorios extends AppCompatActivity {
        startActivity(i);
     }
     public void ItensVendidos(View v){
-        /*if(checkPermissions()){
-            downloadRelatorio();
-        }*/
         Intent i = new Intent(Relatorios.this, RelatorioItensVendidos.class);
         startActivity(i);
-    }
-
-    public boolean checkPermissions(){
-        int readPermission = ContextCompat.checkSelfPermission(Relatorios.this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        if(readPermission == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        }else{
-            ActivityCompat.requestPermissions(Relatorios.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, oqueeuquero);
-        }
-        return false;
-    }
-
-    public void downloadRelatorio(){
-        String url = "https://www.limopestoques.com.br/Android/Relatorios/itensVendidos.php";
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-        request.setTitle("Relatório Itens mais Vendidos");
-
-        request.allowScanningByMediaScanner();
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Relatório Itens mais Vendidos");
-
-        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        if (manager != null) {
-            manager.enqueue(request);
-        }
     }
 }
