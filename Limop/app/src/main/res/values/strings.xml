@@ -202,7 +202,6 @@
         <item>Boleto</item>
         <item>Cartão de Crédito</item>
         <item>Cartão de Débito</item>
-        <item>Dinheiro</item>
     </string-array>
 
     <string name="vencimento">Vencimento</string>

@@ -164,14 +164,12 @@ public class EditarProduto extends AppCompatActivity {
                             niv.setImageUrl("https://limopestoques.com.br/Index_adm/produtos/imgs/"+ imagem,il);
 
                             if(categoria.equals("Acabado")){
-                                categoriaProd.setSelection(0);
-                            }else if(categoria.equals("Mercadoria para Revenda")){
                                 categoriaProd.setSelection(1);
-                            }else if(categoria.equals("Matéria-Prima")){
+                            }else if(categoria.equals("Mercadoria para Revenda")){
                                 categoriaProd.setSelection(2);
-                            }else if(categoria.equals("Embalagem")){
+                            }else if(categoria.equals("Matéria-Prima")){
                                 categoriaProd.setSelection(3);
-                            }else if(categoria.equals("Produto em Processo")){
+                            }else if(categoria.equals("Embalagem")){
                                 categoriaProd.setSelection(4);
                             }else{
                                 categoriaProd.setSelection(5);

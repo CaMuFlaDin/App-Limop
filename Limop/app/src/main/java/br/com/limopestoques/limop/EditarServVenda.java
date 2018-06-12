@@ -284,10 +284,8 @@ public class EditarServVenda extends AppCompatActivity {
                                 forma_pagamento.setSelection(0);
                             }else if(forma.equals("Cartão de Crédito")){
                                 forma_pagamento.setSelection(1);
-                            }else if(forma.equals("Cartão de Débito")){
-                                forma_pagamento.setSelection(2);
                             }else{
-                                forma_pagamento.setSelection(3);
+                                forma_pagamento.setSelection(2);
                             }
 
                         }catch (JSONException e){
