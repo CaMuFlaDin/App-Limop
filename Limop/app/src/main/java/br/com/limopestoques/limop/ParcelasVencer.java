@@ -25,7 +25,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +71,23 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
         loadParcelasList();
         listView.setTextFilterEnabled(true);
         searchView.setOnQueryTextListener(this);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ParcelasVencer.this);
+                builder.setCancelable(true);
+                builder.setTitle("Status - Parcelas");
+                builder.setMessage("Deseja realmente pagar esta parcela?");
+                builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int ii) {
+                        String id = parcelasQuery.get(i).getId();
+                        //TODO: terminar
+                    }
+                }).setNegativeButton("Não", null);
+            }
+        });
     }
 
     @Override
@@ -123,7 +143,7 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
                             for (int i = 0; i < usuarioArray.length(); i++){
                                 JSONObject usuarioObject = usuarioArray.getJSONObject(i);
 
-                                ParcelasConst users = new ParcelasConst(usuarioObject.getString("id_venda"), "Data de Vencimento: " + usuarioObject.getString("vencimento"), "Cliente: " + usuarioObject.getString("nome_Cliente"),"R$ " + usuarioObject.getString("valor"));
+                                ParcelasConst users = new ParcelasConst(usuarioObject.getString("id_venda"), usuarioObject.getString("nome_Cliente"),"R$ " + usuarioObject.getString("valor"), "Data de Vencimento: " + usuarioObject.getString("vencimento"));
 
                                 parcelasList.add(users);
                                 parcelasQuery.add(users);

@@ -77,15 +77,25 @@ public class ListViewParcelas extends ArrayAdapter<ParcelasConst> {
 
         View listViewItem = inflater.inflate(R.layout.list_view_parcelas, null, true);
 
-        TextView txtVencimento = listViewItem.findViewById(R.id.txtVencimento);
         TextView txtCliente = listViewItem.findViewById(R.id.txtCliente);
         TextView txtValor = listViewItem.findViewById(R.id.txtValor);
+        TextView txtVencimento = listViewItem.findViewById(R.id.txtVencimento);
 
         ParcelasConst parcelasConst = parcelasList.get(position);
 
-        txtVencimento.setText(parcelasConst.getVencimento());
         txtCliente.setText(parcelasConst.getCliente());
         txtValor.setText(parcelasConst.getValor());
+        txtVencimento.setText(parcelasConst.getVencimento());
+
+        /*if(parcelasConst.get().equals("Recebido")){
+            view.setBackgroundColor(mCtx.getResources().getColor(R.color.verdelhoso));
+        }else if(parcelasConst.get().equals("Atrasado")){
+            view.setBackgroundColor(mCtx.getResources().getColor(R.color.vermelhao));
+        }else {
+            view.setBackgroundColor(mCtx.getResources().getColor(R.color.amarelao));
+        }*/
+
+        //TODO: View para cores em parcelas *
 
         return listViewItem;
     }
