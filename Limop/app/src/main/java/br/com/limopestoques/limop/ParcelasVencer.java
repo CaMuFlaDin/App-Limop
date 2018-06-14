@@ -75,58 +75,58 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ParcelasVencer.this);
-                builder.setCancelable(true);
-                builder.setTitle("Status - Parcelas");
-                builder.setMessage("Deseja realmente pagar esta parcela?");
-                builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int ii) {
-                        String id = parcelasQuery.get(i).getId();
-                        //TODO: terminar
-                    }
-                }).setNegativeButton("Não", null);
+                String recebido = parcelasQuery.get(i).getRecebido();
+                if(recebido.equals("0")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ParcelasVencer.this);
+                    builder.setCancelable(true);
+                    builder.setTitle("Deseja realmente efetivar essa venda?");
+                    builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int ii) {
+                            final String id_venda = parcelasQuery.get(i).getId();
+                            final String recebido = parcelasQuery.get(i).getRecebido();
+                            final String id_produto = parcelasQuery.get(i).getId_produto();
+                            final String quantidade = parcelasQuery.get(i).getQuantidade();
+
+                            System.out.println(quantidade);
+                            StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
+                                    new Response.Listener<String>() {
+                                        @Override
+                                        public void onResponse(String ServerResponse) {
+                                            System.out.println(ServerResponse);
+                                        }
+                                    },
+                                    new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError volleyError) {
+                                            Toast.makeText(ParcelasVencer.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                                        }
+                                    }) {
+                                @Override
+                                protected Map<String, String> getParams() {
+
+                                    Map<String, String> params = new HashMap<>();
+
+                                    params.put("update", "update");
+                                    params.put("id_venda", id_venda);
+                                    params.put("id_produto", id_produto);
+                                    params.put("quantidade", quantidade);
+
+                                    return params;
+                                }
+
+                            };
+
+                            RequestQueue requestQueue = Volley.newRequestQueue(ParcelasVencer.this);
+                            requestQueue.add(stringRequest);
+                            parcelasList.clear();
+                            loadParcelasList();
+                        }
+                    }).setNegativeButton("Não", null);
+                    builder.create().show();
+                }
             }
         });
-    }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
-        super.onCreateContextMenu(menu, v, menuInfo);
-        menu.setHeaderTitle(R.string.acoes);
-        menu.add(0,v.getId(),0,"Editar Usuário");
-        if(tipo.equals("Administrador")){
-            menu.add(0,v.getId(),0,"Excluir Usuário");
-        }
-
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item){
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        Integer pos = info.position;
-        ParcelasConst usuarios = parcelasQuery.get(pos);
-        final String id = usuarios.getId();
-        if(item.getTitle() == "Editar Usuário"){
-            Intent irTela = new Intent(ParcelasVencer.this, EditarUsuario.class);
-            irTela.putExtra("id",id);
-            startActivity(irTela);
-        }
-        else if(item.getTitle() == "Excluir Usuário"){
-            AlertDialog.Builder builder = new AlertDialog.Builder(ParcelasVencer.this);
-            builder.setCancelable(true);
-            builder.setTitle("Deseja excluir esse Usuário?");
-            builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    CRUD.excluir(JSON_URL, id.toString(), getApplicationContext());
-                    listView.setAdapter(null);
-                    loadParcelasList();
-                }
-            }).setNegativeButton("Não", null);
-            builder.create().show();
-        }
-        return true;
     }
 
     private void loadParcelasList(){
@@ -143,7 +143,7 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
                             for (int i = 0; i < usuarioArray.length(); i++){
                                 JSONObject usuarioObject = usuarioArray.getJSONObject(i);
 
-                                ParcelasConst users = new ParcelasConst(usuarioObject.getString("id_venda"), usuarioObject.getString("nome_Cliente"),"R$ " + usuarioObject.getString("valor"), "Data de Vencimento: " + usuarioObject.getString("vencimento"));
+                                ParcelasConst users = new ParcelasConst(usuarioObject.getString("id_venda"), usuarioObject.getString("nome_Cliente"),"R$ " + usuarioObject.getString("valor"), usuarioObject.getString("vencimento"), usuarioObject.getString("quantidade"), usuarioObject.getString("id_produto"), usuarioObject.getString("recebido"));
 
                                 parcelasList.add(users);
                                 parcelasQuery.add(users);

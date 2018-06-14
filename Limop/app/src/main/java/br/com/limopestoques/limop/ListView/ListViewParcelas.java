@@ -7,8 +7,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import br.com.limopestoques.limop.Construtoras.ParcelasConst;
@@ -80,20 +88,42 @@ public class ListViewParcelas extends ArrayAdapter<ParcelasConst> {
         TextView txtCliente = listViewItem.findViewById(R.id.txtCliente);
         TextView txtValor = listViewItem.findViewById(R.id.txtValor);
         TextView txtVencimento = listViewItem.findViewById(R.id.txtVencimento);
+        View view = listViewItem.findViewById(R.id.view);
 
         ParcelasConst parcelasConst = parcelasList.get(position);
 
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        ParsePosition pos = new ParsePosition(0);
+        Date data = null;
+        try {
+            data = format.parse(parcelasConst.getVencimento());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String dataFormatada = formato.format(data);
+
         txtCliente.setText(parcelasConst.getCliente());
         txtValor.setText(parcelasConst.getValor());
-        txtVencimento.setText(parcelasConst.getVencimento());
+        txtVencimento.setText("Data do vencimento: "+dataFormatada);
 
-        /*if(parcelasConst.get().equals("Recebido")){
+        Date currentDate = Calendar.getInstance().getTime();
+        currentDate = format.parse(format.format(currentDate),pos);
+
+        Date dataVencimento = null;
+        try {
+            dataVencimento = format.parse(parcelasConst.getVencimento());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if(parcelasConst.getRecebido().equals("1")){
             view.setBackgroundColor(mCtx.getResources().getColor(R.color.verdelhoso));
-        }else if(parcelasConst.get().equals("Atrasado")){
-            view.setBackgroundColor(mCtx.getResources().getColor(R.color.vermelhao));
-        }else {
+        }else if(dataVencimento.after(currentDate) || dataVencimento.equals(currentDate)){
             view.setBackgroundColor(mCtx.getResources().getColor(R.color.amarelao));
-        }*/
+        }else{
+            view.setBackgroundColor(mCtx.getResources().getColor(R.color.vermelhao));
+        }
 
         //TODO: View para cores em parcelas *
 
