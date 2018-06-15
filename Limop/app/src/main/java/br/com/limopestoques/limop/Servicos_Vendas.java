@@ -100,7 +100,6 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
         if(tipo.equals("Administrador")){
             menu.add(0,v.getId(),0,"Excluir Venda");
         }
-        menu.add(0,v.getId(),0,"Gerar Ordem de Serviço desta venda");
         menu.add(0,v.getId(),0,"Gerar Contrato desta venda");
     }
 

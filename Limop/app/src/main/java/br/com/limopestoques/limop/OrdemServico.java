@@ -168,6 +168,11 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
         return true;
     }
 
+    public void insertOS(View v){
+        Intent i = new Intent(OrdemServico.this, InsertOS.class);
+        startActivity(i);
+    }
+
     private void loadOrdemServicoList(){
         ordemservicoList.clear();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
@@ -182,7 +187,7 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
                             for (int i = 0; i < ordemservicoArray.length(); i++){
                                 JSONObject ordemdeservicoObject = ordemservicoArray.getJSONObject(i);
 
-                                OrdemServicoConst os = new OrdemServicoConst(ordemdeservicoObject.getString("id_os"),ordemdeservicoObject.getString("cliente"),ordemdeservicoObject.getString("eqp_recebido"), "Número do pedido: " + ordemdeservicoObject.getString("id_os"), "Número da venda: " + ordemdeservicoObject.getString("id_venda"));
+                                OrdemServicoConst os = new OrdemServicoConst(ordemdeservicoObject.getString("id_os"),ordemdeservicoObject.getString("cliente"),ordemdeservicoObject.getString("eqp_recebido"), "Número do pedido: " + ordemdeservicoObject.getString("id_os"));
 
                                 ordemservicoList.add(os);
                                 ordemservicoQuery.add(os);
@@ -224,7 +229,6 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
             String queryText = newText.toLowerCase();
             for(OrdemServicoConst u : ordemservicoList){
                 if(u.getNumPedido().toLowerCase().contains(queryText) ||
-                        u.getNumVenda().toLowerCase().contains(queryText) ||
                         u.getCliente().toLowerCase().contains(queryText) ||
                         u.getEquipamento().toLowerCase().contains(queryText)){
                     ordemservicoQuery.add(u);

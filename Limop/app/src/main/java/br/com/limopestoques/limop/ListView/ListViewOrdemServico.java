@@ -52,7 +52,6 @@ public class ListViewOrdemServico extends ArrayAdapter<OrdemServicoConst>{
                     if (orig != null && orig.size() > 0) {
                         for (final OrdemServicoConst g : orig) {
                             if ((g.getNumPedido().toLowerCase().contains(constraint.toString())) ||
-                                    (g.getNumVenda().toLowerCase().contains(constraint.toString())) ||
                                     (g.getEquipamento().toLowerCase().contains(constraint.toString())) ||
                                     g.getCliente().toLowerCase().contains(constraint.toString())) {
                                 results.add(g);
@@ -82,14 +81,12 @@ public class ListViewOrdemServico extends ArrayAdapter<OrdemServicoConst>{
         TextView txtCliente         = listViewItem.findViewById(R.id.txtCliente);
         TextView txtEquipamento     = listViewItem.findViewById(R.id.txtEquipamento);
         TextView txtNumPedido       = listViewItem.findViewById(R.id.txtNumpedido);
-        TextView txtNumVenda        = listViewItem.findViewById(R.id.txtNumvenda);
 
         OrdemServicoConst ordemservicoConst = ordemservicoList.get(position);
 
         txtCliente.setText(ordemservicoConst.getCliente());
         txtEquipamento.setText(ordemservicoConst.getEquipamento());
         txtNumPedido.setText(ordemservicoConst.getNumPedido());
-        txtNumVenda.setText(ordemservicoConst.getNumVenda());
 
         return listViewItem;
     }
