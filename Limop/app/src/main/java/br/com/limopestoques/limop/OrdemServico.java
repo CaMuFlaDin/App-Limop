@@ -187,7 +187,7 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
                             for (int i = 0; i < ordemservicoArray.length(); i++){
                                 JSONObject ordemdeservicoObject = ordemservicoArray.getJSONObject(i);
 
-                                OrdemServicoConst os = new OrdemServicoConst(ordemdeservicoObject.getString("id_os"),ordemdeservicoObject.getString("cliente"),ordemdeservicoObject.getString("eqp_recebido"), "Número do pedido: " + ordemdeservicoObject.getString("id_os"));
+                                OrdemServicoConst os = new OrdemServicoConst(ordemdeservicoObject.getString("id_os"),ordemdeservicoObject.getString("nome_cliente"),ordemdeservicoObject.getString("nome"), "Número do pedido: " + ordemdeservicoObject.getString("id_os"));
 
                                 ordemservicoList.add(os);
                                 ordemservicoQuery.add(os);

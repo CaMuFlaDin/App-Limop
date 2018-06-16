@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,12 +23,15 @@ import org.json.JSONObject;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import br.com.limopestoques.limop.CRUD.CRUD;
+import br.com.limopestoques.limop.Construtoras.ClientesConst;
+import br.com.limopestoques.limop.Construtoras.ProdCompraConst;
 
 public class EditarOS extends AppCompatActivity {
 
@@ -33,9 +39,20 @@ public class EditarOS extends AppCompatActivity {
 
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Update/updateOS.php";
 
-    EditText cliente, stts, data_inicio, previsao_entrega, equipamento_recebido,
+    EditText data_inicio, previsao_entrega,
             n_serie, marca, modelo, obs_equipamento, descricao_defeito,
             descricao_servico, obs_interna;
+
+    Spinner cliente, equipamento_recebido,stts;
+
+    private String idCliente;
+    private String idProduto;
+
+    ArrayAdapter<String> adapter;
+    ArrayAdapter<String> adapter2;
+
+    ArrayList<ClientesConst> clientes;
+    ArrayList<ProdCompraConst> produtos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +86,41 @@ public class EditarOS extends AppCompatActivity {
         data_inicio.addTextChangedListener(maskDataa);
 
         carregar();
+
+        adapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item);
+        clientes = new ArrayList<ClientesConst>();
+        carregarCliente();
+
+        adapter2 = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item);
+        produtos = new ArrayList<ProdCompraConst>();
+        carregarProduto();
+
+        cliente.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                idCliente = clientes.get(i).getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        equipamento_recebido.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                idProduto = produtos.get(i).getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        carregarCliente();
+        carregarProduto();
     }
 
     public void carregar(){
@@ -82,9 +134,6 @@ public class EditarOS extends AppCompatActivity {
                             JSONArray osArray = obj.getJSONArray("os");
                             JSONObject jo = osArray.getJSONObject(0);
 
-                            cliente.setText(jo.getString("cliente"));
-                            stts.setText(jo.getString("status"));
-                            equipamento_recebido.setText(jo.getString("eqp_recebido"));
                             n_serie.setText(jo.getString("n_serie"));
                             marca.setText(jo.getString("marca"));
                             modelo.setText(jo.getString("modelo"));
@@ -92,7 +141,19 @@ public class EditarOS extends AppCompatActivity {
                             descricao_defeito.setText(jo.getString("descricao_problema"));
                             descricao_servico.setText(jo.getString("descricao_servico"));
                             obs_interna.setText(jo.getString("obs_internas"));
-                            data_inicio.setText(jo.getString("data_inicio"));
+                            String sttsOS = jo.getString("status");
+
+                            if(sttsOS.equals("Orçamento Pendente")){
+                                stts.setSelection(0);
+                            }else if(sttsOS.equals("Serviço Pendente")){
+                                stts.setSelection(1);
+                            }else if(sttsOS.equals("Em Andamento")){
+                                stts.setSelection(2);
+                            }else if(sttsOS.equals("Concluído")){
+                                stts.setSelection(3);
+                            }else{
+                                stts.setSelection(4);
+                            }
 
                             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                             ParsePosition pos = new ParsePosition(0);
@@ -101,6 +162,14 @@ public class EditarOS extends AppCompatActivity {
                             String date = formato.format(data);
 
                             previsao_entrega.setText(date);
+
+                            SimpleDateFormat formato2 = new SimpleDateFormat("yyyy-MM-dd");
+                            ParsePosition pos2 = new ParsePosition(0);
+                            Date data2 = formato2.parse(jo.getString("data_inicio"),pos2);
+                            formato2 = new SimpleDateFormat("dd/MM/yyyy");
+                            String date2 = formato2.format(data2);
+
+                            data_inicio.setText(date2);
 
                         }catch (JSONException e) {
                             e.printStackTrace();
@@ -126,6 +195,92 @@ public class EditarOS extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+    public void carregarCliente(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonClientes.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray forncompraArray = obj.getJSONArray("clientes");
+
+                            for (int i = 0; i < forncompraArray.length(); i++){
+                                JSONObject forncompraObject = forncompraArray.getJSONObject(i);
+
+                                ClientesConst forneCompra = new ClientesConst(forncompraObject.getString("id_cliente"), forncompraObject.getString("nome_cliente"), forncompraObject.getString("tipo"), forncompraObject.getString("email"));
+
+                                clientes.add(forneCompra);
+                                adapter.add(forneCompra.getNome());
+                            }
+                            cliente.setAdapter(adapter);
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ){
+            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("select", "select");
+
+                return params;
+            }
+        };
+
+        RequestQueue rq = Volley.newRequestQueue(this);
+        rq.add(stringRequest);
+    }
+
+    public void carregarProduto(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonProd.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray forncompraArray = obj.getJSONArray("produtos");
+
+                            for (int i = 0; i < forncompraArray.length(); i++){
+                                JSONObject forncompraObject = forncompraArray.getJSONObject(i);
+
+                                ProdCompraConst prodCompra = new ProdCompraConst(forncompraObject.getString("id_produto"), forncompraObject.getString("nome"), forncompraObject.getString("valor_venda"), forncompraObject.getString("disponivel_estoque"),forncompraObject.getString("fotos"));
+
+                                produtos.add(prodCompra);
+                                adapter2.add(prodCompra.getProd());
+                            }
+                            equipamento_recebido.setAdapter(adapter2);
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ){
+            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("select", "select");
+
+                return params;
+            }
+        };
+
+        RequestQueue rq2 = Volley.newRequestQueue(this);
+        rq2.add(stringRequest);
+    }
+
     public void updateOS(){
         Map<String, String> params = new HashMap<String, String>();
 
@@ -135,12 +290,19 @@ public class EditarOS extends AppCompatActivity {
         formato = new SimpleDateFormat("yyyy-MM-dd");
         String date = formato.format(data);
 
+        SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy");
+        ParsePosition pos2 = new ParsePosition(0);
+        Date data2 = formato2.parse(data_inicio.getText().toString(),pos2);
+        formato2 = new SimpleDateFormat("yyyy-MM-dd");
+        String date2 = formato2.format(data2);
+
         params.put("update", "update");
         params.put("id_os", id);
-        params.put("cliente", cliente.getText().toString().trim());
-        params.put("status", stts.getText().toString().trim());
+        params.put("cliente", idCliente);
+        params.put("status", stts.getSelectedItem().toString());
         params.put("previsao_entrega", date);
-        params.put("eqp_recebido", equipamento_recebido.getText().toString().trim());
+        params.put("data_inicio", date2);
+        params.put("eqp_recebido", idProduto);
         params.put("n_serie", n_serie.getText().toString().trim());
         params.put("marca", marca.getText().toString().trim());
         params.put("modelo", modelo.getText().toString().trim());
@@ -170,10 +332,10 @@ public class EditarOS extends AppCompatActivity {
     }
 
     public void validarCampos(View v){
-        if(cliente.getText().length() == 0 || stts.getText().length() == 0 || previsao_entrega.getText().length() == 0 ||
-                equipamento_recebido.getText().length() == 0 || n_serie.getText().length() == 0 || marca.getText().length() == 0 ||
-                modelo.getText().length() == 0 || obs_equipamento.getText().length() == 0 || descricao_defeito.getText().length() == 0 ||
-                descricao_servico.getText().length() == 0) {
+        if(previsao_entrega.getText().length() == 0 ||
+                 n_serie.getText().length() == 0 || marca.getText().length() == 0 ||
+                obs_equipamento.getText().length() == 0 || descricao_defeito.getText().length() == 0 ||
+                descricao_servico.getText().length() == 0 || data_inicio.getText().length() == 0) {
             Toast.makeText(this, "Preencha os campos corretamente!",Toast.LENGTH_SHORT).show();
         }else{
             updateOS();

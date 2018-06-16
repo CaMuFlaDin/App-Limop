@@ -18,6 +18,7 @@ public class OrdemServicoConst {
     public String getId(){
         return this.id;
     }
+
     public String getEquipamento(){
         return this.equipamento;
     }

@@ -213,6 +213,7 @@
 
     <!-- Ordem de Serviço -->
     <string name="cliente">Cliente</string>
+    <string name="data_inicio">Data de Início</string>
     <string name="stts">Status</string>
     <string name="previsao_entrega">Previsão da Entrega</string>
     <string name="equipamento_recebido">Equipamento Recebido</string>
@@ -223,6 +224,13 @@
     <string name="descricao_defeito">Descrição do problema ou defeito encontrado</string>
     <string name="descricao_servico">Descrição do serviço que será prestado</string>
     <string name="obs_interna">Observações Internas</string>
+    <string-array name="sttsOS">
+        <item>Orçamento Pendente</item>
+        <item>Serviço Pendente</item>
+        <item>Em Andamento</item>
+        <item>Concluído</item>
+        <item>Produto em Processo</item>
+    </string-array>
 
 
     <!-- Telas -->

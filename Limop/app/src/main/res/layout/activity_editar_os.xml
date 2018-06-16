@@ -21,21 +21,14 @@
             android:layout_height="wrap_content"
             android:text="@string/cliente" />
 
-        <EditText
-            android:focusable="false"
-            android:hint="@string/cliente"
+        <Spinner
             android:id="@+id/cliente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/input_style"
-            android:drawableLeft="@drawable/ic_person"
-            android:drawableStart="@drawable/ic_person"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
-            android:drawablePadding="20dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp" />
+            android:drawablePadding="-0dp"
+            android:background="@drawable/input_style_not"/>
 
         <TextView
             android:textColor="#000"
@@ -47,21 +40,16 @@
             android:layout_height="wrap_content"
             android:text="@string/stts" />
 
-        <EditText
-            android:focusable="false"
-            android:hint="@string/stts"
+
+        <Spinner
             android:id="@+id/stts"
+            android:entries="@array/sttsOS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/input_style"
-            android:drawableLeft="@drawable/ic_list"
-            android:drawableStart="@drawable/ic_list"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
-            android:drawablePadding="20dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp" />
+            android:drawablePadding="-0dp"
+            android:background="@drawable/input_style_not"/>
 
         <TextView
             android:textColor="#000"
@@ -71,12 +59,11 @@
             android:layout_marginLeft="35dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/data_venda" />
+            android:text="@string/data_inicio" />
 
         <EditText
-            android:focusable="false"
             android:inputType="date"
-            android:hint="@string/data_venda"
+            android:hint="@string/data_inicio"
             android:id="@+id/data_inicio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -101,6 +88,7 @@
             android:text="@string/previsao_entrega" />
 
         <EditText
+
             android:inputType="date"
             android:hint="@string/previsao_entrega"
             android:id="@+id/previsao_entrega"
@@ -126,33 +114,17 @@
             android:layout_height="wrap_content"
             android:text="@string/equipamento_recebido" />
 
-        <EditText
-            android:focusable="false"
-            android:hint="@string/equipamento_recebido"
+        <Spinner
             android:id="@+id/equipamento_recebido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/input_style"
-            android:drawableLeft="@drawable/ic_list"
-            android:drawableStart="@drawable/ic_list"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
-            android:drawablePadding="20dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp" />
-
-        <TextView
-            android:textColor="#000"
-            android:textSize="15sp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="35dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/n_serie" />
+            android:drawablePadding="-0dp"
+            android:background="@drawable/input_style_not"/>
 
         <EditText
+            android:layout_marginTop="30dp"
             android:hint="@string/n_serie"
             android:id="@+id/n_serie"
             android:layout_width="match_parent"
@@ -167,17 +139,8 @@
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
 
-        <TextView
-            android:textColor="#000"
-            android:textSize="15sp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="35dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/marca" />
-
         <EditText
+            android:layout_marginTop="30dp"
             android:hint="@string/marca"
             android:id="@+id/marca"
             android:layout_width="match_parent"
@@ -192,17 +155,8 @@
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
 
-        <TextView
-            android:textColor="#000"
-            android:textSize="15sp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="35dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/modelo" />
-
         <EditText
+            android:layout_marginTop="30dp"
             android:hint="@string/modelo"
             android:id="@+id/modelo"
             android:layout_width="match_parent"
@@ -217,17 +171,8 @@
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
 
-        <TextView
-            android:textColor="#000"
-            android:textSize="15sp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="35dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/obs_equipamento" />
-
         <EditText
+            android:layout_marginTop="30dp"
             android:hint="@string/obs_equipamento"
             android:id="@+id/obs_equipamento"
             android:layout_width="match_parent"
@@ -242,17 +187,8 @@
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
 
-        <TextView
-            android:textColor="#000"
-            android:textSize="15sp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="35dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/descricao_defeito" />
-
         <EditText
+            android:layout_marginTop="30dp"
             android:hint="@string/descricao_defeito"
             android:id="@+id/descricao_defeito"
             android:layout_width="match_parent"
@@ -267,17 +203,8 @@
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
 
-        <TextView
-            android:textColor="#000"
-            android:textSize="15sp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="35dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/descricao_servico" />
-
         <EditText
+            android:layout_marginTop="30dp"
             android:hint="@string/descricao_servico"
             android:id="@+id/descricao_servico"
             android:layout_width="match_parent"
@@ -292,17 +219,8 @@
             android:paddingTop="12dp"
             android:paddingBottom="12dp" />
 
-        <TextView
-            android:textColor="#000"
-            android:textSize="15sp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="35dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/obs_interna" />
-
         <EditText
+            android:layout_marginTop="30dp"
             android:hint="@string/obs_interna"
             android:id="@+id/obs_interna"
             android:layout_width="match_parent"
