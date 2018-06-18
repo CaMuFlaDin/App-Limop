@@ -50,6 +50,9 @@ public class EditarServVenda extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     ArrayList<ClientesConst> clientes;
 
+    Integer posCliente;
+    Integer posServico;
+
     ArrayAdapter<String> adapter2;
     ArrayList<ServicosCompraConst> servicos;
 
@@ -165,6 +168,9 @@ public class EditarServVenda extends AppCompatActivity {
                             String contratoo = jo.getString("contrato");
                             String condicao = jo.getString("condicao_pagamento");
                             String forma = jo.getString("forma_pagamento");
+
+                            idCliente = jo.getString("id_cliente");
+                            idServico = jo.getString("id_servico");
 
                             if(status.equals("Venda")){
                                 stts_negociacao.setSelection(0);
@@ -360,7 +366,9 @@ public class EditarServVenda extends AppCompatActivity {
         params.put("cond_pagamento", CondicaoPagamento);
         params.put("forma_pagamento", forma_pagamento.getSelectedItem().toString());
         params.put("obs", obs.getText().toString().trim());
+        idCliente = clientes.get(nome_cliente.getSelectedItemPosition()).getId();
         params.put("id_cliente", idCliente);
+        idServico = servicos.get(servico.getSelectedItemPosition()).getId();
         params.put("id_servico", idServico);
 
 
@@ -398,8 +406,13 @@ public class EditarServVenda extends AppCompatActivity {
 
                                 clientes.add(forneCompra);
                                 adapter.add(forneCompra.getNome());
+
+                                if(idCliente.equals(forneCompra.getId())){
+                                    posCliente = adapter.getPosition(forneCompra.getNome());
+                                }
                             }
                             nome_cliente.setAdapter(adapter);
+                            nome_cliente.setSelection(posCliente);
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -441,8 +454,13 @@ public class EditarServVenda extends AppCompatActivity {
 
                                 servicos.add(servCompra);
                                 adapter2.add(servCompra.getNome());
+
+                                if(idServico.equals(servCompra.getId())){
+                                    posServico = adapter2.getPosition(servCompra.getNome());
+                                }
                             }
                             servico.setAdapter(adapter2);
+                            servico.setSelection(posServico);
                         }catch (JSONException e){
                             e.printStackTrace();
                         }

@@ -51,6 +51,8 @@ public class EditarProduto extends AppCompatActivity {
 
     String imagem;
 
+    Integer posFornecedor;
+
 
     private static final int GALLERY_REQUEST = 1;
     private Bitmap img = null;
@@ -175,6 +177,8 @@ public class EditarProduto extends AppCompatActivity {
                                 categoriaProd.setSelection(5);
                             }
 
+                           idFornecedor = jo.getString("id_fornecedor");
+
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -258,8 +262,13 @@ public class EditarProduto extends AppCompatActivity {
 
                                 fornecedores.add(forneCompra);
                                 adapter.add(forneCompra.getNome());
+
+                                if(idFornecedor.equals(forneCompra.getId())){
+                                    posFornecedor = adapter.getPosition(forneCompra.getNome());
+                                }
                             }
                             fornecedor.setAdapter(adapter);
+                            fornecedor.setSelection(posFornecedor);
                         }catch (JSONException e){
                             e.printStackTrace();
                         }

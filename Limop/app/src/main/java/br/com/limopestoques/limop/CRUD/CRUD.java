@@ -16,11 +16,15 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import br.com.limopestoques.limop.Sessao.Sessao;
+import br.com.limopestoques.limop.Usuarios;
+
 /**
  * Created by Aluno on 08/03/2018.
  */
 
 public class CRUD {
+
     public CRUD(){}
 
     public static StringRequest customRequest(String url, Response.Listener<String> responseListener,

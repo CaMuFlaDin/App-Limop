@@ -46,6 +46,9 @@ public class EditarProdVenda extends AppCompatActivity {
     Spinner nome_cliente,produto,stts_negociacao,contrato,cond_pagamento,forma_pagamento;
     Button button;
 
+    Integer posCliente;
+    Integer posProduto;
+
     ArrayAdapter<String> adapter;
     ArrayList<ClientesConst> clientes;
 
@@ -156,6 +159,8 @@ public class EditarProdVenda extends AppCompatActivity {
 
                             vencimento.setText(date2);
 
+                            idCliente = jo.getString("id_cliente");
+                            idProduto = jo.getString("id_produto");
 
                             obs.setText(jo.getString("observacoes"));
                             String status = jo.getString("status_negociacao");
@@ -358,7 +363,9 @@ public class EditarProdVenda extends AppCompatActivity {
         params.put("cond_pagamento", CondicaoPagamento);
         params.put("forma_pagamento", forma_pagamento.getSelectedItem().toString());
         params.put("obs", obs.getText().toString().trim());
+        idCliente = clientes.get(nome_cliente.getSelectedItemPosition()).getId();
         params.put("id_cliente", idCliente);
+        idProduto = produtos.get(produto.getSelectedItemPosition()).getId();
         params.put("id_produto", idProduto);
 
 
@@ -396,8 +403,13 @@ public class EditarProdVenda extends AppCompatActivity {
 
                                 clientes.add(forneCompra);
                                 adapter.add(forneCompra.getNome());
+
+                                if(idCliente.equals(forneCompra.getId())){
+                                    posCliente = adapter.getPosition(forneCompra.getNome());
+                                }
                             }
                             nome_cliente.setAdapter(adapter);
+                            nome_cliente.setSelection(posCliente);
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -439,8 +451,13 @@ public class EditarProdVenda extends AppCompatActivity {
 
                                 produtos.add(prodCompra);
                                 adapter2.add(prodCompra.getProd());
+
+                                if(idProduto.equals(prodCompra.getId())){
+                                    posProduto = adapter2.getPosition(prodCompra.getProd());
+                                }
                             }
                             produto.setAdapter(adapter2);
+                            produto.setSelection(posProduto);
                         }catch (JSONException e){
                             e.printStackTrace();
                         }

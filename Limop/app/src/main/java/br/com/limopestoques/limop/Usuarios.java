@@ -46,6 +46,7 @@ public class Usuarios extends AppCompatActivity implements SearchView.OnQueryTex
     Sessao sessao;
 
     String tipo;
+    String idUser;
 
     List<UsuariosConst> usuariosList;
     List<UsuariosConst> usuariosQuery;
@@ -66,6 +67,7 @@ public class Usuarios extends AppCompatActivity implements SearchView.OnQueryTex
         sessao = new Sessao(Usuarios.this);
 
         tipo = sessao.getString("tipo");
+        idUser = sessao.getString("id_usuario");
 
         registerForContextMenu(listView);
         loadUsuarioList();
@@ -156,6 +158,7 @@ public class Usuarios extends AppCompatActivity implements SearchView.OnQueryTex
             protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("select", "select");
+                params.put("idUser", idUser);
 
                 return params;
             }

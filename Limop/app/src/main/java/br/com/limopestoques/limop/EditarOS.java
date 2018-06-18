@@ -45,6 +45,9 @@ public class EditarOS extends AppCompatActivity {
 
     Spinner cliente, equipamento_recebido,stts;
 
+    Integer posCliente;
+    Integer posProduto;
+
     private String idCliente;
     private String idProduto;
 
@@ -143,6 +146,9 @@ public class EditarOS extends AppCompatActivity {
                             obs_interna.setText(jo.getString("obs_internas"));
                             String sttsOS = jo.getString("status");
 
+                            idCliente = jo.getString("cliente");
+                            idProduto = jo.getString("eqp_recebido");
+
                             if(sttsOS.equals("Orçamento Pendente")){
                                 stts.setSelection(0);
                             }else if(sttsOS.equals("Serviço Pendente")){
@@ -212,8 +218,13 @@ public class EditarOS extends AppCompatActivity {
 
                                 clientes.add(forneCompra);
                                 adapter.add(forneCompra.getNome());
+
+                                if(idCliente.equals(forneCompra.getId())){
+                                    posCliente = adapter.getPosition(forneCompra.getNome());
+                                }
                             }
                             cliente.setAdapter(adapter);
+                            cliente.setSelection(posCliente);
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -255,8 +266,13 @@ public class EditarOS extends AppCompatActivity {
 
                                 produtos.add(prodCompra);
                                 adapter2.add(prodCompra.getProd());
+
+                                if(idProduto.equals(prodCompra.getId())){
+                                    posProduto = adapter2.getPosition(prodCompra.getProd());
+                                }
                             }
                             equipamento_recebido.setAdapter(adapter2);
+                            equipamento_recebido.setSelection(posProduto);
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -298,11 +314,13 @@ public class EditarOS extends AppCompatActivity {
 
         params.put("update", "update");
         params.put("id_os", id);
+        idCliente = clientes.get(cliente.getSelectedItemPosition()).getId();
         params.put("cliente", idCliente);
         params.put("status", stts.getSelectedItem().toString());
         params.put("previsao_entrega", date);
         params.put("data_inicio", date2);
-        params.put("eqp_recebido", idProduto);
+        idProduto = produtos.get(equipamento_recebido.getSelectedItemPosition()).getId();
+        params.put("eqp_recebido",idProduto);
         params.put("n_serie", n_serie.getText().toString().trim());
         params.put("marca", marca.getText().toString().trim());
         params.put("modelo", modelo.getText().toString().trim());
