@@ -1,13 +1,19 @@
 package br.com.limopestoques.limop;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -50,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
     EditText email;
     EditText senha;
 
+    Button btnLogin;
+
+    ConnectivityManager connectivityManager;
+
     CallbackManager callbackManager;
     LoginButton loginButton;
 
@@ -69,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         email = findViewById(R.id.email);
         senha = findViewById(R.id.senha);
+        btnLogin = findViewById(R.id.button);
+
+        connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        checkInternet();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -174,6 +189,22 @@ public class MainActivity extends AppCompatActivity {
         }, MainActivity.this, params);
         RequestQueue rq = Volley.newRequestQueue(MainActivity.this);
         rq.add(sr);
+    }
+
+    public boolean checkInternet(){
+        boolean is3G = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
+        boolean isWifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
+
+        boolean retorno = false;
+
+        if(!(is3G || isWifi)){
+            Toast.makeText(this, "Sem conexão com a internet!", Toast.LENGTH_SHORT).show();
+            btnLogin.setEnabled(false);
+            retorno = false;
+        }else{
+            retorno = true;
+        }
+        return retorno;
     }
 
     public void Login(View v){
