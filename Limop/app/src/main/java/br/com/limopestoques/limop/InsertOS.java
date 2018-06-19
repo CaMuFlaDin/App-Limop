@@ -127,60 +127,11 @@ public class InsertOS extends AppCompatActivity {
             }
         });
 
-        //carregar();
         carregarCliente();
         carregarProduto();
 
     }
 
-    /*public void carregar(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try{
-                            JSONObject obj = new JSONObject(response);
-
-                            JSONArray osArray = obj.getJSONArray("vendas");
-                            JSONObject jo = osArray.getJSONObject(0);
-
-                            cliente.setText(jo.getString("nome_cliente"));
-                            stts.setText(jo.getString("status_negociacao"));
-                            equipamento_recebido.setText(jo.getString("eqp"));
-
-                            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-                            ParsePosition pos = new ParsePosition(0);
-                            Date data = formato.parse(jo.getString("data_venda"),pos);
-                            formato = new SimpleDateFormat("dd/MM/yyyy");
-                            String date = formato.format(data);
-
-                            data_inicio.setText(date);
-
-                        }catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse(VolleyError error){
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-        ){
-            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("select", "select");
-                params.put("tipo", tipoVenda);
-                params.put("id_venda", id);
-
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }*/
 
     public void carregarCliente(){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonClientes.php",
@@ -199,6 +150,7 @@ public class InsertOS extends AppCompatActivity {
 
                                 clientes.add(forneCompra);
                                 adapter.add(forneCompra.getNome());
+
                             }
                             cliente.setAdapter(adapter);
                         }catch (JSONException e){
