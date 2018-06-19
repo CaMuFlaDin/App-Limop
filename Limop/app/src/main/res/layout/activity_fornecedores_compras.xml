@@ -18,8 +18,8 @@
 
             <TextView
                 android:layout_marginTop="10dp"
-                android:drawableStart="@drawable/ic_local_shipping"
-                android:drawableLeft="@drawable/ic_local_shipping"
+                android:drawableStart="@drawable/ic_assessment_black_24dp"
+                android:drawableLeft="@drawable/ic_assessment_black_24dp"
                 android:layout_gravity="center"
                 android:textColor="#000"
                 android:textSize="25sp"
