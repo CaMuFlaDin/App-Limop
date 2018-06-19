@@ -94,11 +94,9 @@ public class EditarOS extends AppCompatActivity {
 
         adapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item);
         clientes = new ArrayList<ClientesConst>();
-        carregarCliente();
 
         adapter2 = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item);
         produtos = new ArrayList<ProdCompraConst>();
-        carregarProduto();
 
         cliente.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -124,8 +122,6 @@ public class EditarOS extends AppCompatActivity {
             }
         });
 
-        carregarCliente();
-        carregarProduto();
     }
 
     public void carregar(){
@@ -199,60 +195,60 @@ public class EditarOS extends AppCompatActivity {
                 return params;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        final RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
-    }
+        requestQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
+        @Override
+        public void onRequestFinished(Request<Object> request) {
+            requestQueue.removeRequestFinishedListener(this);
 
-    public void carregarCliente(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonClientes.php",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try{
-                            JSONObject obj = new JSONObject(response);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonClientes.php",
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject obj = new JSONObject(response);
 
-                            JSONArray forncompraArray = obj.getJSONArray("clientes");
+                                JSONArray forncompraArray = obj.getJSONArray("clientes");
 
-                            for (int i = 0; i < forncompraArray.length(); i++){
-                                JSONObject forncompraObject = forncompraArray.getJSONObject(i);
+                                for (int i = 0; i < forncompraArray.length(); i++) {
+                                    JSONObject forncompraObject = forncompraArray.getJSONObject(i);
 
-                                ClientesConst forneCompra = new ClientesConst(forncompraObject.getString("id_cliente"), forncompraObject.getString("nome_cliente"), forncompraObject.getString("tipo"), forncompraObject.getString("email"));
+                                    ClientesConst forneCompra = new ClientesConst(forncompraObject.getString("id_cliente"), forncompraObject.getString("nome_cliente"), forncompraObject.getString("tipo"), forncompraObject.getString("email"));
 
-                                clientes.add(forneCompra);
-                                adapter.add(forneCompra.getNome());
+                                    clientes.add(forneCompra);
+                                    adapter.add(forneCompra.getNome());
 
-                                if(idCliente.equals(forneCompra.getId())){
-                                    posCliente = adapter.getPosition(forneCompra.getNome());
+                                    if (idCliente.equals(forneCompra.getId())) {
+                                        posCliente = adapter.getPosition(forneCompra.getNome());
+                                    }
                                 }
+                                cliente.setAdapter(adapter);
+                                cliente.setSelection(posCliente);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                            cliente.setAdapter(adapter);
-                            cliente.setSelection(posCliente);
-                        }catch (JSONException e){
-                            e.printStackTrace();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
-                },
-                new Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse(VolleyError error){
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+            ) {
+                protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("select", "select");
+
+                    return params;
                 }
-        ){
-            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("select", "select");
+            };
 
-                return params;
-            }
-        };
+            requestQueue.add(stringRequest);
 
-        RequestQueue rq = Volley.newRequestQueue(this);
-        rq.add(stringRequest);
-    }
-
-    public void carregarProduto(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonProd.php",
+            stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonProd.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -295,9 +291,11 @@ public class EditarOS extends AppCompatActivity {
             }
         };
 
-        RequestQueue rq2 = Volley.newRequestQueue(this);
-        rq2.add(stringRequest);
+        requestQueue.add(stringRequest);
+        }
+    });
     }
+
 
     public void updateOS(){
         Map<String, String> params = new HashMap<String, String>();
