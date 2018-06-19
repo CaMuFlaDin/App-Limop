@@ -42,8 +42,18 @@ public class Principal extends AppCompatActivity {
         }
     }
 
-    public void Transportadoras(View v){
-        Intent irTela = new Intent(Principal.this, Transportadoras_Compras.class);
+    public void Cadastros(View v){
+        Intent irTela = new Intent(Principal.this, Cadastros.class);
+        startActivity(irTela);
+    }
+
+    public void Produtos(View v){
+        Intent irTela = new Intent(Principal.this, Produtos_Compras.class);
+        startActivity(irTela);
+    }
+
+    public void Servicos(View v){
+        Intent irTela = new Intent(Principal.this, Servicos_Compras.class);
         startActivity(irTela);
     }
 
@@ -52,23 +62,28 @@ public class Principal extends AppCompatActivity {
         startActivity(irTela);
     }
 
-    public void Compras(View v){
-        Intent irTela = new Intent(Principal.this, Compras.class);
+    public void SituacaoEstoque(View v){
+        Intent irTela = new Intent(Principal.this, SituacaoEstoque.class);
+        startActivity(irTela);
+    }
+
+    public void OrdemServico(View v){
+        Intent irTela = new Intent(Principal.this, OrdemServico.class);
+        startActivity(irTela);
+    }
+
+    public void Relatorios(View v){
+        Intent irTela = new Intent(Principal.this, Relatorios.class);
+        startActivity(irTela);
+    }
+
+    public void Graficos(View v){
+        Intent irTela = new Intent(Principal.this, Graficos.class);
         startActivity(irTela);
     }
 
     public void Usuarios(View v){
-        Intent irTela = new Intent(Principal.this, Usuarios.class);
-        startActivity(irTela);
-    }
-
-    public void Acessos(View v){
-        Intent irTela = new Intent(Principal.this, Acessos.class);
-        startActivity(irTela);
-    }
-
-    public void SituacaoEstoque(View v){
-        Intent irTela = new Intent(Principal.this, SituacaoEstoque.class);
+        Intent irTela = new Intent(Principal.this, UsuariosGerenciar.class);
         startActivity(irTela);
     }
 

@@ -13,40 +13,97 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
 
         <ImageView
-            android:onClick="Transportadoras"
-            android:layout_marginTop="10dp"
-            android:id="@+id/transportadoras"
+            android:onClick="Cadastros"
+            android:id="@+id/cadastros"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/transportadoras" />
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/cadastro" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+        
+        <ImageView
+            android:onClick="Produtos"
+            android:id="@+id/produtos"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/produtos" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <ImageView
+            android:onClick="Servicos"
+            android:id="@+id/servicos"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/servicos" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
 
         <ImageView
             android:onClick="Vendas"
-            android:layout_marginTop="10dp"
             android:id="@+id/vendas"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             app:srcCompat="@drawable/vendas" />
 
-        <ImageView
-            android:onClick="Compras"
-            android:layout_marginTop="10dp"
-            android:id="@+id/compras"
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/compras" />
-
+            android:layout_height="30dp" />
 
         <ImageView
             android:onClick="SituacaoEstoque"
-            android:layout_marginTop="10dp"
             android:id="@+id/situacaoestoque"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/situacaoestoque" />
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/situestoque" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <ImageView
+            android:onClick="OrdemServico"
+            android:id="@+id/ordemservico"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/ordemservico" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <ImageView
+            android:onClick="Relatorios"
+            android:id="@+id/relatorios"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/relatorios" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <ImageView
+            android:onClick="Graficos"
+            android:id="@+id/graficos"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/graficos" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
 
     </LinearLayout>
 

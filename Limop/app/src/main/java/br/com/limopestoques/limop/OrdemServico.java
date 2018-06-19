@@ -246,7 +246,7 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
 
     public void onBackPressed(){
         super.onBackPressed();
-        Intent irTela = new Intent(OrdemServico.this, Vendas.class);
+        Intent irTela = new Intent(OrdemServico.this, Principal.class);
         irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(irTela);
     }

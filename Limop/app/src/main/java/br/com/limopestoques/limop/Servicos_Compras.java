@@ -188,7 +188,7 @@ public class Servicos_Compras extends AppCompatActivity implements SearchView.On
 
     public void onBackPressed(){
         super.onBackPressed();
-        Intent irTela = new Intent(Servicos_Compras.this, Compras.class);
+        Intent irTela = new Intent(Servicos_Compras.this, Principal.class);
         irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(irTela);
     }

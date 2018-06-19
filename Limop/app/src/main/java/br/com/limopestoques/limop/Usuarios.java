@@ -193,7 +193,7 @@ public class Usuarios extends AppCompatActivity implements SearchView.OnQueryTex
 
     public void onBackPressed(){
         super.onBackPressed();
-        Intent irTela = new Intent(Usuarios.this, Principal.class);
+        Intent irTela = new Intent(Usuarios.this, UsuariosGerenciar.class);
         irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(irTela);
     }

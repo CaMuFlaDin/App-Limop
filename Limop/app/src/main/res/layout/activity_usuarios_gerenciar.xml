@@ -2,13 +2,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#EEE"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.com.limopestoques.limop.Relatorios">
+    tools:context="br.com.limopestoques.limop.UsuariosGerenciar">
 
     <LinearLayout
-        android:id="@+id/um"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -18,26 +16,22 @@
             android:layout_height="30dp" />
 
         <ImageView
-            android:onClick="PedidosSolicitados"
-            android:id="@+id/vendas"
+            android:onClick="UsuariosGerenciar"
+            android:id="@+id/users"
             android:layout_width="match_parent"
             android:layout_height="125dp"
-            app:srcCompat="@drawable/pedidosolicitados" />
+            app:srcCompat="@drawable/gerenciaruser" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="30dp" />
 
         <ImageView
-            android:onClick="ItensVendidos"
-            android:id="@+id/compras"
+            android:onClick="Acessos"
+            android:id="@+id/acessos"
             android:layout_width="match_parent"
             android:layout_height="125dp"
-            app:srcCompat="@drawable/itensvendidos" />
-        
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
+            app:srcCompat="@drawable/acessos" />
 
     </LinearLayout>
 

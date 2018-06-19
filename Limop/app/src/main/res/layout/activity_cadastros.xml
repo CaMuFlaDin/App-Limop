@@ -2,10 +2,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#EEE"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.com.limopestoques.limop.Relatorios">
+    tools:context="br.com.limopestoques.limop.Cadastros">
 
     <LinearLayout
         android:id="@+id/um"
@@ -18,26 +17,37 @@
             android:layout_height="30dp" />
 
         <ImageView
-            android:onClick="PedidosSolicitados"
-            android:id="@+id/vendas"
+            android:onClick="Clientes"
+            android:id="@+id/cadastros"
             android:layout_width="match_parent"
             android:layout_height="125dp"
-            app:srcCompat="@drawable/pedidosolicitados" />
+            app:srcCompat="@drawable/clientes" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="30dp" />
 
         <ImageView
-            android:onClick="ItensVendidos"
-            android:id="@+id/compras"
+            android:onClick="Fornecedores"
+            android:id="@+id/fornecedores"
             android:layout_width="match_parent"
             android:layout_height="125dp"
-            app:srcCompat="@drawable/itensvendidos" />
-        
+            app:srcCompat="@drawable/fornecedores" />
+
         <Space
             android:layout_width="match_parent"
-            android:layout_height="25dp" />
+            android:layout_height="30dp" />
+
+        <ImageView
+            android:onClick="Transportadoras"
+            android:id="@+id/transportadoras"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            app:srcCompat="@drawable/transportadoras" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
 
     </LinearLayout>
 

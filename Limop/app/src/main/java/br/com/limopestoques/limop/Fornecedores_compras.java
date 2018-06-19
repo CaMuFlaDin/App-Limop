@@ -189,7 +189,7 @@ public class Fornecedores_compras extends AppCompatActivity implements SearchVie
 
     public void onBackPressed(){
         super.onBackPressed();
-        Intent irTela = new Intent(Fornecedores_compras.this, Compras.class);
+        Intent irTela = new Intent(Fornecedores_compras.this, Cadastros.class);
         irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(irTela);
     }

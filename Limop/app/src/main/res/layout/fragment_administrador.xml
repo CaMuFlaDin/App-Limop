@@ -9,19 +9,13 @@
 
     <ImageView
         android:onClick="Usuarios"
-        android:layout_marginTop="10dp"
         android:id="@+id/usuarios"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         app:srcCompat="@drawable/usuarios" />
 
-    <ImageView
-        android:layout_marginBottom="15dp"
-        android:onClick="Acessos"
-        android:layout_marginTop="10dp"
-        android:id="@+id/acessos"
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/acessos" />
+        android:layout_height="30dp" />
 
 </LinearLayout>

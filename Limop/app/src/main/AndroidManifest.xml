@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -61,10 +61,6 @@
             android:name=".Acessos"
             android:label="Acessos"
             android:parentActivityName=".Acessos" />
-        <activity
-            android:name=".Compras"
-            android:label="Compras"
-            android:parentActivityName=".Compras" />
         <activity
             android:name=".Produtos_Compras"
             android:label="Produtos"
@@ -141,7 +137,10 @@
             android:name=".Produtos_Vendas"
             android:label="Vendas - Produtos"
             android:parentActivityName=".Produtos_Vendas" />
-        <activity android:name=".InsertProdVenda" />
+        <activity
+            android:name=".InsertProdVenda"
+            android:label="Inserir Venda - Produto"
+            android:parentActivityName=".InsertProdVenda" />
         <activity
             android:name=".Graficos"
             android:label="Gráficos"
@@ -178,7 +177,10 @@
             android:name=".EditarOS"
             android:label="Editar Ordem de Serviço"
             android:parentActivityName=".EditarOS" />
-        <activity android:name=".InsertOS" />
+        <activity
+            android:name=".InsertOS"
+            android:label="Inserir OS"
+            android:parentActivityName=".InsertOS" />
         <activity
             android:name=".Relatorios"
             android:label="Relatórios"
@@ -188,17 +190,25 @@
             android:label="Inventário"
             android:parentActivityName=".Inventario" />
         <activity
+            android:name=".RelatorioPedidosSolicitados"
             android:label="Relatório de Pedidos mais Solicitados"
-            android:parentActivityName=".RelatorioPedidosSolicitados"
-            android:name=".RelatorioPedidosSolicitados" />
+            android:parentActivityName=".RelatorioPedidosSolicitados" />
         <activity
+            android:name=".RelatorioItensVendidos"
             android:label="Relatório de Itens mais Vendidos"
-            android:parentActivityName=".RelatorioItensVendidos"
-            android:name=".RelatorioItensVendidos" />
+            android:parentActivityName=".RelatorioItensVendidos" />
         <activity
             android:name=".ParcelasVencer"
             android:label="Parcelas a Vencer"
-            android:parentActivityName=".ParcelasVencer"/>
+            android:parentActivityName=".ParcelasVencer" />
+        <activity
+            android:name=".Cadastros"
+            android:label="Cadastros"
+            android:parentActivityName=".Cadastros" />
+        <activity
+            android:name=".UsuariosGerenciar"
+            android:label="Usuários"
+            android:parentActivityName=".UsuariosGerenciar"/>
     </application>
 
 </manifest>

@@ -13,37 +13,18 @@ public class Vendas extends AppCompatActivity {
         setContentView(R.layout.activity_vendas);
     }
 
-    public void Clientes(View v){
-        Intent irTela = new Intent(Vendas.this, Clientes.class);
-        startActivity(irTela);
-    }
-
-    public void Produtos(View v){
+    public void ProdutosVendas(View v){
         Intent irTela = new Intent(Vendas.this, Produtos_Vendas.class);
         startActivity(irTela);
     }
 
-    public void Servicos(View v){
+    public void ServicosVendas(View v){
         Intent irTela = new Intent(Vendas.this, Servicos_Vendas.class);
         startActivity(irTela);
     }
 
     public void Parcelas(View v){
         Intent irTela = new Intent(Vendas.this, ParcelasVencer.class);
-        startActivity(irTela);
-    }
-
-    public void OrdemServico(View v){
-        Intent irTela = new Intent(Vendas.this, OrdemServico.class);
-        startActivity(irTela);
-    }
-
-    public void Graficos(View v) {
-        Intent irTela = new Intent(Vendas.this, Graficos.class);
-        startActivity(irTela);
-    }
-    public void Relatorios(View v){
-        Intent irTela = new Intent(Vendas.this, Relatorios.class);
         startActivity(irTela);
     }
 

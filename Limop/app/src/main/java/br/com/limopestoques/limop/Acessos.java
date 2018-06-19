@@ -117,7 +117,7 @@ public class Acessos extends AppCompatActivity implements SearchView.OnQueryText
 
     public void onBackPressed(){
         super.onBackPressed();
-        Intent irTela = new Intent(Acessos.this, Principal.class);
+        Intent irTela = new Intent(Acessos.this, UsuariosGerenciar.class);
         irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(irTela);
     }

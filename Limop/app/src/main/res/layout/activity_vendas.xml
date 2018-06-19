@@ -12,61 +12,42 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
-            android:onClick="Clientes"
-            android:layout_marginTop="10dp"
-            android:id="@+id/clientes"
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/clientes" />
+            android:layout_height="30dp" />
 
         <ImageView
-            android:onClick="Produtos"
-            android:layout_marginTop="10dp"
-            android:id="@+id/produtos"
+            android:onClick="ProdutosVendas"
+            android:id="@+id/produtosvendas"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/produtos" />
+            android:layout_height="125dp"
+            app:srcCompat="@drawable/produtosvenda" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
 
         <ImageView
-            android:onClick="Servicos"
-            android:layout_marginTop="10dp"
+            android:onClick="ServicosVendas"
             android:id="@+id/servicos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/servicos" />
+            android:layout_height="125dp"
+            app:srcCompat="@drawable/servicosvendas" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
 
         <ImageView
             android:onClick="Parcelas"
-            android:layout_marginTop="10dp"
-            android:id="@+id/parecelasvencer"
+            android:id="@+id/parcelas"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/parcelasvencer" />
+            android:layout_height="125dp"
+            app:srcCompat="@drawable/parcelas" />
 
-        <ImageView
-            android:onClick="OrdemServico"
-            android:layout_marginTop="10dp"
-            android:id="@+id/compras"
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ordemservico" />
-
-        <ImageView
-            android:onClick="Relatorios"
-            android:layout_marginTop="10dp"
-            android:id="@+id/relatoriovendas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/relatoriovendas" />
-
-        <ImageView
-            android:onClick="Graficos"
-            android:layout_marginTop="10dp"
-            android:id="@+id/graficos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/graficos" />
+            android:layout_height="30dp" />
 
     </LinearLayout>
 
