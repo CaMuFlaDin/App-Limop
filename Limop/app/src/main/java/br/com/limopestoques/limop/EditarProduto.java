@@ -103,7 +103,6 @@ public class EditarProduto extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item);
         fornecedores = new ArrayList<FornCompraConst>();
 
-        carregarFornecedor();
     }
 
     @Override
@@ -199,8 +198,64 @@ public class EditarProduto extends AppCompatActivity {
                 return params;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        final RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+        requestQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
+            @Override
+            public void onRequestFinished(Request<Object> request) {
+                requestQueue.removeRequestFinishedListener(this);
+
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonFornecedores.php",
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try{
+                                    JSONObject obj = new JSONObject(response);
+
+                                    JSONArray forncompraArray = obj.getJSONArray("fornecedores");
+
+                                    for (int i = 0; i < forncompraArray.length(); i++){
+                                        JSONObject forncompraObject = forncompraArray.getJSONObject(i);
+
+                                        FornCompraConst forneCompra = new FornCompraConst(forncompraObject.getString("id_fornecedor"), forncompraObject.getString("nome_fornecedor"), forncompraObject.getString("tipo"), forncompraObject.getString("telefone_comercial"));
+
+                                        fornecedores.add(forneCompra);
+                                        adapter.add(forneCompra.getNome());
+
+                                        if(idFornecedor.equals(forneCompra.getId())){
+                                            posFornecedor = adapter.getPosition(forneCompra.getNome());
+                                        }
+                                    }
+                                    fornecedor.setAdapter(adapter);
+                                    fornecedor.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            fornecedor.setSelection(posFornecedor);
+                                        }
+                                    }, 900);
+                                }catch (JSONException e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener(){
+                            @Override
+                            public void onErrorResponse(VolleyError error){
+                                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                ){
+                    protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("select", "select");
+
+                        return params;
+                    }
+                };
+
+                requestQueue.add(stringRequest);
+            }
+        });
     }
 
     public void updateProduto() {
@@ -244,53 +299,6 @@ public class EditarProduto extends AppCompatActivity {
         },params,getApplicationContext());
         RequestQueue requestQueue = Volley.newRequestQueue(EditarProduto.this);
         requestQueue.add(stringRequest);
-    }
-    public void carregarFornecedor(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonFornecedores.php",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try{
-                            JSONObject obj = new JSONObject(response);
-
-                            JSONArray forncompraArray = obj.getJSONArray("fornecedores");
-
-                            for (int i = 0; i < forncompraArray.length(); i++){
-                                JSONObject forncompraObject = forncompraArray.getJSONObject(i);
-
-                                FornCompraConst forneCompra = new FornCompraConst(forncompraObject.getString("id_fornecedor"), forncompraObject.getString("nome_fornecedor"), forncompraObject.getString("tipo"), forncompraObject.getString("telefone_comercial"));
-
-                                fornecedores.add(forneCompra);
-                                adapter.add(forneCompra.getNome());
-
-                                if(idFornecedor.equals(forneCompra.getId())){
-                                    posFornecedor = adapter.getPosition(forneCompra.getNome());
-                                }
-                            }
-                            fornecedor.setAdapter(adapter);
-                            fornecedor.setSelection(posFornecedor);
-                        }catch (JSONException e){
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse(VolleyError error){
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-        ){
-            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("select", "select");
-
-                return params;
-            }
-        };
-
-        RequestQueue rq = Volley.newRequestQueue(this);
-        rq.add(stringRequest);
     }
 
     public void onBackPressed(){

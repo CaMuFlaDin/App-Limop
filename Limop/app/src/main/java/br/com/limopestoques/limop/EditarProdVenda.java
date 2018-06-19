@@ -83,11 +83,9 @@ public class EditarProdVenda extends AppCompatActivity {
 
         adapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item);
         clientes = new ArrayList<ClientesConst>();
-        carregarCliente();
 
         adapter2 = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item);
         produtos = new ArrayList<ProdCompraConst>();
-        carregarProduto();
 
         nome_cliente.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -310,8 +308,104 @@ public class EditarProdVenda extends AppCompatActivity {
                 return params;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        final RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+        requestQueue.addRequestFinishedListener(new RequestQueue.RequestFinishedListener<Object>() {
+            @Override
+            public void onRequestFinished(Request<Object> request) {
+                requestQueue.removeRequestFinishedListener(this);
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonClientes.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray forncompraArray = obj.getJSONArray("clientes");
+
+                            for (int i = 0; i < forncompraArray.length(); i++){
+                                JSONObject forncompraObject = forncompraArray.getJSONObject(i);
+
+                                ClientesConst forneCompra = new ClientesConst(forncompraObject.getString("id_cliente"), forncompraObject.getString("nome_cliente"), forncompraObject.getString("tipo"), forncompraObject.getString("email"));
+
+                                clientes.add(forneCompra);
+                                adapter.add(forneCompra.getNome());
+
+                                if(idCliente.equals(forneCompra.getId())){
+                                    posCliente = adapter.getPosition(forneCompra.getNome());
+                                }
+                            }
+                            nome_cliente.setAdapter(adapter);
+                            nome_cliente.setSelection(posCliente);
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ){
+            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("select", "select");
+
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+
+        stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonProd.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray forncompraArray = obj.getJSONArray("produtos");
+
+                            for (int i = 0; i < forncompraArray.length(); i++){
+                                JSONObject forncompraObject = forncompraArray.getJSONObject(i);
+
+                                ProdCompraConst prodCompra = new ProdCompraConst(forncompraObject.getString("id_produto"), forncompraObject.getString("nome"), forncompraObject.getString("valor_venda"), forncompraObject.getString("disponivel_estoque"),forncompraObject.getString("fotos"));
+
+                                produtos.add(prodCompra);
+                                adapter2.add(prodCompra.getProd());
+
+                                if(idProduto.equals(prodCompra.getId())){
+                                    posProduto = adapter2.getPosition(prodCompra.getProd());
+                                }
+                            }
+                            produto.setAdapter(adapter2);
+                            produto.setSelection(posProduto);
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ){
+            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("select", "select");
+
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+            }
+        });
     }
 
     public void validarCampos(View v){
@@ -385,101 +479,6 @@ public class EditarProdVenda extends AppCompatActivity {
         },params,getApplicationContext());
         RequestQueue requestQueue = Volley.newRequestQueue(EditarProdVenda.this);
         requestQueue.add(stringRequest);
-    }
-    public void carregarCliente(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonClientes.php",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try{
-                            JSONObject obj = new JSONObject(response);
-
-                            JSONArray forncompraArray = obj.getJSONArray("clientes");
-
-                            for (int i = 0; i < forncompraArray.length(); i++){
-                                JSONObject forncompraObject = forncompraArray.getJSONObject(i);
-
-                                ClientesConst forneCompra = new ClientesConst(forncompraObject.getString("id_cliente"), forncompraObject.getString("nome_cliente"), forncompraObject.getString("tipo"), forncompraObject.getString("email"));
-
-                                clientes.add(forneCompra);
-                                adapter.add(forneCompra.getNome());
-
-                                if(idCliente.equals(forneCompra.getId())){
-                                    posCliente = adapter.getPosition(forneCompra.getNome());
-                                }
-                            }
-                            nome_cliente.setAdapter(adapter);
-                            nome_cliente.setSelection(posCliente);
-                        }catch (JSONException e){
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse(VolleyError error){
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-        ){
-            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("select", "select");
-
-                return params;
-            }
-        };
-
-        RequestQueue rq = Volley.newRequestQueue(this);
-        rq.add(stringRequest);
-    }
-
-    public void carregarProduto(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonProd.php",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try{
-                            JSONObject obj = new JSONObject(response);
-
-                            JSONArray forncompraArray = obj.getJSONArray("produtos");
-
-                            for (int i = 0; i < forncompraArray.length(); i++){
-                                JSONObject forncompraObject = forncompraArray.getJSONObject(i);
-
-                                ProdCompraConst prodCompra = new ProdCompraConst(forncompraObject.getString("id_produto"), forncompraObject.getString("nome"), forncompraObject.getString("valor_venda"), forncompraObject.getString("disponivel_estoque"),forncompraObject.getString("fotos"));
-
-                                produtos.add(prodCompra);
-                                adapter2.add(prodCompra.getProd());
-
-                                if(idProduto.equals(prodCompra.getId())){
-                                    posProduto = adapter2.getPosition(prodCompra.getProd());
-                                }
-                            }
-                            produto.setAdapter(adapter2);
-                            produto.setSelection(posProduto);
-                        }catch (JSONException e){
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse(VolleyError error){
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-        ){
-            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("select", "select");
-
-                return params;
-            }
-        };
-
-        RequestQueue rq2 = Volley.newRequestQueue(this);
-        rq2.add(stringRequest);
     }
 
     public void onBackPressed(){
