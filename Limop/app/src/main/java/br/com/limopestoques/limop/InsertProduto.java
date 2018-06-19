@@ -141,39 +141,45 @@ public class InsertProduto extends AppCompatActivity {
     }
 
     public void insertProduto() {
-        Map<String, String> params = new HashMap<String, String>();
 
-        String id_usuario = sessao.getString("id_usuario");
+        Integer disponivelEstoque = Integer.parseInt(disponivel_estoque.getText().toString());
+        Integer minEstoque        = Integer.parseInt(min_estoque.getText().toString());
+        Integer maxEstoque        = Integer.parseInt(max_estoque.getText().toString());
 
-        params.put("imgProd", imagemProduto);
+        if(disponivelEstoque > maxEstoque || disponivelEstoque < minEstoque){
+            Toast.makeText(this, "Quantidade Inválida!", Toast.LENGTH_SHORT).show();
+        }else{
+            Map<String, String> params = new HashMap<String, String>();
 
-        params.put("nome", nome_produto.getText().toString().trim());
-        params.put("tipo", categoriaProd.getSelectedItem().toString());
-        params.put("disponivel_estoque", disponivel_estoque.getText().toString().trim());
-        params.put("min_estoque", min_estoque.getText().toString().trim());
-        params.put("max_estoque", max_estoque.getText().toString().trim());
-        params.put("peso_liquido", peso_liquido.getText().toString().trim());
-        params.put("peso_bruto", peso_bruto.getText().toString().trim());
-        params.put("valor_venda", valor_venda.getText().toString().trim());
-        params.put("valor_custo", valor_custo.getText().toString().trim());
-        params.put("id_fornecedor", idFornecedor);
-        params.put("id_usuario", id_usuario);
+            String id_usuario = sessao.getString("id_usuario");
+            params.put("imgProd", imagemProduto);
+            params.put("nome", nome_produto.getText().toString().trim());
+            params.put("tipo", categoriaProd.getSelectedItem().toString());
+            params.put("disponivel_estoque", disponivel_estoque.getText().toString().trim());
+            params.put("min_estoque", min_estoque.getText().toString().trim());
+            params.put("max_estoque", max_estoque.getText().toString().trim());
+            params.put("peso_liquido", peso_liquido.getText().toString().trim());
+            params.put("peso_bruto", peso_bruto.getText().toString().trim());
+            params.put("valor_venda", valor_venda.getText().toString().trim());
+            params.put("valor_custo", valor_custo.getText().toString().trim());
+            params.put("id_fornecedor", idFornecedor);
+            params.put("id_usuario", id_usuario);
 
-        CRUD.inserir("https://limopestoques.com.br/Android/Insert/InsertProduto.php", new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response){
-                try{
-                    JSONObject jo = new JSONObject(response);
-                    String resposta = jo.getString("resposta");
-                    Toast.makeText(InsertProduto.this, resposta, Toast.LENGTH_SHORT).show();
-                    Intent irTela = new Intent(InsertProduto.this, Produtos_Compras.class);
-                    startActivity(irTela);
-                }catch (JSONException e) {
-                    e.printStackTrace();
+            CRUD.inserir("https://limopestoques.com.br/Android/Insert/InsertProduto.php", new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response){
+                    try{
+                        JSONObject jo = new JSONObject(response);
+                        String resposta = jo.getString("resposta");
+                        Toast.makeText(InsertProduto.this, resposta, Toast.LENGTH_SHORT).show();
+                        Intent irTela = new Intent(InsertProduto.this, Produtos_Compras.class);
+                        startActivity(irTela);
+                    }catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        },params,getApplicationContext());
-
+            },params,getApplicationContext());
+        }
     }
     public void carregarFornecedor(){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonFornecedores.php",
