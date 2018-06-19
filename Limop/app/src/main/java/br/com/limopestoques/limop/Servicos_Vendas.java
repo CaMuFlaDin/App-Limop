@@ -229,7 +229,7 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
         } else {
             String queryText = newText.toLowerCase();
             for(ServicosVendasConst u : servicosvendaList){
-                if(u.getProd().toLowerCase().contains(queryText)){
+                if(u.getProd().toLowerCase().contains(queryText) || u.getNome_cliente().toLowerCase().contains(queryText)|| u.getValor().toLowerCase().contains(queryText)){
                     servicosQuery.add(u);
                 }
             }
