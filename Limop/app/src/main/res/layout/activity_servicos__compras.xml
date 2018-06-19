@@ -18,8 +18,8 @@
 
             <TextView
                 android:layout_marginTop="10dp"
-                android:drawableStart="@drawable/ic_shopping_cart"
-                android:drawableLeft="@drawable/ic_shopping_cart"
+                android:drawableStart="@drawable/ic_build_black_24dp"
+                android:drawableLeft="@drawable/ic_build_black_24dp"
                 android:layout_gravity="center"
                 android:textColor="#000"
                 android:textSize="25sp"
