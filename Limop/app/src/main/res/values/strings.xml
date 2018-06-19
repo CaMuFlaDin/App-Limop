@@ -115,7 +115,6 @@
     <string name="peso_liquido">Peso Líquido</string>
     <string name="peso_bruto">Peso Bruto</string>
     <string-array name="categoriaProd">
-        <item></item>
         <item>Acabado</item>
         <item>Mercadoria para Revenda</item>
         <item>Matéria-Prima</item>
