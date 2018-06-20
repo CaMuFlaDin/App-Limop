@@ -195,8 +195,11 @@ public class Produtos_Compras extends AppCompatActivity implements SearchView.On
                                 try{
                                     JSONObject jo = new JSONObject(response);
                                     String resposta = jo.getString("resposta");
-                                    dialog.cancel();
+                                    dialog.dismiss();
                                     Toast.makeText(Produtos_Compras.this, resposta, Toast.LENGTH_SHORT).show();
+                                    if(resposta.equals("Adicionado com sucesso!")){
+                                        loadProdCompraList();
+                                    }
                                 }catch (JSONException e) {
                                     e.printStackTrace();
                                 }
