@@ -19,6 +19,8 @@
     <string name="obg">* Campos obrigatórios</string>
     <string name="sendmsg">Enviar Mensagem</string>
 
+    <string name="cancelar">Cancelar</string>
+
     <!-- Esqueceu Senha -->
     <string name="andreatta">Para recuperar sua senha, por favor informe seu e-mail no campo abaixo:</string>
     <string name="esqsenha">Enviar</string>
@@ -260,6 +262,11 @@
     <string name="title_activity_insert_fornecedor">InsertFornecedor</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="adicionar">Adicionar</string>
+    <string name="qtdAdd">Quantidade para Adicionar:</string>
+    <string name="qtdAtual">Quantidade Atual: </string>
+    <string name="titulo">Adicionar Produto - </string>
+    <string name="qtdAdd2">Quantidade para Adicionar</string>
 
     <string-array name="meses">
         <item>Janeiro</item>

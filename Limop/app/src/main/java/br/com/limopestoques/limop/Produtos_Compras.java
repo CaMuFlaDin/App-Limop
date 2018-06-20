@@ -2,6 +2,7 @@ package br.com.limopestoques.limop;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,8 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -80,6 +84,7 @@ public class Produtos_Compras extends AppCompatActivity implements SearchView.On
         menu.add(0,v.getId(),0,"Editar Produto");
         if(tipo.equals("Administrador")){
             menu.add(0,v.getId(),0,"Excluir Produto");
+            menu.add(0,v.getId(),0,"Repor este Produto");
         }
     }
 
@@ -108,7 +113,100 @@ public class Produtos_Compras extends AppCompatActivity implements SearchView.On
             }).setNegativeButton("Não", null);
             builder.create().show();
         }
+        else if(item.getTitle() == "Repor este Produto"){
+            modal(id);
+        }
         return true;
+    }
+
+    public void modal(String id){
+        final String idProdutinho;
+        idProdutinho= id;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+
+        final View view = getLayoutInflater().inflate(R.layout.modal_produto, null);
+        final TextView titulo, qtdAtual;
+        final EditText qtdAdd;
+        titulo        = view.findViewById(R.id.titulo);
+        qtdAtual      = view.findViewById(R.id.qtdAtual);
+        qtdAdd        = view.findViewById(R.id.qtd);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray servicocompraArray = obj.getJSONArray("qtd");
+                            JSONObject jo = servicocompraArray.getJSONObject(0);
+
+                            titulo.setText(titulo.getText()+" "+jo.getString("nome"));
+                            qtdAtual.setText(qtdAtual.getText()+" "+jo.getString("disponivel_estoque"));
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ){
+            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("inf", "inf");
+                params.put("id", idProdutinho);
+
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+        //titulo.setText(resposta.getAluno());
+        //campoResposta.setText(resposta.getResposta());
+        builder.setView(view);
+        builder.setPositiveButton(getResources().getString(R.string.adicionar), null)
+                .setNegativeButton(getResources().getString(R.string.cancelar), null);
+
+        final AlertDialog dialog = builder.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                Button confirmar = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                confirmar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Map<String, String> params = new HashMap<String, String>();
+
+                        params.put("updateQtd", "updateQtd");
+                        params.put("idProduto", idProdutinho);
+                        params.put("qtdAdd", qtdAdd.getText().toString());
+
+                        CRUD.inserir("https://limopestoques.com.br/Android/updateQtdBanco.php", new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response){
+                                try{
+                                    JSONObject jo = new JSONObject(response);
+                                    String resposta = jo.getString("resposta");
+                                    dialog.cancel();
+                                    Toast.makeText(Produtos_Compras.this, resposta, Toast.LENGTH_SHORT).show();
+                                }catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },params,getApplicationContext());
+                    }
+                });
+            }
+        });
+        dialog.show();
     }
 
     private void loadProdCompraList(){
