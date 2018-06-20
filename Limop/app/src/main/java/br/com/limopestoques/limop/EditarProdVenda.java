@@ -78,6 +78,8 @@ public class EditarProdVenda extends AppCompatActivity {
         cond_pagamento            = findViewById(R.id.cond_pagamento);
         forma_pagamento            = findViewById(R.id.forma_pagamento);
 
+        valor_unitario.setEnabled(false);
+
 
         button                    = (Button)findViewById(R.id.button);
 
@@ -103,6 +105,24 @@ public class EditarProdVenda extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 idProduto = produtos.get(i).getId();
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("qtd", "qtd");
+                params.put("idProduto", idProduto);
+
+                CRUD.inserir("https://limopestoques.com.br/Android/puxarValorProd.php", new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response){
+                        try{
+                            JSONObject jo = new JSONObject(response);
+                            String qtd = jo.getString("qtd");
+                            valor_unitario.setText(qtd);
+                        }catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },params,getApplicationContext());
             }
 
             @Override
@@ -470,8 +490,10 @@ public class EditarProdVenda extends AppCompatActivity {
                     JSONObject jo = new JSONObject(response);
                     String resposta = jo.getString("resposta");
                     Toast.makeText(EditarProdVenda.this, resposta, Toast.LENGTH_SHORT).show();
-                    Intent irTela = new Intent(EditarProdVenda.this, Produtos_Vendas.class);
-                    startActivity(irTela);
+                    if(resposta.equals("Editado com sucesso!")){
+                        Intent irTela = new Intent(EditarProdVenda.this, Produtos_Vendas.class);
+                        startActivity(irTela);
+                    }
                 }catch (JSONException e) {
                     e.printStackTrace();
                 }

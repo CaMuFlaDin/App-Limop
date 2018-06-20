@@ -79,6 +79,7 @@ public class EditarServVenda extends AppCompatActivity {
         cond_pagamento            = findViewById(R.id.cond_pagamento);
         forma_pagamento            = findViewById(R.id.forma_pagamento);
 
+        valor_unitario.setEnabled(false);
 
         button                    = (Button)findViewById(R.id.button);
 
@@ -104,6 +105,24 @@ public class EditarServVenda extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 idServico = servicos.get(i).getId();
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("qtd", "qtd");
+                params.put("idServico", idServico);
+
+                CRUD.inserir("https://limopestoques.com.br/Android/puxarValorServ.php", new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response){
+                        try{
+                            JSONObject jo = new JSONObject(response);
+                            String qtd = jo.getString("qtd");
+                            valor_unitario.setText(qtd);
+                        }catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },params,getApplicationContext());
             }
 
             @Override
