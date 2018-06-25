@@ -28,6 +28,7 @@ import org.json.JSONObject;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -140,10 +141,41 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
 
                             JSONArray usuarioArray = obj.getJSONArray("parcelas");
 
+                            Date hoje = Calendar.getInstance().getTime();
+
                             for (int i = 0; i < usuarioArray.length(); i++){
                                 JSONObject usuarioObject = usuarioArray.getJSONObject(i);
 
                                 ParcelasConst users = new ParcelasConst(usuarioObject.getString("id_venda"), usuarioObject.getString("nome_Cliente"),"R$ " + usuarioObject.getString("valor"), usuarioObject.getString("vencimento"), usuarioObject.getString("quantidade"), usuarioObject.getString("id_produto"), usuarioObject.getString("recebido"));
+                                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                                ParsePosition pos = new ParsePosition(0);
+                                Date vencimento = formato.parse(usuarioObject.getString("vencimento"),pos);
+
+                                Integer qtd = usuarioObject.getInt("quantidade");
+                                Integer valor = usuarioObject.getInt("valor");
+                                Integer valorTotal = qtd * valor;
+                                Boolean situacao = usuarioObject.getBoolean("recebido");
+                                Integer receber  = 0;
+                                Integer recebidoo = 0;
+                                Integer recebido = 0;
+                                Integer atrasado = 0;
+                                Integer cont_recebido = 0;
+                                Integer cont_receber = 0;
+                                Integer cont_atrasado = 0;
+
+                                if(situacao){
+                                    cont_recebido++;
+                                    recebido = valorTotal;
+                                    recebidoo += valorTotal;
+
+                                }else if(vencimento.before(hoje)){
+                                    cont_atrasado++;
+                                    atrasado += valorTotal;
+                                }else{
+                                    cont_receber++;
+                                    receber += valorTotal;
+                                }
+
 
                                 parcelasList.add(users);
                                 parcelasQuery.add(users);
