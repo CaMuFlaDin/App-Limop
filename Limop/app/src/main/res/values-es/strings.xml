@@ -137,4 +137,5 @@
     <string name="qtdAdd">Cantidad para añadir:</string>
     <string name="qtdAtual">Cantidad actual:</string>
     <string name="titulo">Añadir producto -</string>
+    <string name="qtdAdd2">Cantidad para añadir</string>
 </resources>
