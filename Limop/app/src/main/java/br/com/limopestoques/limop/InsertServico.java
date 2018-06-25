@@ -42,7 +42,7 @@ public class InsertServico extends AppCompatActivity {
 
     public void campoVazio(View v){
         if(nome.getText().length() == 0 || valor_custo.getText().length() == 0 || valor_venda.getText().length() == 0) {
-            Toast.makeText(this, "Preencha os campos corretamente!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.preenchaoscamposcorretamente),Toast.LENGTH_SHORT).show();
         }else{
             insertServico();
         }

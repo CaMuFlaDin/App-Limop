@@ -336,7 +336,7 @@ public class EditarOS extends AppCompatActivity {
                 try{
                     JSONObject jo = new JSONObject(response);
                     String resposta = jo.getString("resposta");
-                    Toast.makeText(EditarOS.this, "Editado com Sucesso!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditarOS.this, getString(R.string.editadocomsucesso), Toast.LENGTH_SHORT).show();
                     Intent irTela = new Intent(EditarOS.this, OrdemServico.class);
                     startActivity(irTela);
                 }catch (JSONException e) {
@@ -354,7 +354,7 @@ public class EditarOS extends AppCompatActivity {
                  n_serie.getText().length() == 0 || marca.getText().length() == 0 ||
                 obs_equipamento.getText().length() == 0 || descricao_defeito.getText().length() == 0 ||
                 descricao_servico.getText().length() == 0 || data_inicio.getText().length() == 0) {
-            Toast.makeText(this, "Preencha os campos corretamente!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.preenchaoscamposcorretamente),Toast.LENGTH_SHORT).show();
         }else{
             updateOS();
         }

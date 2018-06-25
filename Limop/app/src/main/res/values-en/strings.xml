@@ -138,4 +138,20 @@
     <string name="qtdAtual">"Current Quantity: "</string>
     <string name="titulo">"Add Product - "</string>
     <string name="qtdAdd2">"Add to Cart "</string>
+    <string name="editarCliente">Edit Client</string>
+    <string name="excluirCliente">Delete Customer</string>
+    <string name="desejaExcluirEsseCliente">Do you want to delete this client?</string>
+    <string name="sim">"Yes "</string>
+    <string name="nao">"No "</string>
+    <string name="cepinvalido">Cep Invalido!</string>
+    <string name="preenchaoscamposcorretamente">Fill in the fields correctly!</string>
+    <string name="editadocomsucesso">Edited with Success</string>
+    <string name="erroimagem">Error while receiving image: Image not found!</string>
+    <string name="quantidadeinvalida">Quantity Invalid!</string>
+    <string name="errosenha">The password must be greater than or equal to 7 characters!</string>
+    <string name="errosenha2">Passwords do not match</string>
+    <string name="errodownload">You must be allowed to download the report</string>
+    <string name="errointernet">No internet connection</string>
+    <string name="errousuario">"User not found "</string>
+    <string name="erropermissao">You must be allowed to download the reports!</string>
 </resources>

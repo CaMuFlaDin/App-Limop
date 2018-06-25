@@ -138,4 +138,20 @@
     <string name="qtdAtual">Cantidad actual:</string>
     <string name="titulo">Añadir producto -</string>
     <string name="qtdAdd2">Cantidad para añadir</string>
+    <string name="editarCliente">Editar Cliente</string>
+    <string name="excluirCliente">Eliminar Cliente</string>
+    <string name="desejaExcluirEsseCliente">¿Desea eliminar este cliente?</string>
+    <string name="sim">Si?</string>
+    <string name="nao">"¿Desea eliminar este cliente? "</string>
+    <string name="cepinvalido">¡Cep Invalido!</string>
+    <string name="preenchaoscamposcorretamente">¡Rellene los campos correctamente!</string>
+    <string name="editadocomsucesso">Editado con éxito</string>
+    <string name="erroimagem">Error al recibir la imagen: Imagen no encontrada!</string>
+    <string name="quantidadeinvalida">¡Cantidad Invalida!</string>
+    <string name="errosenha">"La contraseña debe ser mayor o igual a 7 caracteres! "</string>
+    <string name="errosenha2">Las contraseñas no confieren</string>
+    <string name="errodownload">¡Es necesario garantizar el permiso para descargar los informes!</string>
+    <string name="errointernet">Sin conexión a Internet</string>
+    <string name="errousuario">Usuario no encontrado</string>
+    <string name="erropermissao">¡Es necesario garantizar el permiso para descargar los informes!</string>
 </resources>

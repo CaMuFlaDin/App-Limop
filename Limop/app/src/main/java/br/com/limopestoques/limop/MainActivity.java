@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
         boolean retorno = false;
 
         if(!(is3G || isWifi)){
-            Toast.makeText(this, "Sem conexão com a internet!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.errointernet), Toast.LENGTH_SHORT).show();
             btnLogin.setEnabled(false);
             retorno = false;
         }else{
@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(irTela);
 
                     }else{
-                        Snackbar.make(findViewById(R.id.layout), "Usuário não encontrado", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(findViewById(R.id.layout), getString(R.string.errousuario), Snackbar.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

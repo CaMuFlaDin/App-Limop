@@ -88,7 +88,7 @@ public class InsertUsuario extends AppCompatActivity {
                 imagemUsuario = getStringImage(img);
             }catch(FileNotFoundException e){
                 e.printStackTrace();
-                Toast.makeText(this, "Erro ao receber a imagem: Imagem não encontrada!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.erroimagem), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -104,7 +104,7 @@ public class InsertUsuario extends AppCompatActivity {
     public void validarCampos(View v){
 
         if(nome.getText().length() == 0 || email.getText().length() == 0 || senha.getText().length() == 0 || confirmar_senha.getText().length() == 0 || data_nascimento.getText().length() == 0 || sexoGroup.getCheckedRadioButtonId() < 0 || imagemUsuario == null){
-            Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.preenchaoscamposcorretamente), Toast.LENGTH_SHORT).show();
         }else{
             insertUsuario();
         }
@@ -121,13 +121,13 @@ public class InsertUsuario extends AppCompatActivity {
 
         if(senha.getText().toString().equals(confirmar_senha.getText().toString())){
             if(senha.getText().length() < 7){
-                Toast.makeText(this, "A senha deve ser maior ou igual a 7 caracteres!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.errosenha), Toast.LENGTH_SHORT).show();
             }else{
                 senhaa = senha.getText().toString();
             }
 
         }else{
-            Toast.makeText(this, "Senhas não conferem", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.errosenha2), Toast.LENGTH_SHORT).show();
         }
 
 

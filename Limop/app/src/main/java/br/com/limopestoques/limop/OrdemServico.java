@@ -126,7 +126,7 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
         switch(requestCode){
             case oqueeuquero:
                 if(!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)){
-                    Toast.makeText(this, "É necessário garantir a permissão para download dos relatórios!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.erropermissao), Toast.LENGTH_SHORT).show();
                 }else{
                     downloadRelatorio(ultimoid);
                 }

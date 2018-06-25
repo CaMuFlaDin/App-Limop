@@ -288,4 +288,21 @@
         <item>2018</item>
     </string-array>
 
+    <string name="editarCliente">Editar Cliente</string>
+    <string name="excluirCliente">Excluir Cliente</string>
+    <string name="desejaExcluirEsseCliente">Deseja Excluir Esse Cliente ?</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="cepinvalido">Cep Invalido!</string>
+    <string name="preenchaoscamposcorretamente">"Preencha os campos corretamente!"</string>
+    <string name="editadocomsucesso">"Editado com Sucesso"</string>
+    <string name="erroimagem">"Erro ao receber a imagem: Imagem não encontrada!"</string>
+    <string name="quantidadeinvalida">"Quantidade Invalida !"</string>
+    <string name="errosenha">"A senha deve ser maior ou igual a 7 caracteres!"</string>
+    <string name="errosenha2">"A senhas não conferem"</string>
+    <string name="errodownload">"É necessário garantir a permissão para download dos relatórios!"</string>
+    <string name="errointernet">"Sem conexão com a internet"</string>
+    <string name="errousuario">"Usuário não encontrado"</string>
+    <string name="erropermissao">"É necessário garantir a permissão para download dos relatórios!"</string>
+
 </resources>

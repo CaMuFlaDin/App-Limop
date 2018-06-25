@@ -119,7 +119,7 @@ public class EditarProduto extends AppCompatActivity {
                 niv.setImageBitmap(img);
             }catch(FileNotFoundException e){
                 e.printStackTrace();
-                Toast.makeText(this, "Erro ao receber a imagem: Imagem não encontrada!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.erroimagem), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -135,7 +135,7 @@ public class EditarProduto extends AppCompatActivity {
     public void validarCampos(View v){
         if(nome_produto.getText().length() == 0 || valor_custo.getText().length() == 0 || valor_venda.getText().length() == 0 || disponivel_estoque.getText().length() == 0 || min_estoque.getText().length() == 0 || max_estoque.getText().length() == 0 ||
                 peso_liquido.getText().length() == 0 || peso_bruto.getText().length() == 0){
-            Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.preenchaoscamposcorretamente), Toast.LENGTH_SHORT).show();
         }else{
             updateProduto();
         }
