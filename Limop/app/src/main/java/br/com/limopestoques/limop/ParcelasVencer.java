@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -51,6 +52,8 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
 
     String tipo;
 
+    TextView Recebido,Receber,Atrasado,Total;
+
     List<ParcelasConst> parcelasList;
     List<ParcelasConst> parcelasQuery;
 
@@ -63,6 +66,10 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
 
         listView = (ListView)findViewById(R.id.listView);
         searchView = findViewById(R.id.sv);
+        Recebido = findViewById(R.id.recebido);
+        Receber = findViewById(R.id.receber);
+        Atrasado = findViewById(R.id.atrasado);
+        Total = findViewById(R.id.total);
         parcelasList = new ArrayList<>();
         parcelasQuery = new ArrayList<>();
 
@@ -89,7 +96,6 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
                             final String id_produto = parcelasQuery.get(i).getId_produto();
                             final String quantidade = parcelasQuery.get(i).getQuantidade();
 
-                            System.out.println(quantidade);
                             StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
                                     new Response.Listener<String>() {
                                         @Override
@@ -143,6 +149,15 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
 
                             Date hoje = Calendar.getInstance().getTime();
 
+                            Double recebidoo = 0.0;
+                            Double receber  = 0.0;
+                            Double atrasado = 0.0;
+                            Integer cont_recebido = 0;
+                            Integer cont_receber = 0;
+                            Integer cont_atrasado = 0;
+                            Integer cont_total = 0;
+                            Double Totalzao = 0.0;
+
                             for (int i = 0; i < usuarioArray.length(); i++){
                                 JSONObject usuarioObject = usuarioArray.getJSONObject(i);
 
@@ -152,22 +167,17 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
                                 Date vencimento = formato.parse(usuarioObject.getString("vencimento"),pos);
 
                                 Integer qtd = usuarioObject.getInt("quantidade");
-                                Integer valor = usuarioObject.getInt("valor");
-                                Integer valorTotal = qtd * valor;
-                                Boolean situacao = usuarioObject.getBoolean("recebido");
-                                Integer receber  = 0;
-                                Integer recebidoo = 0;
-                                Integer recebido = 0;
-                                Integer atrasado = 0;
-                                Integer cont_recebido = 0;
-                                Integer cont_receber = 0;
-                                Integer cont_atrasado = 0;
+                                Double valor = usuarioObject.getDouble("valor");
+                                Double valorTotal = (double) qtd * valor;
+                                int situacaoInt = usuarioObject.getInt("recebido");
+                                boolean situacao=false;
+                                if(situacaoInt == 1){
+                                    situacao = true;
+                                }
 
                                 if(situacao){
                                     cont_recebido++;
-                                    recebido = valorTotal;
                                     recebidoo += valorTotal;
-
                                 }else if(vencimento.before(hoje)){
                                     cont_atrasado++;
                                     atrasado += valorTotal;
@@ -175,11 +185,18 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
                                     cont_receber++;
                                     receber += valorTotal;
                                 }
-
-
+                                Totalzao += valorTotal;
+                                cont_total = cont_atrasado + cont_receber + cont_recebido;
+                                Totalzao += valorTotal;
                                 parcelasList.add(users);
                                 parcelasQuery.add(users);
+
                             }
+                            Atrasado.setText("Atrasado: "+String.format("%.2f", atrasado+(cont_atrasado)));
+                            Receber.setText("Receber: "+String.format("%.2f", receber+(cont_receber)));
+                            Recebido.setText("Recebido: "+String.format("%.2f", recebidoo+(cont_recebido)));
+                            Total.setText("Total: "+String.format("%.2f", Totalzao+(cont_total)));
+
 
                             ListViewParcelas adapter = new ListViewParcelas(parcelasList, getApplicationContext());
 
