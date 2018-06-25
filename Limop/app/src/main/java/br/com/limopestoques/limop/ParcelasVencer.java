@@ -170,12 +170,8 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
                                 Double valor = usuarioObject.getDouble("valor");
                                 Double valorTotal = (double) qtd * valor;
                                 int situacaoInt = usuarioObject.getInt("recebido");
-                                boolean situacao=false;
-                                if(situacaoInt == 1){
-                                    situacao = true;
-                                }
 
-                                if(situacao){
+                                if(situacaoInt == 1){
                                     cont_recebido++;
                                     recebidoo += valorTotal;
                                 }else if(vencimento.before(hoje)){
@@ -187,15 +183,14 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
                                 }
                                 Totalzao += valorTotal;
                                 cont_total = cont_atrasado + cont_receber + cont_recebido;
-                                Totalzao += valorTotal;
                                 parcelasList.add(users);
                                 parcelasQuery.add(users);
 
                             }
-                            Atrasado.setText("Atrasado: "+String.format("%.2f", atrasado+(cont_atrasado)));
-                            Receber.setText("Receber: "+String.format("%.2f", receber+(cont_receber)));
-                            Recebido.setText("Recebido: "+String.format("%.2f", recebidoo+(cont_recebido)));
-                            Total.setText("Total: "+String.format("%.2f", Totalzao+(cont_total)));
+                            Atrasado.setText("Atrasado: "+String.format("%.2f", atrasado)+"("+cont_atrasado+")");
+                            Receber.setText("Receber: "+String.format("%.2f", receber)+"("+cont_receber+")");
+                            Recebido.setText("Recebido: "+String.format("%.2f", recebidoo)+"("+cont_recebido+")");
+                            Total.setText("Total: "+String.format("%.2f", Totalzao)+"("+cont_total+")");
 
 
                             ListViewParcelas adapter = new ListViewParcelas(parcelasList, getApplicationContext());
