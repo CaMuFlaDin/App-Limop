@@ -23,7 +23,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import br.com.limopestoques.limop.CRUD.CRUD;
 import br.com.limopestoques.limop.Construtoras.ClientesConst;
-import br.com.limopestoques.limop.Construtoras.UsuariosConst;
 import br.com.limopestoques.limop.ListView.ListViewClientes;
 import br.com.limopestoques.limop.Sessao.Sessao;
 
@@ -80,9 +79,9 @@ public class Clientes extends AppCompatActivity implements SearchView.OnQueryTex
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle(R.string.acoes);
-        menu.add(0,v.getId(),0,"Editar Cliente");
+        menu.add(0,v.getId(),0,getString(R.string.editarCliente));
         if(tipo.equals("Administrador")){
-            menu.add(0,v.getId(),0,"Excluir Cliente");
+            menu.add(0,v.getId(),0,getString(R.string.excluirCliente));
         }
     }
 
@@ -92,23 +91,23 @@ public class Clientes extends AppCompatActivity implements SearchView.OnQueryTex
         Integer pos = info.position;
         ClientesConst clientes = clientesQuery.get(pos);
         final String id = clientes.getId();
-        if(item.getTitle() == "Editar Cliente"){
+        if(item.getTitle() == getString(R.string.editarCliente)){
             Intent irTela = new Intent(Clientes.this, EditarCliente.class);
             irTela.putExtra("id", id);
             startActivity(irTela);
         }
-        else if(item.getTitle() == "Excluir Cliente"){
+        else if(item.getTitle() == getString(R.string.excluirCliente)){
             AlertDialog.Builder builder = new AlertDialog.Builder(Clientes.this);
             builder.setCancelable(true);
-            builder.setTitle("Deseja excluir esse Cliente?");
-            builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            builder.setTitle(getString(R.string.desejaExcluirEsseCliente));
+            builder.setPositiveButton(getString(R.string.sim), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     CRUD.excluir(JSON_URL, id.toString(), getApplicationContext());
                     listView.setAdapter(null);
                     loadClientesList();
                 }
-            }).setNegativeButton("Não", null);
+            }).setNegativeButton(getString(R.string.nao), null);
             builder.create().show();
         }
         return true;

@@ -431,7 +431,7 @@ public class EditarProdVenda extends AppCompatActivity {
     public void validarCampos(View v){
         if(data_venda.getText().length() == 0 || qtd.getText().length() == 0 || valor_unitario.getText().length() == 0
                 || desconto.getText().length() == 0  || vencimento.getText().length() == 0) {
-            Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.preenchaoscamposcorretamente), Toast.LENGTH_SHORT).show();
         }else{
             updatevenda();
         }

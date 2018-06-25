@@ -108,7 +108,7 @@ public class InsertProduto extends AppCompatActivity {
         if(nome_produto.getText().length() == 0 || imagemProduto == null || valor_custo.getText().length() == 0 ||
                 valor_venda.getText().length() == 0 || disponivel_estoque.getText().length() == 0 || min_estoque.getText().length() == 0 ||
                 max_estoque.toString().length() == 0 || peso_liquido.getText().length() == 0 || peso_bruto.getText().length() == 0){
-            Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.preenchaoscamposcorretamente), Toast.LENGTH_SHORT).show();
         }else{
             insertProduto();
         }
@@ -127,7 +127,7 @@ public class InsertProduto extends AppCompatActivity {
                 imagemProduto = getStringImage(img);
             }catch(FileNotFoundException e){
                 e.printStackTrace();
-                Toast.makeText(this, "Erro ao receber a imagem: Imagem não encontrada!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.erroimagem), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -147,7 +147,7 @@ public class InsertProduto extends AppCompatActivity {
         Integer maxEstoque        = Integer.parseInt(max_estoque.getText().toString());
 
         if(disponivelEstoque > maxEstoque || disponivelEstoque < minEstoque){
-            Toast.makeText(this, "Quantidade Inválida!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.quantidadeinvalida), Toast.LENGTH_SHORT).show();
         }else{
             Map<String, String> params = new HashMap<String, String>();
 
