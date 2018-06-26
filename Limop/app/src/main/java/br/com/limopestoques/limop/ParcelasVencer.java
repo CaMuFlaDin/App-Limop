@@ -52,7 +52,16 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
 
     String tipo;
 
-    TextView Recebido,Receber,Atrasado,Total;
+    TextView Link;
+
+    Double recebidoo = 0.0;
+    Double receber  = 0.0;
+    Double atrasado = 0.0;
+    Integer cont_recebido = 0;
+    Integer cont_receber = 0;
+    Integer cont_atrasado = 0;
+    Integer cont_total = 0;
+    Double Totalzao = 0.0;
 
     List<ParcelasConst> parcelasList;
     List<ParcelasConst> parcelasQuery;
@@ -65,11 +74,8 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
         setContentView(R.layout.activity_parcelas_vencer);
 
         listView = (ListView)findViewById(R.id.listView);
+        Link = findViewById(R.id.link);
         searchView = findViewById(R.id.sv);
-        Recebido = findViewById(R.id.recebido);
-        Receber = findViewById(R.id.receber);
-        Atrasado = findViewById(R.id.atrasado);
-        Total = findViewById(R.id.total);
         parcelasList = new ArrayList<>();
         parcelasQuery = new ArrayList<>();
 
@@ -126,14 +132,25 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
 
                             RequestQueue requestQueue = Volley.newRequestQueue(ParcelasVencer.this);
                             requestQueue.add(stringRequest);
-                            parcelasList.clear();
-                            loadParcelasList();
+                            //parcelasList.clear();
+                            //loadParcelasList();
                         }
                     }).setNegativeButton("Não", null);
                     builder.create().show();
                 }
             }
         });
+    }
+
+    public void cards(View v){
+        Intent i = new Intent(ParcelasVencer.this, valores_parcelas.class);
+        i.putExtra("valorAtrasado", atrasado);
+        i.putExtra("valorReceber", receber);
+        i.putExtra("valorRecebido", recebidoo);
+        i.putExtra("contAtrasado", cont_atrasado);
+        i.putExtra("contReceber", cont_receber);
+        i.putExtra("contRecebido", cont_recebido);
+        startActivity(i);
     }
 
     private void loadParcelasList(){
@@ -148,15 +165,6 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
                             JSONArray usuarioArray = obj.getJSONArray("parcelas");
 
                             Date hoje = Calendar.getInstance().getTime();
-
-                            Double recebidoo = 0.0;
-                            Double receber  = 0.0;
-                            Double atrasado = 0.0;
-                            Integer cont_recebido = 0;
-                            Integer cont_receber = 0;
-                            Integer cont_atrasado = 0;
-                            Integer cont_total = 0;
-                            Double Totalzao = 0.0;
 
                             for (int i = 0; i < usuarioArray.length(); i++){
                                 JSONObject usuarioObject = usuarioArray.getJSONObject(i);
@@ -187,11 +195,10 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
                                 parcelasQuery.add(users);
 
                             }
-                            Atrasado.setText("Atrasado: "+String.format("%.2f", atrasado)+"("+cont_atrasado+")");
-                            Receber.setText("Receber: "+String.format("%.2f", receber)+"("+cont_receber+")");
-                            Recebido.setText("Recebido: "+String.format("%.2f", recebidoo)+"("+cont_recebido+")");
-                            Total.setText("Total: "+String.format("%.2f", Totalzao)+"("+cont_total+")");
-
+                            //Atrasado.setText("Atrasado: "+String.format("%.2f", atrasado)+"("+cont_atrasado+")");
+                            //Receber.setText("Receber: "+String.format("%.2f", receber)+"("+cont_receber+")");
+                            //Recebido.setText("Recebido: "+String.format("%.2f", recebidoo)+"("+cont_recebido+")");
+                            //Total.setText("Total: "+String.format("%.2f", Totalzao)+"("+cont_total+")");
 
                             ListViewParcelas adapter = new ListViewParcelas(parcelasList, getApplicationContext());
 

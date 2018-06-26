@@ -304,5 +304,6 @@
     <string name="errointernet">"Sem conexão com a internet"</string>
     <string name="errousuario">"Usuário não encontrado"</string>
     <string name="erropermissao">"É necessário garantir a permissão para download dos relatórios!"</string>
+    <string name="consultar">Consultar valores arrecadados</string>
 
 </resources>

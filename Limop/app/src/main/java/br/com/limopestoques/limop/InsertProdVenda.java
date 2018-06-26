@@ -147,7 +147,12 @@ public class InsertProdVenda extends AppCompatActivity {
                 || desconto.getText().length() == 0  || vencimento.getText().length() == 0) {
                     Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
         }else{
-            insertProduto();
+            Integer Desconto = Integer.parseInt(desconto.getText().toString());
+            if(Desconto > 100){
+                Toast.makeText(this, "Porcentagem inválida!", Toast.LENGTH_SHORT).show();
+            }else{
+                insertProduto();
+            }
         }
     }
 

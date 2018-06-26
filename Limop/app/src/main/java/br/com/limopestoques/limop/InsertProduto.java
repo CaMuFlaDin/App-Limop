@@ -1,9 +1,11 @@
 package br.com.limopestoques.limop;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -23,6 +25,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+
 import br.com.limopestoques.limop.CRUD.CRUD;
 import br.com.limopestoques.limop.Construtoras.FornCompraConst;
 import br.com.limopestoques.limop.Sessao.Sessao;
@@ -149,37 +156,47 @@ public class InsertProduto extends AppCompatActivity {
         if(disponivelEstoque > maxEstoque || disponivelEstoque < minEstoque){
             Toast.makeText(this, getString(R.string.quantidadeinvalida), Toast.LENGTH_SHORT).show();
         }else{
-            Map<String, String> params = new HashMap<String, String>();
-
-            String id_usuario = sessao.getString("id_usuario");
-            params.put("imgProd", imagemProduto);
-            params.put("nome", nome_produto.getText().toString().trim());
-            params.put("tipo", categoriaProd.getSelectedItem().toString());
-            params.put("disponivel_estoque", disponivel_estoque.getText().toString().trim());
-            params.put("min_estoque", min_estoque.getText().toString().trim());
-            params.put("max_estoque", max_estoque.getText().toString().trim());
-            params.put("peso_liquido", peso_liquido.getText().toString().trim());
-            params.put("peso_bruto", peso_bruto.getText().toString().trim());
-            params.put("valor_venda", valor_venda.getText().toString().trim());
-            params.put("valor_custo", valor_custo.getText().toString().trim());
-            params.put("id_fornecedor", idFornecedor);
-            params.put("id_usuario", id_usuario);
-
-            CRUD.inserir("https://limopestoques.com.br/Android/Insert/InsertProduto.php", new Response.Listener<String>() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(InsertProduto.this);
+            builder.setCancelable(true);
+            builder.setTitle("Deseja realmente cadastrar esta quantidade deste produto?");
+            builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                 @Override
-                public void onResponse(String response){
-                    try{
-                        JSONObject jo = new JSONObject(response);
-                        String resposta = jo.getString("resposta");
-                        Toast.makeText(InsertProduto.this, resposta, Toast.LENGTH_SHORT).show();
-                        Intent irTela = new Intent(InsertProduto.this, Produtos_Compras.class);
-                        startActivity(irTela);
-                    }catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Map<String, String> params = new HashMap<String, String>();
+
+                    String id_usuario = sessao.getString("id_usuario");
+                    params.put("imgProd", imagemProduto);
+                    params.put("nome", nome_produto.getText().toString().trim());
+                    params.put("tipo", categoriaProd.getSelectedItem().toString());
+                    params.put("disponivel_estoque", disponivel_estoque.getText().toString().trim());
+                    params.put("min_estoque", min_estoque.getText().toString().trim());
+                    params.put("max_estoque", max_estoque.getText().toString().trim());
+                    params.put("peso_liquido", peso_liquido.getText().toString().trim());
+                    params.put("peso_bruto", peso_bruto.getText().toString().trim());
+                    params.put("valor_venda", valor_venda.getText().toString().trim());
+                    params.put("valor_custo", valor_custo.getText().toString().trim());
+                    params.put("id_fornecedor", idFornecedor);
+                    params.put("id_usuario", id_usuario);
+
+                    CRUD.inserir("https://limopestoques.com.br/Android/Insert/InsertProduto.php", new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response){
+                            try{
+                                JSONObject jo = new JSONObject(response);
+                                String resposta = jo.getString("resposta");
+                                Toast.makeText(InsertProduto.this, resposta, Toast.LENGTH_SHORT).show();
+                                Intent irTela = new Intent(InsertProduto.this, Produtos_Compras.class);
+                                startActivity(irTela);
+                            }catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    },params,getApplicationContext());
                 }
-            },params,getApplicationContext());
+            }).setNegativeButton("Não", null);
+            builder.create().show();
         }
+
     }
     public void carregarFornecedor(){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://limopestoques.com.br/Android/Json/jsonFornecedores.php",

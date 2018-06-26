@@ -36,41 +36,27 @@
         </LinearLayout>
 
 
-        <TextView
+        <!--TextView
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
-            android:textColor="#000"
             android:textSize="25sp"
-            android:id="@+id/atrasado"
+            android:id="@+id/link"
+            android:onClick="cards"
+            android:text="@string/consultar"
+            android:linksClickable="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/-->
 
         <TextView
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
-            android:textColor="#000"
             android:textSize="25sp"
-            android:id="@+id/receber"
+            android:id="@+id/link"
+            android:onClick="cards"
+            android:text="@string/consultar"
+            android:linksClickable="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:textColor="#000"
-            android:textSize="25sp"
-            android:id="@+id/recebido"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:textColor="#000"
-            android:textSize="25sp"
-            android:id="@+id/total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
         <ListView
             android:id="@+id/listView"

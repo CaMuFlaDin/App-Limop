@@ -154,4 +154,5 @@
     <string name="errointernet">Sin conexión a Internet</string>
     <string name="errousuario">Usuario no encontrado</string>
     <string name="erropermissao">¡Es necesario garantizar el permiso para descargar los informes!</string>
+    <string name="consultar">Consultar los valores recaudados</string>
 </resources>

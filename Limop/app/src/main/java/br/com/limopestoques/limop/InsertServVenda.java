@@ -140,7 +140,12 @@ public class InsertServVenda extends AppCompatActivity {
                 || desconto.getText().length() == 0  || vencimento.getText().length() == 0) {
             Toast.makeText(this, getString(R.string.preenchaoscamposcorretamente), Toast.LENGTH_SHORT).show();
         }else{
-            insertServico();
+            Integer Desconto = Integer.parseInt(desconto.getText().toString());
+            if(Desconto > 100){
+                Toast.makeText(this, "Porcentagem inválida!", Toast.LENGTH_SHORT).show();
+            }else{
+                insertServico();
+            }
         }
     }
 

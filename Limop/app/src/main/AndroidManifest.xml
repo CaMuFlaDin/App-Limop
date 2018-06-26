@@ -208,7 +208,8 @@
         <activity
             android:name=".UsuariosGerenciar"
             android:label="Usuários"
-            android:parentActivityName=".UsuariosGerenciar"/>
+            android:parentActivityName=".UsuariosGerenciar" />
+        <activity android:name=".valores_parcelas"></activity>
     </application>
 
 </manifest>

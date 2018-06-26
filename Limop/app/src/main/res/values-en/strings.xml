@@ -154,4 +154,5 @@
     <string name="errointernet">No internet connection</string>
     <string name="errousuario">"User not found "</string>
     <string name="erropermissao">You must be allowed to download the reports!</string>
+    <string name="consultar">Check values ​​collected</string>
 </resources>
