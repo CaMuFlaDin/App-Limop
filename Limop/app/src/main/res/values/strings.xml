@@ -305,4 +305,6 @@
     <string name="errousuario">"Usuário não encontrado"</string>
     <string name="erropermissao">"É necessário garantir a permissão para download dos relatórios!"</string>
 
+    <string name="sair">Sair</string>
+
 </resources>
