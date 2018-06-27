@@ -40,9 +40,12 @@ import java.io.InputStream;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class InsertProdVenda extends AppCompatActivity {
 
@@ -80,6 +83,14 @@ public class InsertProdVenda extends AppCompatActivity {
         forma_pagamento           = findViewById(R.id.forma_pagamento);
 
         valor_unitario.setEnabled(false);
+
+        SimpleDateFormat formataData = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = new Date();
+        String dataFormatada = formataData.format(data);
+
+        data_venda.setEnabled(false);
+        data_venda.setText(dataFormatada);
+
 
         sessao = new Sessao(InsertProdVenda.this);
 
@@ -147,7 +158,7 @@ public class InsertProdVenda extends AppCompatActivity {
                 || desconto.getText().length() == 0  || vencimento.getText().length() == 0) {
                     Toast.makeText(this, "Preencha os campos corretamente!", Toast.LENGTH_SHORT).show();
         }else{
-            Integer Desconto = Integer.parseInt(desconto.getText().toString());
+            Double Desconto = Double.parseDouble(desconto.getText().toString());
             if(Desconto > 100){
                 Toast.makeText(this, "Porcentagem inválida!", Toast.LENGTH_SHORT).show();
             }else{

@@ -76,6 +76,13 @@ public class InsertServVenda extends AppCompatActivity {
 
         sessao = new Sessao(InsertServVenda.this);
 
+        SimpleDateFormat formataData = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = new Date();
+        String dataFormatada = formataData.format(data);
+
+        data_venda.setEnabled(false);
+        data_venda.setText(dataFormatada);
+
 
         button                    = (Button)findViewById(R.id.button);
 
@@ -140,7 +147,7 @@ public class InsertServVenda extends AppCompatActivity {
                 || desconto.getText().length() == 0  || vencimento.getText().length() == 0) {
             Toast.makeText(this, getString(R.string.preenchaoscamposcorretamente), Toast.LENGTH_SHORT).show();
         }else{
-            Integer Desconto = Integer.parseInt(desconto.getText().toString());
+            Double Desconto = Double.parseDouble(desconto.getText().toString());
             if(Desconto > 100){
                 Toast.makeText(this, "Porcentagem inválida!", Toast.LENGTH_SHORT).show();
             }else{

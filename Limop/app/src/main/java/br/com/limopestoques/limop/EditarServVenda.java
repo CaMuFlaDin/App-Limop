@@ -81,6 +81,8 @@ public class EditarServVenda extends AppCompatActivity {
 
         valor_unitario.setEnabled(false);
 
+        data_venda.setEnabled(false);
+
         button                    = (Button)findViewById(R.id.button);
 
         adapter = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item);
@@ -435,7 +437,7 @@ public class EditarServVenda extends AppCompatActivity {
                 || desconto.getText().length() == 0  || vencimento.getText().length() == 0) {
             Toast.makeText(this, getString(R.string.preenchaoscamposcorretamente), Toast.LENGTH_SHORT).show();
         }else{
-            Integer Desconto = Integer.parseInt(desconto.getText().toString());
+            Double Desconto = Double.parseDouble(desconto.getText().toString());
             if(Desconto > 100){
                 Toast.makeText(this, "Porcentagem inválida!", Toast.LENGTH_SHORT).show();
             }else{
