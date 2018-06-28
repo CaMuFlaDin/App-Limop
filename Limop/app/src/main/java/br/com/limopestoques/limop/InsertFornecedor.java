@@ -92,7 +92,6 @@ public class InsertFornecedor extends AppCompatActivity {
                         public void onResponse(String response) {
                             try {
                                 JSONObject objeto = new JSONObject(response);
-                                if(!objeto.getBoolean("erro")){
                                     String enderecoO = objeto.getString("logradouro"), cidadeO = objeto.getString("localidade"),
                                             estadoO = objeto.getString("uf"),bairroO = objeto.getString("bairro");
 
@@ -100,9 +99,6 @@ public class InsertFornecedor extends AppCompatActivity {
                                     cidade.setText(cidadeO);
                                     estado.setText(estadoO);
                                     bairro.setText(bairroO);
-                                }else{
-                                    Toast.makeText(InsertFornecedor.this, "CEP Inválido!", Toast.LENGTH_SHORT).show();
-                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
