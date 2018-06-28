@@ -67,8 +67,8 @@ public class CRUD {
                     boolean deletado = resposta.getBoolean("resposta");
                     if(deletado){
                         Toast.makeText(contexto, "Excluído com sucesso!", Toast.LENGTH_LONG).show();
-                    }else{
-                        Toast.makeText(contexto, "Falha na exclusão!", Toast.LENGTH_LONG).show();
+                    }if(deletado == false){
+                        Toast.makeText(contexto, "Não é possível excluir este registro!", Toast.LENGTH_LONG).show();
                     }
                 }catch(JSONException e){
                     e.printStackTrace();
