@@ -198,7 +198,7 @@ public class Transportadoras_Compras extends AppCompatActivity implements Search
 
     public void onBackPressed(){
         super.onBackPressed();
-        Intent irTela = new Intent(Transportadoras_Compras.this, Principal.class);
+        Intent irTela = new Intent(Transportadoras_Compras.this, Cadastros.class);
         irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(irTela);
     }
