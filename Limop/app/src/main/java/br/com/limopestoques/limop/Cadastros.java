@@ -13,6 +13,7 @@ public class Cadastros extends AppCompatActivity {
         setContentView(R.layout.activity_cadastros);
     }
 
+    //Mudanças de Tela
     public void Clientes(View v){
         Intent irTela = new Intent(Cadastros.this, Clientes.class);
         startActivity(irTela);

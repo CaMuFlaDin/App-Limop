@@ -63,6 +63,7 @@ public class InsertFornecedor extends AppCompatActivity {
 
         sessao = new Sessao(InsertFornecedor.this);
 
+        //Mascaras
         MaskEditTextChangedListener maskCPF = new MaskEditTextChangedListener("###.###.###-##",cpf);
         MaskEditTextChangedListener maskCEP = new MaskEditTextChangedListener("##.###-###",cep);
         MaskEditTextChangedListener maskRG = new MaskEditTextChangedListener("##.###.###-#",rg);
@@ -79,6 +80,7 @@ public class InsertFornecedor extends AppCompatActivity {
         tel_celular.addTextChangedListener(maskTELCE);
         tel_comercial.addTextChangedListener(maskTELCO);
 
+        //Recuperar CEP
         cep.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -92,7 +94,6 @@ public class InsertFornecedor extends AppCompatActivity {
                         public void onResponse(String response) {
                             try {
                                 JSONObject objeto = new JSONObject(response);
-                                if(!objeto.getBoolean("erro")){
                                     String enderecoO = objeto.getString("logradouro"), cidadeO = objeto.getString("localidade"),
                                             estadoO = objeto.getString("uf"),bairroO = objeto.getString("bairro");
 
@@ -100,9 +101,6 @@ public class InsertFornecedor extends AppCompatActivity {
                                     cidade.setText(cidadeO);
                                     estado.setText(estadoO);
                                     bairro.setText(bairroO);
-                                }else{
-                                    Toast.makeText(InsertFornecedor.this, "CEP Inválido!", Toast.LENGTH_SHORT).show();
-                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -182,6 +180,7 @@ public class InsertFornecedor extends AppCompatActivity {
 
         String id_usuario = sessao.getString("id_usuario");
 
+        //Enviar dados para o Insert
         params.put("nome", nome.getText().toString().trim());
         params.put("cnpj", cnpj.getText().toString().trim());
         params.put("razao", razao.getText().toString().trim());

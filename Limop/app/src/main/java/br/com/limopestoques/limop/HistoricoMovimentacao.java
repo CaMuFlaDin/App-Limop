@@ -33,6 +33,7 @@ public class HistoricoMovimentacao extends AppCompatActivity {
 
     ListView listView;
 
+    //Json
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Json/jsonHistorico.php";
 
     List<HistoricoConst> historicoList;
@@ -69,11 +70,13 @@ public class HistoricoMovimentacao extends AppCompatActivity {
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome Json
                             JSONArray forncompraArray = obj.getJSONArray("entradas");
 
                             for (int i = 0; i < forncompraArray.length(); i++){
                                 JSONObject forncompraObject = forncompraArray.getJSONObject(i);
 
+                                //Recuperar dados
                                 HistoricoConst produto = new HistoricoConst(forncompraObject.getString("data"), "Fornecedor:"+forncompraObject.getString("nome_fornecedor"), "Quantidade movimentada:"+forncompraObject.getString("qtd"), "Valor:"+forncompraObject.getString("valor_venda"),"Entrada");
 
                                 historicoList.add(produto);

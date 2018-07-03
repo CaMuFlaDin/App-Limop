@@ -83,6 +83,7 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
         tipo = sessao.getString("tipo");
     }
 
+    //Criar Opções Context menu
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -94,6 +95,7 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
         }
     }
 
+    //Permissao
     public boolean checkPermissions(){
         int readPermission = ContextCompat.checkSelfPermission(OrdemServico.this, Manifest.permission.READ_EXTERNAL_STORAGE);
         if(readPermission == PackageManager.PERMISSION_GRANTED) {
@@ -104,6 +106,7 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
         return false;
     }
 
+    //Download Relatorio
     public void downloadRelatorio(String id){
         String url = "https://www.limopestoques.com.br/PDF/os.php?id=" + id;
 
@@ -121,6 +124,7 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
         }
     }
 
+    //Verificar Permissao
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults){
         switch(requestCode){
@@ -134,6 +138,7 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
         }
     }
 
+    //Opcao selecionada - Context Menu
     @Override
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
@@ -182,11 +187,13 @@ public class OrdemServico extends AppCompatActivity implements SearchView.OnQuer
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome Json
                             JSONArray ordemservicoArray = obj.getJSONArray("os");
 
                             for (int i = 0; i < ordemservicoArray.length(); i++){
                                 JSONObject ordemdeservicoObject = ordemservicoArray.getJSONObject(i);
 
+                                //Recuperar dados
                                 OrdemServicoConst os = new OrdemServicoConst(ordemdeservicoObject.getString("id_os"),ordemdeservicoObject.getString("nome_cliente"),ordemdeservicoObject.getString("nome"), "Número do pedido: " + ordemdeservicoObject.getString("id_os"));
 
                                 ordemservicoList.add(os);

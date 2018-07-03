@@ -28,6 +28,7 @@ public class EditarServico extends AppCompatActivity {
 
     private String id;
 
+    //Json
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Update/updateServico.php";
 
     EditText nome;
@@ -63,9 +64,11 @@ public class EditarServico extends AppCompatActivity {
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome Json
                             JSONArray servicocompraArray = obj.getJSONArray("servicos");
                             JSONObject jo = servicocompraArray.getJSONObject(0);
 
+                            //Inserir dados no EditText
                             nome.setText(jo.getString("nome_servico"));
                             valor_custo.setText(jo.getString("valor_custo"));
                             valor_venda.setText(jo.getString("valor_venda"));
@@ -105,6 +108,7 @@ public class EditarServico extends AppCompatActivity {
     public void updateServico() {
         Map<String, String> params = new HashMap<String, String>();
 
+        //Enviar dados para o Update
         params.put("update", "update");
         params.put("id_servico", id);
         params.put("nome", nome.getText().toString().trim());

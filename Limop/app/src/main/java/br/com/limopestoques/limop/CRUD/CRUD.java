@@ -43,6 +43,7 @@ public class CRUD {
         return sr;
     }
 
+    //Método de reutilização para Update
     public static StringRequest editar(String url, Response.Listener listener, final Map<String,String> params, final Context context){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, listener, new Response.ErrorListener() {
             @Override
@@ -58,6 +59,7 @@ public class CRUD {
         return stringRequest;
     }
 
+    //Método de reutilização para Delete
     public static void excluir(String url, final String id, final Context contexto){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -67,8 +69,8 @@ public class CRUD {
                     boolean deletado = resposta.getBoolean("resposta");
                     if(deletado){
                         Toast.makeText(contexto, "Excluído com sucesso!", Toast.LENGTH_LONG).show();
-                    }else{
-                        Toast.makeText(contexto, "Falha na exclusão!", Toast.LENGTH_LONG).show();
+                    }if(deletado == false){
+                        Toast.makeText(contexto, "Não é possível excluir este registro!", Toast.LENGTH_LONG).show();
                     }
                 }catch(JSONException e){
                     e.printStackTrace();
@@ -91,6 +93,8 @@ public class CRUD {
         RequestQueue rq = Volley.newRequestQueue(contexto);
         rq.add(stringRequest);
     }
+
+    //Método de reutilização para Insert
     public static void inserir(String url, Response.Listener<String> responseListener, final Map<String, String> params, final Context contexto){
         StringRequest sr = new StringRequest(Request.Method.POST, url, responseListener, new Response.ErrorListener() {
             @Override

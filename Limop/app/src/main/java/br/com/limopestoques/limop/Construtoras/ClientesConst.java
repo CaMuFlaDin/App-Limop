@@ -8,6 +8,7 @@ public class ClientesConst {
 
     String id,nome, tipo, email;
 
+    //Dados
     public ClientesConst(String id, String nome, String tipo, String email){
         this.id = id;
         this.nome = nome;
@@ -16,6 +17,7 @@ public class ClientesConst {
         this.email = email;
     }
 
+    //Getters
     public String getId() {return this.id; }
 
     public String getNome(){

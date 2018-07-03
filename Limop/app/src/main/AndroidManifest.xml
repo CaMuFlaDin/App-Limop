@@ -209,7 +209,10 @@
             android:name=".UsuariosGerenciar"
             android:label="Usuários"
             android:parentActivityName=".UsuariosGerenciar" />
-        <activity android:name=".valores_parcelas"></activity>
+        <activity
+            android:name=".valores_parcelas"
+            android:label="Valores - Parcelas"
+            android:parentActivityName=".valores_parcelas"/>
     </application>
 
 </manifest>

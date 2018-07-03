@@ -9,12 +9,16 @@ import android.content.SharedPreferences;
  */
 
 public class Sessao {
+
+    //Name Preferences
     public static final String PREFS_NAME = "LimopPreferences";
 
+    //Contexto
     private static Context contexto;
 
     private static SharedPreferences preferences;
 
+    //Get Preferenses
     private SharedPreferences getPreferences() {
         return preferences;
     }
@@ -28,6 +32,7 @@ public class Sessao {
         return preferences.edit();
     }
 
+    //Setters
     public void setString(String name, String value){
         SharedPreferences.Editor editor = getEditor();
         editor.putString(name,value);
@@ -40,6 +45,8 @@ public class Sessao {
 
         editor.commit();
     }
+
+    //Getters
     public String getString(String name){
         String retorno = getPreferences().getString(name, null);
 

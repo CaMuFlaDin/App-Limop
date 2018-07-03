@@ -55,9 +55,8 @@ public class EditarProdVenda extends AppCompatActivity {
     ArrayAdapter<String> adapter2;
     ArrayList<ProdCompraConst> produtos;
 
+    //Json
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Update/updateProdVenda.php";
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +139,7 @@ public class EditarProdVenda extends AppCompatActivity {
 
         carregar();
 
+        //Mascaras
         MaskEditTextChangedListener maskData = new MaskEditTextChangedListener("##/##/####",data_venda);
         MaskEditTextChangedListener maskDataVenc = new MaskEditTextChangedListener("##/##/####",vencimento);
         data_venda.addTextChangedListener(maskData);
@@ -153,9 +153,11 @@ public class EditarProdVenda extends AppCompatActivity {
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Json
                             JSONArray prodvendaArray = obj.getJSONArray("vendas");
                             JSONObject jo = prodvendaArray.getJSONObject(0);
 
+                            //Formatar Data
                             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                             ParsePosition pos = new ParsePosition(0);
                             Date data = formato.parse(jo.getString("data_venda"),pos);
@@ -164,6 +166,7 @@ public class EditarProdVenda extends AppCompatActivity {
 
                             data_venda.setText(date);
 
+                            //Inserir dados no EditText
                             qtd.setText(jo.getString("quantidade"));
                             valor_unitario.setText(jo.getString("valor"));
                             desconto.setText(jo.getString("desconto"));
@@ -445,6 +448,7 @@ public class EditarProdVenda extends AppCompatActivity {
     public void updatevenda() {
         Map<String, String> params = new HashMap<String, String>();
 
+        //Formatar data para o envio
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         ParsePosition pos = new ParsePosition(0);
         Date data = formato.parse(data_venda.getText().toString(),pos);
@@ -470,6 +474,7 @@ public class EditarProdVenda extends AppCompatActivity {
             }
         }
 
+        //Enviar dados para o Update
         params.put("update", "update");
         params.put("id_venda", id);
         params.put("data_venda", date);

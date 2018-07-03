@@ -80,11 +80,13 @@ public class SituacaoEstoque extends AppCompatActivity implements SearchView.OnQ
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome Json
                             JSONArray prodcompraArray = obj.getJSONArray("produtos");
 
                             for (int i = 0; i < prodcompraArray.length(); i++){
                                 JSONObject produtoObject = prodcompraArray.getJSONObject(i);
 
+                                //Recuperar dados
                                 ProdCompraConst prodCompra = new ProdCompraConst(produtoObject.getString("id_produto"),produtoObject.getString("nome"),"R$ "+produtoObject.getString("valor_venda"), produtoObject.getString("disponivel_estoque")+" Disponíveis no estoque",produtoObject.getString("fotos"));
 
                                 prodcompraList.add(prodCompra);

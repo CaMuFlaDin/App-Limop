@@ -92,6 +92,7 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
         tipo = sessao.getString("tipo");
     }
 
+    //Opcoes Context Menu
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -103,6 +104,7 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
         menu.add(0,v.getId(),0,"Gerar Contrato desta venda");
     }
 
+    //Opcao selecionada Context Menu
     @Override
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
@@ -143,6 +145,7 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
         return true;
     }
 
+    //Check Permissao
     public boolean checkPermissions(){
         int readPermission = ContextCompat.checkSelfPermission(Servicos_Vendas.this, Manifest.permission.READ_EXTERNAL_STORAGE);
         if(readPermission == PackageManager.PERMISSION_GRANTED) {
@@ -153,6 +156,7 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
         return false;
     }
 
+    //Download Relatorio
     public void downloadRelatorio(String id){
         String url = "https://www.limopestoques.com.br/PDF/contrato.php?id=" + id+"&tipo=" +tipoVenda;
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
@@ -178,11 +182,13 @@ public class Servicos_Vendas extends AppCompatActivity implements SearchView.OnQ
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome Json
                             JSONArray servvendaArray = obj.getJSONArray("vendas");
 
                             for (int i = 0; i < servvendaArray.length(); i++){
                                 JSONObject servicoObject = servvendaArray.getJSONObject(i);
 
+                                //Recuperar dados
                                 ServicosVendasConst servVenda = new ServicosVendasConst(servicoObject.getString("id_venda"),servicoObject.getString("nomeServico"),"R$ "+servicoObject.getString("valor"), "Quantidade: "+servicoObject.getString("quantidade"),"Cliente: "+servicoObject.getString("nome_Cliente"));
 
                                 servicosvendaList.add(servVenda);

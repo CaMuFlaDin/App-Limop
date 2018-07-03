@@ -45,7 +45,6 @@ public class Contato extends AppCompatActivity {
 
     public void enviarMensagem(View v){
 
-
         if(nome.getText().length() == 0 || email.getText().length() == 0 || telefone.getText().length() == 0 || assunto.getText().length() == 0 || mensagem.getText().length() == 0){
            try{
                Toast.makeText(this, R.string.camposVazios, Toast.LENGTH_SHORT).show();
@@ -57,9 +56,12 @@ public class Contato extends AppCompatActivity {
             enviarEmail();
         }
     }
+
+    //Método de envio
     public void enviarEmail() {
         Map<String, String> params = new HashMap<String, String>();
 
+        //Dados que sera enviado
         params.put("nome", nome.getText().toString().trim());
         params.put("email", email.getText().toString().trim());
         params.put("telefone", telefone.getText().toString().trim());

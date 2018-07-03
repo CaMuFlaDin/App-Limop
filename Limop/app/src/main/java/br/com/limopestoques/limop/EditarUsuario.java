@@ -45,6 +45,7 @@ public class EditarUsuario extends AppCompatActivity {
 
     private String id;
 
+    //Json
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Update/updateUsuario.php";
 
     EditText nome;
@@ -142,10 +143,12 @@ public class EditarUsuario extends AppCompatActivity {
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome Json
                             JSONArray servicocompraArray = obj.getJSONArray("usuario");
                             JSONObject jo = servicocompraArray.getJSONObject(0);
                             String sexoUser;
 
+                            //Inserir dados no EditText
                             nome.setText(jo.getString("nome_usuario"));
                             String tipoUser = jo.getString("tipo");
                             email.setText(jo.getString("email"));

@@ -80,6 +80,7 @@ public class Usuarios extends AppCompatActivity implements SearchView.OnQueryTex
         startActivity(irTela);
     }
 
+    //Opcoes Context Menu
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -91,6 +92,7 @@ public class Usuarios extends AppCompatActivity implements SearchView.OnQueryTex
 
     }
 
+    //Opcao selecionada ContextMenu
     @Override
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
@@ -128,11 +130,13 @@ public class Usuarios extends AppCompatActivity implements SearchView.OnQueryTex
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome Json
                             JSONArray usuarioArray = obj.getJSONArray("usuarios");
 
                             for (int i = 0; i < usuarioArray.length(); i++){
                                 JSONObject usuarioObject = usuarioArray.getJSONObject(i);
 
+                                //Recuperar dados
                                 UsuariosConst users = new UsuariosConst(usuarioObject.getString("id_usuario"),usuarioObject.getString("nome_usuario"), usuarioObject.getString("email"),usuarioObject.getString("tipo"),usuarioObject.getString("foto"));
 
                                 usuariosList.add(users);

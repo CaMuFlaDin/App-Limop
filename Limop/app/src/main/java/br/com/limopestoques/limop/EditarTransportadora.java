@@ -31,6 +31,7 @@ public class EditarTransportadora extends AppCompatActivity {
 
     private String id;
 
+    //Json
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Update/updateTransportadora.php";
 
     EditText nome;
@@ -75,6 +76,7 @@ public class EditarTransportadora extends AppCompatActivity {
         valor_frete    = findViewById(R.id.valor_frete);
         btn            = findViewById(R.id.button);
 
+        //Mascaras
         MaskEditTextChangedListener maskCEP = new MaskEditTextChangedListener("##.###-###",cep);
         MaskEditTextChangedListener maskCNPJ = new MaskEditTextChangedListener("##.###.###/####-##",cnpj);
         MaskEditTextChangedListener maskINSC = new MaskEditTextChangedListener("###.###.###.###",inscricao);
@@ -87,6 +89,7 @@ public class EditarTransportadora extends AppCompatActivity {
         tel_celular.addTextChangedListener(maskTELCE);
         tel_comercial.addTextChangedListener(maskTELCO);
 
+        //Recuperar CEP
         cep.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -100,7 +103,6 @@ public class EditarTransportadora extends AppCompatActivity {
                         public void onResponse(String response) {
                             try {
                                 JSONObject objeto = new JSONObject(response);
-                                if(!objeto.getBoolean("erro")){
                                     String enderecoO = objeto.getString("logradouro"), cidadeO = objeto.getString("localidade"),
                                             estadoO = objeto.getString("uf"),bairroO = objeto.getString("bairro");
 
@@ -108,9 +110,6 @@ public class EditarTransportadora extends AppCompatActivity {
                                     cidade.setText(cidadeO);
                                     estado.setText(estadoO);
                                     bairro.setText(bairroO);
-                                }else{
-                                    Toast.makeText(EditarTransportadora.this, "CEP Inválido!", Toast.LENGTH_SHORT).show();
-                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -156,9 +155,11 @@ public class EditarTransportadora extends AppCompatActivity {
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome Json
                             JSONArray servicocompraArray = obj.getJSONArray("transportadoras");
                             JSONObject jo = servicocompraArray.getJSONObject(0);
 
+                            //Inserir dados no EditText
                             nome.setText(jo.getString("nome_transportadora"));
                             cnpj.setText(jo.getString("cnpj"));
                             razao.setText(jo.getString("razao_social"));
@@ -203,6 +204,7 @@ public class EditarTransportadora extends AppCompatActivity {
     public void updateTrans() {
         Map<String, String> params = new HashMap<String, String>();
 
+        //Enviar dados para o Update
         params.put("update", "update");
         params.put("id_transportadora", id);
         params.put("nome", nome.getText().toString().trim());

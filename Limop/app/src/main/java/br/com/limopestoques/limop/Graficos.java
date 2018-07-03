@@ -62,6 +62,7 @@ public class Graficos extends AppCompatActivity {
 
         btn.setEnabled(false);
 
+        //Mascaras
         MaskEditTextChangedListener maskDataI = new MaskEditTextChangedListener("##/##/####",data_inicio);
         data_inicio.addTextChangedListener(maskDataI);
 

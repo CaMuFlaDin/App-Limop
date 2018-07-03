@@ -21,9 +21,10 @@ import br.com.limopestoques.limop.R;
 
 public class ListViewHistorico extends ArrayAdapter<HistoricoConst> {
 
+    //Lista
     private List<HistoricoConst> historicolist;
 
-
+    //Contexto
     private Context mCtx;
 
     public ListViewHistorico(List<HistoricoConst> servicocompraList, Context mCtx){
@@ -38,7 +39,7 @@ public class ListViewHistorico extends ArrayAdapter<HistoricoConst> {
         return historicolist.size();
     }
 
-
+    //Dados para a listagem
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = LayoutInflater.from(mCtx);

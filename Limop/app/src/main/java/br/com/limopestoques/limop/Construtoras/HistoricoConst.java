@@ -12,6 +12,7 @@ public class HistoricoConst {
 
     String data, intermediario, qtd, valor,tipo;
 
+    //Dados
     public HistoricoConst(String data, String inter, String qtd, String valor,String tipo){
         this.data = data;
         this.intermediario = inter;
@@ -20,6 +21,7 @@ public class HistoricoConst {
         this.tipo = tipo;
     }
 
+    //Get com Data formatada
     public String getData(){
         SimpleDateFormat formato2 = new SimpleDateFormat("yyyy-MM-dd");
         ParsePosition pos2 = new ParsePosition(0);
@@ -29,6 +31,7 @@ public class HistoricoConst {
         return date2;
     }
 
+    //Getters
     public String getInter(){
         return this.intermediario;
     }

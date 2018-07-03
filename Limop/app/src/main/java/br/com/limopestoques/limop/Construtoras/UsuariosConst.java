@@ -8,6 +8,7 @@ public class UsuariosConst {
 
     String id,name, email,tipo,imagem;
 
+    //Dados
     public UsuariosConst(String id, String name, String email, String tipo,String img){
         this.id = id;
         this.name = name;
@@ -16,6 +17,7 @@ public class UsuariosConst {
         this.imagem = img;
     }
 
+    //Getters
     public String getId(){
         return  this.id;
     }

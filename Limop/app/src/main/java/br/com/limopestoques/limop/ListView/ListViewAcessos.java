@@ -20,9 +20,11 @@ import java.util.List;
 
 public class ListViewAcessos extends ArrayAdapter<AcessosConst> {
 
+    //Listas
     private List<AcessosConst> acessosList;
     private List<AcessosConst> orig;
 
+    //Contexto
     private Context mCtx;
 
     public ListViewAcessos(List<AcessosConst> acessosList, Context mCtx){
@@ -37,6 +39,7 @@ public class ListViewAcessos extends ArrayAdapter<AcessosConst> {
         return acessosList.size();
     }
 
+    //Filter para pesquisa
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -72,6 +75,7 @@ public class ListViewAcessos extends ArrayAdapter<AcessosConst> {
         };
     }
 
+    //Dados para a listagem
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = LayoutInflater.from(mCtx);

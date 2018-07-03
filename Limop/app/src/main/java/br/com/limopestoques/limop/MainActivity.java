@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject obj = new JSONObject(response);
                     boolean validar = obj.getBoolean("validar");
                     if(validar) {
+                        //Validar Login - Facebook
                         JSONObject objeto = obj.getJSONObject("resposta");
                         String id_usuario = objeto.getString("id_usuario");
                         String email = objeto.getString("email");
@@ -222,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject jo = new JSONObject(response);
                     boolean valido = jo.getBoolean("validar");
                     if (valido == true) {
+                        //Verificar Login
                         JSONObject quei = jo.getJSONObject("resposta");
 
                         String id_usuario = quei.getString("id_usuario");

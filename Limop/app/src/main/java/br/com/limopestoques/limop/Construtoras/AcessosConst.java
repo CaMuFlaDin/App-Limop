@@ -12,12 +12,14 @@ public class AcessosConst {
 
     String user, qtd, data;
 
+    //Dados
     public AcessosConst(String user, String qtd, String data){
         this.user = user;
         this.qtd = qtd;
         this.data = data;
     }
 
+    //Getters
     public String getUser(){
         return this.user;
     }
@@ -26,6 +28,7 @@ public class AcessosConst {
         return this.qtd;
     }
 
+    //Get com Data Formatada
     public String getData(){
         SimpleDateFormat formato2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         ParsePosition pos2 = new ParsePosition(0);

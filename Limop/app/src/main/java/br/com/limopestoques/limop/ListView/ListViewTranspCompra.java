@@ -20,9 +20,11 @@ import java.util.List;
 
 public class ListViewTranspCompra extends ArrayAdapter<TranspCompraConst> {
 
+    //Listas
     private List<TranspCompraConst> transpcompraList;
     private List<TranspCompraConst> orig;
 
+    //Contexto
     private Context mCtx;
 
     public ListViewTranspCompra(List<TranspCompraConst> transpcompraList, Context mCtx){
@@ -36,6 +38,7 @@ public class ListViewTranspCompra extends ArrayAdapter<TranspCompraConst> {
         return transpcompraList.size();
     }
 
+    //Filter para a pesquisa
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -71,6 +74,7 @@ public class ListViewTranspCompra extends ArrayAdapter<TranspCompraConst> {
         };
     }
 
+    //Dados para a listagem
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = LayoutInflater.from(mCtx);

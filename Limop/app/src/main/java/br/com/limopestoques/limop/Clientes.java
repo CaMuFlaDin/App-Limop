@@ -37,6 +37,7 @@ import java.util.Map;
 
 public class Clientes extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
+    //Json
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Json/jsonClientes.php";
 
     ListView listView;
@@ -75,6 +76,7 @@ public class Clientes extends AppCompatActivity implements SearchView.OnQueryTex
         startActivity(irTela);
     }
 
+    //Dados do Context menu
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -85,6 +87,7 @@ public class Clientes extends AppCompatActivity implements SearchView.OnQueryTex
         }
     }
 
+    //Context menu
     @Override
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
@@ -122,11 +125,13 @@ public class Clientes extends AppCompatActivity implements SearchView.OnQueryTex
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome do Json
                             JSONArray clientesArray = obj.getJSONArray("clientes");
 
                             for (int i = 0; i < clientesArray.length(); i++){
                                 JSONObject clienteObject = clientesArray.getJSONObject(i);
 
+                                //Dados que serão retirados do Json
                                 ClientesConst clientes = new ClientesConst(clienteObject.getString("id_cliente"), clienteObject.getString("nome_cliente"), clienteObject.getString("tipo"), clienteObject.getString("email"));
 
                                 clientesList.add(clientes);
@@ -185,7 +190,7 @@ public class Clientes extends AppCompatActivity implements SearchView.OnQueryTex
 
     public void onBackPressed(){
         super.onBackPressed();
-        Intent irTela = new Intent(Clientes.this, Vendas.class);
+        Intent irTela = new Intent(Clientes.this, Cadastros.class);
         irTela.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(irTela);
     }

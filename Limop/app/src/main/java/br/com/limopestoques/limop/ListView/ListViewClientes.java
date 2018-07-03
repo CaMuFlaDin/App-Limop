@@ -20,7 +20,10 @@ import java.util.List;
 
 public class ListViewClientes extends ArrayAdapter<ClientesConst>{
 
+    //Lista
     private List<ClientesConst> clientesList;
+
+    //Contexto
     private Context mCtx;
 
     public ListViewClientes(List<ClientesConst> clientesList, Context mCtx){
@@ -29,6 +32,7 @@ public class ListViewClientes extends ArrayAdapter<ClientesConst>{
         this.mCtx = mCtx;
     }
 
+    //Dados para a listagem
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = LayoutInflater.from(mCtx);
 

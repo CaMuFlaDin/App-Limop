@@ -8,6 +8,7 @@ public class ServicosCompraConst {
 
     private String id ,nome, custo, venda;
 
+    //Dados
     public ServicosCompraConst(String id,String nome, String custo, String venda){
         this.id = id;
         this.nome = nome;
@@ -19,6 +20,7 @@ public class ServicosCompraConst {
         return this.id;
     }
 
+    //Getters
     public String getNome(){
         return this.nome;
     }

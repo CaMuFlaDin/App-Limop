@@ -31,9 +31,9 @@ import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 
 public class EditarFornecedor extends AppCompatActivity {
 
-
     private String id;
 
+    //Json
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Update/updateFornecedor.php";
 
     EditText nome;
@@ -92,6 +92,7 @@ public class EditarFornecedor extends AppCompatActivity {
         cpf_text       = findViewById(R.id.cpf_text);
         rg_text        = findViewById(R.id.rg_text);
 
+        //Mascaras
         MaskEditTextChangedListener maskCPF = new MaskEditTextChangedListener("###.###.###-##",cpf);
         MaskEditTextChangedListener maskCEP = new MaskEditTextChangedListener("##.###-###",cep);
         MaskEditTextChangedListener maskRG = new MaskEditTextChangedListener("##.###.###-#",rg);
@@ -108,6 +109,7 @@ public class EditarFornecedor extends AppCompatActivity {
         tel_celular.addTextChangedListener(maskTELCE);
         tel_comercial.addTextChangedListener(maskTELCO);
 
+        //Formatação e recuperação - CEP
         cep.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -121,7 +123,6 @@ public class EditarFornecedor extends AppCompatActivity {
                         public void onResponse(String response) {
                             try {
                                 JSONObject objeto = new JSONObject(response);
-                                if(!objeto.getBoolean("erro")){
                                     String enderecoO = objeto.getString("logradouro"), cidadeO = objeto.getString("localidade"),
                                             estadoO = objeto.getString("uf"),bairroO = objeto.getString("bairro");
 
@@ -129,9 +130,6 @@ public class EditarFornecedor extends AppCompatActivity {
                                     cidade.setText(cidadeO);
                                     estado.setText(estadoO);
                                     bairro.setText(bairroO);
-                                }else{
-                                    Toast.makeText(EditarFornecedor.this, getString(R.string.cepinvalido), Toast.LENGTH_SHORT).show();
-                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -209,9 +207,11 @@ public class EditarFornecedor extends AppCompatActivity {
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome do Json
                             JSONArray servicocompraArray = obj.getJSONArray("fornecedor");
                             JSONObject jo = servicocompraArray.getJSONObject(0);
 
+                            //Inserir dados no EditText
                             nome.setText(jo.getString("nome_fornecedor"));
                             String tipoPessoa = jo.getString("tipo");
                             cnpj.setText(jo.getString("cnpj"));
@@ -287,6 +287,7 @@ public class EditarFornecedor extends AppCompatActivity {
     public void updateFornecedor() {
         Map<String, String> params = new HashMap<String, String>();
 
+        //Dados enviados para o Update
         params.put("update", "update");
         params.put("id_fornecedor", id);
         params.put("tipo",tipo.getSelectedItem().toString());

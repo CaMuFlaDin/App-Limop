@@ -8,6 +8,7 @@ public class ProdCompraConst {
 
     String id,prod, valor, qtd,img;
 
+    //Dados
     public ProdCompraConst(String id, String prod, String valor, String qtd,String img){
         this.id = id;
         this.prod = prod;
@@ -16,6 +17,7 @@ public class ProdCompraConst {
         this.img = img;
     }
 
+    //Getters
     public String getId() {
         return this.id;
     }

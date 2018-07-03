@@ -20,9 +20,12 @@ import br.com.limopestoques.limop.R;
  */
 
 public class ListViewServicosVendas extends ArrayAdapter<ServicosVendasConst> {
+
+    //Listas
     private List<ServicosVendasConst> servicocompraList;
     private List<ServicosVendasConst> orig;
 
+    //Contexto
     private Context mCtx;
 
     public ListViewServicosVendas(List<ServicosVendasConst> servicocompraList, Context mCtx){
@@ -37,6 +40,7 @@ public class ListViewServicosVendas extends ArrayAdapter<ServicosVendasConst> {
         return servicocompraList.size();
     }
 
+    //Filter para a pesquisa
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -72,6 +76,7 @@ public class ListViewServicosVendas extends ArrayAdapter<ServicosVendasConst> {
         };
     }
 
+    //Dados para a listagem
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = LayoutInflater.from(mCtx);

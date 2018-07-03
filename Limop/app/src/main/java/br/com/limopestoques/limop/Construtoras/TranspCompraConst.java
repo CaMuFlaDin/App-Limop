@@ -8,6 +8,7 @@ public class TranspCompraConst {
 
     private String id, nome, email, valor;
 
+    //Dados
     public TranspCompraConst(String id, String nome, String email, String valor){
         this.id = id;
         this.nome = nome;
@@ -15,6 +16,7 @@ public class TranspCompraConst {
         this.valor = valor;
     }
 
+    //Getters
     public String getId() {
         return this.id;
     }
