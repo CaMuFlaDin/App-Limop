@@ -84,6 +84,8 @@ public class EditarProduto extends AppCompatActivity {
         niv                       = findViewById(R.id.img);
 
         disponivel_estoque.setEnabled(false);
+        valor_custo.setEnabled(false);
+        valor_venda.setEnabled(false);
 
         try{
             Intent i = getIntent();
