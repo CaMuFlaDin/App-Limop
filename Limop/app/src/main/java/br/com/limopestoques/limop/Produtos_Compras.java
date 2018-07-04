@@ -128,10 +128,11 @@ public class Produtos_Compras extends AppCompatActivity implements SearchView.On
 
         final View view = getLayoutInflater().inflate(R.layout.modal_produto, null);
         final TextView titulo, qtdAtual;
-        final EditText qtdAdd;
+        final EditText qtdAdd,valorCusto;
         titulo        = view.findViewById(R.id.titulo);
         qtdAtual      = view.findViewById(R.id.qtdAtual);
         qtdAdd        = view.findViewById(R.id.qtd);
+        valorCusto    = view.findViewById(R.id.valorCusto);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, JSON_URL,
                 new Response.Listener<String>() {
@@ -188,6 +189,7 @@ public class Produtos_Compras extends AppCompatActivity implements SearchView.On
                         params.put("updateQtd", "updateQtd");
                         params.put("idProduto", idProdutinho);
                         params.put("qtdAdd", qtdAdd.getText().toString());
+                        params.put("valorCusto", valorCusto.getText().toString());
 
                         CRUD.inserir("https://limopestoques.com.br/Android/updateQtdBanco.php", new Response.Listener<String>() {
                             @Override
