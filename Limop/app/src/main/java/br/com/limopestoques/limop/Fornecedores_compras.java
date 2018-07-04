@@ -120,11 +120,13 @@ public class Fornecedores_compras extends AppCompatActivity implements SearchVie
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome Json
                             JSONArray forncompraArray = obj.getJSONArray("fornecedores");
 
                             for (int i = 0; i < forncompraArray.length(); i++){
                                 JSONObject forncompraObject = forncompraArray.getJSONObject(i);
 
+                                //Recuperar dados
                                 FornCompraConst forneCompra = new FornCompraConst(forncompraObject.getString("id_fornecedor"), forncompraObject.getString("nome_fornecedor"), forncompraObject.getString("tipo"), forncompraObject.getString("telefone_comercial"));
 
                                 forncompraList.add(forneCompra);

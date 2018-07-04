@@ -120,6 +120,7 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
 
                                     Map<String, String> params = new HashMap<>();
 
+                                    //Update efetivar venda
                                     params.put("update", "update");
                                     params.put("id_venda", id_venda);
                                     params.put("id_produto", id_produto);
@@ -169,7 +170,10 @@ public class ParcelasVencer extends AppCompatActivity implements SearchView.OnQu
                             for (int i = 0; i < usuarioArray.length(); i++){
                                 JSONObject usuarioObject = usuarioArray.getJSONObject(i);
 
+                                //Recuperar dados
                                 ParcelasConst users = new ParcelasConst(usuarioObject.getString("id_venda"), usuarioObject.getString("nome_Cliente"),"R$ " + usuarioObject.getString("valor"), usuarioObject.getString("vencimento"), usuarioObject.getString("quantidade"), usuarioObject.getString("id_produto"), usuarioObject.getString("recebido"));
+
+                                //Formatar data
                                 SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                                 ParsePosition pos = new ParsePosition(0);
                                 Date vencimento = formato.parse(usuarioObject.getString("vencimento"),pos);

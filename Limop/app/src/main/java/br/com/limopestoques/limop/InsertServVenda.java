@@ -161,6 +161,7 @@ public class InsertServVenda extends AppCompatActivity {
 
         String id_usuario = sessao.getString("id_usuario");
 
+        //Formtar data
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         ParsePosition pos = new ParsePosition(0);
         Date data = formato.parse(data_venda.getText().toString(),pos);
@@ -173,6 +174,7 @@ public class InsertServVenda extends AppCompatActivity {
         formato2 = new SimpleDateFormat("yyyy-MM-dd");
         String vencimento = formato2.format(data2);
 
+        //Enviar dados para o Insert
         params.put("data_venda", date);
         params.put("status", stts_negociacao.getSelectedItem().toString());
         params.put("contrato", contrato.getSelectedItem().toString());

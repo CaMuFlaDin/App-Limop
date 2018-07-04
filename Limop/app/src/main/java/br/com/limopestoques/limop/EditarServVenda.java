@@ -56,6 +56,7 @@ public class EditarServVenda extends AppCompatActivity {
     ArrayAdapter<String> adapter2;
     ArrayList<ServicosCompraConst> servicos;
 
+    //Json
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Update/updateServVenda.php";
 
 
@@ -155,15 +156,18 @@ public class EditarServVenda extends AppCompatActivity {
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome do Json
                             JSONArray prodvendaArray = obj.getJSONArray("vendas");
                             JSONObject jo = prodvendaArray.getJSONObject(0);
 
+                            //Formatar data para mostrar no EditText
                             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                             ParsePosition pos = new ParsePosition(0);
                             Date data = formato.parse(jo.getString("data_venda"),pos);
                             formato = new SimpleDateFormat("dd/MM/yyyy");
                             String date = formato.format(data);
 
+                            //Inserir dados no EditText
                             data_venda.setText(date);
 
                             qtd.setText(jo.getString("quantidade"));
@@ -449,6 +453,7 @@ public class EditarServVenda extends AppCompatActivity {
     public void updatevenda() {
         Map<String, String> params = new HashMap<String, String>();
 
+        //Formatar data para o envio
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         ParsePosition pos = new ParsePosition(0);
         Date data = formato.parse(data_venda.getText().toString(),pos);
@@ -473,6 +478,7 @@ public class EditarServVenda extends AppCompatActivity {
             }
         }
 
+        //Enviar dados para o Update
         params.put("update", "update");
         params.put("id_venda", id);
         params.put("data_venda", date);

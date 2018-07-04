@@ -23,9 +23,11 @@ import java.util.List;
 
 public class ListViewUsuarios extends ArrayAdapter<UsuariosConst>{
 
+    //Listas
     private List<UsuariosConst> usuariosList;
     private List<UsuariosConst> orig;
 
+    //Contexto
     private Context mCtx;
 
     public ListViewUsuarios(List<UsuariosConst> usuariosList, Context mCtx){
@@ -34,12 +36,12 @@ public class ListViewUsuarios extends ArrayAdapter<UsuariosConst>{
         this.mCtx = mCtx;
     }
 
-
     @Override
     public int getCount() {
         return usuariosList.size();
     }
 
+    //Filter para a pesquisa
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -75,6 +77,7 @@ public class ListViewUsuarios extends ArrayAdapter<UsuariosConst>{
         };
     }
 
+    //Dados para a listagem
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = LayoutInflater.from(mCtx);

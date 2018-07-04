@@ -77,6 +77,7 @@ public class Produtos_Compras extends AppCompatActivity implements SearchView.On
         tipo = sessao.getString("tipo");
     }
 
+    //Opcoes Context Menu
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -88,6 +89,7 @@ public class Produtos_Compras extends AppCompatActivity implements SearchView.On
         }
     }
 
+    //Opcao selecionada Context Menu
     @Override
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
@@ -223,11 +225,13 @@ public class Produtos_Compras extends AppCompatActivity implements SearchView.On
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome Json
                             JSONArray prodcompraArray = obj.getJSONArray("produtos");
 
                             for (int i = 0; i < prodcompraArray.length(); i++){
                                 JSONObject produtoObject = prodcompraArray.getJSONObject(i);
 
+                                //Recuperar dados
                                 ProdCompraConst prodCompra = new ProdCompraConst(produtoObject.getString("id_produto"),produtoObject.getString("nome"),"R$ "+produtoObject.getString("valor_venda"), produtoObject.getString("disponivel_estoque")+" Disponíveis no estoque",produtoObject.getString("fotos"));
 
                                 prodcompraList.add(prodCompra);

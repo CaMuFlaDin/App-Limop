@@ -59,6 +59,7 @@ public class EditarProduto extends AppCompatActivity {
 
     private String id;
 
+    //Json
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Update/updateProduto.php";
 
     ArrayAdapter<String> adapter;
@@ -107,6 +108,7 @@ public class EditarProduto extends AppCompatActivity {
 
     }
 
+    //Receber Img
     @Override
     public void onActivityResult(int reqCode, int resultCode, Intent data){
         super.onActivityResult(reqCode, resultCode, data);
@@ -123,6 +125,8 @@ public class EditarProduto extends AppCompatActivity {
             }
         }
     }
+
+    //Pegar img
     public String getStringImage(Bitmap imagem){
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         imagem.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
@@ -149,9 +153,11 @@ public class EditarProduto extends AppCompatActivity {
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome do Json
                             JSONArray servicocompraArray = obj.getJSONArray("produtos");
                             JSONObject jo = servicocompraArray.getJSONObject(0);
 
+                            //Inserir dados no EditText
                             nome_produto.setText(jo.getString("nome"));
                             disponivel_estoque.setText(jo.getString("disponivel_estoque"));
                             min_estoque.setText(jo.getString("min_estoque"));
@@ -163,6 +169,7 @@ public class EditarProduto extends AppCompatActivity {
                             String categoria = jo.getString("categoria");
                             imagem = jo.getString("fotos");
 
+                            //Recuperar Img
                             ImageLoader il = Singleton.getInstance(EditarProduto.this).getImageLoader();
                             niv.setImageUrl("https://limopestoques.com.br/Index_adm/produtos/imgs/"+ imagem,il);
 
@@ -263,6 +270,7 @@ public class EditarProduto extends AppCompatActivity {
     public void updateProduto() {
         Map<String, String> params = new HashMap<String, String>();
 
+        //Caso imagem não seja alterada
         if(img == null){
             params.put("imgProd", imagem);
         }else{
@@ -270,6 +278,8 @@ public class EditarProduto extends AppCompatActivity {
             params.put("imgProd", imagemProduto);
             params.put("novaImg", "nada");
         }
+
+        //Enviar dados para o Update
         params.put("update", "update");
         params.put("id_produto", id);
         params.put("nome", nome_produto.getText().toString().trim());

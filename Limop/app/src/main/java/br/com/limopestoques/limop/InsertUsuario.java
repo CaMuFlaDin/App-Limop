@@ -71,6 +71,7 @@ public class InsertUsuario extends AppCompatActivity {
             }
         });
 
+        //Mascaras
         MaskEditTextChangedListener maskData = new MaskEditTextChangedListener("##/##/####",data_nascimento);
         data_nascimento.addTextChangedListener(maskData);
     }
@@ -130,14 +131,14 @@ public class InsertUsuario extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.errosenha2), Toast.LENGTH_SHORT).show();
         }
 
-
-
+        //Formatar data
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         ParsePosition pos = new ParsePosition(0);
         Date data = formato.parse(data_nascimento.getText().toString(),pos);
         formato = new SimpleDateFormat("yyyy-MM-dd");
         String date = formato.format(data);
 
+        //Enviar dados para o Insert
         params.put("img", imagemUsuario);
         params.put("nome", nome.getText().toString().trim());
         params.put("email", email.getText().toString().trim());

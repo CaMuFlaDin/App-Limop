@@ -146,6 +146,7 @@ public class InsertProdVenda extends AppCompatActivity {
             }
         });
 
+        //Mascaras
         MaskEditTextChangedListener maskData = new MaskEditTextChangedListener("##/##/####",data_venda);
         MaskEditTextChangedListener maskDataVenc = new MaskEditTextChangedListener("##/##/####",vencimento);
         data_venda.addTextChangedListener(maskData);
@@ -172,6 +173,7 @@ public class InsertProdVenda extends AppCompatActivity {
 
         String id_usuario = sessao.getString("id_usuario");
 
+        //Formatar data
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         ParsePosition pos = new ParsePosition(0);
         Date data = formato.parse(data_venda.getText().toString(),pos);
@@ -184,6 +186,7 @@ public class InsertProdVenda extends AppCompatActivity {
         formato2 = new SimpleDateFormat("yyyy-MM-dd");
         String vencimento = formato2.format(data2);
 
+        //Enviar dados para Insert
         params.put("data_venda", date);
         params.put("status", stts_negociacao.getSelectedItem().toString());
         params.put("contrato", contrato.getSelectedItem().toString());

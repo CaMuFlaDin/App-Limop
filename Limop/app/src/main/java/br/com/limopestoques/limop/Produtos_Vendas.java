@@ -89,6 +89,7 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
 
     }
 
+    //Opcoes Context Menu
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -100,6 +101,7 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
         menu.add(0,v.getId(),0,"Gerar Contrato desta venda");
     }
 
+    //Permissao
     public boolean checkPermissions(){
         int readPermission = ContextCompat.checkSelfPermission(Produtos_Vendas.this, Manifest.permission.READ_EXTERNAL_STORAGE);
         if(readPermission == PackageManager.PERMISSION_GRANTED) {
@@ -110,6 +112,7 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
         return false;
     }
 
+    //Download Relatorio
     public void downloadRelatorio(String id){
         String url = "https://www.limopestoques.com.br/PDF/contrato.php?id=" + id+"&tipo=" +tipoVenda;
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
@@ -126,6 +129,7 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
         }
     }
 
+    //Opcao selecionada Context Menu
     @Override
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
@@ -175,11 +179,13 @@ public class Produtos_Vendas extends AppCompatActivity implements SearchView.OnQ
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome Json
                             JSONArray prodvendaArray = obj.getJSONArray("vendas");
 
                             for (int i = 0; i < prodvendaArray.length(); i++){
                                 JSONObject produtoObject = prodvendaArray.getJSONObject(i);
 
+                                //Recuperar dados
                                 ProdVendaConst prodCompra = new ProdVendaConst(produtoObject.getString("id_venda"),produtoObject.getString("nome_produto"),"R$ "+produtoObject.getString("valor"), "Quantidade: "+produtoObject.getString("quantidade"),produtoObject.getString("fotos"),"Cliente: " + produtoObject.getString("nome_Cliente"));
 
                                 prodvendaList.add(prodCompra);

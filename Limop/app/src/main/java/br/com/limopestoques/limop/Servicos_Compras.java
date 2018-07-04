@@ -74,6 +74,7 @@ public class Servicos_Compras extends AppCompatActivity implements SearchView.On
         tipo = sessao.getString("tipo");
     }
 
+    //Opcoes Context Menu
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -84,6 +85,7 @@ public class Servicos_Compras extends AppCompatActivity implements SearchView.On
         }
     }
 
+    //Opcao selecionada Context Menu
     @Override
     public boolean onContextItemSelected(MenuItem item){
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
@@ -126,11 +128,13 @@ public class Servicos_Compras extends AppCompatActivity implements SearchView.On
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome Json
                             JSONArray servicocompraArray = obj.getJSONArray("servicos");
 
                             for (int i = 0; i < servicocompraArray.length(); i++){
                                 JSONObject servicoObject = servicocompraArray.getJSONObject(i);
 
+                                //Recuperar dados
                                 ServicosCompraConst servicoCompra = new ServicosCompraConst(servicoObject.getString("id_servico"),servicoObject.getString("nome_servico"), "Valor de Custo R$ "+servicoObject.getString("valor_custo"), "Valor de Venda R$ "+servicoObject.getString("valor_venda"));
 
                                 servicocompraList.add(servicoCompra);

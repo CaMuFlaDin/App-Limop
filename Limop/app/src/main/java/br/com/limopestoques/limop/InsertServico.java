@@ -53,6 +53,7 @@ public class InsertServico extends AppCompatActivity {
 
         String id_usuario = sessao.getString("id_usuario");
 
+        //Enviar dados para o Insert
         params.put("nome", nome.getText().toString().trim());
         params.put("id_usuario", id_usuario);
         params.put("valor_custo", valor_custo.getText().toString().trim());

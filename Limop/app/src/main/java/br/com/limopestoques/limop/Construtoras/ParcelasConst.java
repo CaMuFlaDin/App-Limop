@@ -8,6 +8,7 @@ public class ParcelasConst {
 
     String id,vencimento, cliente, valor, quantidade, id_produto, recebido;
 
+    //Dados
     public ParcelasConst(String id, String cliente, String valor, String vencimento,String quantidade, String id_produto, String recebido){
         this.id = id;
         this.cliente = cliente;
@@ -18,6 +19,7 @@ public class ParcelasConst {
         this.recebido = recebido;
     }
 
+    //Getters
     public String getId() {return this.id; }
 
     public String getCliente(){

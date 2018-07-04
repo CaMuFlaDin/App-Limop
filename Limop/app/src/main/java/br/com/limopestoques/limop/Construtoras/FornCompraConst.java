@@ -8,6 +8,7 @@ public class FornCompraConst {
 
     private String id, nome, tipo, tel;
 
+    //Dados
     public FornCompraConst(String id, String nome, String tipo, String tel){
         this.id = id;
         this.nome = nome;
@@ -15,6 +16,7 @@ public class FornCompraConst {
         this.tel = tel;
     }
 
+    //Getters
     public String getId(){
         return this.id;
     }

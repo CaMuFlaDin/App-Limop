@@ -88,6 +88,7 @@ public class Inventario extends AppCompatActivity {
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome Json
                             JSONArray forncompraArray = obj.getJSONArray("fornecedores");
 
                             FornCompraConst forneCompra = new FornCompraConst("0", null, null, null);
@@ -96,6 +97,7 @@ public class Inventario extends AppCompatActivity {
                             for (int i = 0; i < forncompraArray.length(); i++){
                                 JSONObject forncompraObject = forncompraArray.getJSONObject(i);
 
+                                //Dados recuperados
                                 forneCompra = new FornCompraConst(forncompraObject.getString("id_fornecedor"), forncompraObject.getString("nome_fornecedor"), forncompraObject.getString("tipo"), forncompraObject.getString("telefone_comercial"));
 
                                 fornecedores.add(forneCompra);
@@ -125,6 +127,8 @@ public class Inventario extends AppCompatActivity {
         RequestQueue rq = Volley.newRequestQueue(this);
         rq.add(stringRequest);
     }
+
+    //Permissao
     public boolean checkPermissions(){
         int readPermission = ContextCompat.checkSelfPermission(Inventario.this, Manifest.permission.READ_EXTERNAL_STORAGE);
         if(readPermission == PackageManager.PERMISSION_GRANTED) {
@@ -135,6 +139,7 @@ public class Inventario extends AppCompatActivity {
         return false;
     }
 
+    //Download Relatorio do Inventario
     public void downloadRelatorio(String categoria, String fornecedor, String qtd){
         String url = "https://www.limopestoques.com.br/Android/Json/Inventario.php?categoria=" + categoria+"&fornecedor=" +fornecedor+"&qtd="+qtd;
 
@@ -152,6 +157,7 @@ public class Inventario extends AppCompatActivity {
         }
     }
 
+    //Verificar Permissao
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults){
         switch(requestCode){

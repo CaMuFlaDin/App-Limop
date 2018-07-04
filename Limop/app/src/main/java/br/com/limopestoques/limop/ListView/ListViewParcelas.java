@@ -28,9 +28,11 @@ import br.com.limopestoques.limop.R;
 
 public class ListViewParcelas extends ArrayAdapter<ParcelasConst> {
 
+    //Listas
     private List<ParcelasConst> parcelasList;
     private List<ParcelasConst> orig;
 
+    //Contexto
     private Context mCtx;
 
     public ListViewParcelas(List<ParcelasConst> parcelasList, Context mCtx){
@@ -44,6 +46,7 @@ public class ListViewParcelas extends ArrayAdapter<ParcelasConst> {
         return parcelasList.size();
     }
 
+    //Filter para a pesquisa
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -79,6 +82,7 @@ public class ListViewParcelas extends ArrayAdapter<ParcelasConst> {
         };
     }
 
+    //Dados para a listagem
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = LayoutInflater.from(mCtx);
@@ -92,6 +96,7 @@ public class ListViewParcelas extends ArrayAdapter<ParcelasConst> {
 
         ParcelasConst parcelasConst = parcelasList.get(position);
 
+        //Formatar data
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         ParsePosition pos = new ParsePosition(0);
@@ -117,6 +122,7 @@ public class ListViewParcelas extends ArrayAdapter<ParcelasConst> {
             e.printStackTrace();
         }
 
+        //Definir cor da View
         if(parcelasConst.getRecebido().equals("1")){
             view.setBackgroundColor(mCtx.getResources().getColor(R.color.verdelhoso));
         }else if(dataVencimento.after(currentDate) || dataVencimento.equals(currentDate)){
@@ -124,8 +130,6 @@ public class ListViewParcelas extends ArrayAdapter<ParcelasConst> {
         }else{
             view.setBackgroundColor(mCtx.getResources().getColor(R.color.vermelhao));
         }
-
-        //TODO: View para cores em parcelas *
 
         return listViewItem;
     }

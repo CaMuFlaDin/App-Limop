@@ -38,6 +38,7 @@ public class EditarOS extends AppCompatActivity {
 
     private String id;
 
+    //Json
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Update/updateOS.php";
 
     EditText data_inicio, previsao_entrega,
@@ -84,6 +85,7 @@ public class EditarOS extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //Mascaras
         MaskEditTextChangedListener maskData = new MaskEditTextChangedListener("##/##/####",previsao_entrega);
         previsao_entrega.addTextChangedListener(maskData);
 
@@ -132,9 +134,11 @@ public class EditarOS extends AppCompatActivity {
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome do Json
                             JSONArray osArray = obj.getJSONArray("os");
                             JSONObject jo = osArray.getJSONObject(0);
 
+                            //Dados inseridos no EditText
                             n_serie.setText(jo.getString("n_serie"));
                             marca.setText(jo.getString("marca"));
                             modelo.setText(jo.getString("modelo"));
@@ -300,6 +304,7 @@ public class EditarOS extends AppCompatActivity {
     public void updateOS(){
         Map<String, String> params = new HashMap<String, String>();
 
+        //Formatar Data para enviar
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         ParsePosition pos = new ParsePosition(0);
         Date data = formato.parse(previsao_entrega.getText().toString(),pos);
@@ -312,6 +317,7 @@ public class EditarOS extends AppCompatActivity {
         formato2 = new SimpleDateFormat("yyyy-MM-dd");
         String date2 = formato2.format(data2);
 
+        //Dados enviados para o Update
         params.put("update", "update");
         params.put("id_os", id);
         idCliente = clientes.get(cliente.getSelectedItemPosition()).getId();

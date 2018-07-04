@@ -8,6 +8,7 @@ public class OrdemServicoConst {
 
     String id, cliente, equipamento, numPedido;
 
+    //Dados
     public OrdemServicoConst(String id, String cliente, String equipamento, String numPedido){
         this.id = id;
         this.cliente = cliente;
@@ -15,6 +16,7 @@ public class OrdemServicoConst {
         this.numPedido = numPedido;
     }
 
+    //Getters
     public String getId(){
         return this.id;
     }

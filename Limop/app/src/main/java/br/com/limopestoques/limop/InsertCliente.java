@@ -63,6 +63,7 @@ public class InsertCliente extends AppCompatActivity {
 
         sessao = new Sessao(InsertCliente.this);
 
+        //Mascaras
         MaskEditTextChangedListener maskCPF = new MaskEditTextChangedListener("###.###.###-##",cpf);
         MaskEditTextChangedListener maskCEP = new MaskEditTextChangedListener("##.###-###",cep);
         MaskEditTextChangedListener maskRG = new MaskEditTextChangedListener("##.###.###-#",rg);
@@ -80,6 +81,7 @@ public class InsertCliente extends AppCompatActivity {
         tel_comercial.addTextChangedListener(maskTELCO);
         inscricao.addTextChangedListener(maskINSC);
 
+        //Receber CEP
         cep.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -183,6 +185,7 @@ public class InsertCliente extends AppCompatActivity {
 
         String id_usuario = sessao.getString("id_usuario");
 
+        //Enviar dados para o Insert
         params.put("nome", nome.getText().toString().trim());
         params.put("cnpj", cnpj.getText().toString().trim());
         params.put("razao", razao.getText().toString().trim());

@@ -20,9 +20,11 @@ import java.util.List;
 
 public class ListViewServicosCompra extends ArrayAdapter<ServicosCompraConst> {
 
+    //Listas
     private List<ServicosCompraConst> servicocompraList;
     private List<ServicosCompraConst> orig;
 
+    //Contexto
     private Context mCtx;
 
     public ListViewServicosCompra(List<ServicosCompraConst> servicocompraList, Context mCtx){
@@ -37,6 +39,7 @@ public class ListViewServicosCompra extends ArrayAdapter<ServicosCompraConst> {
         return servicocompraList.size();
     }
 
+    //Filter para a pesquisa
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -72,6 +75,7 @@ public class ListViewServicosCompra extends ArrayAdapter<ServicosCompraConst> {
         };
     }
 
+    //Dados para a listagem
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = LayoutInflater.from(mCtx);

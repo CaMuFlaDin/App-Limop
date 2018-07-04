@@ -91,6 +91,7 @@ public class EditarCliente extends AppCompatActivity {
         cpf_text       = findViewById(R.id.cpf_text);
         rg_text        = findViewById(R.id.rg_text);
 
+        //Mascaras
         MaskEditTextChangedListener maskCPF = new MaskEditTextChangedListener("###.###.###-##",cpf);
         MaskEditTextChangedListener maskCEP = new MaskEditTextChangedListener("##.###-###",cep);
         MaskEditTextChangedListener maskCNPJ = new MaskEditTextChangedListener("##.###.###/####-##",cnpj);
@@ -107,7 +108,7 @@ public class EditarCliente extends AppCompatActivity {
         tel_celular.addTextChangedListener(maskTELCE);
         tel_comercial.addTextChangedListener(maskTELCO);
 
-
+        //Formatação e recuperação - CEP
         cep.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -229,9 +230,11 @@ public class EditarCliente extends AppCompatActivity {
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome do Json
                             JSONArray servicocompraArray = obj.getJSONArray("clientes");
                             JSONObject jo = servicocompraArray.getJSONObject(0);
 
+                            //Inserir dados no EditText
                             nome.setText(jo.getString("nome_cliente"));
                             String tipoPessoa = jo.getString("tipo");
                             cnpj.setText(jo.getString("cnpj"));
@@ -285,6 +288,7 @@ public class EditarCliente extends AppCompatActivity {
     public void updateCliente() {
         Map<String, String> params = new HashMap<String, String>();
 
+        //Enviar dados para o Update
         params.put("update", "update");
         params.put("id_cliente", id);
         params.put("tipo",tipo.getSelectedItem().toString());

@@ -20,9 +20,11 @@ import java.util.List;
 
 public class ListViewFornCompra extends ArrayAdapter<FornCompraConst> {
 
+    //Listas
     private List<FornCompraConst> forncompraList;
     private List<FornCompraConst> orig;
 
+    //Contexto
     private Context mCtx;
 
     public ListViewFornCompra(List<FornCompraConst> forncompraList, Context mCtx){
@@ -37,6 +39,7 @@ public class ListViewFornCompra extends ArrayAdapter<FornCompraConst> {
         return forncompraList.size();
     }
 
+    //Filter para a pesquisa
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -72,6 +75,7 @@ public class ListViewFornCompra extends ArrayAdapter<FornCompraConst> {
         };
     }
 
+    //Dados para a listagem
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = LayoutInflater.from(mCtx);

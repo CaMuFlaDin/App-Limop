@@ -164,6 +164,7 @@ public class InsertProduto extends AppCompatActivity {
                 public void onClick(DialogInterface dialogInterface, int i) {
                     Map<String, String> params = new HashMap<String, String>();
 
+                    //Enviar dados para o Insert
                     String id_usuario = sessao.getString("id_usuario");
                     params.put("imgProd", imagemProduto);
                     params.put("nome", nome_produto.getText().toString().trim());

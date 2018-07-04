@@ -8,6 +8,7 @@ public class ProdVendaConst {
 
     String id,prod, valor, qtd,img, nome_cliente;
 
+    //Dados
     public ProdVendaConst(String id, String prod, String valor, String qtd,String img, String nome_cliente){
         this.id = id;
         this.prod = prod;
@@ -17,6 +18,7 @@ public class ProdVendaConst {
         this.nome_cliente = nome_cliente;
     }
 
+    //Getters
     public String getId() {
         return this.id;
     }

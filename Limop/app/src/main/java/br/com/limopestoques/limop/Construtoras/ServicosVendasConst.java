@@ -8,6 +8,7 @@ public class ServicosVendasConst {
 
     String id, servico, valor, qtd,nome_cliente;
 
+    //Dados
     public ServicosVendasConst(String id, String serv, String valor, String qtd, String nome_cliente) {
         this.id = id;
         this.servico = serv;
@@ -16,6 +17,7 @@ public class ServicosVendasConst {
         this.nome_cliente = nome_cliente;
     }
 
+    //Getters
     public String getId() {
         return this.id;
     }

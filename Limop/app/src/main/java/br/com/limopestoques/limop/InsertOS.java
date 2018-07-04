@@ -80,6 +80,7 @@ public class InsertOS extends AppCompatActivity {
 
         sessao = new Sessao(InsertOS.this);
 
+        //Mascaras
         MaskEditTextChangedListener maskData = new MaskEditTextChangedListener("##/##/####",previsao_entrega);
         previsao_entrega.addTextChangedListener(maskData);
 
@@ -141,11 +142,13 @@ public class InsertOS extends AppCompatActivity {
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome Json
                             JSONArray forncompraArray = obj.getJSONArray("clientes");
 
                             for (int i = 0; i < forncompraArray.length(); i++){
                                 JSONObject forncompraObject = forncompraArray.getJSONObject(i);
 
+                                //Dados recuperados
                                 ClientesConst forneCompra = new ClientesConst(forncompraObject.getString("id_cliente"), forncompraObject.getString("nome_cliente"), forncompraObject.getString("tipo"), forncompraObject.getString("email"));
 
                                 clientes.add(forneCompra);
@@ -236,6 +239,7 @@ public class InsertOS extends AppCompatActivity {
 
         String id_usuario = sessao.getString("id_usuario");
 
+        //Formatar data
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         ParsePosition pos = new ParsePosition(0);
         Date data = formato.parse(previsao_entrega.getText().toString(),pos);
@@ -248,6 +252,7 @@ public class InsertOS extends AppCompatActivity {
         formato2 = new SimpleDateFormat("yyyy-MM-dd");
         String date2 = formato2.format(data2);
 
+        //Enviar dados para Insert
         params.put("insert", "insert");
         params.put("cliente", idCliente);
         params.put("status", stts.getSelectedItem().toString());

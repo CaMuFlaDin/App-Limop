@@ -29,6 +29,7 @@ import java.util.List;
 
 public class Acessos extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
+    //Json
     private static final String JSON_URL = "https://limopestoques.com.br/Android/Json/jsonAcessos.php";
 
     ListView listView;
@@ -61,11 +62,13 @@ public class Acessos extends AppCompatActivity implements SearchView.OnQueryText
                         try{
                             JSONObject obj = new JSONObject(response);
 
+                            //Nome do Json
                             JSONArray acessosArray = obj.getJSONArray("acessos");
 
                             for (int i = 0; i < acessosArray.length(); i++){
                                 JSONObject acessosObject = acessosArray.getJSONObject(i);
 
+                                //Dados que serão retirados do Json
                                 AcessosConst users = new AcessosConst(acessosObject.getString("nome_usuario"), acessosObject.getString("qtd_acessos")+" Acessos", acessosObject.getString("data_acesso"));
 
                                 acessosList.add(users);
@@ -115,6 +118,7 @@ public class Acessos extends AppCompatActivity implements SearchView.OnQueryText
         return false;
     }
 
+    //Botão para voltar
     public void onBackPressed(){
         super.onBackPressed();
         Intent irTela = new Intent(Acessos.this, UsuariosGerenciar.class);
